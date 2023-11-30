@@ -35,4 +35,23 @@ namespace gam703::engine::utility
 
 		return "";
 	}
+
+	void writeFile(const std::string& content, const std::filesystem::path& filePath)
+	{
+		try
+		{
+			std::ofstream file(filePath, std::ios::out);
+
+			if (file.is_open())
+			{
+				file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+				file << content;
+				file.close();
+			}
+		}
+		catch (std::ifstream::failure& e)
+		{
+			std::cout << "ERROR: " << e.what() << std::endl;
+		}
+	}
 }
