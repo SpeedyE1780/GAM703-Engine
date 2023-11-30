@@ -10,3 +10,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(${PROJECT_NAME})
 
 target_sources(${PROJECT_NAME} PRIVATE src/main.cpp)
+
+add_subdirectory(3rd-party/glfw)
+add_subdirectory(3rd-party/glad)
+add_subdirectory(gui)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE gui)
