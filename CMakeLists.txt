@@ -21,3 +21,11 @@ add_subdirectory(graphic)
 add_subdirectory(utility)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE gui)
+
+add_custom_target(copy-files ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_SOURCE_DIR}/resources/
+    ${CMAKE_BINARY_DIR}/resources/
+    )
+
+add_dependencies(${PROJECT_NAME} copy-files)

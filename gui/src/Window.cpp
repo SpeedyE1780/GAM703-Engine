@@ -1,5 +1,6 @@
 #include <glad/glad.h>
 #include <gui/Window.hpp>
+#include <graphic/Shader.hpp>
 
 #include <iostream>
 
@@ -109,6 +110,8 @@ namespace gam703::engine::gui
 		// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
 		// glBindVertexArray(0);
 
+		graphic::Shader shader = graphic::createDefaultShader();
+
 		while (!glfwWindowShouldClose(m_window))
 		{
 			// input
@@ -120,6 +123,7 @@ namespace gam703::engine::gui
 			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+			shader.use();
 			glBindVertexArray(VAO);
 			glDrawArrays(GL_TRIANGLES, 0, 3);
 
@@ -128,5 +132,10 @@ namespace gam703::engine::gui
 			glfwSwapBuffers(m_window);
 			glfwPollEvents();
 		}
+
+		// optional: de-allocate all resources once they've outlived their purpose:
+		// ------------------------------------------------------------------------
+		glDeleteVertexArrays(1, &VAO);
+		glDeleteBuffers(1, &VBO);
 	}
 } //gam703::engine::gui

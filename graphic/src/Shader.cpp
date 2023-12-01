@@ -140,6 +140,6 @@ namespace gam703::engine::graphic
 
 	Shader createDefaultShader()
 	{
-		return Shader("resource/Shaders/Default.vert", "resource/Shaders/Default.frag");
+		return Shader("resources/Shaders/Default.vert", "resources/Shaders/Default.frag");
 	}
 }

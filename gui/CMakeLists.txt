@@ -8,3 +8,4 @@ target_sources(${PROJECT_NAME} PRIVATE src/Window.cpp include/gui/Window.hpp)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC glfw)
 target_link_libraries(${PROJECT_NAME} PRIVATE glad)
+target_link_libraries(${PROJECT_NAME} PRIVATE graphic)
