@@ -22,11 +22,13 @@ add_subdirectory(3rd-party/glm)
 add_subdirectory(3rd-party/gtest)
 add_subdirectory(3rd-party/stb)
 
-add_subdirectory(gui)
+add_subdirectory(components)
 add_subdirectory(graphic)
+add_subdirectory(gui)
 add_subdirectory(utility)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE gui)
+target_link_libraries(${PROJECT_NAME} PRIVATE components)
 
 add_custom_target(copy-files ALL
     COMMAND ${CMAKE_COMMAND} -E copy_directory

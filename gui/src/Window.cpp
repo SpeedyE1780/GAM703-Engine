@@ -4,6 +4,7 @@
 #include <graphic/Model.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <components/Camera.hpp>
 
 #include <iostream>
 
@@ -74,7 +75,7 @@ namespace gam703::engine::gui
 		// -----------------------------
 		glEnable(GL_DEPTH_TEST);
 		// tell GLFW to capture our mouse
-		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	}
 
 	Window::~Window()
