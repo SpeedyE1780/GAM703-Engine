@@ -11,6 +11,11 @@ add_executable(${PROJECT_NAME})
 
 target_sources(${PROJECT_NAME} PRIVATE src/main.cpp)
 
+find_package(Git)
+
+execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
+add_subdirectory(3rd-party/assimp)
 add_subdirectory(3rd-party/glfw)
 add_subdirectory(3rd-party/glad)
 add_subdirectory(3rd-party/glm)
