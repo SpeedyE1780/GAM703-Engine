@@ -22,6 +22,7 @@ add_subdirectory(3rd-party/glm)
 add_subdirectory(3rd-party/gtest)
 add_subdirectory(3rd-party/stb)
 
+add_subdirectory(core)
 add_subdirectory(components)
 add_subdirectory(graphic)
 add_subdirectory(gui)
