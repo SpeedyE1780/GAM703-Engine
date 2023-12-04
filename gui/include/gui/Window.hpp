@@ -12,6 +12,7 @@ namespace gam703::engine::gui
 	public:
 		Window(const std::string& title, int width, int height);
 		~Window();
+		void resizeWindow(int width, int height);
 
 		void render();
 

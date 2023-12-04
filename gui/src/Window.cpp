@@ -14,8 +14,6 @@ namespace gam703::engine::gui
 	{
 		void initializeGLFW()
 		{
-			// glfw: initialize and configure
-			// ------------------------------
 			glfwInit();
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -24,29 +22,24 @@ namespace gam703::engine::gui
 #ifdef __APPLE__
 			glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
-
 		}
-		// glfw: whenever the window size changed (by OS or user resize) this callback function executes
-		// ---------------------------------------------------------------------------------------------
-		void ResizeWindow(GLFWwindow* window, int width, int height)
+
+		void ResizeWindow(GLFWwindow* glfwWindow, int width, int height)
 		{
-			// make sure the viewport matches the new window dimensions; note that width and
-			// height will be significantly larger than specified on retina displays.
-			glViewport(0, 0, width, height);
+			if (auto* window = static_cast<Window*>(glfwGetWindowUserPointer(glfwWindow)))
+			{
+				window->resizeWindow(width, height);
+			}
 		}
 
 		void initialzeGlad()
 		{
-			// glad: load all OpenGL function pointers
-			// ---------------------------------------
 			if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 			{
 				std::cout << "Failed to initialize GLAD" << std::endl;
 			}
 		}
 
-		// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-// ---------------------------------------------------------------------------------------------------------
 		void processInput(GLFWwindow* window)
 		{
 			if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -61,6 +54,7 @@ namespace gam703::engine::gui
 		if (m_window = glfwCreateWindow(m_width, m_height, m_title.c_str(), nullptr, nullptr))
 		{
 			glfwMakeContextCurrent(m_window);
+			glfwSetWindowUserPointer(m_window, this);
 			glfwSetFramebufferSizeCallback(m_window, ResizeWindow);
 			initialzeGlad();
 		}
@@ -71,10 +65,7 @@ namespace gam703::engine::gui
 			return;
 		}
 
-		// configure global opengl state
-		// -----------------------------
 		glEnable(GL_DEPTH_TEST);
-		// tell GLFW to capture our mouse
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	}
 
@@ -83,43 +74,45 @@ namespace gam703::engine::gui
 		glfwTerminate();
 	}
 
+	void Window::resizeWindow(int width, int height)
+	{
+		m_width = width;
+		m_height = height;
+		glViewport(0, 0, width, height);
+	}
+
 	void Window::render()
 	{
 		graphic::Model ourModel("resources/Models/backpack/backpack.obj");
 
 		graphic::Shader shader = graphic::createDefaultShader();
 
+		components::Camera camera(glm::vec3(0.0f, 0.0f, 10.0f));
+
 		while (!glfwWindowShouldClose(m_window))
 		{
-			// input
-			// -----
 			processInput(m_window);
 
-			// render
-			// ------
 			glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			shader.use();
 
-			// view/projection transformations
-			glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)m_width / (float)m_height, 0.1f, 100.0f);
-			glm::mat4 view = glm::lookAt(glm::vec3(0.0f,0.0f,3.0f), glm::vec3(), glm::vec3(0,1.0f,0.f));
+			glm::mat4 projection = glm::perspective(glm::radians(camera.getZoom()), (float)m_width / (float)m_height, 0.1f, 100.0f);
+			glm::mat4 view = camera.GetViewMatrix();
 			shader.setMat4("projection", projection);
 			shader.setMat4("view", view);
 
-			// render the loaded model
 			glm::mat4 model = glm::mat4(1.0f);
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-			model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
+			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+			model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
 			shader.setMat4("model", model);
 
 			ourModel.draw(shader);
 
-			// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
-			// -------------------------------------------------------------------------------
 			glfwSwapBuffers(m_window);
 			glfwPollEvents();
 		}
 	}
+
 } //gam703::engine::gui
