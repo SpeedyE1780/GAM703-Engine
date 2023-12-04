@@ -49,10 +49,13 @@ namespace gam703::engine::core
 			}
 		}
 
-		//void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-		//{
-		//	camera->ProcessMouseScroll(static_cast<float>(yoffset));
-		//}
+		void scrollCallback(GLFWwindow* glfwWindow, double xOffset, double yOffset)
+		{
+			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
+			{
+				engine->getMainCamera()->ProcessMouseScroll(yOffset);
+			}
+		}
 	}
 
 	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height)
@@ -63,7 +66,7 @@ namespace gam703::engine::core
 			glfwSetFramebufferSizeCallback(glfwWindow, resizeWindow);
 			glfwGetCursorPos(glfwWindow, &m_lastMouseX, &m_lastMouseY);
 			glfwSetCursorPosCallback(glfwWindow, mouseMovment);
-			//glfwSetScrollCallback(glfwWindow, scroll_callback);
+			glfwSetScrollCallback(glfwWindow, scrollCallback);
 			glfwSetInputMode(glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		}
 	}
