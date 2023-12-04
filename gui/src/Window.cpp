@@ -28,14 +28,6 @@ namespace gam703::engine::gui
 #endif
 		}
 
-		void ResizeWindow(GLFWwindow* glfwWindow, int width, int height)
-		{
-			if (auto* window = static_cast<Window*>(glfwGetWindowUserPointer(glfwWindow)))
-			{
-				window->resizeWindow(width, height);
-			}
-		}
-
 		void initialzeGlad()
 		{
 			if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -58,35 +50,6 @@ namespace gam703::engine::gui
 			if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 				camera->ProcessKeyboard(gam703::engine::components::RIGHT, deltaTime);
 		}
-
-		void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
-		{
-			float xpos = static_cast<float>(xposIn);
-			float ypos = static_cast<float>(yposIn);
-			static bool firstMouse = true;
-			static float lastX;
-			static float lastY;
-
-			if (firstMouse)
-			{
-				lastX = xpos;
-				lastY = ypos;
-				firstMouse = false;
-			}
-
-			float xoffset = xpos - lastX;
-			float yoffset = lastY - ypos;
-
-			lastX = xpos;
-			lastY = ypos;
-
-			camera->ProcessMouseMovement(xoffset, yoffset);
-		}
-
-		void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-		{
-			camera->ProcessMouseScroll(static_cast<float>(yoffset));
-		}
 	}
 
 	Window::Window(const std::string& title, int width, int height) :m_window(nullptr), m_title(title), m_width(width), m_height(height)
@@ -96,10 +59,6 @@ namespace gam703::engine::gui
 		if (m_window = glfwCreateWindow(m_width, m_height, m_title.c_str(), nullptr, nullptr))
 		{
 			glfwMakeContextCurrent(m_window);
-			glfwSetWindowUserPointer(m_window, this);
-			glfwSetFramebufferSizeCallback(m_window, ResizeWindow);
-			glfwSetCursorPosCallback(m_window, mouse_callback);
-			glfwSetScrollCallback(m_window, scroll_callback);
 			initialzeGlad();
 		}
 		else
@@ -110,12 +69,6 @@ namespace gam703::engine::gui
 		}
 
 		glEnable(GL_DEPTH_TEST);
-		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-	}
-
-	Window::~Window()
-	{
-		glfwTerminate();
 	}
 
 	void Window::resizeWindow(int width, int height)
