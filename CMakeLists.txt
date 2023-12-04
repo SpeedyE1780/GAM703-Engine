@@ -28,8 +28,7 @@ add_subdirectory(graphic)
 add_subdirectory(gui)
 add_subdirectory(utility)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE gui)
-target_link_libraries(${PROJECT_NAME} PRIVATE components)
+target_link_libraries(${PROJECT_NAME} PRIVATE core)
 
 add_custom_target(copy-files ALL
     COMMAND ${CMAKE_COMMAND} -E copy_directory
