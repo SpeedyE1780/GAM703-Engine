@@ -1,19 +1,11 @@
-#include <glad/glad.h>
 #include <gui/Window.hpp>
-#include <graphic/Shader.hpp>
-#include <graphic/Model.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <components/Camera.hpp>
 
 #include <iostream>
 
 namespace gam703::engine::gui
 {
-	float deltaTime = 0;
-	float lastFrame = 0;
-	components::Camera* camera = nullptr;
-
 	namespace
 	{
 		void initializeGLFW()
@@ -34,21 +26,6 @@ namespace gam703::engine::gui
 			{
 				std::cout << "Failed to initialize GLAD" << std::endl;
 			}
-		}
-
-		void processInput(GLFWwindow* window)
-		{
-			if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-				glfwSetWindowShouldClose(window, true);
-
-			if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-				camera->ProcessKeyboard(gam703::engine::components::FORWARD, deltaTime);
-			if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-				camera->ProcessKeyboard(gam703::engine::components::BACKWARD, deltaTime);
-			if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-				camera->ProcessKeyboard(gam703::engine::components::LEFT, deltaTime);
-			if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-				camera->ProcessKeyboard(gam703::engine::components::RIGHT, deltaTime);
 		}
 	}
 
@@ -78,23 +55,8 @@ namespace gam703::engine::gui
 		glViewport(0, 0, width, height);
 	}
 
-	void Window::render()
+	void Window::render(const components::Camera& sceneCamera, const graphic::Shader& shader, const graphic::Model& model) const
 	{
-		graphic::Model ourModel("resources/Models/backpack/backpack.obj");
-
-		graphic::Shader shader = graphic::createDefaultShader();
-
-		components::Camera sceneCamera(glm::vec3(0.0f, 0.0f, 10.0f));
-		camera = &sceneCamera;
-
-		while (!glfwWindowShouldClose(m_window))
-		{
-			float currentFrame = static_cast<float>(glfwGetTime());
-			deltaTime = currentFrame - lastFrame;
-			lastFrame = currentFrame;
-
-			processInput(m_window);
-
 			glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -105,16 +67,12 @@ namespace gam703::engine::gui
 			shader.setMat4("projection", projection);
 			shader.setMat4("view", view);
 
-			glm::mat4 model = glm::mat4(1.0f);
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
-			model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
-			shader.setMat4("model", model);
+			glm::mat4 modelTransfrom = glm::mat4(1.0f);
+			modelTransfrom = glm::translate(modelTransfrom, glm::vec3(0.0f, 0.0f, 0.0f));
+			modelTransfrom = glm::scale(modelTransfrom, glm::vec3(1.0f, 1.0f, 1.0f));
+			shader.setMat4("model", modelTransfrom);
 
-			ourModel.draw(shader);
-
-			glfwSwapBuffers(m_window);
-			glfwPollEvents();
-		}
+			model.draw(shader);
 	}
 
 } //gam703::engine::gui

@@ -1,4 +1,7 @@
+#include <glad/glad.h>
 #include <core/Engine.hpp>
+#include <graphic/Model.hpp>
+#include <graphic/Shader.hpp>
 
 namespace gam703::engine::core
 {
@@ -12,20 +15,31 @@ namespace gam703::engine::core
 			}
 		}
 
-		//void processInput(GLFWwindow* window)
-		//{
-		//	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		//		glfwSetWindowShouldClose(window, true);
+		void processInput(Engine& engine)
+		{
+			if (auto* window = engine.getWindow().getGLFWWindow())
+			{
+				if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+				{
+					engine.stop();
+					glfwSetWindowShouldClose(window, true);
+				}
 
-		//	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		//		camera->ProcessKeyboard(gam703::engine::components::FORWARD, deltaTime);
-		//	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		//		camera->ProcessKeyboard(gam703::engine::components::BACKWARD, deltaTime);
-		//	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		//		camera->ProcessKeyboard(gam703::engine::components::LEFT, deltaTime);
-		//	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		//		camera->ProcessKeyboard(gam703::engine::components::RIGHT, deltaTime);
-		//}
+				if (auto* camera = engine.getMainCamera())
+				{
+					float deltaTime = engine.getDeltaTime();
+
+					if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+						camera->ProcessKeyboard(gam703::engine::components::FORWARD, deltaTime);
+					if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+						camera->ProcessKeyboard(gam703::engine::components::BACKWARD, deltaTime);
+					if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+						camera->ProcessKeyboard(gam703::engine::components::LEFT, deltaTime);
+					if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+						camera->ProcessKeyboard(gam703::engine::components::RIGHT, deltaTime);
+				}
+			}
+		}
 
 		//void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 		//{
@@ -76,7 +90,35 @@ namespace gam703::engine::core
 
 	void Engine::start()
 	{
-		m_window.render();
+		m_isRunning = true;
+		run();
+	}
+
+	void Engine::run()
+	{
+		graphic::Model ourModel("resources/Models/backpack/backpack.obj");
+		graphic::Shader shader = graphic::createDefaultShader();
+
+		components::Camera sceneCamera(glm::vec3(0.0f, 0.0f, 10.0f));
+		m_mainCamera = &sceneCamera;
+
+		while (m_isRunning)
+		{
+			float currentFrame = static_cast<float>(glfwGetTime());
+			m_deltaTime = currentFrame - m_lastFrame;
+			m_lastFrame = currentFrame;
+
+			processInput(*this);
+			m_window.render(sceneCamera, shader, ourModel);
+
+			glfwSwapBuffers(m_window.getGLFWWindow());
+			glfwPollEvents();
+		}
+	}
+
+	void Engine::stop()
+	{
+		m_isRunning = false;
 	}
 
 } //gam703::engine::core

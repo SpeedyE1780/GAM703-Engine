@@ -2,6 +2,7 @@
 #define GAM703_ENGINE_CORE_ENGINE_HPP
 
 #include <gui/Window.hpp>
+#include <components/Camera.hpp>
 
 #include <string>
 
@@ -17,9 +18,21 @@ namespace gam703::engine::core
 		const gui::Window& getWindow() const { return m_window; }
 
 		void start();
+		void stop();
+
+		components::Camera* getMainCamera() { return m_mainCamera; }
+		const components::Camera* getMainCamera() const { return m_mainCamera; }
+
+		float getDeltaTime() const { return m_deltaTime; }
 
 	private:
+		void run();
+
 		gui::Window m_window;
+		components::Camera* m_mainCamera = nullptr;
+		bool m_isRunning = false;
+		float m_deltaTime = 0;
+		float m_lastFrame = 0;
 	};
 }
 
