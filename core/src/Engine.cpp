@@ -7,7 +7,7 @@ namespace gam703::engine::core
 {
 	namespace
 	{
-		void ResizeWindow(GLFWwindow* glfwWindow, int width, int height)
+		void resizeWindow(GLFWwindow* glfwWindow, int width, int height)
 		{
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
@@ -41,29 +41,13 @@ namespace gam703::engine::core
 			}
 		}
 
-		//void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
-		//{
-		//	float xpos = static_cast<float>(xposIn);
-		//	float ypos = static_cast<float>(yposIn);
-		//	static bool firstMouse = true;
-		//	static float lastX;
-		//	static float lastY;
-
-		//	if (firstMouse)
-		//	{
-		//		lastX = xpos;
-		//		lastY = ypos;
-		//		firstMouse = false;
-		//	}
-
-		//	float xoffset = xpos - lastX;
-		//	float yoffset = lastY - ypos;
-
-		//	lastX = xpos;
-		//	lastY = ypos;
-
-		//	camera->ProcessMouseMovement(xoffset, yoffset);
-		//}
+		void mouseMovment(GLFWwindow* glfwWindow, double mouseX, double mouseY)
+		{
+			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
+			{
+				engine->processMouseMovement(glfwWindow, mouseX, mouseY);
+			}
+		}
 
 		//void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 		//{
@@ -76,10 +60,11 @@ namespace gam703::engine::core
 		if (auto* glfwWindow = m_window.getGLFWWindow())
 		{
 			glfwSetWindowUserPointer(glfwWindow, this);
-			glfwSetFramebufferSizeCallback(glfwWindow, ResizeWindow);
-			//glfwSetCursorPosCallback(glfwWindow, mouse_callback);
+			glfwSetFramebufferSizeCallback(glfwWindow, resizeWindow);
+			glfwGetCursorPos(glfwWindow, &m_lastMouseX, &m_lastMouseY);
+			glfwSetCursorPosCallback(glfwWindow, mouseMovment);
 			//glfwSetScrollCallback(glfwWindow, scroll_callback);
-			glfwSetInputMode(glfwWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+			glfwSetInputMode(glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		}
 	}
 
@@ -119,6 +104,26 @@ namespace gam703::engine::core
 	void Engine::stop()
 	{
 		m_isRunning = false;
+	}
+
+	void Engine::processMouseMovement(GLFWwindow* glfwWindow, double mouseX, double mouseY)
+	{
+		static bool firstTime = true;
+
+		if (firstTime)
+		{
+			firstTime = false;
+			m_lastMouseX = mouseX;
+			m_lastMouseY = mouseY;
+		}
+
+		double xoffset = mouseX - m_lastMouseX;
+		double yoffset = m_lastMouseY - mouseY;
+
+		m_lastMouseX = mouseX;
+		m_lastMouseY = mouseY;
+
+		m_mainCamera->ProcessMouseMovement(xoffset, yoffset);
 	}
 
 } //gam703::engine::core

@@ -25,6 +25,8 @@ namespace gam703::engine::core
 
 		float getDeltaTime() const { return m_deltaTime; }
 
+		void processMouseMovement(GLFWwindow* glfwWindow, double mouseX, double mouseY);
+
 	private:
 		void run();
 
@@ -33,6 +35,8 @@ namespace gam703::engine::core
 		bool m_isRunning = false;
 		float m_deltaTime = 0;
 		float m_lastFrame = 0;
+		double m_lastMouseX = 0;
+		double m_lastMouseY = 0;
 	};
 }
 
