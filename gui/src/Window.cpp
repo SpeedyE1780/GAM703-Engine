@@ -10,6 +10,10 @@
 
 namespace gam703::engine::gui
 {
+	float deltaTime = 0;
+	float lastFrame = 0;
+	components::Camera* camera = nullptr;
+
 	namespace
 	{
 		void initializeGLFW()
@@ -44,6 +48,44 @@ namespace gam703::engine::gui
 		{
 			if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 				glfwSetWindowShouldClose(window, true);
+
+			if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+				camera->ProcessKeyboard(gam703::engine::components::FORWARD, deltaTime);
+			if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+				camera->ProcessKeyboard(gam703::engine::components::BACKWARD, deltaTime);
+			if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+				camera->ProcessKeyboard(gam703::engine::components::LEFT, deltaTime);
+			if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+				camera->ProcessKeyboard(gam703::engine::components::RIGHT, deltaTime);
+		}
+
+		void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
+		{
+			float xpos = static_cast<float>(xposIn);
+			float ypos = static_cast<float>(yposIn);
+			static bool firstMouse = true;
+			static float lastX;
+			static float lastY;
+
+			if (firstMouse)
+			{
+				lastX = xpos;
+				lastY = ypos;
+				firstMouse = false;
+			}
+
+			float xoffset = xpos - lastX;
+			float yoffset = lastY - ypos;
+
+			lastX = xpos;
+			lastY = ypos;
+
+			camera->ProcessMouseMovement(xoffset, yoffset);
+		}
+
+		void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+		{
+			camera->ProcessMouseScroll(static_cast<float>(yoffset));
 		}
 	}
 
@@ -56,6 +98,8 @@ namespace gam703::engine::gui
 			glfwMakeContextCurrent(m_window);
 			glfwSetWindowUserPointer(m_window, this);
 			glfwSetFramebufferSizeCallback(m_window, ResizeWindow);
+			glfwSetCursorPosCallback(m_window, mouse_callback);
+			glfwSetScrollCallback(m_window, scroll_callback);
 			initialzeGlad();
 		}
 		else
@@ -87,10 +131,15 @@ namespace gam703::engine::gui
 
 		graphic::Shader shader = graphic::createDefaultShader();
 
-		components::Camera camera(glm::vec3(0.0f, 0.0f, 10.0f));
+		components::Camera sceneCamera(glm::vec3(0.0f, 0.0f, 10.0f));
+		camera = &sceneCamera;
 
 		while (!glfwWindowShouldClose(m_window))
 		{
+			float currentFrame = static_cast<float>(glfwGetTime());
+			deltaTime = currentFrame - lastFrame;
+			lastFrame = currentFrame;
+
 			processInput(m_window);
 
 			glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -98,8 +147,8 @@ namespace gam703::engine::gui
 
 			shader.use();
 
-			glm::mat4 projection = glm::perspective(glm::radians(camera.getZoom()), (float)m_width / (float)m_height, 0.1f, 100.0f);
-			glm::mat4 view = camera.GetViewMatrix();
+			glm::mat4 projection = glm::perspective(glm::radians(sceneCamera.getZoom()), (float)m_width / (float)m_height, 0.1f, 100.0f);
+			glm::mat4 view = sceneCamera.GetViewMatrix();
 			shader.setMat4("projection", projection);
 			shader.setMat4("view", view);
 
