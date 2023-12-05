@@ -25,6 +25,16 @@ TEST(TimeTests, UpdateDeltaTime)
 	EXPECT_EQ(timeStep, time.getDeltaTime());
 }
 
+TEST(TimeTests, SetTimeScale)
+{
+	const double initialTime = 20;
+	const double timeScale = 2;
+	gam703::engine::core::Time time(initialTime, timeScale);
+
+	ASSERT_EQ(initialTime, time.getTime());
+	EXPECT_EQ(timeScale, time.getTimeScale());
+}
+
 int main(int argc, char** argv)
 {
 	printf("Running main() from %s\n", __FILE__);

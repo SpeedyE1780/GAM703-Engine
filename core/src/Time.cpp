@@ -2,7 +2,7 @@
 
 namespace gam703::engine::core
 {
-	Time::Time(double time) : m_time(time)
+	Time::Time(double time, double timeScale) : m_time(time), m_timeScale(timeScale)
 	{
 	}
 
