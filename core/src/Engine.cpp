@@ -17,27 +17,39 @@ namespace gam703::engine::core
 
 		void processInput(Engine& engine)
 		{
-			if (auto* window = engine.getWindow().getGLFWWindow())
+			Input& inputHandler = engine.getInput();
+
+			if (inputHandler.isKeyPressed(GLFW_KEY_ESCAPE))
 			{
-				if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+				engine.stop();
+			}
+
+			if (auto* camera = engine.getMainCamera())
+			{
+				float deltaTime = engine.getDeltaTime();
+
+				if (inputHandler.isKeyPressed(GLFW_KEY_W))
 				{
-					engine.stop();
-					glfwSetWindowShouldClose(window, true);
+					camera->ProcessKeyboard(gam703::engine::components::FORWARD, deltaTime);
 				}
 
-				if (auto* camera = engine.getMainCamera())
+				if (inputHandler.isKeyPressed(GLFW_KEY_S))
 				{
-					float deltaTime = engine.getDeltaTime();
-
-					if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-						camera->ProcessKeyboard(gam703::engine::components::FORWARD, deltaTime);
-					if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-						camera->ProcessKeyboard(gam703::engine::components::BACKWARD, deltaTime);
-					if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-						camera->ProcessKeyboard(gam703::engine::components::LEFT, deltaTime);
-					if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-						camera->ProcessKeyboard(gam703::engine::components::RIGHT, deltaTime);
+					camera->ProcessKeyboard(gam703::engine::components::BACKWARD, deltaTime);
 				}
+
+				if (inputHandler.isKeyPressed(GLFW_KEY_A))
+				{
+					camera->ProcessKeyboard(gam703::engine::components::LEFT, deltaTime);
+				}
+
+				if (inputHandler.isKeyPressed(GLFW_KEY_D))
+				{
+					camera->ProcessKeyboard(gam703::engine::components::RIGHT, deltaTime);
+				}
+
+				camera->ProcessMouseMovement(inputHandler.getMouseOffsetX(), inputHandler.getMouseOffsetY());
+				camera->ProcessMouseScroll(inputHandler.getMouseScrollOffsetY());
 			}
 		}
 
@@ -45,7 +57,7 @@ namespace gam703::engine::core
 		{
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
-				engine->processMouseMovement(glfwWindow, mouseX, mouseY);
+				engine->getInput().processMouseMovement(mouseX, mouseY);
 			}
 		}
 
@@ -53,18 +65,17 @@ namespace gam703::engine::core
 		{
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
-				engine->getMainCamera()->ProcessMouseScroll(yOffset);
+				engine->getInput().processMouseScroll(xOffset, yOffset);
 			}
 		}
 	}
 
-	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height)
+	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height), m_inputHandler(m_window.getGLFWWindow())
 	{
 		if (auto* glfwWindow = m_window.getGLFWWindow())
 		{
 			glfwSetWindowUserPointer(glfwWindow, this);
 			glfwSetFramebufferSizeCallback(glfwWindow, resizeWindow);
-			glfwGetCursorPos(glfwWindow, &m_lastMouseX, &m_lastMouseY);
 			glfwSetCursorPosCallback(glfwWindow, mouseMovment);
 			glfwSetScrollCallback(glfwWindow, scrollCallback);
 			glfwSetInputMode(glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -99,6 +110,7 @@ namespace gam703::engine::core
 			processInput(*this);
 			m_window.render(sceneCamera, shader, ourModel);
 
+			m_inputHandler.resetMouseOffset();
 			glfwSwapBuffers(m_window.getGLFWWindow());
 			glfwPollEvents();
 		}
@@ -107,26 +119,7 @@ namespace gam703::engine::core
 	void Engine::stop()
 	{
 		m_isRunning = false;
-	}
-
-	void Engine::processMouseMovement(GLFWwindow* glfwWindow, double mouseX, double mouseY)
-	{
-		static bool firstTime = true;
-
-		if (firstTime)
-		{
-			firstTime = false;
-			m_lastMouseX = mouseX;
-			m_lastMouseY = mouseY;
-		}
-
-		double xoffset = mouseX - m_lastMouseX;
-		double yoffset = m_lastMouseY - mouseY;
-
-		m_lastMouseX = mouseX;
-		m_lastMouseY = mouseY;
-
-		m_mainCamera->ProcessMouseMovement(xoffset, yoffset);
+		glfwSetWindowShouldClose(m_window.getGLFWWindow(), true);
 	}
 
 } //gam703::engine::core

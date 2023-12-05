@@ -1,8 +1,9 @@
 #ifndef GAM703_ENGINE_CORE_ENGINE_HPP
 #define GAM703_ENGINE_CORE_ENGINE_HPP
 
-#include <gui/Window.hpp>
 #include <components/Camera.hpp>
+#include <core/Input.hpp>
+#include <gui/Window.hpp>
 
 #include <string>
 
@@ -16,6 +17,9 @@ namespace gam703::engine::core
 
 		gui::Window& getWindow() { return m_window; }
 		const gui::Window& getWindow() const { return m_window; }
+
+		Input& getInput() { return m_inputHandler; }
+		const Input& getInput() const { return m_inputHandler; }
 
 		void start();
 		void stop();
@@ -31,12 +35,11 @@ namespace gam703::engine::core
 		void run();
 
 		gui::Window m_window;
+		Input m_inputHandler;
 		components::Camera* m_mainCamera = nullptr;
 		bool m_isRunning = false;
 		float m_deltaTime = 0;
 		float m_lastFrame = 0;
-		double m_lastMouseX = 0;
-		double m_lastMouseY = 0;
 	};
 }
 
