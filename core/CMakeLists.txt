@@ -8,10 +8,12 @@ target_sources(${PROJECT_NAME} PRIVATE
 #CPP
 src/Engine.cpp
 src/Input.cpp
+src/Time.cpp
 
 #HPP
 include/core/Engine.hpp
 include/core/Input.hpp
+include/core/Time.hpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include/)

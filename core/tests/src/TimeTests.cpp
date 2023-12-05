@@ -1,8 +1,13 @@
 #include <gtest/gtest.h>
+#include <core/Time.hpp>
 
-TEST(TimeTests, UpdateDeltaTime)
+TEST(TimeTests, SetTime)
 {
-	EXPECT_EQ(1, 1);
+	const double expected = 20;
+
+	gam703::engine::core::Time time(expected);
+
+	EXPECT_EQ(expected, time.getTime());
 }
 
 int main(int argc, char** argv)
