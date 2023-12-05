@@ -47,6 +47,8 @@ namespace gam703::engine::core
 				{
 					camera->ProcessKeyboard(gam703::engine::components::RIGHT, deltaTime);
 				}
+
+				camera->ProcessMouseMovement(inputHandler.getMouseOffsetX(), inputHandler.getMouseOffsetY());
 			}
 		}
 
@@ -54,7 +56,7 @@ namespace gam703::engine::core
 		{
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
-				engine->processMouseMovement(glfwWindow, mouseX, mouseY);
+				engine->getInput().processMouseMovement(mouseX, mouseY);
 			}
 		}
 
@@ -73,7 +75,6 @@ namespace gam703::engine::core
 		{
 			glfwSetWindowUserPointer(glfwWindow, this);
 			glfwSetFramebufferSizeCallback(glfwWindow, resizeWindow);
-			glfwGetCursorPos(glfwWindow, &m_lastMouseX, &m_lastMouseY);
 			glfwSetCursorPosCallback(glfwWindow, mouseMovment);
 			glfwSetScrollCallback(glfwWindow, scrollCallback);
 			glfwSetInputMode(glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -108,6 +109,7 @@ namespace gam703::engine::core
 			processInput(*this);
 			m_window.render(sceneCamera, shader, ourModel);
 
+			m_inputHandler.resetMouseOffset();
 			glfwSwapBuffers(m_window.getGLFWWindow());
 			glfwPollEvents();
 		}
@@ -117,26 +119,6 @@ namespace gam703::engine::core
 	{
 		m_isRunning = false;
 		glfwSetWindowShouldClose(m_window.getGLFWWindow(), true);
-	}
-
-	void Engine::processMouseMovement(GLFWwindow* glfwWindow, double mouseX, double mouseY)
-	{
-		static bool firstTime = true;
-
-		if (firstTime)
-		{
-			firstTime = false;
-			m_lastMouseX = mouseX;
-			m_lastMouseY = mouseY;
-		}
-
-		double xoffset = mouseX - m_lastMouseX;
-		double yoffset = m_lastMouseY - mouseY;
-
-		m_lastMouseX = mouseX;
-		m_lastMouseY = mouseY;
-
-		m_mainCamera->ProcessMouseMovement(xoffset, yoffset);
 	}
 
 } //gam703::engine::core
