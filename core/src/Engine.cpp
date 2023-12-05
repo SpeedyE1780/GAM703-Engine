@@ -17,26 +17,35 @@ namespace gam703::engine::core
 
 		void processInput(Engine& engine)
 		{
-			if (auto* window = engine.getWindow().getGLFWWindow())
+			Input& inputHandler = engine.getInput();
+
+			if (inputHandler.isKeyPressed(GLFW_KEY_ESCAPE))
 			{
-				if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+				engine.stop();
+			}
+
+			if (auto* camera = engine.getMainCamera())
+			{
+				float deltaTime = engine.getDeltaTime();
+
+				if (inputHandler.isKeyPressed(GLFW_KEY_W))
 				{
-					engine.stop();
-					glfwSetWindowShouldClose(window, true);
+					camera->ProcessKeyboard(gam703::engine::components::FORWARD, deltaTime);
 				}
 
-				if (auto* camera = engine.getMainCamera())
+				if (inputHandler.isKeyPressed(GLFW_KEY_S))
 				{
-					float deltaTime = engine.getDeltaTime();
+					camera->ProcessKeyboard(gam703::engine::components::BACKWARD, deltaTime);
+				}
 
-					if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-						camera->ProcessKeyboard(gam703::engine::components::FORWARD, deltaTime);
-					if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-						camera->ProcessKeyboard(gam703::engine::components::BACKWARD, deltaTime);
-					if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-						camera->ProcessKeyboard(gam703::engine::components::LEFT, deltaTime);
-					if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-						camera->ProcessKeyboard(gam703::engine::components::RIGHT, deltaTime);
+				if (inputHandler.isKeyPressed(GLFW_KEY_A))
+				{
+					camera->ProcessKeyboard(gam703::engine::components::LEFT, deltaTime);
+				}
+
+				if (inputHandler.isKeyPressed(GLFW_KEY_D))
+				{
+					camera->ProcessKeyboard(gam703::engine::components::RIGHT, deltaTime);
 				}
 			}
 		}
@@ -58,7 +67,7 @@ namespace gam703::engine::core
 		}
 	}
 
-	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height)
+	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height), m_inputHandler(m_window.getGLFWWindow())
 	{
 		if (auto* glfwWindow = m_window.getGLFWWindow())
 		{
@@ -107,6 +116,7 @@ namespace gam703::engine::core
 	void Engine::stop()
 	{
 		m_isRunning = false;
+		glfwSetWindowShouldClose(m_window.getGLFWWindow(), true);
 	}
 
 	void Engine::processMouseMovement(GLFWwindow* glfwWindow, double mouseX, double mouseY)
