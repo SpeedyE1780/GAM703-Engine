@@ -33,10 +33,18 @@ namespace gam703::engine::core
 		m_lastMouseY = mouseY;
 	}
 
+	void Input::processMouseScroll(double scrollOffsetX, double scrollOffsetY)
+	{
+		m_mouseScrollOffsetX = scrollOffsetX;
+		m_mouseScrollOffsetY = scrollOffsetY;
+	}
+
 	void Input::resetMouseOffset()
 	{
 		m_mouseOffsetX = 0;
 		m_mouseOffsetY = 0;
+		m_mouseScrollOffsetX = 0;
+		m_mouseScrollOffsetY = 0;
 	}
 
 } //gam703::engine::core

@@ -49,6 +49,7 @@ namespace gam703::engine::core
 				}
 
 				camera->ProcessMouseMovement(inputHandler.getMouseOffsetX(), inputHandler.getMouseOffsetY());
+				camera->ProcessMouseScroll(inputHandler.getMouseScrollOffsetY());
 			}
 		}
 
@@ -64,7 +65,7 @@ namespace gam703::engine::core
 		{
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
-				engine->getMainCamera()->ProcessMouseScroll(yOffset);
+				engine->getInput().processMouseScroll(xOffset, yOffset);
 			}
 		}
 	}
