@@ -8,12 +8,15 @@ namespace gam703::engine::core
 	public:
 		Time(double time);
 
+		void processTime(double time);
+
 		double getTime() const { return m_time; }
+		double getDeltaTime() const { return m_deltaTime; }
 
 	private:
 		double m_time = 0;
-		double m_deltaTime = 0;
 		double m_timeScale = 1;
+		double m_deltaTime = 0;
 	};
 }
 
