@@ -15,6 +15,8 @@ namespace gam703::engine::core
 		double getUnscaledDeltaTime() const { return m_deltaTime; }
 		double getTimeScale() const { return m_timeScale; }
 
+		void setTimeScale(double timeScale) { m_timeScale = timeScale; }
+
 	private:
 		double m_time = 0;
 		double m_timeScale = 1;

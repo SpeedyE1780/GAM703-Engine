@@ -54,6 +54,34 @@ TEST(TimeTests, UpdateScaledDeltaTime)
 	EXPECT_EQ(timeStep, time.getUnscaledDeltaTime());
 }
 
+TEST(TimeTests, UpdateTimeScaleThenRevert)
+{
+	const double initialTime = 20;
+	const double timeScale = 2;
+	gam703::engine::core::Time time(initialTime, timeScale);
+
+	ASSERT_EQ(initialTime, time.getTime());
+	ASSERT_EQ(timeScale, time.getTimeScale());
+
+	const double timeStep = 5;
+	double newTime = initialTime + timeStep;
+	time.processTime(newTime);
+
+	ASSERT_EQ(newTime, time.getTime());
+
+	const double scaledTimeStep = timeStep * timeScale;
+	EXPECT_EQ(scaledTimeStep, time.getDeltaTime());
+	EXPECT_EQ(timeStep, time.getUnscaledDeltaTime());
+
+	time.setTimeScale(1);
+	newTime += timeStep;
+	time.processTime(newTime);
+
+	EXPECT_EQ(newTime, time.getTime());
+	EXPECT_EQ(timeStep, time.getDeltaTime());
+	EXPECT_EQ(timeStep, time.getUnscaledDeltaTime());
+}
+
 int main(int argc, char** argv)
 {
 	printf("Running main() from %s\n", __FILE__);
