@@ -1,11 +1,11 @@
 #include <iostream>
-#include <gui/Window.hpp>
+#include <core/Engine.hpp>
 
 int main()
 {
 	std::cout << "GAM703-GameEngine" << std::endl;
 
-	gam703::engine::gui::Window window("GAM703", 1280, 720);
-	window.render();
+	gam703::engine::core::Engine engine("GAM703", 1280, 720);
+	engine.start();
 	return 0;
 }
