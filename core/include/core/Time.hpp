@@ -11,7 +11,8 @@ namespace gam703::engine::core
 		void processTime(double time);
 
 		double getTime() const { return m_time; }
-		double getDeltaTime() const { return m_deltaTime; }
+		double getDeltaTime() const { return m_deltaTime * m_timeScale; }
+		double getUnscaledDeltaTime() const { return m_deltaTime; }
 		double getTimeScale() const { return m_timeScale; }
 
 	private:
