@@ -3,6 +3,7 @@
 
 #include <components/Camera.hpp>
 #include <core/Input.hpp>
+#include <core/Time.hpp>
 #include <gui/Window.hpp>
 
 #include <string>
@@ -17,29 +18,24 @@ namespace gam703::engine::core
 
 		gui::Window& getWindow() { return m_window; }
 		const gui::Window& getWindow() const { return m_window; }
-
 		Input& getInput() { return m_inputHandler; }
 		const Input& getInput() const { return m_inputHandler; }
-
-		void start();
-		void stop();
-
+		Time& getTime() { return m_time; }
+		const Time& getTime() const { return m_time; }
 		components::Camera* getMainCamera() { return m_mainCamera; }
 		const components::Camera* getMainCamera() const { return m_mainCamera; }
 
-		float getDeltaTime() const { return m_deltaTime; }
-
-		void processMouseMovement(GLFWwindow* glfwWindow, double mouseX, double mouseY);
+		void start();
+		void stop();
 
 	private:
 		void run();
 
 		gui::Window m_window;
 		Input m_inputHandler;
+		Time m_time;
 		components::Camera* m_mainCamera = nullptr;
 		bool m_isRunning = false;
-		float m_deltaTime = 0;
-		float m_lastFrame = 0;
 	};
 }
 

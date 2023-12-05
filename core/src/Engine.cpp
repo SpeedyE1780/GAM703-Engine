@@ -26,7 +26,7 @@ namespace gam703::engine::core
 
 			if (auto* camera = engine.getMainCamera())
 			{
-				float deltaTime = engine.getDeltaTime();
+				float deltaTime = engine.getTime().getDeltaTime();
 
 				if (inputHandler.isKeyPressed(GLFW_KEY_W))
 				{
@@ -70,7 +70,7 @@ namespace gam703::engine::core
 		}
 	}
 
-	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height), m_inputHandler(m_window.getGLFWWindow())
+	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height), m_inputHandler(m_window.getGLFWWindow()), m_time(glfwGetTime())
 	{
 		if (auto* glfwWindow = m_window.getGLFWWindow())
 		{
@@ -103,10 +103,7 @@ namespace gam703::engine::core
 
 		while (m_isRunning)
 		{
-			float currentFrame = static_cast<float>(glfwGetTime());
-			m_deltaTime = currentFrame - m_lastFrame;
-			m_lastFrame = currentFrame;
-
+			m_time.processTime(glfwGetTime());
 			processInput(*this);
 			m_window.render(sceneCamera, shader, ourModel);
 
