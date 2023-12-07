@@ -2,6 +2,8 @@ project(graphic)
 
 add_library(${PROJECT_NAME})
 
+target_compile_definitions(${PROJECT_NAME} PRIVATE GRAPHIC_EXPORT)
+
 target_sources(${PROJECT_NAME} PRIVATE
 #CPP
 src/Shader.cpp 
@@ -10,6 +12,7 @@ src/Model.cpp
 src/Texture.cpp
 
 #HPP
+include/graphic/Config.hpp
 include/graphic/Shader.hpp
 include/graphic/Shader.fwd.hpp
 include/graphic/Mesh.hpp

@@ -34,7 +34,7 @@ namespace gam703::engine::components
 			m_position += m_right * velocity;
 	}
 
-	void Camera::ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch)
+	void Camera::ProcessMouseMovement(float xoffset, float yoffset, bool constrainPitch)
 	{
 		xoffset *= m_mouseSensitivity;
 		yoffset *= m_mouseSensitivity;

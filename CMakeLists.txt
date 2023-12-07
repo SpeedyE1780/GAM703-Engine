@@ -6,6 +6,9 @@ enable_testing()
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 add_executable(${PROJECT_NAME})
 
@@ -33,7 +36,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE core)
 add_custom_target(copy-files ALL
     COMMAND ${CMAKE_COMMAND} -E copy_directory
     ${CMAKE_SOURCE_DIR}/resources/
-    ${CMAKE_BINARY_DIR}/resources/
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/resources/
     )
 
 add_dependencies(${PROJECT_NAME} copy-files)

@@ -1,12 +1,13 @@
 #ifndef GAM703_ENGINE_GRAPHIC_SHADER_HPP
 #define GAM703_ENGINE_GRAPHIC_SHADER_HPP
 
+#include<graphic/Config.hpp>
 #include <glm/glm.hpp>
 #include <string>
 
 namespace gam703::engine::graphic
 {
-	class Shader
+	class GRAPHIC_API Shader
 	{
 	public:
 		Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
@@ -33,7 +34,7 @@ namespace gam703::engine::graphic
 		unsigned int m_id = 0;
 	};
 
-	Shader createDefaultShader();
+	GRAPHIC_API Shader createDefaultShader();
 }
 
 #endif //GAM703_ENGINE_GRAPHIC_SHADER_HPP

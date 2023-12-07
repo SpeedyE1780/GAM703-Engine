@@ -2,6 +2,7 @@
 #define GAM703_ENGINE_CORE_ENGINE_HPP
 
 #include <components/Camera.hpp>
+#include <core/Config.hpp>
 #include <core/Input.hpp>
 #include <core/Time.hpp>
 #include <gui/Window.hpp>
@@ -10,7 +11,7 @@
 
 namespace gam703::engine::core
 {
-	class Engine
+	class CORE_API Engine
 	{
 	public:
 		Engine(const std::string& title, int width, int height);
