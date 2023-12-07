@@ -1,6 +1,7 @@
 #ifndef GAM703_ENGINE_GRAPHIC_MODEL_HPP
 #define GAM703_ENGINE_GRAPHIC_MODEL_HPP
 
+#include <graphic/Config.hpp>
 #include <graphic/Mesh.hpp>
 #include <graphic/Shader.fwd.hpp>
 
@@ -16,7 +17,7 @@ enum aiTextureType;
 
 namespace gam703::engine::graphic
 {
-	class Model
+	class GRAPHIC_API Model
 	{
 
 	public:

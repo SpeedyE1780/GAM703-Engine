@@ -17,6 +17,8 @@ namespace gam703::engine::graphic
 				return GL_RGB;
 			else if (numberOfComponents == 4)
 				return GL_RGBA;
+
+			return GL_RED;
 		}
 	}
 
