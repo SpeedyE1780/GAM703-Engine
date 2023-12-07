@@ -1,7 +1,7 @@
 #ifndef GAM703_ENGINE_COMPONENTS_CAMERA_HPP
 #define GAM703_ENGINE_COMPONENTS_CAMERA_HPP
 
-#include <glad/glad.h>
+#include <components/Config.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -10,7 +10,7 @@
 namespace gam703::engine::components
 {
 
-	enum Camera_Movement
+	enum COMPONENTS_API Camera_Movement
 	{
 		FORWARD,
 		BACKWARD,
@@ -24,7 +24,7 @@ namespace gam703::engine::components
 	constexpr float SENSITIVITY = 0.1f;
 	constexpr float ZOOM = 45.0f;
 
-	class Camera
+	class COMPONENTS_API Camera
 	{
 	public:
 
@@ -34,7 +34,7 @@ namespace gam703::engine::components
 
 		glm::mat4 GetViewMatrix() const;
 		void ProcessKeyboard(Camera_Movement direction, float deltaTime);
-		void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true);
+		void ProcessMouseMovement(float xoffset, float yoffset, bool constrainPitch = true);
 		void ProcessMouseScroll(float yoffset);
 
 		glm::vec3 getPosition() const { return m_position; }
