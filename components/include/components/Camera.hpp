@@ -2,6 +2,7 @@
 #define GAM703_ENGINE_COMPONENTS_CAMERA_HPP
 
 #include <components/Config.hpp>
+#include <components/IComponent.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -24,7 +25,7 @@ namespace gam703::engine::components
 	constexpr float SENSITIVITY = 0.1f;
 	constexpr float ZOOM = 45.0f;
 
-	class COMPONENTS_API Camera
+	class COMPONENTS_API Camera : public IComponent
 	{
 	public:
 
