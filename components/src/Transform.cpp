@@ -22,43 +22,61 @@ namespace gam703::engine::components
 
 	void Transform::setPosition(const glm::vec3& position)
 	{
-		m_position = position;
-		m_shouldCalculateTransform = true;
+		if (m_position != position)
+		{
+			m_position = position;
+			m_shouldCalculateTransform = true;
+		}
 	}
 
 	void Transform::setPosition(float x, float y, float z)
 	{
-		m_position = glm::vec3(x, y, z);
-		m_shouldCalculateTransform = true;
+		setPosition(glm::vec3(x, y, z));
 	}
 
 	void Transform::setRotation(const glm::quat& rotation)
 	{
-		m_rotation = rotation;
-		m_shouldCalculateTransform = true;
+		if (m_rotation != rotation)
+		{
+			m_rotation = rotation;
+			m_shouldCalculateTransform = true;
+		}
 	}
 
 	void Transform::setRotation(const glm::vec3& eulerAngles)
 	{
-		m_rotation = glm::quat(eulerAngles);
-		m_shouldCalculateTransform = true;
+		setRotation(glm::quat(eulerAngles));
 	}
 
 	void Transform::setRotation(float x, float y, float z)
 	{
-		m_rotation = glm::quat(1, x, y, z);
-		m_shouldCalculateTransform = true;
+		setRotation(glm::quat(1, x, y, z));
 	}
 
 	void Transform::setScale(const glm::vec3& scale)
 	{
-		m_scale = scale;
-		m_shouldCalculateTransform = true;
+		if (m_scale != scale)
+		{
+			m_scale = scale;
+			m_shouldCalculateTransform = true;
+		}
 	}
 
 	void Transform::setScale(float x, float y, float z)
 	{
-		m_scale = glm::vec3(x, y, z);
-		m_shouldCalculateTransform = true;
+		setScale(glm::vec3(x, y, z));
+	}
+
+	void Transform::translate(const glm::vec3& offset)
+	{
+		if (offset.x != 0 || offset.y != 0 || offset.z != 0)
+		{
+			setPosition(m_position + offset);
+		}
+	}
+
+	void Transform::translate(float x, float y, float z)
+	{
+		translate(glm::vec3(x, y, z));
 	}
 }

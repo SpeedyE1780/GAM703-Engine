@@ -219,4 +219,20 @@ namespace gam703::engine::components::tests
 
 		EXPECT_TRUE(compareMatrix(transformMatrix, transformationMatrix));
 	}
+
+	TEST(TransformTests, TranslateTest)
+	{
+		glm::vec3 position(1, 2, 3);
+		Transform transform(position);
+		glm::mat4 transformMatrix = glm::translate(glm::mat4(1), position);
+
+		ASSERT_TRUE(compareMatrix(transformMatrix, transform.getTransformationMatrix()));
+
+		glm::vec3 offset(5, 6, 7);
+		transform.translate(offset);
+		transform.calculateTransformMatrix();
+		transformMatrix = glm::translate(transformMatrix, offset);
+
+		EXPECT_TRUE(compareMatrix(transformMatrix, transform.getTransformationMatrix()));
+	}
 } //gam703::engine::components::tests

@@ -27,6 +27,9 @@ namespace gam703::engine::components
 		void setScale(const glm::vec3& scale);
 		void setScale(float x, float y, float z);
 
+		void translate(const glm::vec3& offset);
+		void translate(float x, float y, float z);
+
 	private:
 		glm::vec3 m_position;
 		glm::quat m_rotation;
