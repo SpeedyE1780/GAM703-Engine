@@ -29,19 +29,13 @@ namespace gam703::engine::components
 	{
 	public:
 
-		Camera(Transform* transform, glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH);
-
-		Camera(Transform* transform, float upX, float upY, float upZ, float yaw, float pitch);
+		Camera(Transform* transform, float yaw = YAW, float pitch = PITCH);
 
 		glm::mat4 GetViewMatrix() const;
 		void ProcessKeyboard(Camera_Movement direction, float deltaTime);
 		void ProcessMouseMovement(float xoffset, float yoffset, bool constrainPitch = true);
 		void ProcessMouseScroll(float yoffset);
 
-		glm::vec3 getFront() const { return m_front; }
-		glm::vec3 getUp() const { return m_up; }
-		glm::vec3 getRight() const { return m_right; }
-		glm::vec3 getWorldUp() const { return m_worldUp; }
 		float getYaw() const { return m_yaw; }
 		float getPitch() const { return m_pitch; }
 		float getMovementSpeed() const { return m_movementSpeed; }
@@ -49,12 +43,6 @@ namespace gam703::engine::components
 		float getZoom() const { return m_zoom; }
 
 	private:
-		void updateCameraVectors();
-
-		glm::vec3 m_front;
-		glm::vec3 m_up;
-		glm::vec3 m_right;
-		glm::vec3 m_worldUp;
 		float m_yaw;
 		float m_pitch;
 		float m_movementSpeed;

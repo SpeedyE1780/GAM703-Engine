@@ -3,22 +3,13 @@
 
 namespace gam703::engine::components
 {
-	Camera::Camera(Transform* transform, glm::vec3 up, float yaw, float pitch) : IComponent(transform), m_front(glm::vec3(0.0f, 0.0f, -1.0f)), m_up(), m_right(), m_worldUp(up), m_yaw(yaw), m_pitch(pitch), m_movementSpeed(SPEED), m_mouseSensitivity(SENSITIVITY), m_zoom(ZOOM)
+	Camera::Camera(Transform* transform, float yaw, float pitch) : IComponent(transform), m_yaw(yaw), m_pitch(pitch), m_movementSpeed(SPEED), m_mouseSensitivity(SENSITIVITY), m_zoom(ZOOM)
 	{
-		updateCameraVectors();
-	}
-
-	Camera::Camera(Transform* transform, float upX, float upY, float upZ, float yaw, float pitch) : IComponent(transform), m_front(glm::vec3(0.0f, 0.0f, -1.0f)), m_movementSpeed(SPEED), m_mouseSensitivity(SENSITIVITY), m_zoom(ZOOM)
-	{
-		m_worldUp = glm::vec3(upX, upY, upZ);
-		m_yaw = yaw;
-		m_pitch = pitch;
-		updateCameraVectors();
 	}
 
 	glm::mat4 Camera::GetViewMatrix() const
 	{
-		return glm::lookAt(m_transform->getPosition(), m_transform->getPosition() + m_front, m_up);
+		return glm::lookAt(m_transform->getPosition(), m_transform->getPosition() + m_transform->getFront(), m_transform->getUp());
 	}
 
 	void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
@@ -27,19 +18,19 @@ namespace gam703::engine::components
 
 		if (direction == FORWARD)
 		{
-			m_transform->translate(m_front * velocity);
+			m_transform->translate(m_transform->getFront() * velocity);
 		}
 		if (direction == BACKWARD)
 		{
-			m_transform->translate(-m_front * velocity);
+			m_transform->translate(-m_transform->getFront() * velocity);
 		}
 		if (direction == LEFT)
 		{
-			m_transform->translate(-m_right * velocity);
+			m_transform->translate(-m_transform->getRight() * velocity);
 		}
 		if (direction == RIGHT)
 		{
-			m_transform->translate(m_right * velocity);
+			m_transform->translate(m_transform->getRight() * velocity);
 		}
 	}
 
@@ -53,30 +44,14 @@ namespace gam703::engine::components
 
 		if (constrainPitch)
 		{
-			if (m_pitch > 89.0f)
-				m_pitch = 89.0f;
-			if (m_pitch < -89.0f)
-				m_pitch = -89.0f;
+			m_pitch = glm::clamp(m_pitch, -89.0f, 89.0f);
 		}
 
-		updateCameraVectors();
+		m_transform->setRotation(glm::vec3(glm::radians(m_pitch), glm::radians(m_yaw), 0.0f));
 	}
 
 	void Camera::ProcessMouseScroll(float yoffset)
 	{
 		m_zoom = glm::clamp(m_zoom - yoffset, 1.0f, 45.0f);
 	}
-
-	void Camera::updateCameraVectors()
-	{
-		glm::vec3 front(
-			cos(glm::radians(m_yaw)) * cos(glm::radians(m_pitch)),
-			sin(glm::radians(m_pitch)),
-			sin(glm::radians(m_yaw)) * cos(glm::radians(m_pitch))
-		);
-		m_front = glm::normalize(front);
-		m_right = glm::normalize(glm::cross(m_front, m_worldUp));
-		m_up = glm::normalize(glm::cross(m_right, m_front));
-	}
-
 }// gam703::engine::components

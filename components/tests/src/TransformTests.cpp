@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <glm/glm.hpp>
 #include <components/Transform.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include <cmath>
 
@@ -36,7 +37,7 @@ namespace gam703::engine::components::tests
 
 		glm::vec3 position = glm::vec3(0, 0, 0);
 		glm::vec3 scale = glm::vec3(1, 1, 1);
-		glm::quat rotation = glm::quat(glm::vec3(0, 0, 0));
+		glm::vec3 rotation = glm::vec3(0, 0, 0);
 		glm::mat4 transformMatrix = glm::mat4(1);
 
 		EXPECT_EQ(position, transform.getPosition());
@@ -58,77 +59,70 @@ namespace gam703::engine::components::tests
 	TEST(TransformTests, RotationXAxis)
 	{
 		glm::vec3 eulerAngles(glm::radians(90.0f), 0, 0);
-		glm::quat rotation(eulerAngles);
 		Transform transform{ glm::vec3(0,0,0), eulerAngles };
 		glm::mat4 transformMatrix = calculateRotationMatrix(glm::mat4(1), eulerAngles);
 
-		EXPECT_EQ(rotation, transform.getRotation());
+		EXPECT_EQ(eulerAngles, transform.getRotation());
 		EXPECT_TRUE(compareMatrix(transformMatrix, transform.getTransformationMatrix()));
 	}
 
 	TEST(TransformTests, RotationYAxis)
 	{
 		glm::vec3 eulerAngles(0, glm::radians(90.0f), 0);
-		glm::quat rotation(eulerAngles);
 		Transform transform{ glm::vec3(0,0,0), eulerAngles };
 		glm::mat4 transformMatrix = calculateRotationMatrix(glm::mat4(1), eulerAngles);
 
-		EXPECT_EQ(rotation, transform.getRotation());
+		EXPECT_EQ(eulerAngles, transform.getRotation());
 		EXPECT_TRUE(compareMatrix(transformMatrix, transform.getTransformationMatrix()));
 	}
 
 	TEST(TransformTests, RotationZAxis)
 	{
 		glm::vec3 eulerAngles(0, 0, glm::radians(90.0f));
-		glm::quat rotation(eulerAngles);
 		Transform transform{ glm::vec3(0,0,0), eulerAngles };
 		glm::mat4 transformMatrix = calculateRotationMatrix(glm::mat4(1), eulerAngles);
 
-		EXPECT_EQ(rotation, transform.getRotation());
+		EXPECT_EQ(eulerAngles, transform.getRotation());
 		EXPECT_TRUE(compareMatrix(transformMatrix, transform.getTransformationMatrix()));
 	}
 
 	TEST(TransformTests, RotationXYAxis)
 	{
 		glm::vec3 eulerAngles(glm::radians(90.0f), glm::radians(90.0f), 0);
-		glm::quat rotation(eulerAngles);
 		Transform transform{ glm::vec3(0,0,0), eulerAngles };
 		glm::mat4 transformMatrix = calculateRotationMatrix(glm::mat4(1), eulerAngles);
 
-		EXPECT_EQ(rotation, transform.getRotation());
+		EXPECT_EQ(eulerAngles, transform.getRotation());
 		EXPECT_TRUE(compareMatrix(transformMatrix, transform.getTransformationMatrix()));
 	}
 
 	TEST(TransformTests, RotationXZAxis)
 	{
 		glm::vec3 eulerAngles(glm::radians(90.0f), 0, glm::radians(90.0f));
-		glm::quat rotation(eulerAngles);
 		Transform transform{ glm::vec3(0,0,0), eulerAngles };
 		glm::mat4 transformMatrix = calculateRotationMatrix(glm::mat4(1), eulerAngles);
 
-		EXPECT_EQ(rotation, transform.getRotation());
+		EXPECT_EQ(eulerAngles, transform.getRotation());
 		EXPECT_TRUE(compareMatrix(transformMatrix, transform.getTransformationMatrix()));
 	}
 
 	TEST(TransformTests, RotationYZAxis)
 	{
 		glm::vec3 eulerAngles(0, glm::radians(90.0f), glm::radians(90.0f));
-		glm::quat rotation(eulerAngles);
 		Transform transform{ glm::vec3(0,0,0), eulerAngles };
 		glm::mat4 transformMatrix = calculateRotationMatrix(glm::mat4(1), eulerAngles);
 
-		EXPECT_EQ(rotation, transform.getRotation());
+		EXPECT_EQ(eulerAngles, transform.getRotation());
 		EXPECT_TRUE(compareMatrix(transformMatrix, transform.getTransformationMatrix()));
 	}
 
 	TEST(TransformTests, RotationXYZAxis)
 	{
 		glm::vec3 eulerAngles(glm::radians(90.0f), glm::radians(90.0f), glm::radians(90.0f));
-		glm::quat rotation(eulerAngles);
 		Transform transform{ glm::vec3(0,0,0), eulerAngles };
 		glm::mat4 transformMatrix = calculateRotationMatrix(glm::mat4(1), eulerAngles);
 
-		EXPECT_EQ(rotation, transform.getRotation());
+		EXPECT_EQ(eulerAngles, transform.getRotation());
 		EXPECT_TRUE(compareMatrix(transformMatrix, transform.getTransformationMatrix()));
 	}
 
@@ -176,7 +170,7 @@ namespace gam703::engine::components::tests
 		transform.calculateTransformMatrix();
 		transformMatrix = calculateRotationMatrix(transformMatrix, eulerAngles);
 
-		EXPECT_EQ(glm::quat(eulerAngles), transform.getRotation());
+		EXPECT_EQ(eulerAngles, transform.getRotation());
 		EXPECT_TRUE(compareMatrix(transformMatrix, transformationMatrix));
 
 		transform.setScale(scale);
@@ -205,7 +199,7 @@ namespace gam703::engine::components::tests
 
 		transform.setRotation(eulerAngles);
 
-		EXPECT_EQ(glm::quat(eulerAngles), transform.getRotation());
+		EXPECT_EQ(eulerAngles, transform.getRotation());
 		EXPECT_TRUE(compareMatrix(transformMatrix, transformationMatrix));
 
 		transform.setScale(scale);
