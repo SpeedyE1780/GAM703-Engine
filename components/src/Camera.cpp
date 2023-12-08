@@ -2,12 +2,12 @@
 
 namespace gam703::engine::components
 {
-	Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch) : IComponent(nullptr), m_position(position), m_front(glm::vec3(0.0f, 0.0f, -1.0f)), m_up(), m_right(), m_worldUp(up), m_yaw(yaw), m_pitch(pitch), m_movementSpeed(SPEED), m_mouseSensitivity(SENSITIVITY), m_zoom(ZOOM)
+	Camera::Camera(Transform* transform, glm::vec3 position, glm::vec3 up, float yaw, float pitch) : IComponent(transform), m_position(position), m_front(glm::vec3(0.0f, 0.0f, -1.0f)), m_up(), m_right(), m_worldUp(up), m_yaw(yaw), m_pitch(pitch), m_movementSpeed(SPEED), m_mouseSensitivity(SENSITIVITY), m_zoom(ZOOM)
 	{
 		updateCameraVectors();
 	}
 
-	Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) : IComponent(nullptr), m_front(glm::vec3(0.0f, 0.0f, -1.0f)), m_movementSpeed(SPEED), m_mouseSensitivity(SENSITIVITY), m_zoom(ZOOM)
+	Camera::Camera(Transform* transform, float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) : IComponent(transform), m_front(glm::vec3(0.0f, 0.0f, -1.0f)), m_movementSpeed(SPEED), m_mouseSensitivity(SENSITIVITY), m_zoom(ZOOM)
 	{
 		m_position = glm::vec3(posX, posY, posZ);
 		m_worldUp = glm::vec3(upX, upY, upZ);
