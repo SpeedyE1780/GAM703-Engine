@@ -1,0 +1,9 @@
+#ifndef GAM703_ENGINE_COMPONENTS_TRANSFORM_FWD_HPP
+#define GAM703_ENGINE_COMPONENTS_TRANSFORM_FWD_HPP
+
+namespace gam703::engine::components
+{
+	class Transform;
+}
+
+#endif // GAM703_ENGINE_COMPONENTS_TRANSFORM_FWD_HPP
