@@ -235,4 +235,19 @@ namespace gam703::engine::components::tests
 
 		EXPECT_TRUE(compareMatrix(transformMatrix, transform.getTransformationMatrix()));
 	}
+
+	TEST(TransformTests, RotationTest)
+	{
+		glm::vec3 eulerAngles(20, 0, 0);
+		Transform transform(glm::vec3(0, 0, 0), eulerAngles);
+		glm::mat4 transformMatrix = glm::rotate(glm::mat4(1), 20.0f, glm::vec3(1, 0, 0));
+
+		ASSERT_TRUE(compareMatrix(transformMatrix, transform.getTransformationMatrix()));
+
+		transform.rotate(eulerAngles);
+		transform.calculateTransformMatrix();
+		transformMatrix = glm::rotate(transformMatrix, 20.0f, glm::vec3(1, 0, 0));
+
+		EXPECT_TRUE(compareMatrix(transformMatrix, transform.getTransformationMatrix()));
+	}
 } //gam703::engine::components::tests

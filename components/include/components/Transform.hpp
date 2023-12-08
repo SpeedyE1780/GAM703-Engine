@@ -29,6 +29,9 @@ namespace gam703::engine::components
 
 		void translate(const glm::vec3& offset);
 		void translate(float x, float y, float z);
+		void rotate(const glm::quat& quaternion);
+		void rotate(const glm::vec3& eulerAngles);
+		void rotate(float x, float y, float z);
 
 	private:
 		glm::vec3 m_position;

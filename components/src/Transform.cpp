@@ -79,4 +79,22 @@ namespace gam703::engine::components
 	{
 		translate(glm::vec3(x, y, z));
 	}
+
+	void Transform::rotate(const glm::quat& quaternion)
+	{
+		if (quaternion.x != 0 || quaternion.y != 0 || quaternion.z != 0)
+		{
+			setRotation(m_rotation * quaternion);
+		}
+	}
+
+	void Transform::rotate(const glm::vec3& eulerAngles)
+	{
+		rotate(glm::quat(eulerAngles));
+	}
+
+	void Transform::rotate(float x, float y, float z)
+	{
+		rotate(glm::quat(1, x, y, z));
+	}
 }
