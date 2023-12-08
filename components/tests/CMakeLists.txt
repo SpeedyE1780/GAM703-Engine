@@ -8,6 +8,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 #CPP
 src/main.cpp
 src/TransformTests.cpp
+src/ComponentsTests.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE components)

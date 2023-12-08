@@ -12,6 +12,9 @@ namespace gam703::engine::components
 		IComponent(Transform* transform);
 		virtual ~IComponent() = default;
 
+		Transform* getTransform() { return m_transform; }
+		const Transform* getTransform() const { return m_transform; }
+
 	protected:
 		Transform* m_transform;
 	};
