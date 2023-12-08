@@ -100,7 +100,7 @@ namespace gam703::engine::core
 		graphic::Shader shader = graphic::createDefaultShader();
 
 		components::Transform cameraTransform(glm::vec3(0.0f, 0.0f, 10.0f));
-		m_mainCamera = cameraTransform.addComponent<components::Camera>(glm::vec3(0.0f, 0.0f, 10.0f));
+		m_mainCamera = cameraTransform.addComponent<components::Camera>();
 
 		while (m_isRunning)
 		{
