@@ -80,6 +80,7 @@ namespace gam703::engine::components
 		glm::vec3 m_up = glm::vec3(0, 0, 0);
 		glm::vec3 m_right = glm::vec3(0, 0, 0);
 		bool m_shouldCalculateTransform;
+		bool m_shouldUpdateDirectionVectors;
 		std::vector<std::unique_ptr<IComponent>> m_components = {};
 	};
 }

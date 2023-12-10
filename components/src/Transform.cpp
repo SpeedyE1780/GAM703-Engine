@@ -4,7 +4,7 @@
 
 namespace gam703::engine::components
 {
-	Transform::Transform(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) : m_position(position), m_rotation(rotation), m_scale(scale), m_transformMatrix(glm::mat4(1)), m_shouldCalculateTransform(true)
+	Transform::Transform(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) : m_position(position), m_rotation(rotation), m_scale(scale), m_transformMatrix(glm::mat4(1)), m_shouldCalculateTransform(true), m_shouldUpdateDirectionVectors(true)
 	{
 		calculateTransformMatrix();
 	}
@@ -24,15 +24,20 @@ namespace gam703::engine::components
 
 	void Transform::updateDirectionVectors()
 	{
-		glm::vec3 front(
-			cos(m_rotation.y) * cos(m_rotation.x),
-			sin(m_rotation.x),
-			sin(m_rotation.y) * cos(m_rotation.x)
-		);
+		if (m_shouldUpdateDirectionVectors)
+		{
+			glm::vec3 front(
+				cos(m_rotation.y) * cos(m_rotation.x),
+				sin(m_rotation.x),
+				sin(m_rotation.y) * cos(m_rotation.x)
+			);
 
-		m_front = glm::normalize(front);
-		m_right = glm::normalize(glm::cross(m_front, glm::vec3(0, 1, 0)));
-		m_up = glm::normalize(glm::cross(m_right, m_front));
+			m_front = glm::normalize(front);
+			m_right = glm::normalize(glm::cross(m_front, glm::vec3(0, 1, 0)));
+			m_up = glm::normalize(glm::cross(m_right, m_front));
+
+			m_shouldUpdateDirectionVectors = false;
+		}
 	}
 
 	void Transform::setPosition(const glm::vec3& position)
@@ -55,6 +60,7 @@ namespace gam703::engine::components
 		{
 			m_rotation = eulerAngles;
 			m_shouldCalculateTransform = true;
+			m_shouldUpdateDirectionVectors = true;
 		}
 	}
 
