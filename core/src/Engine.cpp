@@ -1,5 +1,6 @@
 #include <glad/glad.h>
 #include <core/Engine.hpp>
+#include <core/SceneRenderer.hpp>
 #include <components/Transform.hpp>
 #include <graphic/Model.hpp>
 #include <graphic/Shader.hpp>
@@ -13,6 +14,7 @@ namespace gam703::engine::core
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
 				engine->getWindow().resizeWindow(width, height);
+				engine->getSceneRenderer().calculateProjectionMatrix();
 			}
 		}
 
@@ -71,7 +73,7 @@ namespace gam703::engine::core
 		}
 	}
 
-	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height), m_inputHandler(m_window.getGLFWWindow()), m_time(glfwGetTime())
+	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height), m_inputHandler(m_window.getGLFWWindow()), m_time(glfwGetTime()), m_sceneRenderer(&m_window)
 	{
 		if (auto* glfwWindow = m_window.getGLFWWindow())
 		{
@@ -102,12 +104,18 @@ namespace gam703::engine::core
 		components::Transform cameraTransform(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0, glm::radians(-90.0f), 0));
 		m_mainCamera = cameraTransform.addComponent<components::Camera>();
 
+		components::Transform backpackTransform{};
+		auto* backpackRenderer = backpackTransform.addComponent<components::Renderer>(ourModel, shader);
+
+		m_sceneRenderer.addRenderer(backpackRenderer);
+		m_sceneRenderer.setMainCamera(m_mainCamera);
+
 		while (m_isRunning)
 		{
 			m_time.processTime(glfwGetTime());
 			processInput(*this);
 			cameraTransform.calculateTransformMatrix();
-			m_window.render(*m_mainCamera, shader, ourModel);
+			m_sceneRenderer.render();
 
 			m_inputHandler.resetMouseOffset();
 			glfwSwapBuffers(m_window.getGLFWWindow());

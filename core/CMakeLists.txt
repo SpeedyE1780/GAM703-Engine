@@ -10,12 +10,14 @@ target_sources(${PROJECT_NAME} PRIVATE
 #CPP
 src/Engine.cpp
 src/Input.cpp
+src/SceneRenderer.cpp
 src/Time.cpp
 
 #HPP
 include/core/Config.hpp
 include/core/Engine.hpp
 include/core/Input.hpp
+include/core/SceneRenderer.hpp
 include/core/Time.hpp
 )
 

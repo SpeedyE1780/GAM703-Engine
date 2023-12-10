@@ -55,24 +55,4 @@ namespace gam703::engine::gui
 		glViewport(0, 0, width, height);
 	}
 
-	void Window::render(const components::Camera& sceneCamera, const graphic::Shader& shader, const graphic::Model& model) const
-	{
-			glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-			shader.use();
-
-			glm::mat4 projection = glm::perspective(glm::radians(sceneCamera.getZoom()), (float)m_width / (float)m_height, 0.1f, 100.0f);
-			glm::mat4 view = sceneCamera.GetViewMatrix();
-			shader.setMat4("projection", projection);
-			shader.setMat4("view", view);
-
-			glm::mat4 modelTransfrom = glm::mat4(1.0f);
-			modelTransfrom = glm::translate(modelTransfrom, glm::vec3(0.0f, 0.0f, 0.0f));
-			modelTransfrom = glm::scale(modelTransfrom, glm::vec3(1.0f, 1.0f, 1.0f));
-			shader.setMat4("model", modelTransfrom);
-
-			model.draw(shader);
-	}
-
 } //gam703::engine::gui
