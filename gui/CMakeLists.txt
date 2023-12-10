@@ -17,5 +17,4 @@ include/gui/Window.hpp
 target_link_libraries(${PROJECT_NAME} PUBLIC glad)
 target_link_libraries(${PROJECT_NAME} PUBLIC glfw)
 target_link_libraries(${PROJECT_NAME} PRIVATE glm)
-target_link_libraries(${PROJECT_NAME} PUBLIC graphic)
 target_link_libraries(${PROJECT_NAME} PUBLIC components)

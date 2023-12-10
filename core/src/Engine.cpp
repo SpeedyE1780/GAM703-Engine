@@ -102,12 +102,15 @@ namespace gam703::engine::core
 		components::Transform cameraTransform(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0, glm::radians(-90.0f), 0));
 		m_mainCamera = cameraTransform.addComponent<components::Camera>();
 
+		components::Transform backpackTransform{};
+		auto* backpackRenderer = backpackTransform.addComponent<components::Renderer>(ourModel, shader);
+
 		while (m_isRunning)
 		{
 			m_time.processTime(glfwGetTime());
 			processInput(*this);
 			cameraTransform.calculateTransformMatrix();
-			m_window.render(*m_mainCamera, shader, ourModel);
+			m_window.render(*m_mainCamera, *backpackRenderer);
 
 			m_inputHandler.resetMouseOffset();
 			glfwSwapBuffers(m_window.getGLFWWindow());
