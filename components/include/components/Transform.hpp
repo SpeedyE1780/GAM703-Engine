@@ -1,6 +1,7 @@
 #ifndef GAM703_ENGINE_COMPONENTS_TRANSFORM_HPP
 #define GAM703_ENGINE_COMPONENTS_TRANSFORM_HPP
 
+#include <core-interfaces/IEngine.hpp>
 #include <components/Config.hpp>
 #include <components/IComponent.hpp>
 #include <glm/glm.hpp>
@@ -69,6 +70,11 @@ namespace gam703::engine::components
 
 		std::size_t getComponentsSize() const { return m_components.size(); }
 
+		core_interface::IEngine* getEngine() { return m_engine; }
+		const core_interface::IEngine* getEngine() const { return m_engine; }
+
+		void setEngine(core_interface::IEngine* engine) { m_engine = engine; }
+
 	private:
 		void updateDirectionVectors();
 
@@ -82,6 +88,7 @@ namespace gam703::engine::components
 		bool m_shouldCalculateTransform;
 		bool m_shouldUpdateDirectionVectors;
 		std::vector<std::unique_ptr<IComponent>> m_components = {};
+		core_interface::IEngine* m_engine = nullptr;
 	};
 }
 

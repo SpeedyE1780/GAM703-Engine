@@ -23,6 +23,7 @@ include/core/Time.hpp
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include/)
 
+target_link_libraries(${PROJECT_NAME} PUBLIC core-interfaces)
 target_link_libraries(${PROJECT_NAME} PRIVATE glad)
 target_link_libraries(${PROJECT_NAME} PRIVATE graphic)
 target_link_libraries(${PROJECT_NAME} PUBLIC gui)

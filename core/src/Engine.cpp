@@ -20,9 +20,9 @@ namespace gam703::engine::core
 
 		void processInput(Engine& engine)
 		{
-			Input& inputHandler = engine.getInput();
+			auto* inputHandler = engine.getInput();
 
-			if (inputHandler.isKeyPressed(GLFW_KEY_ESCAPE))
+			if (inputHandler->isKeyPressed(GLFW_KEY_ESCAPE))
 			{
 				engine.stop();
 			}
@@ -31,28 +31,28 @@ namespace gam703::engine::core
 			{
 				float deltaTime = engine.getTime().getDeltaTime();
 
-				if (inputHandler.isKeyPressed(GLFW_KEY_W))
+				if (inputHandler->isKeyPressed(GLFW_KEY_W))
 				{
 					camera->ProcessKeyboard(gam703::engine::components::FORWARD, deltaTime);
 				}
 
-				if (inputHandler.isKeyPressed(GLFW_KEY_S))
+				if (inputHandler->isKeyPressed(GLFW_KEY_S))
 				{
 					camera->ProcessKeyboard(gam703::engine::components::BACKWARD, deltaTime);
 				}
 
-				if (inputHandler.isKeyPressed(GLFW_KEY_A))
+				if (inputHandler->isKeyPressed(GLFW_KEY_A))
 				{
 					camera->ProcessKeyboard(gam703::engine::components::LEFT, deltaTime);
 				}
 
-				if (inputHandler.isKeyPressed(GLFW_KEY_D))
+				if (inputHandler->isKeyPressed(GLFW_KEY_D))
 				{
 					camera->ProcessKeyboard(gam703::engine::components::RIGHT, deltaTime);
 				}
 
-				camera->ProcessMouseMovement(inputHandler.getMouseOffsetX(), inputHandler.getMouseOffsetY());
-				camera->ProcessMouseScroll(inputHandler.getMouseScrollOffsetY());
+				camera->ProcessMouseMovement(inputHandler->getMouseOffsetX(), inputHandler->getMouseOffsetY());
+				camera->ProcessMouseScroll(inputHandler->getMouseScrollOffsetY());
 			}
 		}
 
@@ -60,7 +60,7 @@ namespace gam703::engine::core
 		{
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
-				engine->getInput().processMouseMovement(mouseX, mouseY);
+				engine->getInput()->processMouseMovement(mouseX, mouseY);
 			}
 		}
 
@@ -68,7 +68,7 @@ namespace gam703::engine::core
 		{
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
-				engine->getInput().processMouseScroll(xOffset, yOffset);
+				engine->getInput()->processMouseScroll(xOffset, yOffset);
 			}
 		}
 	}
@@ -103,9 +103,11 @@ namespace gam703::engine::core
 
 		components::Transform cameraTransform(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0, glm::radians(-90.0f), 0));
 		m_mainCamera = cameraTransform.addComponent<components::Camera>();
+		cameraTransform.setEngine(this);
 
 		components::Transform backpackTransform{};
 		auto* backpackRenderer = backpackTransform.addComponent<components::Renderer>(ourModel, shader);
+		backpackTransform.setEngine(this);
 
 		m_sceneRenderer.addRenderer(backpackRenderer);
 		m_sceneRenderer.setMainCamera(m_mainCamera);
