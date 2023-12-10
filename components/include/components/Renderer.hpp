@@ -16,6 +16,7 @@ namespace gam703::engine::components
 		Renderer(Transform* transform, const graphic::Model& model, const graphic::Shader& shader);
 
 		void render(const glm::mat4& projectionMatrix, const glm::mat4& viewMatrix) const;
+		void tick(float deltaTime) override {}
 
 	private:
 		graphic::Model m_model;

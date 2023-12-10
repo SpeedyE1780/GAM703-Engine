@@ -1,3 +1,6 @@
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 #include <components/Camera.hpp>
 #include <components/Transform.hpp>
 
@@ -12,46 +15,42 @@ namespace gam703::engine::components
 		return glm::lookAt(m_transform->getPosition(), m_transform->getPosition() + m_transform->getFront(), m_transform->getUp());
 	}
 
-	void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
+	void Camera::tick(float deltaTime)
 	{
-		float velocity = m_movementSpeed * deltaTime;
-
-		if (direction == FORWARD)
+		if (auto* inputHandler = getEngine()->getInput())
 		{
-			m_transform->translate(m_transform->getFront() * velocity);
-		}
-		if (direction == BACKWARD)
-		{
-			m_transform->translate(-m_transform->getFront() * velocity);
-		}
-		if (direction == LEFT)
-		{
-			m_transform->translate(-m_transform->getRight() * velocity);
-		}
-		if (direction == RIGHT)
-		{
-			m_transform->translate(m_transform->getRight() * velocity);
-		}
-	}
+			float velocity = m_movementSpeed * deltaTime;
 
-	void Camera::ProcessMouseMovement(float xoffset, float yoffset, bool constrainPitch)
-	{
-		xoffset *= m_mouseSensitivity;
-		yoffset *= m_mouseSensitivity;
+			if (inputHandler->isKeyPressed(GLFW_KEY_W))
+			{
+				m_transform->translate(m_transform->getFront() * velocity);
+			}
 
-		m_yaw += xoffset;
-		m_pitch += yoffset;
+			if (inputHandler->isKeyPressed(GLFW_KEY_S))
+			{
+				m_transform->translate(-m_transform->getFront() * velocity);
+			}
 
-		if (constrainPitch)
-		{
-			m_pitch = glm::clamp(m_pitch, -89.0f, 89.0f);
+			if (inputHandler->isKeyPressed(GLFW_KEY_A))
+			{
+				m_transform->translate(-m_transform->getRight() * velocity);
+			}
+
+			if (inputHandler->isKeyPressed(GLFW_KEY_D))
+			{
+				m_transform->translate(m_transform->getRight() * velocity);
+			}
+
+			float xoffset = inputHandler->getMouseOffsetX() * m_mouseSensitivity;
+			float yoffset = inputHandler->getMouseOffsetY() * m_mouseSensitivity;
+
+			m_yaw += xoffset;
+			m_pitch += yoffset;
+
+			m_pitch = glm::clamp(m_pitch + yoffset, -89.0f, 89.0f);
+
+			m_transform->setRotation(glm::vec3(glm::radians(m_pitch), glm::radians(m_yaw), 0.0f));
+			m_zoom = glm::clamp(m_zoom - static_cast<float>(inputHandler->getMouseScrollOffsetY()), 1.0f, 45.0f);
 		}
-
-		m_transform->setRotation(glm::vec3(glm::radians(m_pitch), glm::radians(m_yaw), 0.0f));
-	}
-
-	void Camera::ProcessMouseScroll(float yoffset)
-	{
-		m_zoom = glm::clamp(m_zoom - yoffset, 1.0f, 45.0f);
 	}
 }// gam703::engine::components

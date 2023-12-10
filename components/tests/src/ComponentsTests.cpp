@@ -11,12 +11,20 @@ namespace gam703::engine::components::tests
 		MockComponent1(Transform* transform) : IComponent(transform)
 		{
 		}
+
+		virtual void tick(float deltaTime) override
+		{
+		}
 	};
 
 	class MockComponent2 : public IComponent
 	{
 	public:
 		MockComponent2(Transform* transform) : IComponent(transform)
+		{
+		}
+
+		virtual void tick(float deltaTime) override
 		{
 		}
 	};
@@ -31,6 +39,10 @@ namespace gam703::engine::components::tests
 		MockComponentWithArgs(Transform* transform, const std::string& name, int id, float speed, double precision) : IComponent(transform), m_name(name), m_id(id), m_speed(speed), m_precision(precision)
 		{
 
+		}
+
+		virtual void tick(float deltaTime) override
+		{
 		}
 
 		std::string m_name = "DEFAULT";

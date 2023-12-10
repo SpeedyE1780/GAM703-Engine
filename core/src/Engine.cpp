@@ -26,34 +26,6 @@ namespace gam703::engine::core
 			{
 				engine.stop();
 			}
-
-			if (auto* camera = engine.getMainCamera())
-			{
-				float deltaTime = engine.getTime().getDeltaTime();
-
-				if (inputHandler->isKeyPressed(GLFW_KEY_W))
-				{
-					camera->ProcessKeyboard(gam703::engine::components::FORWARD, deltaTime);
-				}
-
-				if (inputHandler->isKeyPressed(GLFW_KEY_S))
-				{
-					camera->ProcessKeyboard(gam703::engine::components::BACKWARD, deltaTime);
-				}
-
-				if (inputHandler->isKeyPressed(GLFW_KEY_A))
-				{
-					camera->ProcessKeyboard(gam703::engine::components::LEFT, deltaTime);
-				}
-
-				if (inputHandler->isKeyPressed(GLFW_KEY_D))
-				{
-					camera->ProcessKeyboard(gam703::engine::components::RIGHT, deltaTime);
-				}
-
-				camera->ProcessMouseMovement(inputHandler->getMouseOffsetX(), inputHandler->getMouseOffsetY());
-				camera->ProcessMouseScroll(inputHandler->getMouseScrollOffsetY());
-			}
 		}
 
 		void mouseMovment(GLFWwindow* glfwWindow, double mouseX, double mouseY)
@@ -116,6 +88,7 @@ namespace gam703::engine::core
 		{
 			m_time.processTime(glfwGetTime());
 			processInput(*this);
+			m_mainCamera->tick(m_time.getDeltaTime());
 			cameraTransform.calculateTransformMatrix();
 			m_sceneRenderer.render();
 
