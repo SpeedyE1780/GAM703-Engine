@@ -1,5 +1,6 @@
 #include <glad/glad.h>
 #include <core/Engine.hpp>
+#include <core/SceneRenderer.hpp>
 #include <components/Transform.hpp>
 #include <graphic/Model.hpp>
 #include <graphic/Shader.hpp>
@@ -105,12 +106,15 @@ namespace gam703::engine::core
 		components::Transform backpackTransform{};
 		auto* backpackRenderer = backpackTransform.addComponent<components::Renderer>(ourModel, shader);
 
+		glm::mat4 projection = glm::perspective(glm::radians(m_mainCamera->getZoom()), m_window.getAspectRatio(), 0.1f, 100.0f);
+		SceneRenderer sceneRenderer({ backpackRenderer });
+
 		while (m_isRunning)
 		{
 			m_time.processTime(glfwGetTime());
 			processInput(*this);
 			cameraTransform.calculateTransformMatrix();
-			m_window.render(*m_mainCamera, *backpackRenderer);
+			sceneRenderer.render(projection, m_mainCamera->GetViewMatrix());
 
 			m_inputHandler.resetMouseOffset();
 			glfwSwapBuffers(m_window.getGLFWWindow());

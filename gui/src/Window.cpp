@@ -55,13 +55,4 @@ namespace gam703::engine::gui
 		glViewport(0, 0, width, height);
 	}
 
-	void Window::render(const components::Camera& sceneCamera, const components::Renderer& renderer) const
-	{
-			glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-			glm::mat4 projection = glm::perspective(glm::radians(sceneCamera.getZoom()), (float)m_width / (float)m_height, 0.1f, 100.0f);
-			renderer.render(projection, sceneCamera.GetViewMatrix());
-	}
-
 } //gam703::engine::gui

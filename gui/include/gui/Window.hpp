@@ -1,8 +1,6 @@
 #ifndef GAM703_ENGINE_GUI_WINDOW_HPP
 #define GAM703_ENGINE_GUI_WINDOW_HPP
 
-#include <components/Camera.hpp>
-#include <components/Renderer.hpp>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <gui/Config.hpp>
@@ -17,10 +15,10 @@ namespace gam703::engine::gui
 		Window(const std::string& title, int width, int height);
 		void resizeWindow(int width, int height);
 
-		void render(const components::Camera& sceneCamera, const components::Renderer& renderer) const;
-
 		GLFWwindow* getGLFWWindow() { return m_window; }
 		const GLFWwindow* getGLFWWindow() const { return m_window; }
+
+		float getAspectRatio() const { return static_cast<float>(m_width) / static_cast<float>(m_height); }
 
 	private:
 		GLFWwindow* m_window;
