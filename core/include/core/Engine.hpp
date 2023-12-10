@@ -4,6 +4,7 @@
 #include <components/Camera.hpp>
 #include <core/Config.hpp>
 #include <core/Input.hpp>
+#include <core/SceneRenderer.hpp>
 #include <core/Time.hpp>
 #include <gui/Window.hpp>
 
@@ -25,6 +26,8 @@ namespace gam703::engine::core
 		const Time& getTime() const { return m_time; }
 		components::Camera* getMainCamera() { return m_mainCamera; }
 		const components::Camera* getMainCamera() const { return m_mainCamera; }
+		SceneRenderer& getSceneRenderer() { return m_sceneRenderer; }
+		const SceneRenderer& getSceneRenderer() const { return m_sceneRenderer; }
 
 		void start();
 		void stop();
@@ -35,6 +38,7 @@ namespace gam703::engine::core
 		gui::Window m_window;
 		Input m_inputHandler;
 		Time m_time;
+		SceneRenderer m_sceneRenderer;
 		components::Camera* m_mainCamera = nullptr;
 		bool m_isRunning = false;
 	};

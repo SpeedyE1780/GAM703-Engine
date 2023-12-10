@@ -14,6 +14,7 @@ namespace gam703::engine::core
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
 				engine->getWindow().resizeWindow(width, height);
+				engine->getSceneRenderer().calculateProjectionMatrix();
 			}
 		}
 
@@ -72,7 +73,7 @@ namespace gam703::engine::core
 		}
 	}
 
-	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height), m_inputHandler(m_window.getGLFWWindow()), m_time(glfwGetTime())
+	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height), m_inputHandler(m_window.getGLFWWindow()), m_time(glfwGetTime()), m_sceneRenderer(&m_window)
 	{
 		if (auto* glfwWindow = m_window.getGLFWWindow())
 		{
@@ -106,15 +107,15 @@ namespace gam703::engine::core
 		components::Transform backpackTransform{};
 		auto* backpackRenderer = backpackTransform.addComponent<components::Renderer>(ourModel, shader);
 
-		glm::mat4 projection = glm::perspective(glm::radians(m_mainCamera->getZoom()), m_window.getAspectRatio(), 0.1f, 100.0f);
-		SceneRenderer sceneRenderer({ backpackRenderer });
+		m_sceneRenderer.addRenderer(backpackRenderer);
+		m_sceneRenderer.setMainCamera(m_mainCamera);
 
 		while (m_isRunning)
 		{
 			m_time.processTime(glfwGetTime());
 			processInput(*this);
 			cameraTransform.calculateTransformMatrix();
-			sceneRenderer.render(projection, m_mainCamera->GetViewMatrix());
+			m_sceneRenderer.render();
 
 			m_inputHandler.resetMouseOffset();
 			glfwSwapBuffers(m_window.getGLFWWindow());
