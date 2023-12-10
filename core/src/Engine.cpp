@@ -1,5 +1,6 @@
 #include <glad/glad.h>
 #include <core/Engine.hpp>
+#include <components/Transform.hpp>
 #include <graphic/Model.hpp>
 #include <graphic/Shader.hpp>
 
@@ -98,14 +99,15 @@ namespace gam703::engine::core
 		graphic::Model ourModel("resources/Models/backpack/backpack.obj");
 		graphic::Shader shader = graphic::createDefaultShader();
 
-		components::Camera sceneCamera(glm::vec3(0.0f, 0.0f, 10.0f));
-		m_mainCamera = &sceneCamera;
+		components::Transform cameraTransform(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0, glm::radians(-90.0f), 0));
+		m_mainCamera = cameraTransform.addComponent<components::Camera>();
 
 		while (m_isRunning)
 		{
 			m_time.processTime(glfwGetTime());
 			processInput(*this);
-			m_window.render(sceneCamera, shader, ourModel);
+			cameraTransform.calculateTransformMatrix();
+			m_window.render(*m_mainCamera, shader, ourModel);
 
 			m_inputHandler.resetMouseOffset();
 			glfwSwapBuffers(m_window.getGLFWWindow());

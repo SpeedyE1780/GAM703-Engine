@@ -4,7 +4,6 @@
 #include <components/Config.hpp>
 #include <components/IComponent.hpp>
 #include <glm/glm.hpp>
-#include <glm/gtc/quaternion.hpp>
 
 #include <memory>
 #include <vector>
@@ -14,21 +13,23 @@ namespace gam703::engine::components
 	class COMPONENTS_API Transform
 	{
 	public:
-		Transform(glm::vec3 position = glm::vec3(0, 0, 0), glm::vec3 rotation = glm::vec3(0, 0, 0), glm::vec3 scale = glm::vec3(1, 1, 1));
+		Transform(const glm::vec3& position = glm::vec3(0, 0, 0), const glm::vec3& rotation = glm::vec3(0, 0, 0), const glm::vec3& scale = glm::vec3(1, 1, 1));
 		~Transform() = default;
 		Transform(const Transform& transform) = delete;
 		Transform& operator=(const Transform& transform) = delete;
 
 		const glm::vec3& getPosition() const { return m_position; }
-		const glm::quat& getRotation() const { return m_rotation; }
+		const glm::vec3& getRotation() const { return m_rotation; }
 		const glm::vec3& getScale() const { return m_scale; }
 		const glm::mat4& getTransformationMatrix() const { return m_transformMatrix; }
+		const glm::vec3& getFront() const { return m_front; }
+		const glm::vec3& getRight() const { return m_right; }
+		const glm::vec3& getUp() const { return m_up; }
 
 		void calculateTransformMatrix();
 
 		void setPosition(const glm::vec3& position);
 		void setPosition(float x, float y, float z);
-		void setRotation(const glm::quat& rotation);
 		void setRotation(const glm::vec3& eulerAngles);
 		void setRotation(float x, float y, float z);
 		void setScale(const glm::vec3& scale);
@@ -36,7 +37,6 @@ namespace gam703::engine::components
 
 		void translate(const glm::vec3& offset);
 		void translate(float x, float y, float z);
-		void rotate(const glm::quat& quaternion);
 		void rotate(const glm::vec3& eulerAngles);
 		void rotate(float x, float y, float z);
 
@@ -70,12 +70,18 @@ namespace gam703::engine::components
 		std::size_t getComponentsSize() const { return m_components.size(); }
 
 	private:
+		void updateDirectionVectors();
+
 		glm::vec3 m_position;
-		glm::quat m_rotation;
+		glm::vec3 m_rotation;
 		glm::vec3 m_scale;
 		glm::mat4 m_transformMatrix;
+		glm::vec3 m_front = glm::vec3(0, 0, 0);
+		glm::vec3 m_up = glm::vec3(0, 0, 0);
+		glm::vec3 m_right = glm::vec3(0, 0, 0);
 		bool m_shouldCalculateTransform;
-		std::vector<std::unique_ptr<IComponent>> m_components;
+		bool m_shouldUpdateDirectionVectors;
+		std::vector<std::unique_ptr<IComponent>> m_components = {};
 	};
 }
 
