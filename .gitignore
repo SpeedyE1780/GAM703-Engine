@@ -412,3 +412,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Add obj models
+!resources/Models/**/*.obj
