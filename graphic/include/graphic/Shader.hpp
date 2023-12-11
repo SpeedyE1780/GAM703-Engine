@@ -1,13 +1,15 @@
 #ifndef GAM703_ENGINE_GRAPHIC_SHADER_HPP
 #define GAM703_ENGINE_GRAPHIC_SHADER_HPP
 
-#include<graphic/Config.hpp>
+#include <core-interfaces/IShader.hpp>
+#include <graphic/Config.hpp>
 #include <glm/glm.hpp>
+
 #include <string>
 
 namespace gam703::engine::graphic
 {
-	class GRAPHIC_API Shader
+	class GRAPHIC_API Shader : public core_interface::IShader
 	{
 	public:
 		Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
@@ -26,10 +28,10 @@ namespace gam703::engine::graphic
 		void setMat2(const std::string& name, const glm::mat2& mat) const;
 		void setMat3(const std::string& name, const glm::mat3& mat) const;
 		void setMat4(const std::string& name, const glm::mat4& mat) const;
-		void setDiffuseSampler(int index, int value) const;
-		void setSpecularSampler(int index, int value) const;
-		void setNormalSampler(int index, int value) const;
-		void setHeightSampler(int index, int value) const;
+		virtual void setDiffuseSampler(int index, int value) const override;
+		virtual void setSpecularSampler(int index, int value) const override;
+		virtual void setNormalSampler(int index, int value) const override;
+		virtual void setHeightSampler(int index, int value) const override;
 	private:
 		unsigned int m_id = 0;
 	};

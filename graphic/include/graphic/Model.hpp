@@ -1,6 +1,10 @@
 #ifndef GAM703_ENGINE_GRAPHIC_MODEL_HPP
 #define GAM703_ENGINE_GRAPHIC_MODEL_HPP
 
+#include <core-interfaces/IResourceManager.hpp>
+#include <core-interfaces/IModel.hpp>
+#include <core-interfaces/IShader.hpp>
+
 #include <graphic/Config.hpp>
 #include <graphic/Mesh.hpp>
 #include <graphic/Shader.fwd.hpp>
@@ -17,24 +21,15 @@ enum aiTextureType;
 
 namespace gam703::engine::graphic
 {
-	class GRAPHIC_API Model
+	class GRAPHIC_API Model : public core_interface::IModel
 	{
-
 	public:
-		Model(const std::filesystem::path& path);
-		void draw(const Shader& shader) const;
+		Model(const std::vector<Mesh>& meshes);
+		virtual void draw(const core_interface::IShader& shader) const override;
 
 	private:
-		void loadModel(const std::filesystem::path& path);
-		void processNode(const aiNode* node, const aiScene* scene);
-		Mesh processMesh(const aiMesh* mesh, const aiScene* scene);
-		std::vector<Texture> loadMaterialTextures(const aiMaterial* mat, aiTextureType type);
-
-		std::vector<Texture> m_texturesLoaded;
 		std::vector<Mesh> m_meshes;
-		std::filesystem::path m_directory;
 	};
-
 }
 
 #endif // GAM703_ENGINE_GRAPHIC_MODEL_HPP

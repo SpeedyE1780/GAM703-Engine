@@ -70,14 +70,25 @@ namespace gam703::engine::core
 
 	void Engine::run()
 	{
-		graphic::Model ourModel("resources/Models/backpack/backpack.obj");
-		graphic::Shader shader = graphic::createDefaultShader();
+		const core_interface::IModel* ourModel = m_resourceManager.getModel("resources/Models/backpack/backpack.obj");
+		const core_interface::IModel* ourModel2 = m_resourceManager.getModel("resources/Models/backpack/backpack.obj");
+		const core_interface::IModel* ourModel3 = m_resourceManager.getModel("resources/Models/backpack/backpack.obj");
+		const core_interface::IModel* ourModel4 = m_resourceManager.getModel("resources/Models/backpack/backpack.obj");
 
 		components::Transform cameraTransform(this, glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0, glm::radians(-90.0f), 0));
 		m_mainCamera = cameraTransform.addComponent<components::Camera>();
 
-		components::Transform backpackTransform{ this };
-		auto* backpackRenderer = backpackTransform.addComponent<components::Renderer>(ourModel, shader);
+		components::Transform backpackTransform{ this, glm::vec3(0.0f, 0.0f, 0.0f) };
+		backpackTransform.addComponent<components::Renderer>(ourModel);
+
+		components::Transform backpackTransform2{ this, glm::vec3(1.0f, 1.0f, 0.0f) };
+		backpackTransform2.addComponent<components::Renderer>(ourModel2);
+
+		components::Transform backpackTransform3{ this, glm::vec3(2.0f, 2.0f, 0.0f) };
+		backpackTransform3.addComponent<components::Renderer>(ourModel3);
+
+		components::Transform backpackTransform4{ this, glm::vec3(3.0f, 3.0f, 0.0f) };
+		backpackTransform4.addComponent<components::Renderer>(ourModel4);
 
 		m_sceneRenderer.setMainCamera(m_mainCamera);
 
