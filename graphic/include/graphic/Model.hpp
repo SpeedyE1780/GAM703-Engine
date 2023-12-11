@@ -5,6 +5,8 @@
 #include <graphic/Mesh.hpp>
 #include <graphic/Shader.fwd.hpp>
 
+#include <core-interfaces/IResourceManager.hpp>
+
 #include <string>
 #include <vector>
 #include <filesystem>
@@ -21,18 +23,18 @@ namespace gam703::engine::graphic
 	{
 
 	public:
-		Model(const std::filesystem::path& path);
+		Model(const std::filesystem::path& path, core_interface::IResourceManager* resourceManager);
 		void draw(const Shader& shader) const;
 
 	private:
 		void loadModel(const std::filesystem::path& path);
 		void processNode(const aiNode* node, const aiScene* scene);
 		Mesh processMesh(const aiMesh* mesh, const aiScene* scene);
-		std::vector<Texture> loadMaterialTextures(const aiMaterial* mat, aiTextureType type);
+		void loadMaterialTextures(std::vector<const core_interface::ITexture*>& textures, const aiMaterial* mat, aiTextureType type) const;
 
-		std::vector<Texture> m_texturesLoaded;
 		std::vector<Mesh> m_meshes;
 		std::filesystem::path m_directory;
+		core_interface::IResourceManager* m_resourceManager;
 	};
 
 }

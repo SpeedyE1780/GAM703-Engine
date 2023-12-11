@@ -3,6 +3,7 @@
 
 #include <glm/glm.hpp>
 #include <graphic/Shader.fwd.hpp>
+#include <graphic/Texture.hpp>
 
 #include <string>
 #include <vector>
@@ -22,27 +23,11 @@ namespace gam703::engine::graphic
 		float m_weights[MaxBoneInfluence] = { 0 };
 	};
 
-	struct Texture
-	{
-		enum class TextureType
-		{
-			Undefined,
-			Diffuse,
-			Specular,
-			Normal,
-			Height
-		};
-
-		unsigned int m_id= 0;
-		TextureType m_type = TextureType::Undefined;
-		std::string path = "";
-	};
-
 	class Mesh
 	{
 
 	public:
-		Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
+		Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const std::vector<const core_interface::ITexture*>& textures);
 		void draw(const Shader& shader) const;
 
 	private:
@@ -53,8 +38,7 @@ namespace gam703::engine::graphic
 		unsigned int m_elementBufferObject = 0;
 		std::vector<Vertex> m_vertices{};
 		std::vector<unsigned int> m_indices{};
-		std::vector<Texture> m_textures{};
-
+		std::vector<const core_interface::ITexture*> m_textures{};
 	};
 
 } //gam703::engine::graphic

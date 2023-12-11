@@ -6,7 +6,7 @@
 
 namespace gam703::engine::graphic
 {
-	Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures) : m_vertices(vertices), m_indices(indices), m_textures(textures)
+	Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const std::vector<const core_interface::ITexture*>& textures) : m_vertices(vertices), m_indices(indices), m_textures(textures)
 	{
 		setupMesh();
 	}
@@ -22,7 +22,7 @@ namespace gam703::engine::graphic
 		{
 			glActiveTexture(GL_TEXTURE0 + i);
 
-			switch (m_textures[i].m_type)
+			switch (m_textures[i]->getType())
 			{
 			case Texture::TextureType::Diffuse:
 			{
@@ -54,7 +54,7 @@ namespace gam703::engine::graphic
 			}
 			}
 
-			glBindTexture(GL_TEXTURE_2D, m_textures[i].m_id);
+			glBindTexture(GL_TEXTURE_2D, m_textures[i]->getID());
 		}
 
 		glBindVertexArray(m_vertexArrayObject);

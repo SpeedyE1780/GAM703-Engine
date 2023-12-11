@@ -70,10 +70,10 @@ namespace gam703::engine::core
 
 	void Engine::run()
 	{
-		graphic::Model ourModel("resources/Models/backpack/backpack.obj");
-		graphic::Model ourModel2("resources/Models/backpack/backpack.obj");
-		graphic::Model ourModel3("resources/Models/backpack/backpack.obj");
-		graphic::Model ourModel4("resources/Models/backpack/backpack.obj");
+		graphic::Model ourModel("resources/Models/backpack/backpack.obj", &m_resourceManager);
+		graphic::Model ourModel2("resources/Models/backpack/backpack.obj", &m_resourceManager);
+		graphic::Model ourModel3("resources/Models/backpack/backpack.obj", &m_resourceManager);
+		graphic::Model ourModel4("resources/Models/backpack/backpack.obj", &m_resourceManager);
 
 		components::Transform cameraTransform(this, glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0, glm::radians(-90.0f), 0));
 		m_mainCamera = cameraTransform.addComponent<components::Camera>();

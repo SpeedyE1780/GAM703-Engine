@@ -50,7 +50,7 @@ namespace gam703::engine::graphic
 		}
 	}
 
-	Model::Model(const std::filesystem::path& path) : m_directory(path.parent_path())
+	Model::Model(const std::filesystem::path& path, core_interface::IResourceManager* resourceManager) : m_directory(path.parent_path()), m_resourceManager(resourceManager)
 	{
 		loadModel(path);
 	}
@@ -92,7 +92,6 @@ namespace gam703::engine::graphic
 	{
 		std::vector<Vertex> vertices;
 		std::vector<unsigned int> indices;
-		std::vector<Texture> textures;
 
 		for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 		{
@@ -124,50 +123,23 @@ namespace gam703::engine::graphic
 		}
 
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-
-		std::vector<Texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE);
-		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-		std::vector<Texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR);
-		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
-		std::vector<Texture> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT);
-		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
-		std::vector<Texture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT);
-		textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
+		std::vector<const core_interface::ITexture*> textures{};
+		loadMaterialTextures(textures, material, aiTextureType_DIFFUSE);
+		loadMaterialTextures(textures, material, aiTextureType_SPECULAR);
+		loadMaterialTextures(textures, material, aiTextureType_HEIGHT);
+		loadMaterialTextures(textures, material, aiTextureType_AMBIENT);
 
 		return Mesh(vertices, indices, textures);
 	}
 
-	std::vector<Texture> Model::loadMaterialTextures(const aiMaterial* mat, aiTextureType type)
+	void Model::loadMaterialTextures(std::vector<const core_interface::ITexture*>& textures, const aiMaterial* mat, aiTextureType type) const
 	{
-		std::vector<Texture> textures;
-
 		for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
 		{
 			aiString str;
 			mat->GetTexture(type, i, &str);
 
-			bool skip = false;
-			for (unsigned int j = 0; j < m_texturesLoaded.size(); j++)
-			{
-				if (std::strcmp(m_texturesLoaded[j].path.data(), str.C_Str()) == 0)
-				{
-					textures.push_back(m_texturesLoaded[j]);
-					skip = true;
-					break;
-				}
-			}
-
-			if (!skip)
-			{
-				Texture texture;
-				texture.m_id = loadTextureFromFile(m_directory / str.C_Str());
-				texture.m_type = convertAITextureType(type);
-				texture.path = str.C_Str();
-				textures.push_back(texture);
-				m_texturesLoaded.push_back(texture);
-			}
+			textures.push_back(m_resourceManager->getTexture(m_directory/ str.C_Str(), convertAITextureType(type)));
 		}
-
-		return textures;
 	}
 }
