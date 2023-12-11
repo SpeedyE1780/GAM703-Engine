@@ -16,6 +16,7 @@ namespace gam703::engine::components
 	public:
 		Renderer(Transform* transform, const core_interface::IModel* model);
 		Renderer(Transform* transform, const core_interface::IModel* model, const graphic::Shader& shader);
+		~Renderer();
 
 		void render(const glm::mat4& projectionMatrix, const glm::mat4& viewMatrix) const;
 		void tick(float deltaTime) override {}

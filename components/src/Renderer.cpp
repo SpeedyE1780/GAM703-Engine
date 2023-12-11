@@ -13,6 +13,11 @@ namespace gam703::engine::components
 		getEngine()->getSceneRenderer()->addRenderer(this);
 	}
 
+	Renderer::~Renderer()
+	{
+		getEngine()->getSceneRenderer()->removeRenderer(this);
+	}
+
 	void Renderer::render(const glm::mat4& projectionMatrix, const glm::mat4& viewMatrix) const
 	{
 		m_shader.use();
