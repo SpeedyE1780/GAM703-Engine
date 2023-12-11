@@ -23,8 +23,8 @@ namespace gam703::engine::core
 		const gui::Window& getWindow() const { return m_window; }
 		virtual core_interface::IInput* getInput() override { return &m_inputHandler; }
 		virtual const core_interface::IInput* getInput() const override { return &m_inputHandler; }
-		Time& getTime() { return m_time; }
-		const Time& getTime() const { return m_time; }
+		core_interface::ITime* getTime() { return &m_time; }
+		const core_interface::ITime* getTime() const { return &m_time; }
 		components::Camera* getMainCamera() { return m_mainCamera; }
 		const components::Camera* getMainCamera() const { return m_mainCamera; }
 		virtual core_interface::ISceneRenderer* getSceneRenderer() override { return &m_sceneRenderer; }

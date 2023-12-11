@@ -3,6 +3,7 @@
 
 #include <core-interfaces/ISceneRenderer.hpp>
 #include <core-interfaces/IInput.hpp>
+#include <core-interfaces/ITime.hpp>
 
 namespace gam703::engine::core_interface
 {
@@ -14,6 +15,8 @@ namespace gam703::engine::core_interface
 		virtual const IInput* getInput() const = 0;
 		virtual ISceneRenderer* getSceneRenderer() = 0;
 		virtual const ISceneRenderer* getSceneRenderer() const = 0;
+		virtual ITime* getTime() = 0;
+		virtual const ITime* getTime() const = 0;
 	};
 }
 

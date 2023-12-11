@@ -8,6 +8,7 @@ include/core-interfaces/IEngine.hpp
 include/core-interfaces/IInput.hpp
 include/core-interfaces/IRenderer.hpp
 include/core-interfaces/ISceneRenderer.hpp
+include/core-interfaces/ITime.hpp
 )
 
 target_include_directories(${PROJECT_NAME} INTERFACE ${PROJECT_SOURCE_DIR}/include/)
