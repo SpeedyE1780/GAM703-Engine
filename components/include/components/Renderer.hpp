@@ -4,12 +4,13 @@
 #include <glm/mat4x4.hpp>
 #include <graphic/Model.hpp>
 #include <graphic/Shader.hpp>
+#include <core-interfaces/IRenderer.hpp>
 #include <components/Config.hpp>
 #include <components/IComponent.hpp>
 
 namespace gam703::engine::components
 {
-	class COMPONENTS_API Renderer : public IComponent
+	class COMPONENTS_API Renderer : public IComponent, public core_interface::IRenderer
 	{
 	public:
 		Renderer(Transform* transform, const graphic::Model& model);

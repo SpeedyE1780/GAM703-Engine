@@ -14,7 +14,7 @@ namespace gam703::engine::core
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
 				engine->getWindow().resizeWindow(width, height);
-				engine->getSceneRenderer().calculateProjectionMatrix();
+				engine->getSceneRenderer()->calculateProjectionMatrix();
 			}
 		}
 
@@ -73,15 +73,12 @@ namespace gam703::engine::core
 		graphic::Model ourModel("resources/Models/backpack/backpack.obj");
 		graphic::Shader shader = graphic::createDefaultShader();
 
-		components::Transform cameraTransform(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0, glm::radians(-90.0f), 0));
+		components::Transform cameraTransform(this, glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0, glm::radians(-90.0f), 0));
 		m_mainCamera = cameraTransform.addComponent<components::Camera>();
-		cameraTransform.setEngine(this);
 
-		components::Transform backpackTransform{};
+		components::Transform backpackTransform{ this };
 		auto* backpackRenderer = backpackTransform.addComponent<components::Renderer>(ourModel, shader);
-		backpackTransform.setEngine(this);
 
-		m_sceneRenderer.addRenderer(backpackRenderer);
 		m_sceneRenderer.setMainCamera(m_mainCamera);
 
 		while (m_isRunning)

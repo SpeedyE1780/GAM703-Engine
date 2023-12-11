@@ -14,7 +14,7 @@ namespace gam703::engine::components
 	class COMPONENTS_API Transform
 	{
 	public:
-		Transform(const glm::vec3& position = glm::vec3(0, 0, 0), const glm::vec3& rotation = glm::vec3(0, 0, 0), const glm::vec3& scale = glm::vec3(1, 1, 1));
+		Transform(core_interface::IEngine* engine, const glm::vec3& position = glm::vec3(0, 0, 0), const glm::vec3& rotation = glm::vec3(0, 0, 0), const glm::vec3& scale = glm::vec3(1, 1, 1));
 		~Transform() = default;
 		Transform(const Transform& transform) = delete;
 		Transform& operator=(const Transform& transform) = delete;
@@ -53,7 +53,7 @@ namespace gam703::engine::components
 		Component* getComponent()
 		{
 			Component* returnValue = nullptr;
-			std::find_if(begin(m_components), end(m_components), [&returnValue](std::unique_ptr<IComponent>& component) { return returnValue = dynamic_cast<Component*>(component.get()); });
+			auto _ = std::find_if(begin(m_components), end(m_components), [&returnValue](std::unique_ptr<IComponent>& component) { return returnValue = dynamic_cast<Component*>(component.get()); });
 			return returnValue;
 		}
 
@@ -72,8 +72,6 @@ namespace gam703::engine::components
 
 		core_interface::IEngine* getEngine() { return m_engine; }
 		const core_interface::IEngine* getEngine() const { return m_engine; }
-
-		void setEngine(core_interface::IEngine* engine) { m_engine = engine; }
 
 	private:
 		void updateDirectionVectors();

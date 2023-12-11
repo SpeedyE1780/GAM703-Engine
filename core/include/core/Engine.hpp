@@ -27,8 +27,8 @@ namespace gam703::engine::core
 		const Time& getTime() const { return m_time; }
 		components::Camera* getMainCamera() { return m_mainCamera; }
 		const components::Camera* getMainCamera() const { return m_mainCamera; }
-		SceneRenderer& getSceneRenderer() { return m_sceneRenderer; }
-		const SceneRenderer& getSceneRenderer() const { return m_sceneRenderer; }
+		virtual core_interface::ISceneRenderer* getSceneRenderer() override { return &m_sceneRenderer; }
+		virtual const core_interface::ISceneRenderer* getSceneRenderer() const override { return &m_sceneRenderer; }
 
 		void start();
 		void stop();
