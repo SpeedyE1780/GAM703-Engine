@@ -32,15 +32,13 @@ namespace gam703::engine::components
 		Camera(Transform* transform, float yaw = YAW, float pitch = PITCH);
 
 		glm::mat4 GetViewMatrix() const;
-		void ProcessKeyboard(Camera_Movement direction, float deltaTime);
-		void ProcessMouseMovement(float xoffset, float yoffset, bool constrainPitch = true);
-		void ProcessMouseScroll(float yoffset);
-
 		float getYaw() const { return m_yaw; }
 		float getPitch() const { return m_pitch; }
 		float getMovementSpeed() const { return m_movementSpeed; }
 		float getMouseSensitivity() const { return m_mouseSensitivity; }
 		float getZoom() const { return m_zoom; }
+
+		void tick(float deltaTime) override;
 
 	private:
 		float m_yaw;

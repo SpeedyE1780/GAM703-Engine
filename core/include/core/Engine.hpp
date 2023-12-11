@@ -6,13 +6,14 @@
 #include <core/Input.hpp>
 #include <core/SceneRenderer.hpp>
 #include <core/Time.hpp>
+#include <core-interfaces/IEngine.hpp>
 #include <gui/Window.hpp>
 
 #include <string>
 
 namespace gam703::engine::core
 {
-	class CORE_API Engine
+	class CORE_API Engine : public core_interface::IEngine
 	{
 	public:
 		Engine(const std::string& title, int width, int height);
@@ -20,14 +21,14 @@ namespace gam703::engine::core
 
 		gui::Window& getWindow() { return m_window; }
 		const gui::Window& getWindow() const { return m_window; }
-		Input& getInput() { return m_inputHandler; }
-		const Input& getInput() const { return m_inputHandler; }
-		Time& getTime() { return m_time; }
-		const Time& getTime() const { return m_time; }
+		virtual core_interface::IInput* getInput() override { return &m_inputHandler; }
+		virtual const core_interface::IInput* getInput() const override { return &m_inputHandler; }
+		core_interface::ITime* getTime() { return &m_time; }
+		const core_interface::ITime* getTime() const { return &m_time; }
 		components::Camera* getMainCamera() { return m_mainCamera; }
 		const components::Camera* getMainCamera() const { return m_mainCamera; }
-		SceneRenderer& getSceneRenderer() { return m_sceneRenderer; }
-		const SceneRenderer& getSceneRenderer() const { return m_sceneRenderer; }
+		virtual core_interface::ISceneRenderer* getSceneRenderer() override { return &m_sceneRenderer; }
+		virtual const core_interface::ISceneRenderer* getSceneRenderer() const override { return &m_sceneRenderer; }
 
 		void start();
 		void stop();

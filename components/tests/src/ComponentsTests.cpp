@@ -11,12 +11,20 @@ namespace gam703::engine::components::tests
 		MockComponent1(Transform* transform) : IComponent(transform)
 		{
 		}
+
+		virtual void tick(float deltaTime) override
+		{
+		}
 	};
 
 	class MockComponent2 : public IComponent
 	{
 	public:
 		MockComponent2(Transform* transform) : IComponent(transform)
+		{
+		}
+
+		virtual void tick(float deltaTime) override
 		{
 		}
 	};
@@ -33,6 +41,10 @@ namespace gam703::engine::components::tests
 
 		}
 
+		virtual void tick(float deltaTime) override
+		{
+		}
+
 		std::string m_name = "DEFAULT";
 		int m_id = 0;
 		float m_speed = 0;
@@ -41,7 +53,7 @@ namespace gam703::engine::components::tests
 
 	TEST(ComponentsTest, AddComponent)
 	{
-		Transform transform{};
+		Transform transform{ nullptr };
 
 		ASSERT_EQ(0, transform.getComponentsSize());
 
@@ -54,7 +66,7 @@ namespace gam703::engine::components::tests
 
 	TEST(ComponentsTest, AddComponentWithArgs)
 	{
-		Transform transform{};
+		Transform transform{ nullptr };
 		std::string name = "Hello World!";
 		int id = 20;
 		float speed = 32.23f;
@@ -89,7 +101,7 @@ namespace gam703::engine::components::tests
 
 	TEST(ComponentsTest, GetComponent)
 	{
-		Transform transform{};
+		Transform transform{ nullptr };
 
 		ASSERT_EQ(0, transform.getComponentsSize());
 		ASSERT_EQ(nullptr, transform.getComponent<MockComponent1>());
@@ -105,7 +117,7 @@ namespace gam703::engine::components::tests
 
 	TEST(ComponentsTest, RemoveComponent)
 	{
-		Transform transform{};
+		Transform transform{ nullptr };
 		transform.addComponent<MockComponent1>();
 		ASSERT_EQ(1, transform.getComponentsSize());
 
@@ -116,7 +128,7 @@ namespace gam703::engine::components::tests
 
 	TEST(ComponentsTest, MultipleComponents)
 	{
-		Transform transform{};
+		Transform transform{ nullptr };
 		ASSERT_EQ(0, transform.getComponentsSize());
 
 		auto* mock1 = transform.addComponent<MockComponent1>();

@@ -9,18 +9,18 @@ namespace gam703::engine::core
 	{
 	}
 
-	SceneRenderer::SceneRenderer(gui::Window* window, const std::vector<components::Renderer*>& sceneObjects) : m_window(window), m_sceneObjects(sceneObjects)
+	SceneRenderer::SceneRenderer(gui::Window* window, const std::vector<core_interface::IRenderer*>& sceneObjects) : m_window(window), m_sceneObjects(sceneObjects)
 	{
 	}
 
-	void SceneRenderer::addRenderer(components::Renderer* sceneObject)
+	void SceneRenderer::addRenderer(core_interface::IRenderer* sceneObject)
 	{
 		m_sceneObjects.push_back(sceneObject);
 	}
 
-	void SceneRenderer::removeRenderer(components::Renderer* sceneObject)
+	void SceneRenderer::removeRenderer(core_interface::IRenderer* sceneObject)
 	{
-		auto newEnd = std::remove_if(begin(m_sceneObjects), end(m_sceneObjects), [sceneObject](components::Renderer* renderer) { return sceneObject == renderer; });
+		auto newEnd = std::remove_if(begin(m_sceneObjects), end(m_sceneObjects), [sceneObject](core_interface::IRenderer* renderer) { return sceneObject == renderer; });
 		m_sceneObjects.erase(newEnd, end(m_sceneObjects));
 	}
 

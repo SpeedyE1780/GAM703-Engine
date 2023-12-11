@@ -14,45 +14,17 @@ namespace gam703::engine::core
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
 				engine->getWindow().resizeWindow(width, height);
-				engine->getSceneRenderer().calculateProjectionMatrix();
+				engine->getSceneRenderer()->calculateProjectionMatrix();
 			}
 		}
 
 		void processInput(Engine& engine)
 		{
-			Input& inputHandler = engine.getInput();
+			auto* inputHandler = engine.getInput();
 
-			if (inputHandler.isKeyPressed(GLFW_KEY_ESCAPE))
+			if (inputHandler->isKeyPressed(GLFW_KEY_ESCAPE))
 			{
 				engine.stop();
-			}
-
-			if (auto* camera = engine.getMainCamera())
-			{
-				float deltaTime = engine.getTime().getDeltaTime();
-
-				if (inputHandler.isKeyPressed(GLFW_KEY_W))
-				{
-					camera->ProcessKeyboard(gam703::engine::components::FORWARD, deltaTime);
-				}
-
-				if (inputHandler.isKeyPressed(GLFW_KEY_S))
-				{
-					camera->ProcessKeyboard(gam703::engine::components::BACKWARD, deltaTime);
-				}
-
-				if (inputHandler.isKeyPressed(GLFW_KEY_A))
-				{
-					camera->ProcessKeyboard(gam703::engine::components::LEFT, deltaTime);
-				}
-
-				if (inputHandler.isKeyPressed(GLFW_KEY_D))
-				{
-					camera->ProcessKeyboard(gam703::engine::components::RIGHT, deltaTime);
-				}
-
-				camera->ProcessMouseMovement(inputHandler.getMouseOffsetX(), inputHandler.getMouseOffsetY());
-				camera->ProcessMouseScroll(inputHandler.getMouseScrollOffsetY());
 			}
 		}
 
@@ -60,7 +32,7 @@ namespace gam703::engine::core
 		{
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
-				engine->getInput().processMouseMovement(mouseX, mouseY);
+				engine->getInput()->processMouseMovement(mouseX, mouseY);
 			}
 		}
 
@@ -68,7 +40,7 @@ namespace gam703::engine::core
 		{
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
-				engine->getInput().processMouseScroll(xOffset, yOffset);
+				engine->getInput()->processMouseScroll(xOffset, yOffset);
 			}
 		}
 	}
@@ -101,19 +73,19 @@ namespace gam703::engine::core
 		graphic::Model ourModel("resources/Models/backpack/backpack.obj");
 		graphic::Shader shader = graphic::createDefaultShader();
 
-		components::Transform cameraTransform(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0, glm::radians(-90.0f), 0));
+		components::Transform cameraTransform(this, glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0, glm::radians(-90.0f), 0));
 		m_mainCamera = cameraTransform.addComponent<components::Camera>();
 
-		components::Transform backpackTransform{};
+		components::Transform backpackTransform{ this };
 		auto* backpackRenderer = backpackTransform.addComponent<components::Renderer>(ourModel, shader);
 
-		m_sceneRenderer.addRenderer(backpackRenderer);
 		m_sceneRenderer.setMainCamera(m_mainCamera);
 
 		while (m_isRunning)
 		{
 			m_time.processTime(glfwGetTime());
 			processInput(*this);
+			m_mainCamera->tick(m_time.getDeltaTime());
 			cameraTransform.calculateTransformMatrix();
 			m_sceneRenderer.render();
 

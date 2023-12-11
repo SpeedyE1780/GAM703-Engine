@@ -1,6 +1,7 @@
 #ifndef GAM703_ENGINE_COMPONENTS_TRANSFORM_HPP
 #define GAM703_ENGINE_COMPONENTS_TRANSFORM_HPP
 
+#include <core-interfaces/IEngine.hpp>
 #include <components/Config.hpp>
 #include <components/IComponent.hpp>
 #include <glm/glm.hpp>
@@ -13,7 +14,7 @@ namespace gam703::engine::components
 	class COMPONENTS_API Transform
 	{
 	public:
-		Transform(const glm::vec3& position = glm::vec3(0, 0, 0), const glm::vec3& rotation = glm::vec3(0, 0, 0), const glm::vec3& scale = glm::vec3(1, 1, 1));
+		Transform(core_interface::IEngine* engine, const glm::vec3& position = glm::vec3(0, 0, 0), const glm::vec3& rotation = glm::vec3(0, 0, 0), const glm::vec3& scale = glm::vec3(1, 1, 1));
 		~Transform() = default;
 		Transform(const Transform& transform) = delete;
 		Transform& operator=(const Transform& transform) = delete;
@@ -52,7 +53,7 @@ namespace gam703::engine::components
 		Component* getComponent()
 		{
 			Component* returnValue = nullptr;
-			std::find_if(begin(m_components), end(m_components), [&returnValue](std::unique_ptr<IComponent>& component) { return returnValue = dynamic_cast<Component*>(component.get()); });
+			auto _ = std::find_if(begin(m_components), end(m_components), [&returnValue](std::unique_ptr<IComponent>& component) { return returnValue = dynamic_cast<Component*>(component.get()); });
 			return returnValue;
 		}
 
@@ -69,6 +70,9 @@ namespace gam703::engine::components
 
 		std::size_t getComponentsSize() const { return m_components.size(); }
 
+		core_interface::IEngine* getEngine() { return m_engine; }
+		const core_interface::IEngine* getEngine() const { return m_engine; }
+
 	private:
 		void updateDirectionVectors();
 
@@ -82,6 +86,7 @@ namespace gam703::engine::components
 		bool m_shouldCalculateTransform;
 		bool m_shouldUpdateDirectionVectors;
 		std::vector<std::unique_ptr<IComponent>> m_components = {};
+		core_interface::IEngine* m_engine = nullptr;
 	};
 }
 

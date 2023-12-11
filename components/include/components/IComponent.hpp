@@ -3,6 +3,7 @@
 
 #include <components/Config.hpp>
 #include <components/Transform.fwd.hpp>
+#include <core-interfaces/IEngine.hpp>
 
 namespace gam703::engine::components
 {
@@ -14,6 +15,11 @@ namespace gam703::engine::components
 
 		Transform* getTransform() { return m_transform; }
 		const Transform* getTransform() const { return m_transform; }
+
+		virtual void tick(float deltaTime) = 0;
+
+		core_interface::IEngine* getEngine();
+		const core_interface::IEngine* getEngine() const;
 
 	protected:
 		Transform* m_transform;

@@ -5,10 +5,12 @@ namespace gam703::engine::components
 {
 	Renderer::Renderer(Transform* transform, const graphic::Model& model) : IComponent(transform), m_model(model), m_shader(graphic::createDefaultShader())
 	{
+		getEngine()->getSceneRenderer()->addRenderer(this);
 	}
 
 	Renderer::Renderer(Transform* transform, const graphic::Model& model, const graphic::Shader& shader) : IComponent(transform), m_model(model), m_shader(shader)
 	{
+		getEngine()->getSceneRenderer()->addRenderer(this);
 	}
 
 	void Renderer::render(const glm::mat4& projectionMatrix, const glm::mat4& viewMatrix) const
