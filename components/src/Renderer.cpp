@@ -3,12 +3,12 @@
 
 namespace gam703::engine::components
 {
-	Renderer::Renderer(Transform* transform, const graphic::Model& model) : IComponent(transform), m_model(model), m_shader(graphic::createDefaultShader())
+	Renderer::Renderer(Transform* transform, const core_interface::IModel* model) : IComponent(transform), m_model(model), m_shader(graphic::createDefaultShader())
 	{
 		getEngine()->getSceneRenderer()->addRenderer(this);
 	}
 
-	Renderer::Renderer(Transform* transform, const graphic::Model& model, const graphic::Shader& shader) : IComponent(transform), m_model(model), m_shader(shader)
+	Renderer::Renderer(Transform* transform, const core_interface::IModel* model, const graphic::Shader& shader) : IComponent(transform), m_model(model), m_shader(shader)
 	{
 		getEngine()->getSceneRenderer()->addRenderer(this);
 	}
@@ -21,6 +21,6 @@ namespace gam703::engine::components
 		m_shader.setMat4("view", viewMatrix);
 		m_shader.setMat4("model", m_transform->getTransformationMatrix());
 
-		m_model.draw(m_shader);
+		m_model->draw(m_shader);
 	}
 }

@@ -1,6 +1,7 @@
 #ifndef GAM703_ENGINE_GRAPHIC_MESH_HPP
 #define GAM703_ENGINE_GRAPHIC_MESH_HPP
 
+#include <core-interfaces/IShader.hpp>
 #include <glm/glm.hpp>
 #include <graphic/Shader.fwd.hpp>
 #include <graphic/Texture.hpp>
@@ -25,10 +26,9 @@ namespace gam703::engine::graphic
 
 	class Mesh
 	{
-
 	public:
 		Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const std::vector<const core_interface::ITexture*>& textures);
-		void draw(const Shader& shader) const;
+		void draw(const core_interface::IShader& shader) const;
 
 	private:
 		void setupMesh();

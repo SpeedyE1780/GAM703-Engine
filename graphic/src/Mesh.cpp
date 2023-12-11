@@ -11,7 +11,7 @@ namespace gam703::engine::graphic
 		setupMesh();
 	}
 
-	void Mesh::draw(const Shader& shader) const
+	void Mesh::draw(const core_interface::IShader& shader) const
 	{
 		unsigned int diffuseIndex = 1;
 		unsigned int specularIndex = 1;

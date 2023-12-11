@@ -30,7 +30,7 @@ namespace gam703::engine::graphic
 	{
 		stbi_set_flip_vertically_on_load(true);
 
-		unsigned int textureID;
+		unsigned int textureID = 0;
 		glGenTextures(1, &textureID);
 
 		int width = 0, height = 0, components = 0;
