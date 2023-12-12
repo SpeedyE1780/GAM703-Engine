@@ -13,6 +13,8 @@ namespace gam703::engine::graphic
 	{
 	public:
 		Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
+		Shader(const Shader& shader);
+		Shader& operator=(const Shader& shader);
 		~Shader();
 		void use() const;
 		unsigned int getId() const { return m_id; }
@@ -33,7 +35,11 @@ namespace gam703::engine::graphic
 		virtual void setNormalSampler(int index, int value) const override;
 		virtual void setHeightSampler(int index, int value) const override;
 	private:
+		void createShaderProgram();
+
 		unsigned int m_id = 0;
+		std::string m_vertexShaderPath;
+		std::string m_fragmentShaderPath;
 	};
 
 	GRAPHIC_API Shader createDefaultShader();

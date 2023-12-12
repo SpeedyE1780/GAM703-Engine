@@ -18,6 +18,8 @@ namespace gam703::engine::components
 		Renderer(Transform* transform, const core_interface::IModel* model, const graphic::Shader& shader);
 		~Renderer();
 
+		virtual IComponent* clone(Transform* transform) const override;
+
 		void render(const glm::mat4& projectionMatrix, const glm::mat4& viewMatrix) const;
 		void tick(float deltaTime) override {}
 

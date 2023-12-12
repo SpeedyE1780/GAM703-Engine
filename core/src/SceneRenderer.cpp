@@ -5,11 +5,8 @@
 
 namespace gam703::engine::core
 {
-	SceneRenderer::SceneRenderer(gui::Window* window) : m_window(window)
-	{
-	}
 
-	SceneRenderer::SceneRenderer(gui::Window* window, const std::vector<core_interface::IRenderer*>& sceneObjects) : m_window(window), m_sceneObjects(sceneObjects)
+	SceneRenderer::SceneRenderer(const std::vector<core_interface::IRenderer*>& sceneObjects) : m_sceneObjects(sceneObjects)
 	{
 	}
 
@@ -24,20 +21,19 @@ namespace gam703::engine::core
 		m_sceneObjects.erase(newEnd, end(m_sceneObjects));
 	}
 
-	void SceneRenderer::setMainCamera(components::Camera* camera)
+	void SceneRenderer::setActiveCamera(components::Camera* camera)
 	{
-		m_mainCamera = camera;
-		calculateProjectionMatrix();
+		m_activeCamera = camera;
 	}
 
-	void SceneRenderer::calculateProjectionMatrix()
+	void SceneRenderer::calculateProjectionMatrix(float aspectRatio)
 	{
-		if (!m_mainCamera)
+		if (!m_activeCamera)
 		{
 			return;
 		}
 
-		m_projectionMatrix = glm::perspective(glm::radians(m_mainCamera->getZoom()), m_window->getAspectRatio(), 0.1f, 100.0f);
+		m_projectionMatrix = glm::perspective(glm::radians(m_activeCamera->getZoom()), aspectRatio, 0.1f, 100.0f);
 	}
 
 	void SceneRenderer::render() const
@@ -47,7 +43,7 @@ namespace gam703::engine::core
 
 		for (auto* renderer : m_sceneObjects)
 		{
-			renderer->render(m_projectionMatrix, m_mainCamera->GetViewMatrix());
+			renderer->render(m_projectionMatrix, m_activeCamera->GetViewMatrix());
 		}
 	}
 }

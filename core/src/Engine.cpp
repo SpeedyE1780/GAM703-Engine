@@ -14,7 +14,7 @@ namespace gam703::engine::core
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
 				engine->getWindow().resizeWindow(width, height);
-				engine->getSceneRenderer()->calculateProjectionMatrix();
+				engine->getScene()->getSceneRenderer()->calculateProjectionMatrix(engine->getWindow().getAspectRatio());
 			}
 		}
 
@@ -45,7 +45,7 @@ namespace gam703::engine::core
 		}
 	}
 
-	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height), m_inputHandler(m_window.getGLFWWindow()), m_time(glfwGetTime()), m_sceneRenderer(&m_window)
+	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height), m_inputHandler(m_window.getGLFWWindow()), m_time(glfwGetTime()), m_scene(this)
 	{
 		if (auto* glfwWindow = m_window.getGLFWWindow())
 		{
@@ -70,35 +70,11 @@ namespace gam703::engine::core
 
 	void Engine::run()
 	{
-		const core_interface::IModel* ourModel = m_resourceManager.getModel("resources/Models/backpack/backpack.obj");
-		const core_interface::IModel* ourModel2 = m_resourceManager.getModel("resources/Models/backpack/backpack.obj");
-		const core_interface::IModel* ourModel3 = m_resourceManager.getModel("resources/Models/backpack/backpack.obj");
-		const core_interface::IModel* ourModel4 = m_resourceManager.getModel("resources/Models/backpack/backpack.obj");
-
-		components::Transform cameraTransform(this, glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0, glm::radians(-90.0f), 0));
-		m_mainCamera = cameraTransform.addComponent<components::Camera>();
-
-		components::Transform backpackTransform{ this, glm::vec3(0.0f, 0.0f, 0.0f) };
-		backpackTransform.addComponent<components::Renderer>(ourModel);
-
-		components::Transform backpackTransform2{ this, glm::vec3(1.0f, 1.0f, 0.0f) };
-		backpackTransform2.addComponent<components::Renderer>(ourModel2);
-
-		components::Transform backpackTransform3{ this, glm::vec3(2.0f, 2.0f, 0.0f) };
-		backpackTransform3.addComponent<components::Renderer>(ourModel3);
-
-		components::Transform backpackTransform4{ this, glm::vec3(3.0f, 3.0f, 0.0f) };
-		backpackTransform4.addComponent<components::Renderer>(ourModel4);
-
-		m_sceneRenderer.setMainCamera(m_mainCamera);
-
 		while (m_isRunning)
 		{
 			m_time.processTime(glfwGetTime());
 			processInput(*this);
-			m_mainCamera->tick(m_time.getDeltaTime());
-			cameraTransform.calculateTransformMatrix();
-			m_sceneRenderer.render();
+			m_scene.updateScene(m_time.getDeltaTime());
 
 			m_inputHandler.resetMouseOffset();
 			glfwSwapBuffers(m_window.getGLFWWindow());

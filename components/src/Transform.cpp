@@ -9,6 +9,54 @@ namespace gam703::engine::components
 		calculateTransformMatrix();
 	}
 
+	Transform::Transform(const Transform& transform) :
+		m_position(transform.m_position),
+		m_rotation(transform.m_rotation),
+		m_scale(transform.m_scale),
+		m_transformMatrix(transform.m_transformMatrix),
+		m_front(transform.m_front),
+		m_up(transform.m_front),
+		m_right(transform.m_right),
+		m_shouldCalculateTransform(transform.m_shouldCalculateTransform),
+		m_shouldUpdateDirectionVectors(transform.m_shouldUpdateDirectionVectors),
+		m_components(),
+		m_engine(transform.m_engine),
+		m_scene(transform.m_scene)
+	{
+		std::for_each(begin(transform.m_components), end(transform.m_components), [this](const std::unique_ptr<IComponent>& component)
+			{
+				m_components.push_back(std::unique_ptr<IComponent>(component->clone(this)));
+			});
+	}
+
+	Transform& Transform::operator=(const Transform& transform)
+	{
+		m_position = transform.m_position;
+		m_rotation = transform.m_rotation;
+		m_scale = transform.m_scale;
+		m_transformMatrix = transform.m_transformMatrix;
+		m_front = transform.m_front;
+		m_up = transform.m_front;
+		m_right = transform.m_right;
+		m_shouldCalculateTransform = transform.m_shouldCalculateTransform;
+		m_shouldUpdateDirectionVectors = transform.m_shouldUpdateDirectionVectors;
+		m_components = std::vector<std::unique_ptr<IComponent>>{};
+		m_engine = transform.m_engine;
+		m_scene = transform.m_scene;
+
+		std::for_each(begin(transform.m_components), end(transform.m_components), [this](const std::unique_ptr<IComponent>& component)
+			{
+				m_components.push_back(std::unique_ptr<IComponent>(component->clone(this)));
+			});
+
+		return *this;
+	}
+
+	core_interface::ITransform* Transform::clone() const
+	{
+		return new Transform(*this);
+	}
+
 	void Transform::calculateTransformMatrix()
 	{
 		if (m_shouldCalculateTransform)
@@ -38,6 +86,11 @@ namespace gam703::engine::components
 
 			m_shouldUpdateDirectionVectors = false;
 		}
+	}
+
+	void Transform::updateComponents(float deltaTime)
+	{
+		std::for_each(begin(m_components), end(m_components), [deltaTime](std::unique_ptr<IComponent>& component) {component->tick(deltaTime); });
 	}
 
 	void Transform::setPosition(const glm::vec3& position)
