@@ -15,6 +15,11 @@ namespace gam703::engine::components::tests
 		virtual void tick(float deltaTime) override
 		{
 		}
+
+		virtual IComponent* clone(Transform*) const override
+		{
+			return nullptr;
+		}
 	};
 
 	class MockComponent2 : public IComponent
@@ -26,6 +31,11 @@ namespace gam703::engine::components::tests
 
 		virtual void tick(float deltaTime) override
 		{
+		}
+
+		virtual IComponent* clone(Transform*) const override
+		{
+			return nullptr;
 		}
 	};
 
@@ -43,6 +53,11 @@ namespace gam703::engine::components::tests
 
 		virtual void tick(float deltaTime) override
 		{
+		}
+
+		virtual IComponent* clone(Transform*) const override
+		{
+			return nullptr;
 		}
 
 		std::string m_name = "DEFAULT";

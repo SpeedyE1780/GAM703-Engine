@@ -18,6 +18,11 @@ namespace gam703::engine::components
 		getEngine()->getSceneRenderer()->removeRenderer(this);
 	}
 
+	IComponent* Renderer::clone(Transform* transform) const
+	{
+		return new Renderer(transform, m_model, graphic::Shader(m_shader));
+	}
+
 	void Renderer::render(const glm::mat4& projectionMatrix, const glm::mat4& viewMatrix) const
 	{
 		m_shader.use();

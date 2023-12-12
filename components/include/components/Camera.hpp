@@ -28,8 +28,9 @@ namespace gam703::engine::components
 	class COMPONENTS_API Camera : public IComponent
 	{
 	public:
-
 		Camera(Transform* transform, float yaw = YAW, float pitch = PITCH);
+
+		virtual IComponent* clone(Transform* transform) const override;
 
 		glm::mat4 GetViewMatrix() const;
 		float getYaw() const { return m_yaw; }

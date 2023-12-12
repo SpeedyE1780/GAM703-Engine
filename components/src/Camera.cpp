@@ -10,6 +10,11 @@ namespace gam703::engine::components
 	{
 	}
 
+	IComponent* Camera::clone(Transform* transform) const
+	{
+		return new Camera(transform, m_yaw, m_pitch);
+	}
+
 	glm::mat4 Camera::GetViewMatrix() const
 	{
 		return glm::lookAt(m_transform->getPosition(), m_transform->getPosition() + m_transform->getFront(), m_transform->getUp());

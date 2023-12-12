@@ -23,22 +23,31 @@ namespace gam703::engine::components
 		m_engine(transform.m_engine),
 		m_scene(transform.m_scene)
 	{
+		std::for_each(begin(transform.m_components), end(transform.m_components), [this](const std::unique_ptr<IComponent>& component)
+			{
+				m_components.push_back(std::unique_ptr<IComponent>(component->clone(this)));
+			});
 	}
 
 	Transform& Transform::operator=(const Transform& transform)
 	{
-		m_position = (transform.m_position);
-		m_rotation = (transform.m_rotation);
-		m_scale = (transform.m_scale);
-		m_transformMatrix = (transform.m_transformMatrix);
-		m_front = (transform.m_front);
-		m_up = (transform.m_front);
-		m_right = (transform.m_right);
-		m_shouldCalculateTransform = (transform.m_shouldCalculateTransform);
-		m_shouldUpdateDirectionVectors = (transform.m_shouldUpdateDirectionVectors);
+		m_position = transform.m_position;
+		m_rotation = transform.m_rotation;
+		m_scale = transform.m_scale;
+		m_transformMatrix = transform.m_transformMatrix;
+		m_front = transform.m_front;
+		m_up = transform.m_front;
+		m_right = transform.m_right;
+		m_shouldCalculateTransform = transform.m_shouldCalculateTransform;
+		m_shouldUpdateDirectionVectors = transform.m_shouldUpdateDirectionVectors;
 		m_components = std::vector<std::unique_ptr<IComponent>>{};
-		m_engine = (transform.m_engine);
-		m_scene = (transform.m_scene);
+		m_engine = transform.m_engine;
+		m_scene = transform.m_scene;
+
+		std::for_each(begin(transform.m_components), end(transform.m_components), [this](const std::unique_ptr<IComponent>& component)
+			{
+				m_components.push_back(std::unique_ptr<IComponent>(component->clone(this)));
+			});
 
 		return *this;
 	}

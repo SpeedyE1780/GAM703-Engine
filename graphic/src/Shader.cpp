@@ -36,27 +36,55 @@ namespace gam703::engine::graphic
 				}
 			}
 		}
+
+		unsigned int createVertexShader(const std::string& vertexCode)
+		{
+			const char* vShaderCode = vertexCode.c_str();
+			unsigned int vertex = glCreateShader(GL_VERTEX_SHADER);
+			glShaderSource(vertex, 1, &vShaderCode, NULL);
+			glCompileShader(vertex);
+			checkCompileErrors(vertex, "VERTEX");
+
+			return vertex;
+		}
+
+		unsigned int createFragmentShader(const std::string& fragmentCode)
+		{
+			const char* fShaderCode = fragmentCode.c_str();
+			unsigned int fragment = glCreateShader(GL_FRAGMENT_SHADER);
+			glShaderSource(fragment, 1, &fShaderCode, NULL);
+			glCompileShader(fragment);
+			checkCompileErrors(fragment, "FRAGMENT");
+
+			return fragment;
+		}
 	}
 
-	Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
+	Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath) : m_vertexShaderPath(vertexShaderPath), m_fragmentShaderPath(fragmentShaderPath)
 	{
-		std::string vertexCode = utility::readFile(vertexShaderPath);
-		std::string fragmentCode = utility::readFile(fragmentShaderPath);
+		createShaderProgram();
+	}
 
-		const char* vShaderCode = vertexCode.c_str();
-		const char* fShaderCode = fragmentCode.c_str();
+	Shader::Shader(const Shader& shader) : m_vertexShaderPath(shader.m_vertexShaderPath), m_fragmentShaderPath(shader.m_fragmentShaderPath)
+	{
+		createShaderProgram();
+	}
 
-		unsigned int vertex = 0, fragment = 0;
+	Shader& Shader::operator=(const Shader& shader)
+	{
+		m_vertexShaderPath = shader.m_vertexShaderPath;
+		m_fragmentShaderPath = shader.m_fragmentShaderPath;
+		createShaderProgram();
+		return *this;
+	}
 
-		vertex = glCreateShader(GL_VERTEX_SHADER);
-		glShaderSource(vertex, 1, &vShaderCode, NULL);
-		glCompileShader(vertex);
-		checkCompileErrors(vertex, "VERTEX");
+	void Shader::createShaderProgram()
+	{
+		std::string vertexCode = utility::readFile(m_vertexShaderPath);
+		std::string fragmentCode = utility::readFile(m_fragmentShaderPath);
 
-		fragment = glCreateShader(GL_FRAGMENT_SHADER);
-		glShaderSource(fragment, 1, &fShaderCode, NULL);
-		glCompileShader(fragment);
-		checkCompileErrors(fragment, "FRAGMENT");
+		unsigned int vertex = createVertexShader(vertexCode);
+		unsigned int fragment = createFragmentShader(fragmentCode);
 
 		m_id = glCreateProgram();
 		glAttachShader(m_id, vertex);
