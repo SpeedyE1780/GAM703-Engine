@@ -11,6 +11,9 @@ namespace gam703::engine::core_interface
 	{
 	public:
 		virtual ~ITransform() = default;
+
+		virtual ITransform* clone() const = 0;
+
 		virtual const glm::vec3& getPosition() const = 0;
 		virtual const glm::vec3& getRotation() const = 0;
 		virtual const glm::vec3& getScale() const = 0;

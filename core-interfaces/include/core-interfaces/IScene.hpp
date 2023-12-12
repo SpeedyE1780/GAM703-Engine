@@ -13,6 +13,7 @@ namespace gam703::engine::core_interface
 		virtual ~IScene() = default;
 
 		virtual ITransform* addTransform(const glm::vec3& position = glm::vec3(0, 0, 0), const glm::vec3& rotation = glm::vec3(0, 0, 0), const glm::vec3& scale = glm::vec3(1, 1, 1)) = 0;
+		virtual ITransform* addTransform(const ITransform* transform) = 0;
 	};
 }
 

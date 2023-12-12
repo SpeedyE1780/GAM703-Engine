@@ -23,6 +23,8 @@ namespace gam703::engine::components
 		Transform(const Transform& transform);
 		Transform& operator=(const Transform& transform);
 
+		virtual core_interface::ITransform* clone() const override;
+
 		virtual const glm::vec3& getPosition() const override { return m_position; }
 		virtual const glm::vec3& getRotation() const override { return m_rotation; }
 		virtual const glm::vec3& getScale() const override { return m_scale; }

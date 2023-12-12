@@ -17,17 +17,19 @@ int main()
 
 	auto* scene = engine.getScene();
 
-	gam703::engine::components::Transform* backpackTransform = dynamic_cast<gam703::engine::components::Transform*>(scene->addTransform(glm::vec3(0.0f, 0.0f, 0.0f)));
+	auto* backpackTransform = dynamic_cast<gam703::engine::components::Transform*>(scene->addTransform(glm::vec3(0.0f, 0.0f, 0.0f)));
 	backpackTransform->addComponent<gam703::engine::components::Renderer>(ourModel);
 
-	gam703::engine::components::Transform* backpackTransform2 = dynamic_cast<gam703::engine::components::Transform*>(scene->addTransform(glm::vec3(1.0f, 1.0f, 0.0f)));
-	backpackTransform2->addComponent<gam703::engine::components::Renderer>(ourModel2);
+	auto* backpackTransform2 = scene->addTransform(backpackTransform);
+	backpackTransform2->setPosition(glm::vec3(1.0f, 1.0f, 0.0f));
+	backpackTransform2->calculateTransformMatrix();
 
-	gam703::engine::components::Transform* backpackTransform3 = dynamic_cast<gam703::engine::components::Transform*>(scene->addTransform(glm::vec3(2.0f, 2.0f, 0.0f)));
+	auto* backpackTransform3 = dynamic_cast<gam703::engine::components::Transform*>(scene->addTransform(glm::vec3(2.0f, 2.0f, 0.0f)));
 	backpackTransform3->addComponent<gam703::engine::components::Renderer>(ourModel3);
 
-	gam703::engine::components::Transform* backpackTransform4 = dynamic_cast<gam703::engine::components::Transform*>(scene->addTransform(glm::vec3(3.0f, 3.0f, 0.0f)));
-	backpackTransform4->addComponent<gam703::engine::components::Renderer>(ourModel4);
+	auto* backpackTransform4 = scene->addTransform(backpackTransform3);
+	backpackTransform4->setPosition(glm::vec3(3.0f, 3.0f, 0.0f));
+	backpackTransform4->calculateTransformMatrix();
 
 	engine.start();
 	return 0;
