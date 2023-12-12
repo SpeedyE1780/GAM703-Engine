@@ -6,6 +6,14 @@ namespace gam703::engine::core
 	Scene::Scene(Engine* engine) : m_engine(engine)
 	{
 	}
+	
+	void Scene::updateScene() const
+	{
+		std::for_each(begin(m_transforms), end(m_transforms), [](const std::unique_ptr<core_interface::ITransform>& transform)
+			{
+				transform->calculateTransformMatrix();
+			});
+	}
 
 	core_interface::ITransform* Scene::addTransform(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale)
 	{

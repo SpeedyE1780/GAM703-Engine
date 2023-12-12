@@ -70,17 +70,14 @@ namespace gam703::engine::core
 
 	void Engine::run()
 	{
-		components::Transform cameraTransform(this, glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0, glm::radians(-90.0f), 0));
-		m_mainCamera = cameraTransform.addComponent<components::Camera>();
-
 		m_sceneRenderer.setMainCamera(m_mainCamera);
 
 		while (m_isRunning)
 		{
 			m_time.processTime(glfwGetTime());
 			processInput(*this);
+			m_scene.updateScene();
 			m_mainCamera->tick(m_time.getDeltaTime());
-			cameraTransform.calculateTransformMatrix();
 			m_sceneRenderer.render();
 
 			m_inputHandler.resetMouseOffset();

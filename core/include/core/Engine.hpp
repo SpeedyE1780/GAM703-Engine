@@ -36,6 +36,8 @@ namespace gam703::engine::core
 		virtual core_interface::IScene* getScene() override { return &m_scene; }
 		virtual const core_interface::IScene* getScene() const override { return &m_scene; }
 
+		void setMainCamera(components::Camera* camera) { m_mainCamera = camera; }
+
 		void start();
 		void stop();
 
