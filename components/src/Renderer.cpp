@@ -5,17 +5,17 @@ namespace gam703::engine::components
 {
 	Renderer::Renderer(Transform* transform, const core_interface::IModel* model) : IComponent(transform), m_model(model), m_shader(graphic::createDefaultShader())
 	{
-		getEngine()->getSceneRenderer()->addRenderer(this);
+		getEngine()->getScene()->getSceneRenderer()->addRenderer(this);
 	}
 
 	Renderer::Renderer(Transform* transform, const core_interface::IModel* model, const graphic::Shader& shader) : IComponent(transform), m_model(model), m_shader(shader)
 	{
-		getEngine()->getSceneRenderer()->addRenderer(this);
+		getEngine()->getScene()->getSceneRenderer()->addRenderer(this);
 	}
 
 	Renderer::~Renderer()
 	{
-		getEngine()->getSceneRenderer()->removeRenderer(this);
+		getEngine()->getScene()->getSceneRenderer()->removeRenderer(this);
 	}
 
 	IComponent* Renderer::clone(Transform* transform) const

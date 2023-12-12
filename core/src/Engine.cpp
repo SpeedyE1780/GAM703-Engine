@@ -14,7 +14,7 @@ namespace gam703::engine::core
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
 				engine->getWindow().resizeWindow(width, height);
-				engine->getSceneRenderer()->calculateProjectionMatrix();
+				engine->getScene()->getSceneRenderer()->calculateProjectionMatrix(engine->getWindow().getAspectRatio());
 			}
 		}
 
@@ -45,7 +45,7 @@ namespace gam703::engine::core
 		}
 	}
 
-	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height), m_inputHandler(m_window.getGLFWWindow()), m_time(glfwGetTime()), m_sceneRenderer(&m_window), m_scene(this)
+	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height), m_inputHandler(m_window.getGLFWWindow()), m_time(glfwGetTime()), m_scene(this)
 	{
 		if (auto* glfwWindow = m_window.getGLFWWindow())
 		{
@@ -70,15 +70,11 @@ namespace gam703::engine::core
 
 	void Engine::run()
 	{
-		m_sceneRenderer.setMainCamera(m_mainCamera);
-
 		while (m_isRunning)
 		{
 			m_time.processTime(glfwGetTime());
 			processInput(*this);
-			m_scene.updateScene();
-			m_mainCamera->tick(m_time.getDeltaTime());
-			m_sceneRenderer.render();
+			m_scene.updateScene(m_time.getDeltaTime());
 
 			m_inputHandler.resetMouseOffset();
 			glfwSwapBuffers(m_window.getGLFWWindow());

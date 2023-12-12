@@ -14,24 +14,23 @@ namespace gam703::engine::core
 	class SceneRenderer : public core_interface::ISceneRenderer
 	{
 	public:
-		SceneRenderer(gui::Window* window);
-		SceneRenderer(gui::Window* window, const std::vector<core_interface::IRenderer*>& sceneObjects);
+		SceneRenderer() = default;
+		SceneRenderer(const std::vector<core_interface::IRenderer*>& sceneObjects);
 
 		virtual void addRenderer(core_interface::IRenderer* sceneObject) override;
 		virtual void removeRenderer(core_interface::IRenderer* sceneObject) override;
 
-		void setMainCamera(components::Camera* camera);
-		components::Camera* getMainCamera() { return m_mainCamera; }
-		const components::Camera* getMainCamera() const { return m_mainCamera; }
+		void setActiveCamera(components::Camera* camera);
+		components::Camera* getActiveCamera() { return m_activeCamera; }
+		const components::Camera* getActiveCamera() const { return m_activeCamera; }
 
-		virtual void calculateProjectionMatrix() override;
+		virtual void calculateProjectionMatrix(float aspectRatio) override;
 		virtual void render() const override;
 
 	private:
 		std::vector<core_interface::IRenderer*> m_sceneObjects = {};
-		components::Camera* m_mainCamera = nullptr;
+		components::Camera* m_activeCamera = nullptr;
 		glm::mat4 m_projectionMatrix = glm::mat4(1);
-		gui::Window* m_window = nullptr;
 	};
 }
 

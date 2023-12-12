@@ -76,6 +76,8 @@ namespace gam703::engine::components
 
 		std::size_t getComponentsSize() const { return m_components.size(); }
 
+		void updateComponents(float deltaTime);
+
 		virtual core_interface::IEngine* getEngine() override { return m_engine; }
 		virtual const core_interface::IEngine* getEngine() const override { return m_engine; }
 

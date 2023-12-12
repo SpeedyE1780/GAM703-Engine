@@ -12,7 +12,7 @@ namespace gam703::engine::core_interface
 		virtual void addRenderer(IRenderer* renderer) = 0;
 		virtual void removeRenderer(IRenderer* sceneObject) = 0;
 
-		virtual void calculateProjectionMatrix() = 0;
+		virtual void calculateProjectionMatrix(float aspectRatio) = 0;
 		virtual void render() const = 0;
 	};
 }

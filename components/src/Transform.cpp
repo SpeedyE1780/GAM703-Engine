@@ -88,6 +88,11 @@ namespace gam703::engine::components
 		}
 	}
 
+	void Transform::updateComponents(float deltaTime)
+	{
+		std::for_each(begin(m_components), end(m_components), [deltaTime](std::unique_ptr<IComponent>& component) {component->tick(deltaTime); });
+	}
+
 	void Transform::setPosition(const glm::vec3& position)
 	{
 		if (m_position != position)

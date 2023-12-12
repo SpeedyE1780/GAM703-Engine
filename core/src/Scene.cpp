@@ -7,12 +7,20 @@ namespace gam703::engine::core
 	{
 	}
 	
-	void Scene::updateScene() const
+	void Scene::updateScene(float deltaTime)
 	{
-		std::for_each(begin(m_transforms), end(m_transforms), [](const std::unique_ptr<core_interface::ITransform>& transform)
+		std::for_each(begin(m_transforms), end(m_transforms), [](std::unique_ptr<core_interface::ITransform>& transform)
 			{
 				transform->calculateTransformMatrix();
 			});
+
+		m_sceneRenderer.render();
+	}
+
+	void Scene::setActiveCamera(components::Camera* activeCamera)
+	{
+		m_sceneRenderer.setActiveCamera(activeCamera);
+		m_sceneRenderer.calculateProjectionMatrix(m_engine->getWindow().getAspectRatio());
 	}
 
 	core_interface::ITransform* Scene::addTransform(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale)

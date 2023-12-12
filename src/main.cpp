@@ -16,7 +16,7 @@ int main()
 	const gam703::engine::core_interface::IModel* ourModel3 = resourceManager->getModel("resources/Models/backpack/backpack.obj");
 	const gam703::engine::core_interface::IModel* ourModel4 = resourceManager->getModel("resources/Models/backpack/backpack.obj");
 
-	auto* scene = engine.getScene();
+	auto* scene = dynamic_cast<gam703::engine::core::Scene*>(engine.getScene());
 
 	auto* backpackTransform = dynamic_cast<gam703::engine::components::Transform*>(scene->addTransform(glm::vec3(0.0f, 0.0f, 0.0f)));
 	backpackTransform->addComponent<gam703::engine::components::Renderer>(ourModel);
@@ -33,7 +33,7 @@ int main()
 	auto* cameraTransform = dynamic_cast<gam703::engine::components::Transform*>(scene->addTransform(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0, glm::radians(-90.0f), 0)));
 	auto* camera = cameraTransform->addComponent<gam703::engine::components::Camera>();
 
-	engine.setMainCamera(camera);
+	scene->setActiveCamera(camera);
 
 	engine.start();
 	return 0;

@@ -27,16 +27,10 @@ namespace gam703::engine::core
 		virtual const core_interface::IInput* getInput() const override { return &m_inputHandler; }
 		core_interface::ITime* getTime() { return &m_time; }
 		const core_interface::ITime* getTime() const { return &m_time; }
-		components::Camera* getMainCamera() { return m_mainCamera; }
-		const components::Camera* getMainCamera() const { return m_mainCamera; }
-		virtual core_interface::ISceneRenderer* getSceneRenderer() override { return &m_sceneRenderer; }
-		virtual const core_interface::ISceneRenderer* getSceneRenderer() const override { return &m_sceneRenderer; }
 		virtual core_interface::IResourceManager* getResourceManager() override { return &m_resourceManager; }
 		virtual const core_interface::IResourceManager* getResourceManager() const override { return &m_resourceManager; }
 		virtual core_interface::IScene* getScene() override { return &m_scene; }
 		virtual const core_interface::IScene* getScene() const override { return &m_scene; }
-
-		void setMainCamera(components::Camera* camera) { m_mainCamera = camera; }
 
 		void start();
 		void stop();
@@ -47,10 +41,8 @@ namespace gam703::engine::core
 		gui::Window m_window;
 		Input m_inputHandler;
 		Time m_time;
-		SceneRenderer m_sceneRenderer;
 		Scene m_scene;
 		ResourceManager m_resourceManager{};
-		components::Camera* m_mainCamera = nullptr;
 		bool m_isRunning = false;
 	};
 }
