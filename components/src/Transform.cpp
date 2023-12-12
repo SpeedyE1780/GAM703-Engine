@@ -9,6 +9,40 @@ namespace gam703::engine::components
 		calculateTransformMatrix();
 	}
 
+	Transform::Transform(const Transform& transform) :
+		m_position(transform.m_position),
+		m_rotation(transform.m_rotation),
+		m_scale(transform.m_scale),
+		m_transformMatrix(transform.m_transformMatrix),
+		m_front(transform.m_front),
+		m_up(transform.m_front),
+		m_right(transform.m_right),
+		m_shouldCalculateTransform(transform.m_shouldCalculateTransform),
+		m_shouldUpdateDirectionVectors(transform.m_shouldUpdateDirectionVectors),
+		m_components(),
+		m_engine(transform.m_engine),
+		m_scene(transform.m_scene)
+	{
+	}
+
+	Transform& Transform::operator=(const Transform& transform)
+	{
+		m_position = (transform.m_position);
+		m_rotation = (transform.m_rotation);
+		m_scale = (transform.m_scale);
+		m_transformMatrix = (transform.m_transformMatrix);
+		m_front = (transform.m_front);
+		m_up = (transform.m_front);
+		m_right = (transform.m_right);
+		m_shouldCalculateTransform = (transform.m_shouldCalculateTransform);
+		m_shouldUpdateDirectionVectors = (transform.m_shouldUpdateDirectionVectors);
+		m_components = std::vector<std::unique_ptr<IComponent>>{};
+		m_engine = (transform.m_engine);
+		m_scene = (transform.m_scene);
+
+		return *this;
+	}
+
 	void Transform::calculateTransformMatrix()
 	{
 		if (m_shouldCalculateTransform)

@@ -2,8 +2,12 @@
 #define GAM703_ENGINE_COMPONENTS_TRANSFORM_HPP
 
 #include <core-interfaces/IEngine.hpp>
+#include <core-interfaces/IScene.hpp>
+#include <core-interfaces/ITransform.hpp>
+
 #include <components/Config.hpp>
 #include <components/IComponent.hpp>
+
 #include <glm/glm.hpp>
 
 #include <memory>
@@ -11,35 +15,35 @@
 
 namespace gam703::engine::components
 {
-	class COMPONENTS_API Transform
+	class COMPONENTS_API Transform : public core_interface::ITransform
 	{
 	public:
 		Transform(core_interface::IEngine* engine, const glm::vec3& position = glm::vec3(0, 0, 0), const glm::vec3& rotation = glm::vec3(0, 0, 0), const glm::vec3& scale = glm::vec3(1, 1, 1));
 		~Transform() = default;
-		Transform(const Transform& transform) = delete;
-		Transform& operator=(const Transform& transform) = delete;
+		Transform(const Transform& transform);
+		Transform& operator=(const Transform& transform);
 
-		const glm::vec3& getPosition() const { return m_position; }
-		const glm::vec3& getRotation() const { return m_rotation; }
-		const glm::vec3& getScale() const { return m_scale; }
-		const glm::mat4& getTransformationMatrix() const { return m_transformMatrix; }
-		const glm::vec3& getFront() const { return m_front; }
-		const glm::vec3& getRight() const { return m_right; }
-		const glm::vec3& getUp() const { return m_up; }
+		virtual const glm::vec3& getPosition() const override { return m_position; }
+		virtual const glm::vec3& getRotation() const override { return m_rotation; }
+		virtual const glm::vec3& getScale() const override { return m_scale; }
+		virtual const glm::mat4& getTransformationMatrix() const override { return m_transformMatrix; }
+		virtual const glm::vec3& getFront() const override { return m_front; }
+		virtual const glm::vec3& getRight() const override { return m_right; }
+		virtual const glm::vec3& getUp() const override { return m_up; }
 
-		void calculateTransformMatrix();
+		virtual void calculateTransformMatrix() override;
 
-		void setPosition(const glm::vec3& position);
-		void setPosition(float x, float y, float z);
-		void setRotation(const glm::vec3& eulerAngles);
-		void setRotation(float x, float y, float z);
-		void setScale(const glm::vec3& scale);
-		void setScale(float x, float y, float z);
+		virtual void setPosition(const glm::vec3& position) override;
+		virtual void setPosition(float x, float y, float z) override;
+		virtual void setRotation(const glm::vec3& eulerAngles) override;
+		virtual void setRotation(float x, float y, float z) override;
+		virtual void setScale(const glm::vec3& scale) override;
+		virtual void setScale(float x, float y, float z) override;
 
-		void translate(const glm::vec3& offset);
-		void translate(float x, float y, float z);
-		void rotate(const glm::vec3& eulerAngles);
-		void rotate(float x, float y, float z);
+		virtual void translate(const glm::vec3& offset) override;
+		virtual void translate(float x, float y, float z) override;
+		virtual void rotate(const glm::vec3& eulerAngles) override;
+		virtual void rotate(float x, float y, float z) override;
 
 		template<typename Component, typename... Args>
 		Component* addComponent(Args&&... args)
@@ -70,8 +74,11 @@ namespace gam703::engine::components
 
 		std::size_t getComponentsSize() const { return m_components.size(); }
 
-		core_interface::IEngine* getEngine() { return m_engine; }
-		const core_interface::IEngine* getEngine() const { return m_engine; }
+		virtual core_interface::IEngine* getEngine() override { return m_engine; }
+		virtual const core_interface::IEngine* getEngine() const override { return m_engine; }
+
+		virtual core_interface::IScene* getScene() override { return m_scene; }
+		virtual const core_interface::IScene* getScene() const override { return m_scene; }
 
 	private:
 		void updateDirectionVectors();
@@ -87,6 +94,7 @@ namespace gam703::engine::components
 		bool m_shouldUpdateDirectionVectors;
 		std::vector<std::unique_ptr<IComponent>> m_components = {};
 		core_interface::IEngine* m_engine = nullptr;
+		core_interface::IScene* m_scene = nullptr;
 	};
 }
 

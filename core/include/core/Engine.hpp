@@ -5,6 +5,7 @@
 #include <core/Config.hpp>
 #include <core/Input.hpp>
 #include <core/ResourceManager.hpp>
+#include <core/Scene.hpp>
 #include <core/SceneRenderer.hpp>
 #include <core/Time.hpp>
 #include <core-interfaces/IEngine.hpp>
@@ -32,6 +33,8 @@ namespace gam703::engine::core
 		virtual const core_interface::ISceneRenderer* getSceneRenderer() const override { return &m_sceneRenderer; }
 		virtual core_interface::IResourceManager* getResourceManager() override { return &m_resourceManager; }
 		virtual const core_interface::IResourceManager* getResourceManager() const override { return &m_resourceManager; }
+		virtual core_interface::IScene* getScene() override { return &m_scene; }
+		virtual const core_interface::IScene* getScene() const override { return &m_scene; }
 
 		void start();
 		void stop();
@@ -43,6 +46,7 @@ namespace gam703::engine::core
 		Input m_inputHandler;
 		Time m_time;
 		SceneRenderer m_sceneRenderer;
+		Scene m_scene;
 		ResourceManager m_resourceManager{};
 		components::Camera* m_mainCamera = nullptr;
 		bool m_isRunning = false;
