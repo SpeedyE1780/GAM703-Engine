@@ -9,8 +9,8 @@ target_sources(${PROJECT_NAME} PRIVATE
 src/MovementController.cpp
 
 #HPP
-include/components/Config2.hpp
-include/components/MovementController.hpp
+include/game/components/Config.hpp
+include/game/components/MovementController.hpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)

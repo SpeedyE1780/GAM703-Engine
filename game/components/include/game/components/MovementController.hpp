@@ -3,7 +3,7 @@
 
 #include <engine/core-interfaces/ICamera.hpp>
 
-#include <components/Config2.hpp>
+#include <game/components/Config.hpp>
 
 namespace gam703::game::components
 {

@@ -1,7 +1,7 @@
 #include <engine/core-interfaces/IEngine.hpp>
 #include <engine/core-interfaces/ITransform.hpp>
 
-#include <components/MovementController.hpp>
+#include <game/components/MovementController.hpp>
 
 #include <GLFW/glfw3.h>
 
