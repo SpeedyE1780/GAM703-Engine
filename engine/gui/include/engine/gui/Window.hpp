@@ -1,15 +1,16 @@
 #ifndef GAM703_ENGINE_GUI_WINDOW_HPP
 #define GAM703_ENGINE_GUI_WINDOW_HPP
 
+#include <engine/gui/Config.hpp>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <gui/Config.hpp>
 
 #include <string>
 
 namespace gam703::engine::gui
 {
-	class GUI_API Window
+	class ENGINE_GUI_API Window
 	{
 	public:
 		Window(const std::string& title, int width, int height);

@@ -9,7 +9,7 @@
 
 #include <engine/core-interfaces/IEngine.hpp>
 
-#include <gui/Window.hpp>
+#include <engine/gui/Window.hpp>
 
 #include <string>
 

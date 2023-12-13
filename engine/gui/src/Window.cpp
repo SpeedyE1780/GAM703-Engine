@@ -1,4 +1,5 @@
-#include <gui/Window.hpp>
+#include <engine/gui/Window.hpp>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
