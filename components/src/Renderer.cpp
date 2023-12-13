@@ -1,14 +1,15 @@
 #include <components/Renderer.hpp>
 #include <core-interfaces/ITransform.hpp>
+#include <core-interfaces/IEngine.hpp>
 
 namespace gam703::engine::components
 {
-	Renderer::Renderer(core_interface::ITransform* transform, const core_interface::IModel* model) : IComponent(transform), m_model(model), m_shader(graphic::createDefaultShader())
+	Renderer::Renderer(core_interface::ITransform* transform, const core_interface::IModel* model) : core_interface::IRenderer(transform), m_model(model), m_shader(graphic::createDefaultShader())
 	{
 		getEngine()->getScene()->getSceneRenderer()->addRenderer(this);
 	}
 
-	Renderer::Renderer(core_interface::ITransform* transform, const core_interface::IModel* model, const graphic::Shader& shader) : IComponent(transform), m_model(model), m_shader(shader)
+	Renderer::Renderer(core_interface::ITransform* transform, const core_interface::IModel* model, const graphic::Shader& shader) : core_interface::IRenderer(transform), m_model(model), m_shader(shader)
 	{
 		getEngine()->getScene()->getSceneRenderer()->addRenderer(this);
 	}

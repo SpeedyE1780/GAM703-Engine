@@ -1,9 +1,4 @@
-#include <glad/glad.h>
 #include <core/Engine.hpp>
-#include <core/SceneRenderer.hpp>
-#include <components/Transform.hpp>
-#include <graphic/Model.hpp>
-#include <graphic/Shader.hpp>
 
 namespace gam703::engine::core
 {

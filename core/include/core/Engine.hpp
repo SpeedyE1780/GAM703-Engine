@@ -1,14 +1,14 @@
 #ifndef GAM703_ENGINE_CORE_ENGINE_HPP
 #define GAM703_ENGINE_CORE_ENGINE_HPP
 
-#include <components/Camera.hpp>
+#include <core-interfaces/IEngine.hpp>
+
 #include <core/Config.hpp>
 #include <core/Input.hpp>
 #include <core/ResourceManager.hpp>
 #include <core/Scene.hpp>
 #include <core/SceneRenderer.hpp>
 #include <core/Time.hpp>
-#include <core-interfaces/IEngine.hpp>
 #include <gui/Window.hpp>
 
 #include <string>

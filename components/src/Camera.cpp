@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <components/Camera.hpp>
+#include <core-interfaces/IEngine.hpp>
 #include <core-interfaces/ITransform.hpp>
 
 namespace gam703::engine::components

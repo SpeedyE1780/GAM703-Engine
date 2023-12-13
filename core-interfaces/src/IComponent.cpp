@@ -1,4 +1,5 @@
 #include <core-interfaces/IComponent.hpp>
+#include <core-interfaces/IEngine.hpp>
 #include <core-interfaces/ITransform.hpp>
 
 namespace gam703::engine::core_interface

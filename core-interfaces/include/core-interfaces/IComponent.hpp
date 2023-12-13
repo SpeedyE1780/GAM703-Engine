@@ -2,8 +2,8 @@
 #define GAM703_ENGINE_CORE_INTERFACES_ICOMPONENT_HPP
 
 #include <core-interfaces/Config.hpp>
+#include <core-interfaces/IEngine.fwd.hpp>
 #include <core-interfaces/ITransform.fwd.hpp>
-#include <core-interfaces/IEngine.hpp>
 
 namespace gam703::engine::core_interface
 {
