@@ -23,9 +23,9 @@ namespace gam703::engine::components
 		m_engine(transform.m_engine),
 		m_scene(transform.m_scene)
 	{
-		std::for_each(begin(transform.m_components), end(transform.m_components), [this](const std::unique_ptr<IComponent>& component)
+		std::for_each(begin(transform.m_components), end(transform.m_components), [this](const std::unique_ptr<core_interface::IComponent>& component)
 			{
-				m_components.push_back(std::unique_ptr<IComponent>(component->clone(this)));
+				m_components.push_back(std::unique_ptr<core_interface::IComponent>(component->clone(this)));
 			});
 	}
 
@@ -40,13 +40,13 @@ namespace gam703::engine::components
 		m_right = transform.m_right;
 		m_shouldCalculateTransform = transform.m_shouldCalculateTransform;
 		m_shouldUpdateDirectionVectors = transform.m_shouldUpdateDirectionVectors;
-		m_components = std::vector<std::unique_ptr<IComponent>>{};
+		m_components = std::vector<std::unique_ptr<core_interface::IComponent>>{};
 		m_engine = transform.m_engine;
 		m_scene = transform.m_scene;
 
-		std::for_each(begin(transform.m_components), end(transform.m_components), [this](const std::unique_ptr<IComponent>& component)
+		std::for_each(begin(transform.m_components), end(transform.m_components), [this](const std::unique_ptr<core_interface::IComponent>& component)
 			{
-				m_components.push_back(std::unique_ptr<IComponent>(component->clone(this)));
+				m_components.push_back(std::unique_ptr<core_interface::IComponent>(component->clone(this)));
 			});
 
 		return *this;
@@ -90,7 +90,7 @@ namespace gam703::engine::components
 
 	void Transform::updateComponents(float deltaTime)
 	{
-		std::for_each(begin(m_components), end(m_components), [deltaTime](std::unique_ptr<IComponent>& component) {component->tick(deltaTime); });
+		std::for_each(begin(m_components), end(m_components), [deltaTime](std::unique_ptr<core_interface::IComponent>& component) {component->tick(deltaTime); });
 	}
 
 	void Transform::setPosition(const glm::vec3& position)

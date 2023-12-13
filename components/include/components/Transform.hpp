@@ -6,7 +6,7 @@
 #include <core-interfaces/ITransform.hpp>
 
 #include <components/Config.hpp>
-#include <components/IComponent.hpp>
+#include <core-interfaces/IComponent.hpp>
 
 #include <glm/glm.hpp>
 
@@ -76,7 +76,7 @@ namespace gam703::engine::components
 
 		std::size_t getComponentsSize() const { return m_components.size(); }
 
-		void updateComponents(float deltaTime);
+		virtual void updateComponents(float deltaTime) override;
 
 		virtual core_interface::IEngine* getEngine() override { return m_engine; }
 		virtual const core_interface::IEngine* getEngine() const override { return m_engine; }
@@ -96,7 +96,7 @@ namespace gam703::engine::components
 		glm::vec3 m_right = glm::vec3(0, 0, 0);
 		bool m_shouldCalculateTransform;
 		bool m_shouldUpdateDirectionVectors;
-		std::vector<std::unique_ptr<IComponent>> m_components = {};
+		std::vector<std::unique_ptr<core_interface::IComponent>> m_components = {};
 		core_interface::IEngine* m_engine = nullptr;
 		core_interface::IScene* m_scene = nullptr;
 	};

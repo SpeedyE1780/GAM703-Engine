@@ -2,7 +2,7 @@
 #define GAM703_ENGINE_COMPONENTS_CAMERA_HPP
 
 #include <components/Config.hpp>
-#include <components/IComponent.hpp>
+#include <core-interfaces/IComponent.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -25,12 +25,12 @@ namespace gam703::engine::components
 	constexpr float SENSITIVITY = 0.1f;
 	constexpr float ZOOM = 45.0f;
 
-	class COMPONENTS_API Camera : public IComponent
+	class COMPONENTS_API Camera : public core_interface::IComponent
 	{
 	public:
-		Camera(Transform* transform, float yaw = YAW, float pitch = PITCH);
+		Camera(core_interface::ITransform* transform, float yaw = YAW, float pitch = PITCH);
 
-		virtual IComponent* clone(Transform* transform) const override;
+		virtual IComponent* clone(core_interface::ITransform* transform) const override;
 
 		glm::mat4 GetViewMatrix() const;
 		float getYaw() const { return m_yaw; }

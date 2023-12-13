@@ -9,9 +9,10 @@ namespace gam703::engine::core
 	
 	void Scene::updateScene(float deltaTime)
 	{
-		std::for_each(begin(m_transforms), end(m_transforms), [](std::unique_ptr<core_interface::ITransform>& transform)
+		std::for_each(begin(m_transforms), end(m_transforms), [deltaTime](std::unique_ptr<core_interface::ITransform>& transform)
 			{
 				transform->calculateTransformMatrix();
+				transform->updateComponents(deltaTime);
 			});
 
 		m_sceneRenderer.render();

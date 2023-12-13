@@ -2,15 +2,15 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <components/Camera.hpp>
-#include <components/Transform.hpp>
+#include <core-interfaces/ITransform.hpp>
 
 namespace gam703::engine::components
 {
-	Camera::Camera(Transform* transform, float yaw, float pitch) : IComponent(transform), m_yaw(yaw), m_pitch(pitch), m_movementSpeed(SPEED), m_mouseSensitivity(SENSITIVITY), m_zoom(ZOOM)
+	Camera::Camera(core_interface::ITransform* transform, float yaw, float pitch) : IComponent(transform), m_yaw(yaw), m_pitch(pitch), m_movementSpeed(SPEED), m_mouseSensitivity(SENSITIVITY), m_zoom(ZOOM)
 	{
 	}
 
-	IComponent* Camera::clone(Transform* transform) const
+	core_interface::IComponent* Camera::clone(core_interface::ITransform* transform) const
 	{
 		return new Camera(transform, m_yaw, m_pitch);
 	}

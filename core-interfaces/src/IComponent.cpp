@@ -1,9 +1,9 @@
-#include <components/IComponent.hpp>
-#include <components/Transform.hpp>
+#include <core-interfaces/IComponent.hpp>
+#include <core-interfaces/ITransform.hpp>
 
-namespace gam703::engine::components
+namespace gam703::engine::core_interface
 {
-	IComponent::IComponent(Transform* transform) : m_transform(transform)
+	IComponent::IComponent(ITransform* transform) : m_transform(transform)
 	{
 	}
 

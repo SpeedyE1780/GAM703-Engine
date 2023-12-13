@@ -24,6 +24,8 @@ namespace gam703::engine::core_interface
 
 		virtual void calculateTransformMatrix() = 0;
 
+		virtual void updateComponents(float deltaTime) = 0;
+
 		virtual void setPosition(const glm::vec3& position) = 0;
 		virtual void setPosition(float x, float y, float z) = 0;
 		virtual void setRotation(const glm::vec3& eulerAngles) = 0;

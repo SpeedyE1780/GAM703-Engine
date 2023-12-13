@@ -7,21 +7,21 @@
 #include <core-interfaces/IRenderer.hpp>
 #include <core-interfaces/IModel.hpp>
 #include <components/Config.hpp>
-#include <components/IComponent.hpp>
+#include <core-interfaces/IComponent.hpp>
 
 namespace gam703::engine::components
 {
-	class COMPONENTS_API Renderer : public IComponent, public core_interface::IRenderer
+	class COMPONENTS_API Renderer : public core_interface::IComponent, public core_interface::IRenderer
 	{
 	public:
-		Renderer(Transform* transform, const core_interface::IModel* model);
-		Renderer(Transform* transform, const core_interface::IModel* model, const graphic::Shader& shader);
+		Renderer(core_interface::ITransform* transform, const core_interface::IModel* model);
+		Renderer(core_interface::ITransform* transform, const core_interface::IModel* model, const graphic::Shader& shader);
 		~Renderer();
 
-		virtual IComponent* clone(Transform* transform) const override;
+		virtual IComponent* clone(core_interface::ITransform* transform) const override;
 
 		void render(const glm::mat4& projectionMatrix, const glm::mat4& viewMatrix) const;
-		void tick(float deltaTime) override {}
+		virtual void tick(float deltaTime) override;
 
 	private:
 		const core_interface::IModel* m_model;

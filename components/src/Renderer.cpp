@@ -1,14 +1,14 @@
 #include <components/Renderer.hpp>
-#include <components/Transform.hpp>
+#include <core-interfaces/ITransform.hpp>
 
 namespace gam703::engine::components
 {
-	Renderer::Renderer(Transform* transform, const core_interface::IModel* model) : IComponent(transform), m_model(model), m_shader(graphic::createDefaultShader())
+	Renderer::Renderer(core_interface::ITransform* transform, const core_interface::IModel* model) : IComponent(transform), m_model(model), m_shader(graphic::createDefaultShader())
 	{
 		getEngine()->getScene()->getSceneRenderer()->addRenderer(this);
 	}
 
-	Renderer::Renderer(Transform* transform, const core_interface::IModel* model, const graphic::Shader& shader) : IComponent(transform), m_model(model), m_shader(shader)
+	Renderer::Renderer(core_interface::ITransform* transform, const core_interface::IModel* model, const graphic::Shader& shader) : IComponent(transform), m_model(model), m_shader(shader)
 	{
 		getEngine()->getScene()->getSceneRenderer()->addRenderer(this);
 	}
@@ -18,7 +18,11 @@ namespace gam703::engine::components
 		getEngine()->getScene()->getSceneRenderer()->removeRenderer(this);
 	}
 
-	IComponent* Renderer::clone(Transform* transform) const
+	void Renderer::tick(float /*deltaTime*/)
+	{
+	}
+
+	core_interface::IComponent* Renderer::clone(core_interface::ITransform* transform) const
 	{
 		return new Renderer(transform, m_model, graphic::Shader(m_shader));
 	}
