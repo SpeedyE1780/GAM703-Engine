@@ -1,9 +1,9 @@
 #ifndef GAM703_GAME_COMPONENTS_MOVEMENT_CONTROLLER_HPP
 #define GAM703_GAME_COMPONENTS_MOVEMENT_CONTROLLER_HPP
 
-#include <components/Config2.hpp>
+#include <engine/core-interfaces/ICamera.hpp>
 
-#include <core-interfaces/ICamera.hpp>
+#include <components/Config2.hpp>
 
 namespace gam703::game::components
 {

@@ -28,10 +28,10 @@ include/engine/core/Time.hpp
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include/)
 
-target_link_libraries(${PROJECT_NAME} PUBLIC core-interfaces)
+target_link_libraries(${PROJECT_NAME} PUBLIC engine-components)
+target_link_libraries(${PROJECT_NAME} PUBLIC engine-core-interfaces)
 target_link_libraries(${PROJECT_NAME} PUBLIC glad)
 target_link_libraries(${PROJECT_NAME} PRIVATE graphic)
 target_link_libraries(${PROJECT_NAME} PUBLIC gui)
-target_link_libraries(${PROJECT_NAME} PUBLIC engine-components)
 
 add_subdirectory(tests)

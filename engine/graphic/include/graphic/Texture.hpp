@@ -3,7 +3,7 @@
 
 #include <graphic/Config.hpp>
 
-#include <core-interfaces/ITexture.hpp>
+#include <engine/core-interfaces/ITexture.hpp>
 
 #include <filesystem>
 

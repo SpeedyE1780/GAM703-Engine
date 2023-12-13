@@ -1,9 +1,9 @@
 #ifndef GAM703_ENGINE_CORE_INPUT_HPP
 #define GAM703_ENGINE_CORE_INPUT_HPP
 
-#include <core-interfaces/IInput.hpp>
-
 #include <engine/core/Config.hpp>
+
+#include <engine/core-interfaces/IInput.hpp>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

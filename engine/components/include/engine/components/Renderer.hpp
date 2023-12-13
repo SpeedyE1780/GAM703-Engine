@@ -1,11 +1,11 @@
 #ifndef GAM703_ENGINE_COMPONENTS_RENDERER_HPP
 #define GAM703_ENGINE_COMPONENTS_RENDERER_HPP
 
-#include <core-interfaces/IRenderer.hpp>
-#include <core-interfaces/IModel.hpp>
-#include <core-interfaces/IComponent.hpp>
-
 #include <engine/components/Config.hpp>
+
+#include <engine/core-interfaces/IComponent.hpp>
+#include <engine/core-interfaces/IModel.hpp>
+#include <engine/core-interfaces/IRenderer.hpp>
 
 #include <glm/mat4x4.hpp>
 

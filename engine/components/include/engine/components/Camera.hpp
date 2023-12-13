@@ -1,8 +1,9 @@
 #ifndef GAM703_ENGINE_COMPONENTS_CAMERA_HPP
 #define GAM703_ENGINE_COMPONENTS_CAMERA_HPP
 
-#include <core-interfaces/ICamera.hpp>
 #include <engine/components/Config.hpp>
+
+#include <engine/core-interfaces/ICamera.hpp>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

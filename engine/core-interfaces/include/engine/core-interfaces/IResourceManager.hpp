@@ -1,8 +1,8 @@
 #ifndef GAM703_ENGINE_CORE_INTERFACES_IRESOURCE_MANAGER_HPP
 #define GAM703_ENGINE_CORE_INTERFACES_IRESOURCE_MANAGER_HPP
 
-#include <core-interfaces/IModel.hpp>
-#include <core-interfaces/ITexture.hpp>
+#include <engine/core-interfaces/IModel.hpp>
+#include <engine/core-interfaces/ITexture.hpp>
 
 #include <filesystem>
 

@@ -1,8 +1,10 @@
 #ifndef GAM703_ENGINE_GRAPHIC_SHADER_HPP
 #define GAM703_ENGINE_GRAPHIC_SHADER_HPP
 
-#include <core-interfaces/IShader.hpp>
+#include <engine/core-interfaces/IShader.hpp>
+
 #include <graphic/Config.hpp>
+
 #include <glm/glm.hpp>
 
 #include <string>

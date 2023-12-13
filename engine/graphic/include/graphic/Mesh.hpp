@@ -1,8 +1,11 @@
 #ifndef GAM703_ENGINE_GRAPHIC_MESH_HPP
 #define GAM703_ENGINE_GRAPHIC_MESH_HPP
 
-#include <core-interfaces/IShader.hpp>
+#include <engine/core-interfaces/IShader.hpp>
+#include <engine/core-interfaces/ITexture.hpp>
+
 #include <glm/glm.hpp>
+
 #include <graphic/Shader.fwd.hpp>
 #include <graphic/Texture.hpp>
 

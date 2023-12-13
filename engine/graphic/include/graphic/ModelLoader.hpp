@@ -1,7 +1,8 @@
 #ifndef GAM703_ENGINE_GRAPHIC_MODEL_LOADER_HPP
 #define GAM703_ENGINE_GRAPHIC_MODEL_LOADER_HPP
 
-#include <core-interfaces/IResourceManager.hpp>
+#include <engine/core-interfaces/IResourceManager.hpp>
+
 #include <graphic/Config.hpp>
 #include <graphic/Model.hpp>
 

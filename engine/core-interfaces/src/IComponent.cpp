@@ -1,6 +1,6 @@
-#include <core-interfaces/IComponent.hpp>
-#include <core-interfaces/IEngine.hpp>
-#include <core-interfaces/ITransform.hpp>
+#include <engine/core-interfaces/IComponent.hpp>
+#include <engine/core-interfaces/IEngine.hpp>
+#include <engine/core-interfaces/ITransform.hpp>
 
 namespace gam703::engine::core_interface
 {

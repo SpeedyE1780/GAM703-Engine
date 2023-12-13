@@ -1,9 +1,8 @@
 #ifndef GAM703_ENGINE_GRAPHIC_MODEL_HPP
 #define GAM703_ENGINE_GRAPHIC_MODEL_HPP
 
-#include <core-interfaces/IResourceManager.hpp>
-#include <core-interfaces/IModel.hpp>
-#include <core-interfaces/IShader.hpp>
+#include <engine/core-interfaces/IModel.hpp>
+#include <engine/core-interfaces/IShader.hpp>
 
 #include <graphic/Config.hpp>
 #include <graphic/Mesh.hpp>

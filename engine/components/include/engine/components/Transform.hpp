@@ -1,12 +1,12 @@
 #ifndef GAM703_ENGINE_COMPONENTS_TRANSFORM_HPP
 #define GAM703_ENGINE_COMPONENTS_TRANSFORM_HPP
 
-#include <core-interfaces/IEngine.hpp>
-#include <core-interfaces/IScene.hpp>
-#include <core-interfaces/ITransform.hpp>
-#include <core-interfaces/IComponent.hpp>
-
 #include <engine/components/Config.hpp>
+
+#include <engine/core-interfaces/IComponent.hpp>
+#include <engine/core-interfaces/IEngine.hpp>
+#include <engine/core-interfaces/IScene.hpp>
+#include <engine/core-interfaces/ITransform.hpp>
 
 #include <glm/glm.hpp>
 

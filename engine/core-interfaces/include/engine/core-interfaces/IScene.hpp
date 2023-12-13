@@ -1,9 +1,9 @@
 #ifndef GAM703_ENGINE_CORE_INTERFACES_ISCENE_HPP
 #define GAM703_ENGINE_CORE_INTERFACES_ISCENE_HPP
 
-#include <core-interfaces/ITransform.fwd.hpp>
-#include <core-interfaces/ISceneRenderer.hpp>
-#include <core-interfaces/ICamera.hpp>
+#include <engine/core-interfaces/ITransform.fwd.hpp>
+#include <engine/core-interfaces/ISceneRenderer.hpp>
+#include <engine/core-interfaces/ICamera.hpp>
 
 #include <glm/glm.hpp>
 

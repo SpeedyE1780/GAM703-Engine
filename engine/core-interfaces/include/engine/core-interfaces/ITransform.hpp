@@ -1,18 +1,19 @@
 #ifndef GAM703_ENGINE_CORE_INTERFACES_ITRANSFORM_HPP
 #define GAM703_ENGINE_CORE_INTERFACES_ITRANSFORM_HPP
 
-#include <core-interfaces/Config.hpp>
-#include <core-interfaces/IScene.hpp>
-#include <core-interfaces/IComponent.hpp>
+#include <engine/core-interfaces/Config.hpp>
+#include <engine/core-interfaces/IComponent.hpp>
+#include <engine/core-interfaces/IEngine.fwd.hpp>
+#include <engine/core-interfaces/IScene.hpp>
 
 #include <glm/glm.hpp>
 
-#include <vector>
 #include <memory>
+#include <vector>
 
 namespace gam703::engine::core_interface
 {
-	class CORE_INTERFACES_API ITransform
+	class ENGINE_CORE_INTERFACES_API ITransform
 	{
 	public:
 		ITransform(IEngine* engine, IScene* scene);

@@ -1,12 +1,12 @@
 #ifndef GAM703_ENGINE_CORE_SCENE_HPP
 #define GAM703_ENGINE_CORE_SCENE_HPP
 
-#include <core-interfaces/IScene.hpp>
-#include <core-interfaces/ITransform.hpp>
-
 #include <engine/core/Config.hpp>
 #include <engine/core/Engine.fwd.hpp>
 #include <engine/core/SceneRenderer.hpp>
+
+#include <engine/core-interfaces/IScene.hpp>
+#include <engine/core-interfaces/ITransform.hpp>
 
 #include <vector>
 

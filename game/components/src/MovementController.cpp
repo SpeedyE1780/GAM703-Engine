@@ -1,8 +1,9 @@
-#include <GLFW/glfw3.h>
+#include <engine/core-interfaces/IEngine.hpp>
+#include <engine/core-interfaces/ITransform.hpp>
 
 #include <components/MovementController.hpp>
-#include <core-interfaces/IEngine.hpp>
-#include <core-interfaces/ITransform.hpp>
+
+#include <GLFW/glfw3.h>
 
 namespace gam703::game::components
 {

@@ -1,14 +1,14 @@
 #ifndef GAM703_ENGINE_CORE_INTERFACES_IRENDERER_HPP
 #define GAM703_ENGINE_CORE_INTERFACES_IRENDERER_HPP
 
-#include <core-interfaces/Config.hpp>
-#include <core-interfaces/IComponent.hpp>
+#include <engine/core-interfaces/Config.hpp>
+#include <engine/core-interfaces/IComponent.hpp>
 
 #include <glm/mat4x4.hpp>
 
 namespace gam703::engine::core_interface
 {
-	class CORE_INTERFACES_API IRenderer : public IComponent
+	class ENGINE_CORE_INTERFACES_API IRenderer : public IComponent
 	{
 	public:
 		IRenderer(ITransform* transform);

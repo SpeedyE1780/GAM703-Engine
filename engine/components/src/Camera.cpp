@@ -1,7 +1,7 @@
-#include <core-interfaces/IEngine.hpp>
-#include <core-interfaces/ITransform.hpp>
-
 #include <engine/components/Camera.hpp>
+
+#include <engine/core-interfaces/IEngine.hpp>
+#include <engine/core-interfaces/ITransform.hpp>
 
 #include <glm/glm.hpp>
 

@@ -1,7 +1,7 @@
 #ifndef GAM703_ENGINE_CORE_INTERFACES_ISCENE_RENDERER_HPP
 #define GAM703_ENGINE_CORE_INTERFACES_ISCENE_RENDERER_HPP
 
-#include <core-interfaces/IRenderer.hpp>
+#include <engine/core-interfaces/IRenderer.hpp>
 
 namespace gam703::engine::core_interface
 {

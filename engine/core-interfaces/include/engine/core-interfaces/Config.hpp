@@ -1,10 +1,10 @@
 #ifndef GAM703_ENGINE_CORE_INTERFACES_CONFIG_HPP
 #define GAM703_ENGINE_CORE_INTERFACES_CONFIG_HPP
 
-#ifdef CORE_INTERFACES_EXPORT
-#define CORE_INTERFACES_API __declspec(dllexport)
+#ifdef ENGINE_CORE_INTERFACES_EXPORT
+#define ENGINE_CORE_INTERFACES_API __declspec(dllexport)
 #else
-#define CORE_INTERFACES_API __declspec(dllimport)
+#define ENGINE_CORE_INTERFACES_API __declspec(dllimport)
 #endif
 
 #endif // GAM703_ENGINE_CORE_INTERFACES_CONFIG_HPP

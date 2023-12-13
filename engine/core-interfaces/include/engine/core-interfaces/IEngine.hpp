@@ -1,15 +1,15 @@
 #ifndef GAM703_ENGINE_CORE_INTERFACES_IENGINE_HPP
 #define GAM703_ENGINE_CORE_INTERFACES_IENGINE_HPP
 
-#include <core-interfaces/Config.hpp>
-#include <core-interfaces/IInput.hpp>
-#include <core-interfaces/IResourceManager.hpp>
-#include <core-interfaces/IScene.hpp>
-#include <core-interfaces/ITime.hpp>
+#include <engine/core-interfaces/Config.hpp>
+#include <engine/core-interfaces/IInput.hpp>
+#include <engine/core-interfaces/IResourceManager.hpp>
+#include <engine/core-interfaces/IScene.hpp>
+#include <engine/core-interfaces/ITime.hpp>
 
 namespace gam703::engine::core_interface
 {
-	class CORE_INTERFACES_API IEngine
+	class ENGINE_CORE_INTERFACES_API IEngine
 	{
 	public:
 		virtual ~IEngine() = default;

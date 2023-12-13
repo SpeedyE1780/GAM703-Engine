@@ -1,7 +1,7 @@
-#include <core-interfaces/ITransform.hpp>
-#include <core-interfaces/IEngine.hpp>
-
 #include <engine/components/Renderer.hpp>
+
+#include <engine/core-interfaces/IEngine.hpp>
+#include <engine/core-interfaces/ITransform.hpp>
 
 namespace gam703::engine::components
 {

@@ -1,14 +1,14 @@
 #ifndef GAM703_ENGINE_CORE_INTERFACES_ICOMPONENT_HPP
 #define GAM703_ENGINE_CORE_INTERFACES_ICOMPONENT_HPP
 
-#include <core-interfaces/Config.hpp>
-#include <core-interfaces/IEngine.fwd.hpp>
-#include <core-interfaces/IScene.fwd.hpp>
-#include <core-interfaces/ITransform.fwd.hpp>
+#include <engine/core-interfaces/Config.hpp>
+#include <engine/core-interfaces/IEngine.fwd.hpp>
+#include <engine/core-interfaces/IScene.fwd.hpp>
+#include <engine/core-interfaces/ITransform.fwd.hpp>
 
 namespace gam703::engine::core_interface
 {
-	class CORE_INTERFACES_API IComponent
+	class ENGINE_CORE_INTERFACES_API IComponent
 	{
 	public:
 		IComponent(ITransform* transform);

@@ -1,4 +1,4 @@
-#include <core-interfaces/ICamera.hpp>
+#include <engine/core-interfaces/ICamera.hpp>
 
 namespace gam703::engine::core_interface
 {

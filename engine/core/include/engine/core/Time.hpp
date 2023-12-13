@@ -1,7 +1,7 @@
 #ifndef GAM703_ENGINE_CORE_TIME_HPP
 #define GAM703_ENGINE_CORE_TIME_HPP
 
-#include <core-interfaces/ITime.hpp>
+#include <engine/core-interfaces/ITime.hpp>
 
 #include <engine/core/Config.hpp>
 
