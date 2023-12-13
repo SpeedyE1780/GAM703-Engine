@@ -3,7 +3,7 @@
 
 #include <engine/core-interfaces/IShader.hpp>
 
-#include <graphic/Config.hpp>
+#include <engine/graphic/Config.hpp>
 
 #include <glm/glm.hpp>
 
@@ -11,7 +11,7 @@
 
 namespace gam703::engine::graphic
 {
-	class GRAPHIC_API Shader : public core_interface::IShader
+	class ENGINE_GRAPHIC_API Shader : public core_interface::IShader
 	{
 	public:
 		Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
@@ -44,7 +44,7 @@ namespace gam703::engine::graphic
 		std::string m_fragmentShaderPath;
 	};
 
-	GRAPHIC_API Shader createDefaultShader();
+	ENGINE_GRAPHIC_API Shader createDefaultShader();
 }
 
 #endif //GAM703_ENGINE_GRAPHIC_SHADER_HPP

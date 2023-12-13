@@ -1,15 +1,15 @@
 #ifndef GAM703_ENGINE_GRAPHIC_TEXTURE_HPP
 #define GAM703_ENGINE_GRAPHIC_TEXTURE_HPP
 
-#include <graphic/Config.hpp>
-
 #include <engine/core-interfaces/ITexture.hpp>
+
+#include <engine/graphic/Config.hpp>
 
 #include <filesystem>
 
 namespace gam703::engine::graphic
 {
-	class GRAPHIC_API Texture : public core_interface::ITexture
+	class ENGINE_GRAPHIC_API Texture : public core_interface::ITexture
 	{
 	public:
 		Texture(unsigned int id, TextureType type);
@@ -22,7 +22,7 @@ namespace gam703::engine::graphic
 		TextureType m_type = TextureType::Undefined;
 	};
 
-	GRAPHIC_API unsigned int loadTextureFromFile(const std::filesystem::path& path);
+	ENGINE_GRAPHIC_API unsigned int loadTextureFromFile(const std::filesystem::path& path);
 }
 
 #endif //GAM703_ENGINE_GRAPHIC_TEXTURE_HPP

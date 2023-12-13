@@ -1,5 +1,7 @@
+#include <engine/graphic/Texture.hpp>
+
 #include <glad/glad.h>
-#include <graphic/Texture.hpp>
+
 #include <stb/stb_image.h>
 
 #include <iostream>

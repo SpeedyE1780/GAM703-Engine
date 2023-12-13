@@ -2,15 +2,16 @@
 #define GAM703_ENGINE_GRAPHIC_MODEL_LOADER_HPP
 
 #include <engine/core-interfaces/IResourceManager.hpp>
+#include <engine/core-interfaces/ITexture.hpp>
 
-#include <graphic/Config.hpp>
-#include <graphic/Model.hpp>
+#include <engine/graphic/Config.hpp>
+#include <engine/graphic/Model.hpp>
 
 #include <filesystem>
 
 namespace gam703::engine::graphic
 {
-	class GRAPHIC_API ModelLoader
+	class ENGINE_GRAPHIC_API ModelLoader
 	{
 	public:
 		ModelLoader(core_interface::IResourceManager* resourceManager);

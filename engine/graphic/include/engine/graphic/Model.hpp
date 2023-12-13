@@ -4,9 +4,8 @@
 #include <engine/core-interfaces/IModel.hpp>
 #include <engine/core-interfaces/IShader.hpp>
 
-#include <graphic/Config.hpp>
-#include <graphic/Mesh.hpp>
-#include <graphic/Shader.fwd.hpp>
+#include <engine/graphic/Config.hpp>
+#include <engine/graphic/Mesh.hpp>
 
 #include <string>
 #include <vector>
@@ -20,7 +19,7 @@ enum aiTextureType;
 
 namespace gam703::engine::graphic
 {
-	class GRAPHIC_API Model : public core_interface::IModel
+	class ENGINE_GRAPHIC_API Model : public core_interface::IModel
 	{
 	public:
 		Model(const std::vector<Mesh>& meshes);

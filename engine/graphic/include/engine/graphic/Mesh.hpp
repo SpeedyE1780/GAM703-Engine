@@ -6,9 +6,6 @@
 
 #include <glm/glm.hpp>
 
-#include <graphic/Shader.fwd.hpp>
-#include <graphic/Texture.hpp>
-
 #include <string>
 #include <vector>
 

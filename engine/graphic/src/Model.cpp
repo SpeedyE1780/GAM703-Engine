@@ -1,4 +1,4 @@
-#include <graphic/Model.hpp>
+#include <engine/graphic/Model.hpp>
 
 namespace gam703::engine::graphic
 {

@@ -7,9 +7,9 @@
 #include <engine/core-interfaces/IModel.hpp>
 #include <engine/core-interfaces/IRenderer.hpp>
 
-#include <glm/mat4x4.hpp>
+#include <engine/graphic/Shader.hpp>
 
-#include <graphic/Shader.hpp>
+#include <glm/mat4x4.hpp>
 
 namespace gam703::engine::components
 {

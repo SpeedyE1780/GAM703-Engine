@@ -3,7 +3,7 @@
 
 #include <engine/core-interfaces/IResourceManager.hpp>
 
-#include <graphic/ModelLoader.hpp>
+#include <engine/graphic/ModelLoader.hpp>
 
 #include <map>
 #include <memory>

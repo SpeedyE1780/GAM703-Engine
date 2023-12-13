@@ -1,8 +1,10 @@
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
+
+#include <engine/graphic/ModelLoader.hpp>
+
 #include <glm/glm.hpp>
-#include <graphic/ModelLoader.hpp>
 
 #include <iostream>
 
@@ -20,29 +22,29 @@ namespace gam703::engine::graphic
 			return glm::vec3(aiVector.x, aiVector.y, aiVector.z);
 		}
 
-		Texture::TextureType convertAITextureType(aiTextureType type)
+		core_interface::ITexture::TextureType convertAITextureType(aiTextureType type)
 		{
 			switch (type)
 			{
 			case aiTextureType_DIFFUSE:
 			{
-				return Texture::TextureType::Diffuse;
+				return core_interface::ITexture::TextureType::Diffuse;
 			}
 			case aiTextureType_SPECULAR:
 			{
-				return Texture::TextureType::Specular;
+				return core_interface::ITexture::TextureType::Specular;
 			}
 			case aiTextureType_HEIGHT:
 			{
-				return Texture::TextureType::Height;
+				return core_interface::ITexture::TextureType::Height;
 			}
 			case aiTextureType_AMBIENT:
 			{
-				return Texture::TextureType::Normal;
+				return core_interface::ITexture::TextureType::Normal;
 			}
 			default:
 			{
-				return Texture::TextureType::Undefined;
+				return core_interface::ITexture::TextureType::Undefined;
 			}
 			}
 		}

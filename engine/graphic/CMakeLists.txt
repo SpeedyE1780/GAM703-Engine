@@ -1,8 +1,8 @@
-project(graphic)
+project(engine-graphic)
 
 add_library(${PROJECT_NAME})
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE GRAPHIC_EXPORT)
+target_compile_definitions(${PROJECT_NAME} PRIVATE ENGINE_GRAPHIC_EXPORT)
 
 target_sources(${PROJECT_NAME} PRIVATE
 #CPP
@@ -13,13 +13,13 @@ src/ModelLoader.cpp
 src/Texture.cpp
 
 #HPP
-include/graphic/Config.hpp
-include/graphic/Shader.hpp
-include/graphic/Shader.fwd.hpp
-include/graphic/Mesh.hpp
-include/graphic/Model.hpp
-include/graphic/ModelLoader.hpp
-include/graphic/Texture.hpp
+include/engine/graphic/Config.hpp
+include/engine/graphic/Shader.hpp
+include/engine/graphic/Shader.fwd.hpp
+include/engine/graphic/Mesh.hpp
+include/engine/graphic/Model.hpp
+include/engine/graphic/ModelLoader.hpp
+include/engine/graphic/Texture.hpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)

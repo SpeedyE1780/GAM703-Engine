@@ -1,8 +1,7 @@
-#include <graphic/Mesh.hpp>
+#include <engine/graphic/Mesh.hpp>
+#include <engine/graphic/Shader.hpp>
 
 #include <glad/glad.h>
-#include <glm/gtc/matrix_transform.hpp>
-#include <graphic/Shader.hpp>
 
 namespace gam703::engine::graphic
 {
@@ -24,31 +23,31 @@ namespace gam703::engine::graphic
 
 			switch (m_textures[i]->getType())
 			{
-			case Texture::TextureType::Diffuse:
+			case core_interface::ITexture::TextureType::Diffuse:
 			{
 				shader.setDiffuseSampler(diffuseIndex, i);
 				diffuseIndex++;
 				break;
 			}
-			case Texture::TextureType::Specular:
+			case core_interface::ITexture::TextureType::Specular:
 			{
 				shader.setSpecularSampler(specularIndex, i);
 				specularIndex++;
 				break;
 			}
-			case Texture::TextureType::Normal:
+			case core_interface::ITexture::TextureType::Normal:
 			{
 				shader.setNormalSampler(normalIndex, i);
 				normalIndex++;
 				break;
 			}
-			case Texture::TextureType::Height:
+			case core_interface::ITexture::TextureType::Height:
 			{
 				shader.setHeightSampler(heightIndex, i);
 				heightIndex++;
 				break;
 			}
-			case Texture::TextureType::Undefined:
+			case core_interface::ITexture::TextureType::Undefined:
 			{
 				break;
 			}

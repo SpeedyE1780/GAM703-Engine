@@ -1,10 +1,10 @@
 #ifndef GAM703_ENGINE_GRAPHIC_CONFIG_HPP
 #define GAM703_ENGINE_GRAPHIC_CONFIG_HPP
 
-#ifdef GRAPHIC_EXPORT
-#define GRAPHIC_API __declspec(dllexport)
+#ifdef ENGINE_GRAPHIC_EXPORT
+#define ENGINE_GRAPHIC_API __declspec(dllexport)
 #else
-#define GRAPHIC_API __declspec(dllimport)
+#define ENGINE_GRAPHIC_API __declspec(dllimport)
 #endif
 
 

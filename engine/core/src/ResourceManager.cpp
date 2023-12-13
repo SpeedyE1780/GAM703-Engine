@@ -1,6 +1,6 @@
 #include <engine/core/ResourceManager.hpp>
 
-#include <graphic/Texture.hpp>
+#include <engine/graphic/Texture.hpp>
 
 #include <iostream>
 

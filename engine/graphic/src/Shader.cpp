@@ -1,6 +1,9 @@
-#include <graphic/Shader.hpp>
+#include <engine/graphic/Shader.hpp>
+
 #include <glad/glad.h>
+
 #include <glm/gtc/type_ptr.hpp>
+
 #include <utility/File.hpp>
 
 #include <iostream>
