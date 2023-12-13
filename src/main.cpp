@@ -1,9 +1,10 @@
-#include <core/Engine.hpp>
-
 #include <components/MovementController.hpp>
+
+#include <engine/core/Engine.hpp>
 
 #include <engine/components/Transform.hpp>
 #include <engine/components/Camera.hpp>
+#include <engine/components/Renderer.hpp>
 
 #include <iostream>
 

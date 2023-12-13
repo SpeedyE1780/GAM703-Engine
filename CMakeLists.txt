@@ -34,7 +34,7 @@ add_subdirectory(engine/utility)
 
 add_subdirectory(game/components)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE core)
+target_link_libraries(${PROJECT_NAME} PRIVATE engine-core)
 target_link_libraries(${PROJECT_NAME} PRIVATE game-components)
 
 add_custom_target(copy-files ALL

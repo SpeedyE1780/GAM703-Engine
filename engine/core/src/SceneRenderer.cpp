@@ -1,7 +1,8 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
+#include <engine/core/SceneRenderer.hpp>
+
 #include <glm/gtc/matrix_transform.hpp>
-#include <core/SceneRenderer.hpp>
 
 namespace gam703::engine::core
 {

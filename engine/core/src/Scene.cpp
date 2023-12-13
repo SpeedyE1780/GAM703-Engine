@@ -1,5 +1,7 @@
-#include <core/Engine.hpp>
-#include <core/Scene.hpp>
+#include <engine/core/Engine.hpp>
+#include <engine/core/Scene.hpp>
+
+#include <engine/components/Transform.hpp>
 
 namespace gam703::engine::core
 {

@@ -1,5 +1,6 @@
+#include <engine/core/Time.hpp>
+
 #include <gtest/gtest.h>
-#include <core/Time.hpp>
 
 TEST(TimeTests, SetTime)
 {
@@ -80,11 +81,4 @@ TEST(TimeTests, UpdateTimeScaleThenRevert)
 	EXPECT_EQ(newTime, time.getTime());
 	EXPECT_EQ(timeStep, time.getDeltaTime());
 	EXPECT_EQ(timeStep, time.getUnscaledDeltaTime());
-}
-
-int main(int argc, char** argv)
-{
-	printf("Running main() from %s\n", __FILE__);
-	testing::InitGoogleTest(&argc, argv);
-	return RUN_ALL_TESTS();
 }

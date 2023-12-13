@@ -1,14 +1,16 @@
 #ifndef GAM703_ENGINE_CORE_INPUT_HPP
 #define GAM703_ENGINE_CORE_INPUT_HPP
 
-#include <core/Config.hpp>
 #include <core-interfaces/IInput.hpp>
+
+#include <engine/core/Config.hpp>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 namespace gam703::engine::core
 {
-	class CORE_API Input : public core_interface::IInput
+	class ENGINE_CORE_API Input : public core_interface::IInput
 	{
 	public:
 		Input(GLFWwindow* window);

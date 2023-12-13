@@ -2,6 +2,7 @@
 #define GAM703_ENGINE_CORE_RESOURCE_MANAGER_HPP
 
 #include <core-interfaces/IResourceManager.hpp>
+
 #include <graphic/ModelLoader.hpp>
 #include <graphic/Texture.hpp>
 

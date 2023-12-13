@@ -1,20 +1,19 @@
 #ifndef GAM703_ENGINE_CORE_SCENE_HPP
 #define GAM703_ENGINE_CORE_SCENE_HPP
 
-#include <core/Config.hpp>
-#include <core/Engine.fwd.hpp>
-#include <core/SceneRenderer.hpp>
-
 #include <core-interfaces/IScene.hpp>
+#include <core-interfaces/ITransform.hpp>
 
-#include <engine/components/Transform.hpp>
+#include <engine/core/Config.hpp>
+#include <engine/core/Engine.fwd.hpp>
+#include <engine/core/SceneRenderer.hpp>
 
 #include <vector>
 
 namespace gam703::engine::core
 {
 
-	class CORE_API Scene : public core_interface::IScene
+	class ENGINE_CORE_API Scene : public core_interface::IScene
 	{
 	public:
 		Scene(Engine* engine);

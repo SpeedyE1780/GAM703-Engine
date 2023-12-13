@@ -1,12 +1,13 @@
 #ifndef GAM703_ENGINE_CORE_TIME_HPP
 #define GAM703_ENGINE_CORE_TIME_HPP
 
-#include <core/Config.hpp>
 #include <core-interfaces/ITime.hpp>
+
+#include <engine/core/Config.hpp>
 
 namespace gam703::engine::core
 {
-	class CORE_API Time : public core_interface::ITime
+	class ENGINE_CORE_API Time : public core_interface::ITime
 	{
 	public:
 		Time(double time, double timeScale = 1);

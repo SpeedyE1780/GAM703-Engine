@@ -3,19 +3,19 @@
 
 #include <core-interfaces/IEngine.hpp>
 
-#include <core/Config.hpp>
-#include <core/Input.hpp>
-#include <core/ResourceManager.hpp>
-#include <core/Scene.hpp>
-#include <core/SceneRenderer.hpp>
-#include <core/Time.hpp>
+#include <engine/core/Config.hpp>
+#include <engine/core/Input.hpp>
+#include <engine/core/ResourceManager.hpp>
+#include <engine/core/Scene.hpp>
+#include <engine/core/Time.hpp>
+
 #include <gui/Window.hpp>
 
 #include <string>
 
 namespace gam703::engine::core
 {
-	class CORE_API Engine : public core_interface::IEngine
+	class ENGINE_CORE_API Engine : public core_interface::IEngine
 	{
 	public:
 		Engine(const std::string& title, int width, int height);
