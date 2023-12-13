@@ -4,9 +4,9 @@
 #include <core-interfaces/IEngine.hpp>
 #include <core-interfaces/IScene.hpp>
 #include <core-interfaces/ITransform.hpp>
-
-#include <components/Config.hpp>
 #include <core-interfaces/IComponent.hpp>
+
+#include <engine/components/Config.hpp>
 
 #include <glm/glm.hpp>
 
@@ -15,7 +15,7 @@
 
 namespace gam703::engine::components
 {
-	class COMPONENTS_API Transform : public core_interface::ITransform
+	class ENGINE_COMPONENTS_API Transform : public core_interface::ITransform
 	{
 	public:
 		Transform(core_interface::IEngine* engine, core_interface::IScene* scene, const glm::vec3& position = glm::vec3(0, 0, 0), const glm::vec3& rotation = glm::vec3(0, 0, 0), const glm::vec3& scale = glm::vec3(1, 1, 1));

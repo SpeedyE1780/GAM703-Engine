@@ -3,8 +3,11 @@
 
 #include <core-interfaces/ISceneRenderer.hpp>
 #include <core-interfaces/ICamera.hpp>
-#include <components/Renderer.hpp>
+
+#include <engine/components/Renderer.hpp>
+
 #include <glm/mat4x4.hpp>
+
 #include <gui/Window.hpp>
 
 #include <vector>

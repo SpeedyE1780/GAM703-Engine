@@ -1,6 +1,7 @@
-#include <components/Renderer.hpp>
 #include <core-interfaces/ITransform.hpp>
 #include <core-interfaces/IEngine.hpp>
+
+#include <engine/components/Renderer.hpp>
 
 namespace gam703::engine::components
 {

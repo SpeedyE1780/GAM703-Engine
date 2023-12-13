@@ -1,7 +1,9 @@
-#include <glm/glm.hpp>
-#include <components/Camera.hpp>
 #include <core-interfaces/IEngine.hpp>
 #include <core-interfaces/ITransform.hpp>
+
+#include <engine/components/Camera.hpp>
+
+#include <glm/glm.hpp>
 
 namespace gam703::engine::components
 {

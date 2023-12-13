@@ -1,7 +1,9 @@
-#include <gtest/gtest.h>
+#include <engine/components/Transform.hpp>
+
 #include <glm/glm.hpp>
-#include <components/Transform.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+
+#include <gtest/gtest.h>
 
 #include <cmath>
 

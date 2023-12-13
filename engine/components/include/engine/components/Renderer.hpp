@@ -1,17 +1,19 @@
 #ifndef GAM703_ENGINE_COMPONENTS_RENDERER_HPP
 #define GAM703_ENGINE_COMPONENTS_RENDERER_HPP
 
-#include <glm/mat4x4.hpp>
-#include <graphic/Model.hpp>
-#include <graphic/Shader.hpp>
 #include <core-interfaces/IRenderer.hpp>
 #include <core-interfaces/IModel.hpp>
-#include <components/Config.hpp>
 #include <core-interfaces/IComponent.hpp>
+
+#include <engine/components/Config.hpp>
+
+#include <glm/mat4x4.hpp>
+
+#include <graphic/Shader.hpp>
 
 namespace gam703::engine::components
 {
-	class COMPONENTS_API Renderer : public core_interface::IRenderer
+	class ENGINE_COMPONENTS_API Renderer : public core_interface::IRenderer
 	{
 	public:
 		Renderer(core_interface::ITransform* transform, const core_interface::IModel* model);

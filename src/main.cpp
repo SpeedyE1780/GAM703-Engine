@@ -1,8 +1,10 @@
 #include <core/Engine.hpp>
 
-#include <components/Transform.hpp>
-#include <components/Camera.hpp>
 #include <components/MovementController.hpp>
+
+#include <engine/components/Transform.hpp>
+#include <engine/components/Camera.hpp>
+
 #include <iostream>
 
 int main()

@@ -32,6 +32,6 @@ target_link_libraries(${PROJECT_NAME} PUBLIC core-interfaces)
 target_link_libraries(${PROJECT_NAME} PRIVATE glad)
 target_link_libraries(${PROJECT_NAME} PRIVATE graphic)
 target_link_libraries(${PROJECT_NAME} PUBLIC gui)
-target_link_libraries(${PROJECT_NAME} PUBLIC components)
+target_link_libraries(${PROJECT_NAME} PUBLIC engine-components)
 
 add_subdirectory(tests)
