@@ -8,7 +8,7 @@ namespace gam703::engine::components::tests
 	class MockComponent1 : public core_interface::IComponent
 	{
 	public:
-		MockComponent1(Transform* transform) : core_interface::IComponent(transform)
+		MockComponent1(core_interface::ITransform* transform) : core_interface::IComponent(transform)
 		{
 		}
 
@@ -25,7 +25,7 @@ namespace gam703::engine::components::tests
 	class MockComponent2 : public core_interface::IComponent
 	{
 	public:
-		MockComponent2(Transform* transform) : core_interface::IComponent(transform)
+		MockComponent2(core_interface::ITransform* transform) : core_interface::IComponent(transform)
 		{
 		}
 
@@ -42,11 +42,11 @@ namespace gam703::engine::components::tests
 	class MockComponentWithArgs : public core_interface::IComponent
 	{
 	public:
-		MockComponentWithArgs(Transform* transform) : core_interface::IComponent(transform)
+		MockComponentWithArgs(core_interface::ITransform* transform) : core_interface::IComponent(transform)
 		{
 		}
 
-		MockComponentWithArgs(Transform* transform, const std::string& name, int id, float speed, double precision) : core_interface::IComponent(transform), m_name(name), m_id(id), m_speed(speed), m_precision(precision)
+		MockComponentWithArgs(core_interface::ITransform* transform, const std::string& name, int id, float speed, double precision) : core_interface::IComponent(transform), m_name(name), m_id(id), m_speed(speed), m_precision(precision)
 		{
 
 		}

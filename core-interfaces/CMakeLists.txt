@@ -8,6 +8,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 #CPP
 src/IComponent.cpp
 src/IRenderer.cpp
+src/ITransform.cpp
 
 #HPP
 include/core-interfaces/Config.hpp

@@ -47,43 +47,6 @@ namespace gam703::engine::components
 		virtual void rotate(const glm::vec3& eulerAngles) override;
 		virtual void rotate(float x, float y, float z) override;
 
-		template<typename Component, typename... Args>
-		Component* addComponent(Args&&... args)
-		{
-			auto* component = new Component(this, std::forward<Args>(args)...);
-			m_components.emplace_back(std::unique_ptr<Component>(component));
-			return component;
-		}
-
-		template<typename Component>
-		Component* getComponent()
-		{
-			Component* returnValue = nullptr;
-			auto _ = std::find_if(begin(m_components), end(m_components), [&returnValue](std::unique_ptr<core_interface::IComponent>& component) { return returnValue = dynamic_cast<Component*>(component.get()); });
-			return returnValue;
-		}
-
-		template<typename Component>
-		void removeComponent()
-		{
-			auto newEnd = std::remove_if(begin(m_components), end(m_components), [](std::unique_ptr<core_interface::IComponent>& component)
-				{
-					return dynamic_cast<Component*>(component.get());
-				});
-
-			m_components.erase(newEnd, end(m_components));
-		}
-
-		std::size_t getComponentsSize() const { return m_components.size(); }
-
-		virtual void updateComponents(float deltaTime) override;
-
-		virtual core_interface::IEngine* getEngine() override { return m_engine; }
-		virtual const core_interface::IEngine* getEngine() const override { return m_engine; }
-
-		virtual core_interface::IScene* getScene() override { return m_scene; }
-		virtual const core_interface::IScene* getScene() const override { return m_scene; }
-
 	private:
 		void updateDirectionVectors();
 
@@ -96,9 +59,6 @@ namespace gam703::engine::components
 		glm::vec3 m_right = glm::vec3(0, 0, 0);
 		bool m_shouldCalculateTransform;
 		bool m_shouldUpdateDirectionVectors;
-		std::vector<std::unique_ptr<core_interface::IComponent>> m_components = {};
-		core_interface::IEngine* m_engine = nullptr;
-		core_interface::IScene* m_scene = nullptr;
 	};
 }
 
