@@ -2,7 +2,7 @@
 #define GAM703_ENGINE_CORE_SCENE_HPP
 
 #include <core/Config.hpp>
-
+#include <core/Engine.fwd.hpp>
 #include <core/SceneRenderer.hpp>
 
 #include <core-interfaces/IScene.hpp>
@@ -13,7 +13,6 @@
 
 namespace gam703::engine::core
 {
-	class Engine;
 
 	class CORE_API Scene : public core_interface::IScene
 	{

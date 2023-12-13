@@ -18,6 +18,7 @@ src/Time.cpp
 #HPP
 include/core/Config.hpp
 include/core/Engine.hpp
+include/core/Engine.fwd.hpp
 include/core/Input.hpp
 include/core/ResourceManager.hpp
 include/core/Scene.hpp
