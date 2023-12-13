@@ -2,7 +2,7 @@
 
 #include <components/Transform.hpp>
 #include <components/Camera.hpp>
-
+#include <components/MovementController.hpp>
 #include <iostream>
 
 int main()
@@ -32,6 +32,7 @@ int main()
 
 	auto* cameraTransform = scene->addTransform(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0, glm::radians(-90.0f), 0));
 	auto* camera = cameraTransform->addComponent<gam703::engine::components::Camera>();
+	cameraTransform->addComponent<gam703::game::components::MovementController>();
 
 	scene->setActiveCamera(camera);
 

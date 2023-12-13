@@ -31,6 +31,6 @@ namespace gam703::engine::core_interface
 
 	void ITransform::updateComponents(float deltaTime)
 	{
-		std::for_each(begin(m_components), end(m_components), [deltaTime](std::unique_ptr<core_interface::IComponent>& component) {component->tick(deltaTime); });
+		std::for_each(begin(m_components), end(m_components), [deltaTime](std::unique_ptr<core_interface::IComponent>& component) { component->tick(deltaTime); });
 	}
 }

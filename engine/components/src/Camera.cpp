@@ -1,5 +1,3 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <components/Camera.hpp>
 #include <core-interfaces/IEngine.hpp>
@@ -7,13 +5,13 @@
 
 namespace gam703::engine::components
 {
-	Camera::Camera(core_interface::ITransform* transform, float yaw, float pitch) : core_interface::ICamera(transform), m_yaw(yaw), m_pitch(pitch), m_movementSpeed(SPEED), m_mouseSensitivity(SENSITIVITY), m_fieldOfView(FieldOfView)
+	Camera::Camera(core_interface::ITransform* transform) : core_interface::ICamera(transform)
 	{
 	}
 
 	core_interface::IComponent* Camera::clone(core_interface::ITransform* transform) const
 	{
-		return new Camera(transform, m_yaw, m_pitch);
+		return new Camera(transform);
 	}
 
 	glm::mat4 Camera::GetViewMatrix() const
@@ -25,37 +23,6 @@ namespace gam703::engine::components
 	{
 		if (auto* inputHandler = getEngine()->getInput())
 		{
-			float velocity = m_movementSpeed * deltaTime;
-
-			if (inputHandler->isKeyPressed(GLFW_KEY_W))
-			{
-				m_transform->translate(m_transform->getFront() * velocity);
-			}
-
-			if (inputHandler->isKeyPressed(GLFW_KEY_S))
-			{
-				m_transform->translate(-m_transform->getFront() * velocity);
-			}
-
-			if (inputHandler->isKeyPressed(GLFW_KEY_A))
-			{
-				m_transform->translate(-m_transform->getRight() * velocity);
-			}
-
-			if (inputHandler->isKeyPressed(GLFW_KEY_D))
-			{
-				m_transform->translate(m_transform->getRight() * velocity);
-			}
-
-			float xoffset = inputHandler->getMouseOffsetX() * m_mouseSensitivity;
-			float yoffset = inputHandler->getMouseOffsetY() * m_mouseSensitivity;
-
-			m_yaw += xoffset;
-			m_pitch += yoffset;
-
-			m_pitch = glm::clamp(m_pitch + yoffset, -89.0f, 89.0f);
-
-			m_transform->setRotation(glm::vec3(glm::radians(m_pitch), glm::radians(m_yaw), 0.0f));
 			m_fieldOfView = glm::clamp(m_fieldOfView - static_cast<float>(inputHandler->getMouseScrollOffsetY()), 1.0f, 45.0f);
 		}
 	}
