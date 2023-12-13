@@ -1,0 +1,42 @@
+#include <engine/components/Renderer.hpp>
+
+#include <engine/core-interfaces/IEngine.hpp>
+#include <engine/core-interfaces/ITransform.hpp>
+
+namespace gam703::engine::components
+{
+	Renderer::Renderer(core_interface::ITransform* transform, const core_interface::IModel* model) : core_interface::IRenderer(transform), m_model(model), m_shader(graphic::createDefaultShader())
+	{
+		getScene()->getSceneRenderer()->addRenderer(this);
+	}
+
+	Renderer::Renderer(core_interface::ITransform* transform, const core_interface::IModel* model, const graphic::Shader& shader) : core_interface::IRenderer(transform), m_model(model), m_shader(shader)
+	{
+		getScene()->getSceneRenderer()->addRenderer(this);
+	}
+
+	Renderer::~Renderer()
+	{
+		getScene()->getSceneRenderer()->removeRenderer(this);
+	}
+
+	void Renderer::tick(float /*deltaTime*/)
+	{
+	}
+
+	core_interface::IComponent* Renderer::clone(core_interface::ITransform* transform) const
+	{
+		return new Renderer(transform, m_model, graphic::Shader(m_shader));
+	}
+
+	void Renderer::render(const glm::mat4& projectionMatrix, const glm::mat4& viewMatrix) const
+	{
+		m_shader.use();
+
+		m_shader.setMat4("projection", projectionMatrix);
+		m_shader.setMat4("view", viewMatrix);
+		m_shader.setMat4("model", m_transform->getTransformationMatrix());
+
+		m_model->draw(m_shader);
+	}
+}

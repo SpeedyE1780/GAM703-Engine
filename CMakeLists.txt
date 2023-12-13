@@ -25,14 +25,17 @@ add_subdirectory(3rd-party/glm)
 add_subdirectory(3rd-party/gtest)
 add_subdirectory(3rd-party/stb)
 
-add_subdirectory(core)
-add_subdirectory(core-interfaces)
-add_subdirectory(components)
-add_subdirectory(graphic)
-add_subdirectory(gui)
-add_subdirectory(utility)
+add_subdirectory(engine/components)
+add_subdirectory(engine/core)
+add_subdirectory(engine/core-interfaces)
+add_subdirectory(engine/graphic)
+add_subdirectory(engine/gui)
+add_subdirectory(engine/utility)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE core)
+add_subdirectory(game/components)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE engine-core)
+target_link_libraries(${PROJECT_NAME} PRIVATE game-components)
 
 add_custom_target(copy-files ALL
     COMMAND ${CMAKE_COMMAND} -E copy_directory
