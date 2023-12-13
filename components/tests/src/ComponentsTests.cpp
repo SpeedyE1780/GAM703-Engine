@@ -5,10 +5,10 @@
 
 namespace gam703::engine::components::tests
 {
-	class MockComponent1 : public IComponent
+	class MockComponent1 : public core_interface::IComponent
 	{
 	public:
-		MockComponent1(Transform* transform) : IComponent(transform)
+		MockComponent1(Transform* transform) : core_interface::IComponent(transform)
 		{
 		}
 
@@ -16,16 +16,16 @@ namespace gam703::engine::components::tests
 		{
 		}
 
-		virtual IComponent* clone(Transform*) const override
+		virtual core_interface::IComponent* clone(core_interface::ITransform*) const override
 		{
 			return nullptr;
 		}
 	};
 
-	class MockComponent2 : public IComponent
+	class MockComponent2 : public core_interface::IComponent
 	{
 	public:
-		MockComponent2(Transform* transform) : IComponent(transform)
+		MockComponent2(Transform* transform) : core_interface::IComponent(transform)
 		{
 		}
 
@@ -33,20 +33,20 @@ namespace gam703::engine::components::tests
 		{
 		}
 
-		virtual IComponent* clone(Transform*) const override
+		virtual core_interface::IComponent* clone(core_interface::ITransform*) const override
 		{
 			return nullptr;
 		}
 	};
 
-	class MockComponentWithArgs : public IComponent
+	class MockComponentWithArgs : public core_interface::IComponent
 	{
 	public:
-		MockComponentWithArgs(Transform* transform) : IComponent(transform)
+		MockComponentWithArgs(Transform* transform) : core_interface::IComponent(transform)
 		{
 		}
 
-		MockComponentWithArgs(Transform* transform, const std::string& name, int id, float speed, double precision) : IComponent(transform), m_name(name), m_id(id), m_speed(speed), m_precision(precision)
+		MockComponentWithArgs(Transform* transform, const std::string& name, int id, float speed, double precision) : core_interface::IComponent(transform), m_name(name), m_id(id), m_speed(speed), m_precision(precision)
 		{
 
 		}
@@ -55,7 +55,7 @@ namespace gam703::engine::components::tests
 		{
 		}
 
-		virtual IComponent* clone(Transform*) const override
+		virtual core_interface::IComponent* clone(core_interface::ITransform*) const override
 		{
 			return nullptr;
 		}

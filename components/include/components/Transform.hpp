@@ -59,14 +59,14 @@ namespace gam703::engine::components
 		Component* getComponent()
 		{
 			Component* returnValue = nullptr;
-			auto _ = std::find_if(begin(m_components), end(m_components), [&returnValue](std::unique_ptr<IComponent>& component) { return returnValue = dynamic_cast<Component*>(component.get()); });
+			auto _ = std::find_if(begin(m_components), end(m_components), [&returnValue](std::unique_ptr<core_interface::IComponent>& component) { return returnValue = dynamic_cast<Component*>(component.get()); });
 			return returnValue;
 		}
 
 		template<typename Component>
 		void removeComponent()
 		{
-			auto newEnd = std::remove_if(begin(m_components), end(m_components), [](std::unique_ptr<IComponent>& component)
+			auto newEnd = std::remove_if(begin(m_components), end(m_components), [](std::unique_ptr<core_interface::IComponent>& component)
 				{
 					return dynamic_cast<Component*>(component.get());
 				});
