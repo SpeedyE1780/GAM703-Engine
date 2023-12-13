@@ -3,6 +3,7 @@
 
 #include <core-interfaces/Config.hpp>
 #include <core-interfaces/IEngine.fwd.hpp>
+#include <core-interfaces/IScene.fwd.hpp>
 #include <core-interfaces/ITransform.fwd.hpp>
 
 namespace gam703::engine::core_interface
@@ -20,8 +21,11 @@ namespace gam703::engine::core_interface
 
 		virtual void tick(float deltaTime) = 0;
 
-		core_interface::IEngine* getEngine();
-		const core_interface::IEngine* getEngine() const;
+		IEngine* getEngine();
+		const IEngine* getEngine() const;
+
+		IScene* getScene();
+		const IScene* getScene() const;
 
 	protected:
 		ITransform* m_transform;

@@ -18,19 +18,19 @@ int main()
 
 	auto* scene = dynamic_cast<gam703::engine::core::Scene*>(engine.getScene());
 
-	auto* backpackTransform = dynamic_cast<gam703::engine::components::Transform*>(scene->addTransform(glm::vec3(0.0f, 0.0f, 0.0f)));
+	auto* backpackTransform = scene->addTransform(glm::vec3(0.0f, 0.0f, 0.0f));
 	backpackTransform->addComponent<gam703::engine::components::Renderer>(ourModel);
 
 	auto* backpackTransform2 = scene->addTransform(backpackTransform);
 	backpackTransform2->setPosition(glm::vec3(1.0f, 1.0f, 0.0f));
 
-	auto* backpackTransform3 = dynamic_cast<gam703::engine::components::Transform*>(scene->addTransform(glm::vec3(2.0f, 2.0f, 0.0f)));
+	auto* backpackTransform3 = scene->addTransform(glm::vec3(2.0f, 2.0f, 0.0f));
 	backpackTransform3->addComponent<gam703::engine::components::Renderer>(ourModel3);
 
 	auto* backpackTransform4 = scene->addTransform(backpackTransform3);
 	backpackTransform4->setPosition(glm::vec3(3.0f, 3.0f, 0.0f));
 
-	auto* cameraTransform = dynamic_cast<gam703::engine::components::Transform*>(scene->addTransform(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0, glm::radians(-90.0f), 0)));
+	auto* cameraTransform = scene->addTransform(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0, glm::radians(-90.0f), 0));
 	auto* camera = cameraTransform->addComponent<gam703::engine::components::Camera>();
 
 	scene->setActiveCamera(camera);

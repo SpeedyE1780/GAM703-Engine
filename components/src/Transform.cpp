@@ -4,7 +4,7 @@
 
 namespace gam703::engine::components
 {
-	Transform::Transform(core_interface::IEngine* engine, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) : core_interface::ITransform(engine, nullptr), m_position(position), m_rotation(rotation), m_scale(scale), m_transformMatrix(glm::mat4(1)), m_shouldCalculateTransform(true), m_shouldUpdateDirectionVectors(true)
+	Transform::Transform(core_interface::IEngine* engine, core_interface::IScene* scene, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) : core_interface::ITransform(engine, scene), m_position(position), m_rotation(rotation), m_scale(scale), m_transformMatrix(glm::mat4(1)), m_shouldCalculateTransform(true), m_shouldUpdateDirectionVectors(true)
 	{
 		calculateTransformMatrix();
 	}

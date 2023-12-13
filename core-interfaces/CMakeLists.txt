@@ -19,6 +19,7 @@ include/core-interfaces/IInput.hpp
 include/core-interfaces/IModel.hpp
 include/core-interfaces/IRenderer.hpp
 include/core-interfaces/IScene.hpp
+include/core-interfaces/IScene.fwd.hpp
 include/core-interfaces/ISceneRenderer.hpp
 include/core-interfaces/IResourceManager.hpp
 include/core-interfaces/IShader.hpp

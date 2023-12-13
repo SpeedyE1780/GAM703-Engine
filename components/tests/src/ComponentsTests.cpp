@@ -68,7 +68,7 @@ namespace gam703::engine::components::tests
 
 	TEST(ComponentsTest, AddComponent)
 	{
-		Transform transform{ nullptr };
+		Transform transform{ nullptr, nullptr };
 
 		ASSERT_EQ(0, transform.getComponentsSize());
 
@@ -81,7 +81,7 @@ namespace gam703::engine::components::tests
 
 	TEST(ComponentsTest, AddComponentWithArgs)
 	{
-		Transform transform{ nullptr };
+		Transform transform{ nullptr, nullptr };
 		std::string name = "Hello World!";
 		int id = 20;
 		float speed = 32.23f;
@@ -116,7 +116,7 @@ namespace gam703::engine::components::tests
 
 	TEST(ComponentsTest, GetComponent)
 	{
-		Transform transform{ nullptr };
+		Transform transform{ nullptr, nullptr };
 
 		ASSERT_EQ(0, transform.getComponentsSize());
 		ASSERT_EQ(nullptr, transform.getComponent<MockComponent1>());
@@ -132,7 +132,7 @@ namespace gam703::engine::components::tests
 
 	TEST(ComponentsTest, RemoveComponent)
 	{
-		Transform transform{ nullptr };
+		Transform transform{ nullptr, nullptr };
 		transform.addComponent<MockComponent1>();
 		ASSERT_EQ(1, transform.getComponentsSize());
 
@@ -143,7 +143,7 @@ namespace gam703::engine::components::tests
 
 	TEST(ComponentsTest, MultipleComponents)
 	{
-		Transform transform{ nullptr };
+		Transform transform{ nullptr, nullptr };
 		ASSERT_EQ(0, transform.getComponentsSize());
 
 		auto* mock1 = transform.addComponent<MockComponent1>();

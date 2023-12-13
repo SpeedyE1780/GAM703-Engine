@@ -8,13 +8,24 @@ namespace gam703::engine::core_interface
 	{
 	}
 
-	core_interface::IEngine* IComponent::getEngine()
+	IEngine* IComponent::getEngine()
 	{
 		return m_transform->getEngine();
 	}
 
-	const core_interface::IEngine* IComponent::getEngine() const
+	const IEngine* IComponent::getEngine() const
 	{
 		return m_transform->getEngine();
 	}
+
+	IScene* IComponent::getScene()
+	{
+		return m_transform->getScene();
+	}
+
+	const IScene* IComponent::getScene() const
+	{
+		return m_transform->getScene();
+	}
+
 } //gam703::engine::components

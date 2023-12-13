@@ -6,17 +6,17 @@ namespace gam703::engine::components
 {
 	Renderer::Renderer(core_interface::ITransform* transform, const core_interface::IModel* model) : core_interface::IRenderer(transform), m_model(model), m_shader(graphic::createDefaultShader())
 	{
-		getEngine()->getScene()->getSceneRenderer()->addRenderer(this);
+		getScene()->getSceneRenderer()->addRenderer(this);
 	}
 
 	Renderer::Renderer(core_interface::ITransform* transform, const core_interface::IModel* model, const graphic::Shader& shader) : core_interface::IRenderer(transform), m_model(model), m_shader(shader)
 	{
-		getEngine()->getScene()->getSceneRenderer()->addRenderer(this);
+		getScene()->getSceneRenderer()->addRenderer(this);
 	}
 
 	Renderer::~Renderer()
 	{
-		getEngine()->getScene()->getSceneRenderer()->removeRenderer(this);
+		getScene()->getSceneRenderer()->removeRenderer(this);
 	}
 
 	void Renderer::tick(float /*deltaTime*/)

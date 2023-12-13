@@ -26,7 +26,7 @@ namespace gam703::engine::core
 
 	core_interface::ITransform* Scene::addTransform(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale)
 	{
-		auto* transform = new components::Transform(m_engine, position, rotation, scale);
+		auto* transform = new components::Transform(m_engine, this, position, rotation, scale);
 		m_transforms.push_back(std::unique_ptr<core_interface::ITransform>(transform));
 		return transform;
 	}
