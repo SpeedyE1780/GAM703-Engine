@@ -3,6 +3,7 @@
 
 #include <core-interfaces/ITransform.fwd.hpp>
 #include <core-interfaces/ISceneRenderer.hpp>
+#include <core-interfaces/ICamera.hpp>
 
 #include <glm/glm.hpp>
 
@@ -18,6 +19,10 @@ namespace gam703::engine::core_interface
 
 		virtual ITransform* addTransform(const glm::vec3& position = glm::vec3(0, 0, 0), const glm::vec3& rotation = glm::vec3(0, 0, 0), const glm::vec3& scale = glm::vec3(1, 1, 1)) = 0;
 		virtual ITransform* addTransform(const ITransform* transform) = 0;
+
+		virtual ICamera* getActiveCamera() = 0;
+		virtual const ICamera* getActiveCamera() const = 0;
+		virtual void setActiveCamera(ICamera* camera) = 0;
 	};
 }
 

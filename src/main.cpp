@@ -16,7 +16,7 @@ int main()
 	const gam703::engine::core_interface::IModel* ourModel3 = resourceManager->getModel("resources/Models/backpack/backpack.obj");
 	const gam703::engine::core_interface::IModel* ourModel4 = resourceManager->getModel("resources/Models/backpack/backpack.obj");
 
-	auto* scene = dynamic_cast<gam703::engine::core::Scene*>(engine.getScene());
+	auto* scene = engine.getScene();
 
 	auto* backpackTransform = scene->addTransform(glm::vec3(0.0f, 0.0f, 0.0f));
 	backpackTransform->addComponent<gam703::engine::components::Renderer>(ourModel);

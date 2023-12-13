@@ -28,7 +28,9 @@ namespace gam703::engine::core
 		virtual core_interface::ITransform* addTransform(const glm::vec3& position = glm::vec3(0, 0, 0), const glm::vec3& rotation = glm::vec3(0, 0, 0), const glm::vec3& scale = glm::vec3(1, 1, 1)) override;
 		virtual core_interface::ITransform* addTransform(const core_interface::ITransform* transform) override;
 
-		void setActiveCamera(components::Camera* setActiveCamera);
+		virtual core_interface::ICamera* getActiveCamera() override { return m_sceneRenderer.getActiveCamera(); }
+		virtual const core_interface::ICamera* getActiveCamera() const override { return m_sceneRenderer.getActiveCamera(); }
+		virtual void setActiveCamera(core_interface::ICamera* activeCamera) override;
 
 		void updateScene(float deltaTime);
 

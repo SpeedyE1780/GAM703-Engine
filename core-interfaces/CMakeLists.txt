@@ -6,12 +6,14 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE CORE_INTERFACES_EXPORT)
 
 target_sources(${PROJECT_NAME} PRIVATE
 #CPP
+src/ICamera.cpp
 src/IComponent.cpp
 src/IRenderer.cpp
 src/ITransform.cpp
 
 #HPP
 include/core-interfaces/Config.hpp
+include/core-interfaces/ICamera.hpp
 include/core-interfaces/IComponent.hpp
 include/core-interfaces/IEngine.hpp
 include/core-interfaces/IEngine.fwd.hpp

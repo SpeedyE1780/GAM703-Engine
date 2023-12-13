@@ -1,7 +1,7 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include <core/SceneRenderer.hpp>
-#include <iostream>
 
 namespace gam703::engine::core
 {
@@ -21,7 +21,7 @@ namespace gam703::engine::core
 		m_sceneObjects.erase(newEnd, end(m_sceneObjects));
 	}
 
-	void SceneRenderer::setActiveCamera(components::Camera* camera)
+	void SceneRenderer::setActiveCamera(core_interface::ICamera* camera)
 	{
 		m_activeCamera = camera;
 	}
@@ -33,7 +33,7 @@ namespace gam703::engine::core
 			return;
 		}
 
-		m_projectionMatrix = glm::perspective(glm::radians(m_activeCamera->getZoom()), aspectRatio, 0.1f, 100.0f);
+		m_projectionMatrix = glm::perspective(glm::radians(m_activeCamera->getFieldOfView()), aspectRatio, 0.1f, 100.0f);
 	}
 
 	void SceneRenderer::render() const

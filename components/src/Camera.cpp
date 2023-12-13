@@ -7,7 +7,7 @@
 
 namespace gam703::engine::components
 {
-	Camera::Camera(core_interface::ITransform* transform, float yaw, float pitch) : IComponent(transform), m_yaw(yaw), m_pitch(pitch), m_movementSpeed(SPEED), m_mouseSensitivity(SENSITIVITY), m_zoom(ZOOM)
+	Camera::Camera(core_interface::ITransform* transform, float yaw, float pitch) : core_interface::ICamera(transform), m_yaw(yaw), m_pitch(pitch), m_movementSpeed(SPEED), m_mouseSensitivity(SENSITIVITY), m_fieldOfView(FieldOfView)
 	{
 	}
 
@@ -56,7 +56,7 @@ namespace gam703::engine::components
 			m_pitch = glm::clamp(m_pitch + yoffset, -89.0f, 89.0f);
 
 			m_transform->setRotation(glm::vec3(glm::radians(m_pitch), glm::radians(m_yaw), 0.0f));
-			m_zoom = glm::clamp(m_zoom - static_cast<float>(inputHandler->getMouseScrollOffsetY()), 1.0f, 45.0f);
+			m_fieldOfView = glm::clamp(m_fieldOfView - static_cast<float>(inputHandler->getMouseScrollOffsetY()), 1.0f, 45.0f);
 		}
 	}
 }// gam703::engine::components
