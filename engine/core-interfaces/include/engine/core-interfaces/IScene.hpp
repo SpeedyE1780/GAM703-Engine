@@ -23,6 +23,8 @@ namespace gam703::engine::core_interface
 		virtual ICamera* getActiveCamera() = 0;
 		virtual const ICamera* getActiveCamera() const = 0;
 		virtual void setActiveCamera(ICamera* camera) = 0;
+
+		virtual void updateSceneProjectionMatrix() = 0;
 	};
 }
 

@@ -7,6 +7,9 @@
 
 namespace gam703::engine::components
 {
+	constexpr float MinimumFOV = 1.0f;
+	constexpr float MaximumFOV = 120.0f;
+
 	Camera::Camera(core_interface::ITransform* transform) : core_interface::ICamera(transform)
 	{
 	}
@@ -21,11 +24,20 @@ namespace gam703::engine::components
 		return glm::lookAt(m_transform->getPosition(), m_transform->getPosition() + m_transform->getFront(), m_transform->getUp());
 	}
 
+	void Camera::setFieldOfView(float fieldOfView)
+	{
+		if (m_fieldOfView != fieldOfView)
+		{
+			m_fieldOfView = fieldOfView;
+			getScene()->updateSceneProjectionMatrix();
+		}
+	}
+
 	void Camera::tick(float deltaTime)
 	{
 		if (auto* inputHandler = getEngine()->getInput())
 		{
-			m_fieldOfView = glm::clamp(m_fieldOfView - static_cast<float>(inputHandler->getMouseScrollOffsetY()), 1.0f, 45.0f);
+			setFieldOfView(glm::clamp(m_fieldOfView - static_cast<float>(inputHandler->getMouseScrollOffsetY()), MinimumFOV, MaximumFOV));
 		}
 	}
 }// gam703::engine::components

@@ -15,6 +15,7 @@ namespace gam703::engine::core_interface
 		virtual ~ICamera() = default;
 		virtual glm::mat4 GetViewMatrix() const = 0;
 		virtual float getFieldOfView() const = 0;
+		virtual void setFieldOfView(float fieldOfView) = 0;
 	};
 }
 

@@ -31,6 +31,7 @@ namespace gam703::engine::core
 		virtual void setActiveCamera(core_interface::ICamera* activeCamera) override;
 
 		void updateScene(float deltaTime);
+		virtual void updateSceneProjectionMatrix() override;
 
 	private:
 		Engine* m_engine;

@@ -21,7 +21,9 @@ namespace gam703::engine::components
 		virtual core_interface::IComponent* clone(core_interface::ITransform* transform) const override;
 
 		virtual glm::mat4 GetViewMatrix() const override;
+
 		virtual float getFieldOfView() const override { return m_fieldOfView; }
+		virtual void setFieldOfView(float fieldOfView) override;
 
 		void tick(float deltaTime) override;
 
