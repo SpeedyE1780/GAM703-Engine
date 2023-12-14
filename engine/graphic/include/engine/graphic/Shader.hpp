@@ -36,6 +36,7 @@ namespace gam703::engine::graphic
 		virtual void setSpecularSampler(int index, int value) const override;
 		virtual void setNormalSampler(int index, int value) const override;
 		virtual void setHeightSampler(int index, int value) const override;
+		virtual void setColor(const glm::vec3& color) const override;
 	private:
 		void createShaderProgram();
 

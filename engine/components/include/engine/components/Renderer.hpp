@@ -25,6 +25,9 @@ namespace gam703::engine::components
 		void render(const glm::mat4& projectionMatrix, const glm::mat4& viewMatrix) const;
 		virtual void tick(float deltaTime) override;
 
+		virtual core_interface::IShader* getShader() override { return &m_shader; }
+		virtual const core_interface::IShader* getShader() const override { return &m_shader; }
+
 	private:
 		const core_interface::IModel* m_model;
 		graphic::Shader m_shader;

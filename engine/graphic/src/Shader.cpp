@@ -111,82 +111,104 @@ namespace gam703::engine::graphic
 
 	void Shader::setBool(const std::string& name, bool value) const
 	{
+		use();
 		glUniform1i(glGetUniformLocation(m_id, name.c_str()), value ? 1 : 0);
 	}
 
 	void Shader::setInt(const std::string& name, int value) const
 	{
+		use();
 		glUniform1i(glGetUniformLocation(m_id, name.c_str()), value);
 	}
 
 	void Shader::setFloat(const std::string& name, float value) const
 	{
+		use();
 		glUniform1f(glGetUniformLocation(m_id, name.c_str()), value);
 	}
 
 	void Shader::setVec2(const std::string& name, const glm::vec2& value) const
 	{
+		use();
 		glUniform2fv(glGetUniformLocation(m_id, name.c_str()), 1, glm::value_ptr(value));
 	}
 
 	void Shader::setVec2(const std::string& name, float x, float y) const
 	{
+		use();
 		glUniform2f(glGetUniformLocation(m_id, name.c_str()), x, y);
 	}
 
 	void Shader::setVec3(const std::string& name, const glm::vec3& value) const
 	{
+		use();
 		glUniform3fv(glGetUniformLocation(m_id, name.c_str()), 1, glm::value_ptr(value));
 	}
 
 	void Shader::setVec3(const std::string& name, float x, float y, float z) const
 	{
+		use();
 		glUniform3f(glGetUniformLocation(m_id, name.c_str()), x, y, z);
 	}
 
 	void Shader::setVec4(const std::string& name, const glm::vec4& value) const
 	{
+		use();
 		glUniform4fv(glGetUniformLocation(m_id, name.c_str()), 1, glm::value_ptr(value));
 	}
 
 	void Shader::setVec4(const std::string& name, float x, float y, float z, float w) const
 	{
+		use();
 		glUniform4f(glGetUniformLocation(m_id, name.c_str()), x, y, z, w);
 	}
 
 	void Shader::setMat2(const std::string& name, const glm::mat2& mat) const
 	{
+		use();
 		glUniformMatrix2fv(glGetUniformLocation(m_id, name.c_str()), 1, GL_FALSE, glm::value_ptr(mat));
 	}
 
 	void Shader::setMat3(const std::string& name, const glm::mat3& mat) const
 	{
+		use();
 		glUniformMatrix3fv(glGetUniformLocation(m_id, name.c_str()), 1, GL_FALSE, glm::value_ptr(mat));
 	}
 
 	void Shader::setMat4(const std::string& name, const glm::mat4& mat) const
 	{
+		use();
 		glUniformMatrix4fv(glGetUniformLocation(m_id, name.c_str()), 1, GL_FALSE, glm::value_ptr(mat));
 	}
 
 	void Shader::setDiffuseSampler(int index, int value) const
 	{
+		use();
 		setInt("diffuse", value);
 	}
 
 	void Shader::setSpecularSampler(int index, int value) const
 	{
+		use();
 		setInt("specular", value);
 	}
 
 	void Shader::setNormalSampler(int index, int value) const
 	{
+		use();
 		setInt("normal", value);
 	}
 
 	void Shader::setHeightSampler(int index, int value) const
 	{
+		use();
 		setInt("height", value);
+	}
+
+	void Shader::setColor(const glm::vec3& color) const
+	{
+		use();
+		setVec3("color", color);
 	}
 
 	Shader createDefaultShader()
