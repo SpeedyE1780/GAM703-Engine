@@ -27,7 +27,7 @@ int main()
 
 	auto* cube = scene->addTransform(glm::vec3(2.0f, 2.0f, 0.0f));
 	auto* cubeRenderer = cube->addComponent<gam703::engine::components::Renderer>(ourModel2);
-	cubeRenderer->getShader()->setColor(glm::vec3(0, 1, 1));
+	cubeRenderer->getMaterial()->setColor(glm::vec3(0, 1, 1));
 
 	auto* cube2 = scene->addTransform(cube);
 	cube2->setPosition(glm::vec3(3.0f, 3.0f, 0.0f));

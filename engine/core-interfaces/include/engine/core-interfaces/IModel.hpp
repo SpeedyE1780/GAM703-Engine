@@ -1,7 +1,7 @@
 #ifndef GAM703_ENGINE_CORE_INTERFACES_IMODEL_HPP
 #define GAM703_ENGINE_CORE_INTERFACES_IMODEL_HPP
 
-#include <engine/core-interfaces/IShader.hpp>
+#include <engine/core-interfaces/IMaterial.hpp>
 
 namespace gam703::engine::core_interface
 {
@@ -9,7 +9,7 @@ namespace gam703::engine::core_interface
 	{
 	public:
 		~IModel() = default;
-		virtual void draw(const IShader& shader) const = 0;
+		virtual void draw(IMaterial& material) const = 0;
 
 	};
 }
