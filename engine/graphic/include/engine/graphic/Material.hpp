@@ -13,6 +13,8 @@ namespace gam703::engine::graphic
 	public:
 		Material();
 		Material(const Shader& shader);
+		Material(const Material& material);
+		Material& operator=(const Material& material);
 
 		virtual void setDiffuseTexture(int diffuseIndex, int textureIndex) override;
 		virtual void setSpecularTexture(int specularIndex, int textureIndex) override;
