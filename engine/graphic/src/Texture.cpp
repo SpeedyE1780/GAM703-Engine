@@ -59,4 +59,14 @@ namespace gam703::engine::graphic
 
 		return textureID;
 	}
+
+	unsigned int createWhiteTexture()
+	{
+		unsigned int textureID = 0;
+		glGenTextures(1, &textureID);
+		glBindTexture(GL_TEXTURE_2D, textureID);
+		GLubyte texData[] = { 255, 255, 255, 255 };
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
+		return textureID;
+	}
 }

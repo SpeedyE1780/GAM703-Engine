@@ -6,8 +6,8 @@ namespace gam703::engine::graphic
 	{
 	}
 
-	void Model::draw(const core_interface::IShader& shader) const
+	void Model::draw(core_interface::IMaterial& material) const
 	{
-		std::for_each(begin(m_meshes), end(m_meshes), [&shader](const Mesh& mesh) { mesh.draw(shader); });
+		std::for_each(begin(m_meshes), end(m_meshes), [&material](const Mesh& mesh) { mesh.draw(material); });
 	}
 }

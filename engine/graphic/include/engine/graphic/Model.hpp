@@ -1,8 +1,8 @@
 #ifndef GAM703_ENGINE_GRAPHIC_MODEL_HPP
 #define GAM703_ENGINE_GRAPHIC_MODEL_HPP
 
+#include <engine/core-interfaces/IMaterial.hpp>
 #include <engine/core-interfaces/IModel.hpp>
-#include <engine/core-interfaces/IShader.hpp>
 
 #include <engine/graphic/Config.hpp>
 #include <engine/graphic/Mesh.hpp>
@@ -23,7 +23,7 @@ namespace gam703::engine::graphic
 	{
 	public:
 		Model(const std::vector<Mesh>& meshes);
-		virtual void draw(const core_interface::IShader& shader) const override;
+		virtual void draw(core_interface::IMaterial& material) const override;
 
 	private:
 		std::vector<Mesh> m_meshes;

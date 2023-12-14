@@ -5,12 +5,12 @@
 
 namespace gam703::engine::components
 {
-	Renderer::Renderer(core_interface::ITransform* transform, const core_interface::IModel* model) : core_interface::IRenderer(transform), m_model(model), m_shader(graphic::createDefaultShader())
+	Renderer::Renderer(core_interface::ITransform* transform, const core_interface::IModel* model) : core_interface::IRenderer(transform), m_model(model), m_material()
 	{
 		getScene()->getSceneRenderer()->addRenderer(this);
 	}
 
-	Renderer::Renderer(core_interface::ITransform* transform, const core_interface::IModel* model, const graphic::Shader& shader) : core_interface::IRenderer(transform), m_model(model), m_shader(shader)
+	Renderer::Renderer(core_interface::ITransform* transform, const core_interface::IModel* model, const graphic::Material& material) : core_interface::IRenderer(transform), m_model(model), m_material(material)
 	{
 		getScene()->getSceneRenderer()->addRenderer(this);
 	}
@@ -26,17 +26,17 @@ namespace gam703::engine::components
 
 	core_interface::IComponent* Renderer::clone(core_interface::ITransform* transform) const
 	{
-		return new Renderer(transform, m_model, graphic::Shader(m_shader));
+		return new Renderer(transform, m_model, m_material);
 	}
 
-	void Renderer::render(const glm::mat4& projectionMatrix, const glm::mat4& viewMatrix) const
+	void Renderer::render(const glm::mat4& projectionMatrix, const glm::mat4& viewMatrix)
 	{
-		m_shader.use();
+		auto* shader = m_material.getShader();
+		shader->use();
+		shader->setMat4("projection", projectionMatrix);
+		shader->setMat4("view", viewMatrix);
+		shader->setMat4("model", m_transform->getTransformationMatrix());
 
-		m_shader.setMat4("projection", projectionMatrix);
-		m_shader.setMat4("view", viewMatrix);
-		m_shader.setMat4("model", m_transform->getTransformationMatrix());
-
-		m_model->draw(m_shader);
+		m_model->draw(m_material);
 	}
 }

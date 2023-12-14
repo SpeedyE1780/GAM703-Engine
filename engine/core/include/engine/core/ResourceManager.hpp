@@ -19,6 +19,7 @@ namespace gam703::engine::core
 		ResourceManager& operator=(const ResourceManager& other) = delete;
 		
 		virtual const core_interface::ITexture* getTexture(const std::filesystem::path& path, core_interface::ITexture::TextureType type) override;
+		virtual const core_interface::ITexture* getWhiteTexture() override;
 		virtual const core_interface::IModel* getModel(const std::filesystem::path& path) override;
 
 	private:

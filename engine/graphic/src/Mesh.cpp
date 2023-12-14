@@ -10,7 +10,7 @@ namespace gam703::engine::graphic
 		setupMesh();
 	}
 
-	void Mesh::draw(const core_interface::IShader& shader) const
+	void Mesh::draw(core_interface::IMaterial& material) const
 	{
 		unsigned int diffuseIndex = 1;
 		unsigned int specularIndex = 1;
@@ -25,25 +25,25 @@ namespace gam703::engine::graphic
 			{
 			case core_interface::ITexture::TextureType::Diffuse:
 			{
-				shader.setDiffuseSampler(diffuseIndex, i);
+				material.setDiffuseTexture(diffuseIndex, i);
 				diffuseIndex++;
 				break;
 			}
 			case core_interface::ITexture::TextureType::Specular:
 			{
-				shader.setSpecularSampler(specularIndex, i);
+				material.setSpecularTexture(specularIndex, i);
 				specularIndex++;
 				break;
 			}
 			case core_interface::ITexture::TextureType::Normal:
 			{
-				shader.setNormalSampler(normalIndex, i);
+				material.setNormalTexture(normalIndex, i);
 				normalIndex++;
 				break;
 			}
 			case core_interface::ITexture::TextureType::Height:
 			{
-				shader.setHeightSampler(heightIndex, i);
+				material.setHeightTexture(heightIndex, i);
 				heightIndex++;
 				break;
 			}
