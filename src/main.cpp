@@ -15,9 +15,7 @@ int main()
 	gam703::engine::core::Engine engine("GAM703", 1280, 720);
 	auto* resourceManager = engine.getResourceManager();
 	const gam703::engine::core_interface::IModel* ourModel = resourceManager->getModel("resources/Models/backpack/backpack.obj");
-	const gam703::engine::core_interface::IModel* ourModel2 = resourceManager->getModel("resources/Models/backpack/backpack.obj");
-	const gam703::engine::core_interface::IModel* ourModel3 = resourceManager->getModel("resources/Models/backpack/backpack.obj");
-	const gam703::engine::core_interface::IModel* ourModel4 = resourceManager->getModel("resources/Models/backpack/backpack.obj");
+	const gam703::engine::core_interface::IModel* ourModel2 = resourceManager->getModel("resources/Models/cube/cube.obj");
 
 	auto* scene = engine.getScene();
 
@@ -28,7 +26,7 @@ int main()
 	backpackTransform2->setPosition(glm::vec3(1.0f, 1.0f, 0.0f));
 
 	auto* backpackTransform3 = scene->addTransform(glm::vec3(2.0f, 2.0f, 0.0f));
-	backpackTransform3->addComponent<gam703::engine::components::Renderer>(ourModel3);
+	backpackTransform3->addComponent<gam703::engine::components::Renderer>(ourModel2);
 
 	auto* backpackTransform4 = scene->addTransform(backpackTransform3);
 	backpackTransform4->setPosition(glm::vec3(3.0f, 3.0f, 0.0f));
