@@ -31,6 +31,27 @@ namespace gam703::engine::core
 		return 0;
 	}
 
+	const core_interface::ITexture* ResourceManager::getWhiteTexture()
+	{
+		if (auto texture = m_textures.find("__WhiteTexture__"); texture != m_textures.end())
+		{
+			return texture->second.get();
+		}
+
+		if (int textureID = graphic::createWhiteTexture(); textureID > 0)
+		{
+			graphic::Texture* texture = new graphic::Texture(textureID, graphic::Texture::TextureType::Diffuse);
+			m_textures["__WhiteTexture__"] = std::unique_ptr<graphic::Texture>(texture);
+
+			std::cout << "TEXTURE LOADED COUNT: " << m_textures.size() << std::endl;
+
+			return texture;
+		}
+
+		std::cout << "ERROR LOADING TEXTURE" << std::endl;
+		return 0;
+	}
+
 	const core_interface::IModel* ResourceManager::getModel(const std::filesystem::path& path)
 	{
 		if (auto model = m_models.find(path); model != m_models.end())

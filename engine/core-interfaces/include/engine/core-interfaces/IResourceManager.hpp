@@ -13,6 +13,7 @@ namespace gam703::engine::core_interface
 	public:
 		~IResourceManager() = default;
 		virtual const ITexture* getTexture(const std::filesystem::path& path, ITexture::TextureType type) = 0;
+		virtual const core_interface::ITexture* getWhiteTexture() = 0;
 		virtual const IModel* getModel(const std::filesystem::path& path) = 0;
 	};
 }

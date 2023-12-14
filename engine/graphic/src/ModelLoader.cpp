@@ -128,6 +128,11 @@ namespace gam703::engine::graphic
 		loadMaterialTextures(textures, material, aiTextureType_HEIGHT);
 		loadMaterialTextures(textures, material, aiTextureType_AMBIENT);
 
+		if (textures.size() == 0)
+		{
+			textures.push_back(m_resourceManager->getWhiteTexture());
+		}
+
 		return Mesh(vertices, indices, textures);
 	}
 
