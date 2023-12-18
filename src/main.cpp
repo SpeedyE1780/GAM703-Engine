@@ -16,6 +16,7 @@ int main()
 	auto* resourceManager = engine.getResourceManager();
 	const gam703::engine::core_interface::IModel* ourModel = resourceManager->getModel("resources/Models/backpack/backpack.obj");
 	const gam703::engine::core_interface::IModel* ourModel2 = resourceManager->getModel("resources/Models/cube/cube.obj");
+	gam703::engine::graphic::Shader checkeredShader{ "resources/Shaders/Default.vert", "resources/Shaders/Checkermap.frag" };
 
 	auto* scene = engine.getScene();
 
@@ -26,11 +27,12 @@ int main()
 	backpackTransform2->setPosition(glm::vec3(1.0f, 1.0f, 0.0f));
 
 	auto* cube = scene->addTransform(glm::vec3(2.0f, 2.0f, 0.0f));
-	auto* cubeRenderer = cube->addComponent<gam703::engine::components::Renderer>(ourModel2);
+	auto* cubeRenderer = cube->addComponent<gam703::engine::components::Renderer>(ourModel2, checkeredShader);
 	cubeRenderer->getMaterial()->setColor(glm::vec3(0, 1, 1));
 
 	auto* cube2 = scene->addTransform(cube);
 	cube2->setPosition(glm::vec3(3.0f, 3.0f, 0.0f));
+	cube2->getComponent<gam703::engine::components::Renderer>()->getMaterial()->getShader()->setVec3("secondColor", glm::vec3(1.0, 1.0, 0.0));
 
 	auto* cameraTransform = scene->addTransform(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0, glm::radians(-90.0f), 0));
 	auto* camera = cameraTransform->addComponent<gam703::engine::components::Camera>();

@@ -17,7 +17,7 @@ namespace gam703::engine::components
 	{
 	public:
 		Renderer(core_interface::ITransform* transform, const core_interface::IModel* model);
-		Renderer(core_interface::ITransform* transform, const core_interface::IModel* model, const graphic::Material& shader);
+		Renderer(core_interface::ITransform* transform, const core_interface::IModel* model, const graphic::Material& material);
 		~Renderer();
 
 		virtual core_interface::IComponent* clone(core_interface::ITransform* transform) const override;
