@@ -8,34 +8,43 @@
 
 #include <iostream>
 
+namespace engine = gam703::engine;
+
+static engine::core_interface::ITransform* addGroundPlane(engine::core_interface::IEngine& engine,
+	const glm::vec3& position = glm::vec3(0.0f ,0.0f, 0.0f),
+	const glm::vec3& mainColor = glm::vec3(1.0f, 1.0f, 1.0f),
+	const glm::vec3& secondColor = glm::vec3(0.0f, 0.0f, 0.0f))
+{
+	const engine::core_interface::IModel* backpackModel = engine.getResourceManager()->getModel("resources/Models/backpack/backpack.obj");
+	const engine::core_interface::IModel* cubeModel = engine.getResourceManager()->getModel("resources/Models/cube/cube.obj");
+	engine::graphic::Shader checkeredShader{ "resources/Shaders/Default.vert", "resources/Shaders/Checkermap.frag" };
+
+	auto* backpack = engine.getScene()->addTransform(position + glm::vec3(0.0f, 2.1f, 0.0f));
+	backpack->addComponent<engine::components::Renderer>(backpackModel);
+
+	auto* cube = engine.getScene()->addTransform(position, glm::vec3(), glm::vec3(5.0f, 0.1f, 5.0f));
+	auto* renderer = cube->addComponent<engine::components::Renderer>(cubeModel, checkeredShader);
+	renderer->getMaterial()->setColor(mainColor);
+	renderer->getMaterial()->getShader()->setVec3("secondColor", secondColor);
+
+	return cube;
+}
+
 int main()
 {
 	std::cout << "GAM703-GameEngine" << std::endl;
 
-	gam703::engine::core::Engine engine("GAM703", 1280, 720);
-	auto* resourceManager = engine.getResourceManager();
-	const gam703::engine::core_interface::IModel* ourModel = resourceManager->getModel("resources/Models/backpack/backpack.obj");
-	const gam703::engine::core_interface::IModel* ourModel2 = resourceManager->getModel("resources/Models/cube/cube.obj");
-	gam703::engine::graphic::Shader checkeredShader{ "resources/Shaders/Default.vert", "resources/Shaders/Checkermap.frag" };
+	engine::core::Engine engine("GAM703", 1280, 720);
+	
+	addGroundPlane(engine);
+	addGroundPlane(engine, glm::vec3(10.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	addGroundPlane(engine, glm::vec3(-10.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	addGroundPlane(engine, glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	addGroundPlane(engine, glm::vec3(0.0f, 0.0f, -10.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	auto* scene = engine.getScene();
-
-	auto* backpackTransform = scene->addTransform(glm::vec3(0.0f, 0.0f, 0.0f));
-	backpackTransform->addComponent<gam703::engine::components::Renderer>(ourModel);
-
-	auto* backpackTransform2 = scene->addTransform(backpackTransform);
-	backpackTransform2->setPosition(glm::vec3(1.0f, 1.0f, 0.0f));
-
-	auto* cube = scene->addTransform(glm::vec3(2.0f, 2.0f, 0.0f));
-	auto* cubeRenderer = cube->addComponent<gam703::engine::components::Renderer>(ourModel2, checkeredShader);
-	cubeRenderer->getMaterial()->setColor(glm::vec3(0, 1, 1));
-
-	auto* cube2 = scene->addTransform(cube);
-	cube2->setPosition(glm::vec3(3.0f, 3.0f, 0.0f));
-	cube2->getComponent<gam703::engine::components::Renderer>()->getMaterial()->getShader()->setVec3("secondColor", glm::vec3(1.0, 1.0, 0.0));
-
-	auto* cameraTransform = scene->addTransform(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0, glm::radians(-90.0f), 0));
-	auto* camera = cameraTransform->addComponent<gam703::engine::components::Camera>();
+	auto* cameraTransform = scene->addTransform(glm::vec3(0.0f, 20.0f, 20.0f), glm::vec3(glm::radians(-45.0f), glm::radians(-90.0f), 0));
+	auto* camera = cameraTransform->addComponent<engine::components::Camera>();
 	cameraTransform->addComponent<gam703::game::components::MovementController>();
 
 	scene->setActiveCamera(camera);

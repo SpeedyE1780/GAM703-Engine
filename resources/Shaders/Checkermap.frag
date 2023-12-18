@@ -10,5 +10,5 @@ void main()
 {
     vec3 pos = floor(Position / 10);
     float patternMask = mod(pos.x + mod(pos.y, 2) + mod(pos.z, 2), 2);
-    FragColor = patternMask * vec4(color, 1) + (1-patternMask) * vec4(secondColor, 1);
+    FragColor = patternMask * vec4(color, 1) + (1 - patternMask) * vec4(secondColor, 1);
 }
