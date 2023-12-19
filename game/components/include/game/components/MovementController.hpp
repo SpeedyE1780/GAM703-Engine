@@ -22,7 +22,7 @@ namespace gam703::game::components
 		virtual void tick(float deltaTime) override;
 
 	private:
-		float m_yaw = -90.0f;
+		float m_yaw = 0.0f;
 		float m_pitch = 0.0f;
 		float m_movementSpeed = 2.5f;
 		float m_mouseSensitivity = 0.1f;
