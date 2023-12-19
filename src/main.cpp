@@ -5,10 +5,12 @@
 #include <engine/components/Renderer.hpp>
 
 #include <game/components/MovementController.hpp>
+#include <game/components/Wonder.hpp>
 
 #include <iostream>
 
 namespace engine = gam703::engine;
+namespace game = gam703::game;
 
 static engine::core_interface::ITransform* addGroundPlane(engine::core_interface::IEngine& engine,
 	const glm::vec3& position = glm::vec3(0.0f ,0.0f, 0.0f),
@@ -21,6 +23,7 @@ static engine::core_interface::ITransform* addGroundPlane(engine::core_interface
 
 	auto* backpack = engine.getScene()->addTransform(position + glm::vec3(0.0f, 2.1f, 0.0f));
 	backpack->addComponent<engine::components::Renderer>(backpackModel);
+	backpack->addComponent<game::components::Wonder>();
 
 	auto* cube = engine.getScene()->addTransform(position, glm::vec3(), glm::vec3(5.0f, 0.1f, 5.0f));
 	auto* renderer = cube->addComponent<engine::components::Renderer>(cubeModel, checkeredShader);

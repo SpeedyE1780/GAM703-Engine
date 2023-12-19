@@ -15,7 +15,7 @@ namespace gam703::game::components
 
 	engine::core_interface::IComponent* MovementController::clone(engine::core_interface::ITransform* transform) const
 	{
-		return new MovementController(*this);
+		return new MovementController(transform);
 	}
 
 	void MovementController::tick(float deltaTime)
