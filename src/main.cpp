@@ -13,7 +13,7 @@ namespace engine = gam703::engine;
 namespace game = gam703::game;
 
 static engine::core_interface::ITransform* addGroundPlane(engine::core_interface::IEngine& engine,
-	const glm::vec3& position = glm::vec3(0.0f ,0.0f, 0.0f),
+	const glm::vec3& position = glm::vec3(0.0f, 0.0f, 0.0f),
 	const glm::vec3& mainColor = glm::vec3(1.0f, 1.0f, 1.0f),
 	const glm::vec3& secondColor = glm::vec3(0.0f, 0.0f, 0.0f))
 {
@@ -38,7 +38,7 @@ int main()
 	std::cout << "GAM703-GameEngine" << std::endl;
 
 	engine::core::Engine engine("GAM703", 1280, 720);
-	
+
 	addGroundPlane(engine);
 	addGroundPlane(engine, glm::vec3(10.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	addGroundPlane(engine, glm::vec3(-10.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -48,7 +48,13 @@ int main()
 	auto* scene = engine.getScene();
 	auto* cameraTransform = scene->addTransform(glm::vec3(0.0f, 20.0f, 20.0f), glm::vec3(glm::radians(-45.0f), glm::radians(-90.0f), 0));
 	auto* camera = cameraTransform->addComponent<engine::components::Camera>();
-	cameraTransform->addComponent<gam703::game::components::MovementController>();
+	//cameraTransform->addComponent<gam703::game::components::MovementController>();
+
+	auto* cubeModel = engine.getResourceManager()->getModel("resources/Models/cube/cube.obj");
+	auto* cubeTransform = scene->addTransform(glm::vec3(0.0f, 1.1f, 0.0f));
+	auto* renderer = cubeTransform->addComponent<engine::components::Renderer>(cubeModel);
+	renderer->getMaterial()->setColor(glm::vec3(0.0f, 0.0f, 1.0f));
+	cubeTransform->addComponent<game::components::MovementController>();
 
 	scene->setActiveCamera(camera);
 
