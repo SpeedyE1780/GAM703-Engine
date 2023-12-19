@@ -1,5 +1,7 @@
 #include <engine/core-interfaces/ITransform.hpp>
 
+#include <engine/utility/Math.hpp>
+
 #include <game/components/Wonder.hpp>
 
 namespace gam703::game::components
@@ -23,7 +25,7 @@ namespace gam703::game::components
 		}
 		else
 		{
-			m_transform->setPosition(m_player->getPosition());
+			m_transform->setPosition(engine::utility::moveTowards(m_transform->getPosition(), m_player->getPosition(), deltaTime));
 		}
 	}
 }

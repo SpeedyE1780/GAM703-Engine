@@ -18,5 +18,6 @@ include/game/components/Wonder.hpp
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC engine-core-interfaces)
+target_link_libraries(${PROJECT_NAME} PRIVATE engine-utility)
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
 
