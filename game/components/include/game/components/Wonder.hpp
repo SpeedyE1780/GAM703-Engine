@@ -12,7 +12,7 @@ namespace gam703::game::components
 	class GAME_COMPONENTS_API Wonder : public engine::core_interface::IComponent
 	{
 	public:
-		Wonder(engine::core_interface::ITransform* transform);
+		Wonder(engine::core_interface::ITransform* transform, engine::core_interface::ITransform* playerTransform);
 
 		virtual engine::core_interface::IComponent* clone(engine::core_interface::ITransform* transform) const override;
 		virtual void tick(float deltaTime) override;
@@ -21,6 +21,7 @@ namespace gam703::game::components
 		glm::vec3 m_origin;
 		float m_radius = 4.5f;
 		float m_angle = 0.0f;
+		engine::core_interface::ITransform* m_player = nullptr;
 	};
 }
 
