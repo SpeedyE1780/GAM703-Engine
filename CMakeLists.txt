@@ -23,6 +23,7 @@ add_subdirectory(3rd-party/glfw)
 add_subdirectory(3rd-party/glad)
 add_subdirectory(3rd-party/glm)
 add_subdirectory(3rd-party/gtest)
+add_subdirectory(3rd-party/imgui)
 add_subdirectory(3rd-party/stb)
 
 add_subdirectory(engine/components)
