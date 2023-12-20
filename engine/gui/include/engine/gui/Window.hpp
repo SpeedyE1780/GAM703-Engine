@@ -7,6 +7,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include <imgui/imgui.h>
+
 #include <memory>
 #include <string>
 #include <vector>
@@ -44,7 +46,7 @@ namespace gam703::engine::gui
 			return element;
 		}
 
-		void render() const;
+		void render(ImGuiContext* context) const;
 
 	private:
 		GLFWwindow* m_window;
