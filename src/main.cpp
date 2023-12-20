@@ -5,6 +5,7 @@
 #include <engine/components/Renderer.hpp>
 
 #include <engine/gui/Checkbox.hpp>
+#include <engine/gui/ColorPicker.hpp>
 #include <engine/gui/Slider.hpp>
 #include <engine/gui/Text.hpp>
 
@@ -69,9 +70,13 @@ int main()
 	auto* demo = window.addGUIElement<engine::gui::Checkbox>("Demo Window", true);
 	auto* another = window.addGUIElement<engine::gui::Checkbox>("Another Window", false);
 	auto* slider = window.addGUIElement<engine::gui::Slider>("Float");
+	auto* colorPicker = window.addGUIElement<engine::gui::ColorPicker>("COLOR");
 
 	engine.start();
 
-	std::cout << "DEMO: " << (demo->isChecked() ? "TRUE" : "FALSE") << " ANOTHER: " << (another->isChecked() ? "TRUE" : "FALSE") << "SLIDER: " << slider->getValue() << std::endl;
+	std::cout << "DEMO: " << (demo->isChecked() ? "TRUE" : "FALSE") << " ANOTHER: " << (another->isChecked() ? "TRUE" : "FALSE") << std::endl;
+	std::cout << "SLIDER: " << slider->getValue() << std::endl;
+	auto [r, g, b, a] = colorPicker->getColors();
+	std::cout << "COLOR: " << r << " " << g << " " << b << " " << a << std::endl;
 	return 0;
 }

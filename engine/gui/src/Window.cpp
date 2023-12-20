@@ -82,8 +82,6 @@ namespace gam703::engine::gui
 
 		std::for_each(begin(m_elements), end(m_elements), [](const std::unique_ptr<IGUIElement>& element) { element->renderElement(); });
 
-		ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-
 		if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
 			counter++;
 		ImGui::SameLine();
