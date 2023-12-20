@@ -1,4 +1,5 @@
 #include <engine/gui/Window.hpp>
+#include <engine/gui/Text.hpp>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -7,6 +8,7 @@
 #include <imgui/backends/imgui_impl_glfw.h>
 #include <imgui/backends/imgui_impl_opengl3.h>
 
+#include <algorithm>
 #include <iostream>
 
 namespace gam703::engine::gui
@@ -123,6 +125,11 @@ namespace gam703::engine::gui
 		glfwSetInputMode(m_window, GLFW_CURSOR, mode);
 	}
 
+	void Window::addText(const std::string& text)
+	{
+		m_elements.push_back(std::make_unique<Text>(text));
+	}
+
 	void Window::render() const
 	{
 		// Start the Dear ImGui frame
@@ -139,7 +146,8 @@ namespace gam703::engine::gui
 
 			ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
 
-			ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+			std::for_each(begin(m_elements), end(m_elements), [](const std::unique_ptr<IGUIElement>& element) { element->renderElement(); });
+
 			ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
 			ImGui::Checkbox("Another Window", &show_another_window);
 

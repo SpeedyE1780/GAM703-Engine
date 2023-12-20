@@ -6,11 +6,15 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE ENGINE_GUI_EXPORT)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include/)
 
-target_sources(${PROJECT_NAME}
+target_sources(${PROJECT_NAME} PRIVATE 
 #CPP
-PRIVATE src/Window.cpp
+src/Window.cpp
+src/Text.cpp
+
 #HPP
 include/engine/gui/Config.hpp
+include/engine/gui/IGUIElement.hpp
+include/engine/gui/Text.hpp
 include/engine/gui/Window.hpp
 )
 

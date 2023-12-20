@@ -60,6 +60,9 @@ int main()
 
 	scene->setActiveCamera(camera);
 
+	auto& window = engine.getWindow();
+	window.addText("This is some useful text.");
+
 	engine.start();
 	return 0;
 }
