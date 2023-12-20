@@ -19,12 +19,15 @@ namespace gam703::engine::gui
 		const GLFWwindow* getGLFWWindow() const { return m_window; }
 
 		float getAspectRatio() const { return static_cast<float>(m_width) / static_cast<float>(m_height); }
+		std::pair<double, double> getMousePosition() const;
+		bool isKeyPressed(int key) const;
 
 		void resizeWindow(int width, int height);
 		void setUserData(void* userData);
 		void setResizeCallback(GLFWframebuffersizefun callback);
 		void setCursorMovementCallback(GLFWcursorposfun callback);
 		void setScrollCallback(GLFWcursorposfun callback);
+		void setCursorMode(int mode);
 
 	private:
 		GLFWwindow* m_window;

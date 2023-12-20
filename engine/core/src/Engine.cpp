@@ -44,17 +44,13 @@ namespace gam703::engine::core
 		}
 	}
 
-	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height), m_inputHandler(m_window.getGLFWWindow()), m_time(glfwGetTime()), m_scene(this)
+	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height), m_inputHandler(&m_window), m_time(glfwGetTime()), m_scene(this)
 	{
 		m_window.setUserData(this);
 		m_window.setResizeCallback(resizeWindow);
 		m_window.setCursorMovementCallback(mouseMovement);
 		m_window.setScrollCallback(scrollCallback);
-
-		if (auto* glfwWindow = m_window.getGLFWWindow())
-		{
-			glfwSetInputMode(glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-		}
+		m_inputHandler.setCursorMode(GLFW_CURSOR_DISABLED);
 	}
 
 	Engine::~Engine()

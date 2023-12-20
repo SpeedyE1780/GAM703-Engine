@@ -15,6 +15,7 @@ namespace gam703::engine::core_interface
 		virtual double getMouseScrollOffsetX() const = 0;
 		virtual double getMouseScrollOffsetY() const = 0;
 		virtual void resetMouseOffset() = 0;
+		virtual void setCursorMode(int mode) = 0;
 	};
 }
 

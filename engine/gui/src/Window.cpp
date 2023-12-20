@@ -49,6 +49,18 @@ namespace gam703::engine::gui
 		glEnable(GL_DEPTH_TEST);
 	}
 
+	std::pair<double, double> Window::getMousePosition() const
+	{
+		double x = 0, y = 0;
+		glfwGetCursorPos(m_window, &x, &y);
+		return { x, y };
+	}
+
+	bool Window::isKeyPressed(int key) const
+	{
+		return glfwGetKey(m_window, key) == GLFW_PRESS;
+	}
+
 	void Window::resizeWindow(int width, int height)
 	{
 		m_width = width;
@@ -74,6 +86,11 @@ namespace gam703::engine::gui
 	void Window::setScrollCallback(GLFWscrollfun callback)
 	{
 		glfwSetScrollCallback(m_window, callback);
+	}
+
+	void Window::setCursorMode(int mode)
+	{
+		glfwSetInputMode(m_window, GLFW_CURSOR, mode);
 	}
 
 } //gam703::engine::gui

@@ -5,6 +5,8 @@
 
 #include <engine/core-interfaces/IInput.hpp>
 
+#include <engine/gui/Window.hpp>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -13,7 +15,7 @@ namespace gam703::engine::core
 	class ENGINE_CORE_API Input : public core_interface::IInput
 	{
 	public:
-		Input(GLFWwindow* window);
+		Input(gui::Window* window);
 
 		virtual bool isKeyPressed(int key) override;
 		virtual void processMouseMovement(double mouseX, double mouseY) override;
@@ -26,9 +28,10 @@ namespace gam703::engine::core
 		virtual double getMouseScrollOffsetY() const override { return m_mouseScrollOffsetY; }
 
 		virtual void resetMouseOffset() override;
+		virtual void setCursorMode(int mode) override;
 
 	private:
-		GLFWwindow* m_window;
+		gui::Window* m_window;
 		double m_lastMouseX = 0;
 		double m_lastMouseY = 0;
 		double m_mouseOffsetX = 0;
