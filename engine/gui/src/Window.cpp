@@ -82,8 +82,6 @@ namespace gam703::engine::gui
 
 		std::for_each(begin(m_elements), end(m_elements), [](const std::unique_ptr<IGUIElement>& element) { element->renderElement(); });
 
-		if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-			counter++;
 		ImGui::SameLine();
 		ImGui::Text("counter = %d", counter);
 

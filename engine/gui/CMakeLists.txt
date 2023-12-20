@@ -8,6 +8,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include/
 
 target_sources(${PROJECT_NAME} PRIVATE 
 #CPP
+src/Button.cpp
 src/Checkbox.cpp
 src/ColorPicker.cpp
 src/Slider.cpp
@@ -15,6 +16,7 @@ src/Text.cpp
 src/Window.cpp
 
 #HPP
+include/engine/gui/Button.hpp
 include/engine/gui/Config.hpp
 include/engine/gui/Checkbox.hpp
 include/engine/gui/ColorPicker.hpp

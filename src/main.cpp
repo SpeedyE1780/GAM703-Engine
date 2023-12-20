@@ -4,6 +4,7 @@
 #include <engine/components/Camera.hpp>
 #include <engine/components/Renderer.hpp>
 
+#include <engine/gui/Button.hpp>
 #include <engine/gui/Checkbox.hpp>
 #include <engine/gui/ColorPicker.hpp>
 #include <engine/gui/Slider.hpp>
@@ -71,6 +72,7 @@ int main()
 	auto* another = window.addGUIElement<engine::gui::Checkbox>("Another Window", false);
 	auto* slider = window.addGUIElement<engine::gui::Slider>("Float");
 	auto* colorPicker = window.addGUIElement<engine::gui::ColorPicker>("COLOR");
+	window.addGUIElement<engine::gui::Button>("BUTTON", []() { std::cout << "BUTTON PRESSED" << std::endl; });
 
 	engine.start();
 
