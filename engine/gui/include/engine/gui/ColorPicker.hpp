@@ -13,9 +13,10 @@ namespace gam703::engine::gui
 	public:
 		ColorPicker(const std::string& content);
 
-		virtual void renderElement() const override;
-
 		std::tuple<float, float, float, float> getColors() const { return { m_colors[0], m_colors[1], m_colors[2], m_colors[3] }; }
+
+	protected:
+		virtual void renderElement() const override;
 
 	private:
 		std::string m_content;

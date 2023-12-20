@@ -10,7 +10,14 @@ namespace gam703::engine::gui
 	public:
 		virtual ~IGUIElement() = default;
 
+		void shouldRenderOnNewLine(bool newLine) { m_shouldRenderOnNewLine = newLine; }
+		void render() const;
+
+	protected:
 		virtual void renderElement() const = 0;
+
+	private:
+		bool m_shouldRenderOnNewLine = true;
 	};
 }
 

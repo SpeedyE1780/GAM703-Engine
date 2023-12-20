@@ -12,9 +12,11 @@ namespace gam703::engine::gui
 	{
 	public:
 		Checkbox(const std::string& content, bool initialState = false);
-		virtual void renderElement() const override;
 
 		bool isChecked() const { return m_state; }
+
+	protected:
+		virtual void renderElement() const override;
 
 	private:
 		std::string m_content;

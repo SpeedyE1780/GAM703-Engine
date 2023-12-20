@@ -11,6 +11,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 src/Button.cpp
 src/Checkbox.cpp
 src/ColorPicker.cpp
+src/IGUIElement.cpp
 src/Slider.cpp
 src/Text.cpp
 src/Window.cpp

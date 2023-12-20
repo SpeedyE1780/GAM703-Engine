@@ -14,6 +14,7 @@
 #include <game/components/Wonder.hpp>
 
 #include <iostream>
+#include <format>
 
 namespace engine = gam703::engine;
 namespace game = gam703::game;
@@ -72,7 +73,17 @@ int main()
 	auto* another = window.addGUIElement<engine::gui::Checkbox>("Another Window", false);
 	auto* slider = window.addGUIElement<engine::gui::Slider>("Float");
 	auto* colorPicker = window.addGUIElement<engine::gui::ColorPicker>("COLOR");
-	window.addGUIElement<engine::gui::Button>("BUTTON", []() { std::cout << "BUTTON PRESSED" << std::endl; });
+	int counter = 0;
+	engine::gui::Text* text = nullptr;
+
+	window.addGUIElement<engine::gui::Button>("BUTTON", [&counter, &text]() 
+		{
+			counter++;
+			text->setContent(std::format("counter: {}", counter));
+		});
+
+	text = window.addGUIElement<engine::gui::Text>(std::format("counter: {}", counter));
+	text->shouldRenderOnNewLine(false);
 
 	engine.start();
 

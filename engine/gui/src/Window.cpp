@@ -32,7 +32,7 @@ namespace gam703::engine::gui
 		}
 	}
 
-	Window::Window(const std::string& title, int width, int height) :m_window(nullptr), m_title(title), m_width(width), m_height(height)
+	Window::Window(const std::string& title, int width, int height) : m_window(nullptr), m_title(title), m_width(width), m_height(height)
 	{
 		initializeGLFW();
 		m_window = glfwCreateWindow(m_width, m_height, m_title.c_str(), nullptr, nullptr);
@@ -73,20 +73,10 @@ namespace gam703::engine::gui
 	{
 		ImGui::SetCurrentContext(context);
 
-		ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
-		static float f = 0.0f;
-		static int counter = 0;
-
 		ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-
-		std::for_each(begin(m_elements), end(m_elements), [](const std::unique_ptr<IGUIElement>& element) { element->renderElement(); });
-
-		ImGui::SameLine();
-		ImGui::Text("counter = %d", counter);
-
 		ImGuiIO& io = ImGui::GetIO();
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+		std::for_each(begin(m_elements), end(m_elements), [](const std::unique_ptr<IGUIElement>& element) { element->render(); });
 		ImGui::End();
 	}
 

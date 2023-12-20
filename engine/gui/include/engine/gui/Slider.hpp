@@ -12,9 +12,11 @@ namespace gam703::engine::gui
 	{
 	public:
 		Slider(const std::string& content, float minimum = 0.0f, float maximum = 1.0f);
-		virtual void renderElement() const override;
 
 		float getValue() const { return m_value; }
+
+	protected:
+		virtual void renderElement() const override;
 
 	private:
 		std::string m_content;

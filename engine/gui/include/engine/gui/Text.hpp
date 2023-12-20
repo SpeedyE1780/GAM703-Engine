@@ -13,6 +13,9 @@ namespace gam703::engine::gui
 	public:
 		Text(const std::string& content);
 
+		void setContent(const std::string& content) { m_content = content; }
+
+	protected:
 		virtual void renderElement() const override;
 
 	private:

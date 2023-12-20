@@ -14,6 +14,7 @@ namespace gam703::engine::gui
 	public:
 		Button(const std::string& context, std::function<void()> callback);
 
+	protected:
 		virtual void renderElement() const override;
 
 	private:
