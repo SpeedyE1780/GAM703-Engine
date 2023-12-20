@@ -5,6 +5,7 @@
 #include <engine/components/Renderer.hpp>
 
 #include <engine/gui/Checkbox.hpp>
+#include <engine/gui/Slider.hpp>
 #include <engine/gui/Text.hpp>
 
 #include <game/components/MovementController.hpp>
@@ -67,9 +68,10 @@ int main()
 	window.addGUIElement<engine::gui::Text>("This is some useful text.");
 	auto* demo = window.addGUIElement<engine::gui::Checkbox>("Demo Window", true);
 	auto* another = window.addGUIElement<engine::gui::Checkbox>("Another Window", false);
-
-	std::cout << "DEMO: " << (demo->isChecked() ? "TRUE" : "FALSE") << " ANOTHER: " << (another->isChecked() ? "TRUE" : "FALSE") << std::endl;
+	auto* slider = window.addGUIElement<engine::gui::Slider>("Float");
 
 	engine.start();
+
+	std::cout << "DEMO: " << (demo->isChecked() ? "TRUE" : "FALSE") << " ANOTHER: " << (another->isChecked() ? "TRUE" : "FALSE") << "SLIDER: " << slider->getValue() << std::endl;
 	return 0;
 }

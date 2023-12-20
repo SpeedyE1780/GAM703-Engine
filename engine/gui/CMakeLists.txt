@@ -9,6 +9,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include/
 target_sources(${PROJECT_NAME} PRIVATE 
 #CPP
 src/Checkbox.cpp
+src/Slider.cpp
 src/Text.cpp
 src/Window.cpp
 
@@ -16,6 +17,7 @@ src/Window.cpp
 include/engine/gui/Config.hpp
 include/engine/gui/Checkbox.hpp
 include/engine/gui/IGUIElement.hpp
+include/engine/gui/Slider.hpp
 include/engine/gui/Text.hpp
 include/engine/gui/Window.hpp
 )
