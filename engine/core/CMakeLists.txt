@@ -33,6 +33,5 @@ target_link_libraries(${PROJECT_NAME} PUBLIC engine-core-interfaces)
 target_link_libraries(${PROJECT_NAME} PRIVATE engine-graphic)
 target_link_libraries(${PROJECT_NAME} PUBLIC engine-gui)
 target_link_libraries(${PROJECT_NAME} PUBLIC glad)
-target_link_libraries(${PROJECT_NAME} PRIVATE imgui)
 
 add_subdirectory(tests)

@@ -14,6 +14,7 @@ namespace gam703::engine::gui
 	{
 	public:
 		Window(const std::string& title, int width, int height);
+		~Window();
 
 		GLFWwindow* getGLFWWindow() { return m_window; }
 		const GLFWwindow* getGLFWWindow() const { return m_window; }
@@ -28,6 +29,8 @@ namespace gam703::engine::gui
 		void setCursorMovementCallback(GLFWcursorposfun callback);
 		void setScrollCallback(GLFWcursorposfun callback);
 		void setCursorMode(int mode);
+
+		void render() const;
 
 	private:
 		GLFWwindow* m_window;
