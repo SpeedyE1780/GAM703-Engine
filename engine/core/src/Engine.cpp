@@ -69,7 +69,7 @@ namespace gam703::engine::core
 			processInput(*this);
 
 			m_inputHandler.resetMouseOffset();
-			glfwSwapBuffers(m_window.getGLFWWindow());
+			m_window.swapBuffers();
 			glfwPollEvents();
 		}
 	}

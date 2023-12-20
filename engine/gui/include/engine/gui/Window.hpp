@@ -24,16 +24,17 @@ namespace gam703::engine::gui
 		GLFWwindow* getGLFWWindow() { return m_window; }
 		const GLFWwindow* getGLFWWindow() const { return m_window; }
 
-		float getAspectRatio() const { return static_cast<float>(m_width) / static_cast<float>(m_height); }
 		std::pair<double, double> getMousePosition() const;
-		bool isKeyPressed(int key) const;
-
 		void resizeWindow(int width, int height);
-		void setUserData(void* userData);
-		void setResizeCallback(GLFWframebuffersizefun callback);
-		void setCursorMovementCallback(GLFWcursorposfun callback);
-		void setScrollCallback(GLFWcursorposfun callback);
-		void setCursorMode(int mode);
+
+		float getAspectRatio() const { return static_cast<float>(m_width) / static_cast<float>(m_height); }
+		bool isKeyPressed(int key) const { return glfwGetKey(m_window, key) == GLFW_PRESS; }
+		void setUserData(void* userData) { glfwSetWindowUserPointer(m_window, userData); }
+		void setResizeCallback(GLFWframebuffersizefun callback) { glfwSetFramebufferSizeCallback(m_window, callback); }
+		void setCursorMovementCallback(GLFWcursorposfun callback) { glfwSetCursorPosCallback(m_window, callback); }
+		void setScrollCallback(GLFWcursorposfun callback) { glfwSetScrollCallback(m_window, callback); }
+		void setCursorMode(int mode) { glfwSetInputMode(m_window, GLFW_CURSOR, mode); }
+		void swapBuffers() { glfwSwapBuffers(m_window); }
 
 		template<typename Element, typename... Args>
 		Element* addGUIElement(Args&&... args)

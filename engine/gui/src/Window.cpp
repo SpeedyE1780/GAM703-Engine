@@ -88,41 +88,11 @@ namespace gam703::engine::gui
 		return { x, y };
 	}
 
-	bool Window::isKeyPressed(int key) const
-	{
-		return glfwGetKey(m_window, key) == GLFW_PRESS;
-	}
-
 	void Window::resizeWindow(int width, int height)
 	{
 		m_width = width;
 		m_height = height;
 		glViewport(0, 0, width, height);
-	}
-
-	void Window::setUserData(void* userData)
-	{
-		glfwSetWindowUserPointer(m_window, userData);
-	}
-
-	void Window::setResizeCallback(GLFWframebuffersizefun callback)
-	{
-		glfwSetFramebufferSizeCallback(m_window, callback);
-	}
-
-	void Window::setCursorMovementCallback(GLFWcursorposfun callback)
-	{
-		glfwSetCursorPosCallback(m_window, callback);
-	}
-
-	void Window::setScrollCallback(GLFWscrollfun callback)
-	{
-		glfwSetScrollCallback(m_window, callback);
-	}
-
-	void Window::setCursorMode(int mode)
-	{
-		glfwSetInputMode(m_window, GLFW_CURSOR, mode);
 	}
 
 	void Window::render() const
