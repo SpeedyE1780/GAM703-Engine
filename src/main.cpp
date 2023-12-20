@@ -4,6 +4,9 @@
 #include <engine/components/Camera.hpp>
 #include <engine/components/Renderer.hpp>
 
+#include <engine/gui/Checkbox.hpp>
+#include <engine/gui/Text.hpp>
+
 #include <game/components/MovementController.hpp>
 #include <game/components/Wonder.hpp>
 
@@ -61,7 +64,11 @@ int main()
 	scene->setActiveCamera(camera);
 
 	auto& window = engine.getWindow();
-	window.addText("This is some useful text.");
+	window.addGUIElement<engine::gui::Text>("This is some useful text.");
+	auto* demo = window.addGUIElement<engine::gui::Checkbox>("Demo Window", true);
+	auto* another = window.addGUIElement<engine::gui::Checkbox>("Another Window", false);
+
+	std::cout << "DEMO: " << (demo->isChecked() ? "TRUE" : "FALSE") << " ANOTHER: " << (another->isChecked() ? "TRUE" : "FALSE") << std::endl;
 
 	engine.start();
 	return 0;

@@ -1,13 +1,14 @@
 #ifndef GAM703_ENGINE_GUI_TEXT_HPP
 #define GAM703_ENGINE_GUI_TEXT_HPP
 
+#include <engine/gui/Config.hpp>
 #include <engine/gui/IGUIElement.hpp>
 
 #include <string>
 
 namespace gam703::engine::gui
 {
-	class Text : public IGUIElement
+	class ENGINE_GUI_API Text : public IGUIElement
 	{
 	public:
 		Text(const std::string& content);

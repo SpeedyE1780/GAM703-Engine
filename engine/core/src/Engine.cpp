@@ -46,7 +46,6 @@ namespace gam703::engine::core
 		m_window.setResizeCallback(resizeWindow);
 		m_window.setCursorMovementCallback(mouseMovement);
 		m_window.setScrollCallback(scrollCallback);
-		m_inputHandler.setCursorMode(GLFW_CURSOR_DISABLED);
 	}
 
 	Engine::~Engine()

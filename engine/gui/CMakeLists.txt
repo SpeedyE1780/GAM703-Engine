@@ -8,11 +8,13 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include/
 
 target_sources(${PROJECT_NAME} PRIVATE 
 #CPP
-src/Window.cpp
+src/Checkbox.cpp
 src/Text.cpp
+src/Window.cpp
 
 #HPP
 include/engine/gui/Config.hpp
+include/engine/gui/Checkbox.hpp
 include/engine/gui/IGUIElement.hpp
 include/engine/gui/Text.hpp
 include/engine/gui/Window.hpp

@@ -35,7 +35,13 @@ namespace gam703::engine::gui
 		void setScrollCallback(GLFWcursorposfun callback);
 		void setCursorMode(int mode);
 
-		void addText(const std::string& text);
+		template<typename Element, typename... Args>
+		Element* addGUIElement(Args&&... args)
+		{
+			auto* element = new Element(std::forward<Args>(args)...);
+			m_elements.emplace_back(std::unique_ptr<Element>(element));
+			return element;
+		}
 
 		void render() const;
 
