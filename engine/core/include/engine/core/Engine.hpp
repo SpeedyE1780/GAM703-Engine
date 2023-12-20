@@ -37,6 +37,7 @@ namespace gam703::engine::core
 
 	private:
 		void run();
+		void renderGUI();
 
 		gui::Window m_window;
 		Input m_inputHandler;

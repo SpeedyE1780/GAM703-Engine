@@ -4,10 +4,17 @@
 #include <engine/components/Camera.hpp>
 #include <engine/components/Renderer.hpp>
 
+#include <engine/gui/Button.hpp>
+#include <engine/gui/Checkbox.hpp>
+#include <engine/gui/ColorPicker.hpp>
+#include <engine/gui/Slider.hpp>
+#include <engine/gui/Text.hpp>
+
 #include <game/components/MovementController.hpp>
 #include <game/components/Wonder.hpp>
 
 #include <iostream>
+#include <format>
 
 namespace engine = gam703::engine;
 namespace game = gam703::game;
@@ -60,6 +67,29 @@ int main()
 
 	scene->setActiveCamera(camera);
 
+	auto& window = engine.getWindow();
+	window.addGUIElement<engine::gui::Text>("This is some useful text.");
+	auto* demo = window.addGUIElement<engine::gui::Checkbox>("Demo Window", true);
+	auto* another = window.addGUIElement<engine::gui::Checkbox>("Another Window", false);
+	auto* slider = window.addGUIElement<engine::gui::Slider>("Float");
+	auto* colorPicker = window.addGUIElement<engine::gui::ColorPicker>("COLOR");
+	int counter = 0;
+	engine::gui::Text* text = nullptr;
+
+	window.addGUIElement<engine::gui::Button>("BUTTON", [&counter, &text]() 
+		{
+			counter++;
+			text->setContent(std::format("counter: {}", counter));
+		});
+
+	text = window.addGUIElement<engine::gui::Text>(std::format("counter: {}", counter));
+	text->shouldRenderOnNewLine(false);
+
 	engine.start();
+
+	std::cout << "DEMO: " << (demo->isChecked() ? "TRUE" : "FALSE") << " ANOTHER: " << (another->isChecked() ? "TRUE" : "FALSE") << std::endl;
+	std::cout << "SLIDER: " << slider->getValue() << std::endl;
+	auto [r, g, b, a] = colorPicker->getColors();
+	std::cout << "COLOR: " << r << " " << g << " " << b << " " << a << std::endl;
 	return 0;
 }
