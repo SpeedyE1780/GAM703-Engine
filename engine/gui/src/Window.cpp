@@ -56,4 +56,24 @@ namespace gam703::engine::gui
 		glViewport(0, 0, width, height);
 	}
 
+	void Window::setUserData(void* userData)
+	{
+		glfwSetWindowUserPointer(m_window, userData);
+	}
+
+	void Window::setResizeCallback(GLFWframebuffersizefun callback)
+	{
+		glfwSetFramebufferSizeCallback(m_window, callback);
+	}
+
+	void Window::setCursorMovementCallback(GLFWcursorposfun callback)
+	{
+		glfwSetCursorPosCallback(m_window, callback);
+	}
+
+	void Window::setScrollCallback(GLFWscrollfun callback)
+	{
+		glfwSetScrollCallback(m_window, callback);
+	}
+
 } //gam703::engine::gui

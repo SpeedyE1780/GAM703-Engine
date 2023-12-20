@@ -27,7 +27,7 @@ namespace gam703::engine::core
 			}
 		}
 
-		void mouseMovment(GLFWwindow* glfwWindow, double mouseX, double mouseY)
+		void mouseMovement(GLFWwindow* glfwWindow, double mouseX, double mouseY)
 		{
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
@@ -46,12 +46,13 @@ namespace gam703::engine::core
 
 	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height), m_inputHandler(m_window.getGLFWWindow()), m_time(glfwGetTime()), m_scene(this)
 	{
+		m_window.setUserData(this);
+		m_window.setResizeCallback(resizeWindow);
+		m_window.setCursorMovementCallback(mouseMovement);
+		m_window.setScrollCallback(scrollCallback);
+
 		if (auto* glfwWindow = m_window.getGLFWWindow())
 		{
-			glfwSetWindowUserPointer(glfwWindow, this);
-			glfwSetFramebufferSizeCallback(glfwWindow, resizeWindow);
-			glfwSetCursorPosCallback(glfwWindow, mouseMovment);
-			glfwSetScrollCallback(glfwWindow, scrollCallback);
 			glfwSetInputMode(glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		}
 	}
