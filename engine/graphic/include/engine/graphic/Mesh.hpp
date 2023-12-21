@@ -28,7 +28,7 @@ namespace gam703::engine::graphic
 	{
 	public:
 		Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const std::vector<const core_interface::ITexture*>& textures);
-		void draw(core_interface::IMaterial& material) const;
+		void draw(const core_interface::IMaterial& material) const;
 
 	private:
 		void setupMesh();

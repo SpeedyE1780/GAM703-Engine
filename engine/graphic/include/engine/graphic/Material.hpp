@@ -16,10 +16,10 @@ namespace gam703::engine::graphic
 		Material(const Material& material);
 		Material& operator=(const Material& material);
 
-		virtual void setDiffuseTexture(int diffuseIndex, int textureIndex) override;
-		virtual void setSpecularTexture(int specularIndex, int textureIndex) override;
-		virtual void setNormalTexture(int normalIndex, int textureIndex) override;
-		virtual void setHeightTexture(int heightIndex, int textureIndex) override;
+		virtual void setDiffuseTexture(int diffuseIndex, int textureIndex) const override;
+		virtual void setSpecularTexture(int specularIndex, int textureIndex) const override;
+		virtual void setNormalTexture(int normalIndex, int textureIndex) const override;
+		virtual void setHeightTexture(int heightIndex, int textureIndex) const override;
 		virtual void setColor(const glm::vec3& color) override;
 
 		virtual core_interface::IShader* getShader() override { return &m_shader; }
@@ -27,10 +27,6 @@ namespace gam703::engine::graphic
 
 	private:
 		Shader m_shader;
-		int m_diffuseTextureIndex = 0;
-		int m_specularTextureIndex = 0;
-		int m_normalTextureIndex = 0;
-		int m_heightTextureIndex = 0;
 		glm::vec3 m_color = glm::vec3(1, 1, 1);
 	};
 }
