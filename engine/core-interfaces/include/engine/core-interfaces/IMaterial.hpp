@@ -11,10 +11,10 @@ namespace gam703::engine::core_interface
 	{
 	public:
 		virtual void setColor(const glm::vec3& color) = 0;
-		virtual void setDiffuseTexture(int diffuseIndex, int textureIndex) = 0;
-		virtual void setSpecularTexture(int specularIndex, int textureIndex) = 0;
-		virtual void setNormalTexture(int normalIndex, int textureIndex) = 0;
-		virtual void setHeightTexture(int heightIndex, int textureIndex) = 0;
+		virtual void setDiffuseTexture(int diffuseIndex, int textureIndex) const = 0;
+		virtual void setSpecularTexture(int specularIndex, int textureIndex) const = 0;
+		virtual void setNormalTexture(int normalIndex, int textureIndex) const = 0;
+		virtual void setHeightTexture(int heightIndex, int textureIndex) const = 0;
 		virtual IShader* getShader() = 0;
 		virtual const IShader* getShader() const = 0;
 	};

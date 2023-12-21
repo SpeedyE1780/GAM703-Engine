@@ -29,7 +29,7 @@ namespace gam703::engine::components
 		return new Renderer(transform, m_model, m_material);
 	}
 
-	void Renderer::render(const glm::mat4& projectionMatrix, const glm::mat4& viewMatrix)
+	void Renderer::render(const glm::mat4& projectionMatrix, const glm::mat4& viewMatrix) const
 	{
 		auto* shader = m_material.getShader();
 		shader->use();

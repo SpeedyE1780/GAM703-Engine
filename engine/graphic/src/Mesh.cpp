@@ -10,7 +10,7 @@ namespace gam703::engine::graphic
 		setupMesh();
 	}
 
-	void Mesh::draw(core_interface::IMaterial& material) const
+	void Mesh::draw(const core_interface::IMaterial& material) const
 	{
 		unsigned int diffuseIndex = 1;
 		unsigned int specularIndex = 1;
