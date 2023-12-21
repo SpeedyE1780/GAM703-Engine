@@ -35,6 +35,11 @@ namespace gam703::engine::core
 		}
 
 		m_projectionMatrix = glm::perspective(glm::radians(m_activeCamera->getFieldOfView()), aspectRatio, 0.1f, 100.0f);
+
+		for (auto* renderer : m_sceneObjects)
+		{
+			renderer->updateProjectionMatrix(m_projectionMatrix);
+		}
 	}
 
 	void SceneRenderer::render() const
@@ -44,7 +49,7 @@ namespace gam703::engine::core
 
 		for (auto* renderer : m_sceneObjects)
 		{
-			renderer->render(m_projectionMatrix, m_activeCamera->GetViewMatrix());
+			renderer->render(m_activeCamera->GetViewMatrix());
 		}
 	}
 }

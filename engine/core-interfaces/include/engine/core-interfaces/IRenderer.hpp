@@ -14,9 +14,10 @@ namespace gam703::engine::core_interface
 	public:
 		IRenderer(ITransform* transform);
 		virtual ~IRenderer() = default;
-		virtual void render(const glm::mat4& projectionMatrix, const glm::mat4& viewMatrix) const = 0;
+		virtual void render(const glm::mat4& viewMatrix) const = 0;
 		virtual  IMaterial* getMaterial() = 0;
 		virtual const IMaterial* getMaterial() const = 0;
+		virtual void updateProjectionMatrix(const glm::mat4& projectionMatrix) const = 0;
 	};
 }
 
