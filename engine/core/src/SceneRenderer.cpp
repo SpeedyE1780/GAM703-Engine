@@ -14,6 +14,7 @@ namespace gam703::engine::core
 	void SceneRenderer::addRenderer(core_interface::IRenderer* sceneObject)
 	{
 		m_sceneObjects.push_back(sceneObject);
+		sceneObject->updateProjectionMatrix(m_projectionMatrix);
 	}
 
 	void SceneRenderer::removeRenderer(core_interface::IRenderer* sceneObject)
