@@ -20,9 +20,12 @@ namespace gam703::engine::core
 		virtual void addRenderer(core_interface::IRenderer* sceneObject) override;
 		virtual void removeRenderer(core_interface::IRenderer* sceneObject) override;
 
-		void setActiveCamera(core_interface::ICamera* camera);
+		void setActiveCamera(core_interface::ICamera* camera) { m_activeCamera = camera; }
 		core_interface::ICamera* getActiveCamera() { return m_activeCamera; }
 		const core_interface::ICamera* getActiveCamera() const { return m_activeCamera; }
+
+		virtual void setAmbientLight(const glm::vec3& ambientLight) override;
+		virtual const glm::vec3& getAmbientLight() const override { return m_ambientLightColor; }
 
 		virtual void calculateProjectionMatrix(float aspectRatio) override;
 		virtual void render() const override;
@@ -31,6 +34,7 @@ namespace gam703::engine::core
 		std::vector<core_interface::IRenderer*> m_sceneObjects = {};
 		core_interface::ICamera* m_activeCamera = nullptr;
 		glm::mat4 m_projectionMatrix = glm::mat4(1);
+		glm::vec3 m_ambientLightColor = glm::vec3(1.0f, 1.0f, 1.0f);
 	};
 }
 

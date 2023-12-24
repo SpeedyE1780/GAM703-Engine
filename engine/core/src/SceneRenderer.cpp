@@ -15,6 +15,7 @@ namespace gam703::engine::core
 	{
 		m_sceneObjects.push_back(sceneObject);
 		sceneObject->updateProjectionMatrix(m_projectionMatrix);
+		sceneObject->getMaterial()->getShader()->setVec3("ambientLight", m_ambientLightColor);
 	}
 
 	void SceneRenderer::removeRenderer(core_interface::IRenderer* sceneObject)
@@ -23,9 +24,14 @@ namespace gam703::engine::core
 		m_sceneObjects.erase(newEnd, end(m_sceneObjects));
 	}
 
-	void SceneRenderer::setActiveCamera(core_interface::ICamera* camera)
+	void SceneRenderer::setAmbientLight(const glm::vec3& ambientLight)
 	{
-		m_activeCamera = camera;
+		m_ambientLightColor = ambientLight;
+
+		for (auto* renderer : m_sceneObjects)
+		{
+			renderer->getMaterial()->getShader()->setVec3("ambientLight", m_ambientLightColor);
+		}
 	}
 
 	void SceneRenderer::calculateProjectionMatrix(float aspectRatio)

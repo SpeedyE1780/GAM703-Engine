@@ -3,6 +3,8 @@
 
 #include <engine/core-interfaces/IRenderer.hpp>
 
+#include <glm/glm.hpp>
+
 namespace gam703::engine::core_interface
 {
 	class ISceneRenderer
@@ -14,6 +16,9 @@ namespace gam703::engine::core_interface
 
 		virtual void calculateProjectionMatrix(float aspectRatio) = 0;
 		virtual void render() const = 0;
+
+		virtual void setAmbientLight(const glm::vec3& ambientLight) = 0;
+		virtual const glm::vec3& getAmbientLight() const = 0;
 	};
 }
 

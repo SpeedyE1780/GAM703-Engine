@@ -76,10 +76,12 @@ int main()
 	int counter = 0;
 	engine::gui::Text* text = nullptr;
 
-	window.addGUIElement<engine::gui::Button>("BUTTON", [&counter, &text]() 
+	window.addGUIElement<engine::gui::Button>("BUTTON", [&counter, &text, scene, colorPicker]()
 		{
 			counter++;
 			text->setContent(std::format("counter: {}", counter));
+			auto [r, g, b, a] = colorPicker->getColors();
+			scene->getSceneRenderer()->setAmbientLight(glm::vec3(r, g, b));
 		});
 
 	text = window.addGUIElement<engine::gui::Text>(std::format("counter: {}", counter));
