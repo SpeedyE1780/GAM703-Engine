@@ -5,7 +5,7 @@
 
 namespace gam703::engine::components
 {
-	Transform::Transform(core_interface::IEngine* engine, core_interface::IScene* scene, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) : core_interface::ITransform(engine, scene), m_position(position), m_rotation(rotation), m_scale(scale), m_transformMatrix(glm::mat4(1)), m_shouldCalculateTransform(true), m_shouldUpdateDirectionVectors(true)
+	Transform::Transform(core_interface::IEngine* engine, core_interface::IScene* scene, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) : core_interface::ITransform(engine, scene), m_position(position), m_rotation(rotation), m_scale(scale)
 	{
 		calculateTransformMatrix();
 	}
@@ -53,6 +53,7 @@ namespace gam703::engine::components
 			m_transformMatrix = glm::translate(m_transformMatrix, m_position);
 			m_transformMatrix = m_transformMatrix * glm::toMat4(glm::quat(m_rotation));
 			m_transformMatrix = glm::scale(m_transformMatrix, m_scale);
+			m_normalMatrix = glm::mat3(glm::transpose(glm::inverse(m_transformMatrix)));
 			updateDirectionVectors();
 			m_shouldCalculateTransform = false;
 		}

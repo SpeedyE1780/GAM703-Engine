@@ -27,6 +27,7 @@ namespace gam703::engine::core_interface
 		virtual const glm::vec3& getRotation() const = 0;
 		virtual const glm::vec3& getScale() const = 0;
 		virtual const glm::mat4& getTransformationMatrix() const = 0;
+		virtual const glm::mat3& getNormalMatrix() const = 0;
 		virtual const glm::vec3& getFront() const = 0;
 		virtual const glm::vec3& getRight() const = 0;
 		virtual const glm::vec3& getUp() const = 0;

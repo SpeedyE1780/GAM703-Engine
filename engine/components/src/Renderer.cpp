@@ -40,6 +40,7 @@ namespace gam703::engine::components
 		shader->use();
 		shader->setMat4("view", viewMatrix);
 		shader->setMat4("model", m_transform->getTransformationMatrix());
+		shader->setMat3("normalMatrix", m_transform->getNormalMatrix());
 
 		m_model->draw(m_material);
 	}
