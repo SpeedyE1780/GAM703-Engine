@@ -37,7 +37,7 @@ namespace gam703::engine::core
 		struct AmbientLight
 		{
 			glm::vec3 m_color = glm::vec3(1.0f, 1.0f, 1.0f);
-			float m_intensity = 1.0f;
+			float m_intensity = 0.1f;
 		};
 
 		std::vector<core_interface::IRenderer*> m_sceneObjects = {};

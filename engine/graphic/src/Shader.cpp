@@ -200,7 +200,7 @@ namespace gam703::engine::graphic
 	void Shader::setSpecularSampler(int index, int value) const
 	{
 		use();
-		setInt("specular", value);
+		setInt("material.specularTexture", value);
 	}
 
 	void Shader::setNormalSampler(int index, int value) const
