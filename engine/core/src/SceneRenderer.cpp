@@ -1,5 +1,8 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
+
+#include <engine/components/Transform.hpp>
+
 #include <engine/core/SceneRenderer.hpp>
 
 #include <glm/gtc/matrix_transform.hpp>
@@ -56,7 +59,7 @@ namespace gam703::engine::core
 
 		for (auto* renderer : m_sceneObjects)
 		{
-			renderer->render(m_activeCamera->GetViewMatrix());
+			renderer->render(m_activeCamera->GetViewMatrix(), m_activeCamera->getTransform()->getPosition());
 		}
 	}
 }

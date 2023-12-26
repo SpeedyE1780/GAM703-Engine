@@ -22,7 +22,7 @@ namespace gam703::engine::components
 
 		virtual core_interface::IComponent* clone(core_interface::ITransform* transform) const override;
 
-		virtual void render(const glm::mat4& viewMatrix) const override;
+		virtual void render(const glm::mat4& viewMatrix, const glm::vec3& cameraPosition) const override;
 		virtual void tick(float deltaTime) override;
 
 		virtual core_interface::IMaterial* getMaterial() override { return &m_material; }
