@@ -5,15 +5,22 @@ in vec2 TexCoords;
 in vec3 Position;
 in vec3 Normal;
 
-uniform sampler2D diffuse;
-uniform vec3 color = vec3(1.0, 1.0, 1.0);
+struct Material
+{
+    sampler2D diffuseTexture;
+    vec3 color;
+    float shininess;
+    float specularStrength;
+};
+
 
 uniform vec3 ambientLight = vec3(1.0, 1.0, 1.0);
 uniform vec3 lightPosition;
 uniform vec3 lightColor = vec3(1.0, 1.0, 1.0);
-uniform float specularStrength = 0.5;
 
 uniform vec3 cameraPosition;
+
+uniform Material material;
 
 void main()
 {
@@ -25,9 +32,9 @@ void main()
     vec3 viewDirection = normalize(cameraPosition - Position);
     vec3 reflectDirection = reflect(-lightDirection, normal);
 
-    float specularImpact = pow(max(dot(viewDirection, reflectDirection), 0.0), 32);
-    vec3 specularColor = specularStrength * specularImpact * lightColor;
+    float specularImpact = pow(max(dot(viewDirection, reflectDirection), 0.0), material.shininess);
+    vec3 specularColor = material.specularStrength * specularImpact * lightColor;
 
-    vec3 outputColor = (ambientLight + diffuseColor + specularColor) * color;
-    FragColor = texture(diffuse, TexCoords) * vec4(outputColor, 1);
+    vec3 outputColor = (ambientLight + diffuseColor + specularColor) * material.color;
+    FragColor = texture(material.diffuseTexture, TexCoords) * vec4(outputColor, 1);
 }

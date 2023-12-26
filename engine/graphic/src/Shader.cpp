@@ -77,6 +77,7 @@ namespace gam703::engine::graphic
 	{
 		m_vertexShaderPath = shader.m_vertexShaderPath;
 		m_fragmentShaderPath = shader.m_fragmentShaderPath;
+		glDeleteProgram(m_id);
 		createShaderProgram();
 		return *this;
 	}
@@ -97,6 +98,15 @@ namespace gam703::engine::graphic
 
 		glDeleteShader(vertex);
 		glDeleteShader(fragment);
+
+		setDefaultValues();
+	}
+
+	void Shader::setDefaultValues()
+	{
+		setColor(glm::vec3(1.0f, 1.0f, 1.0f));
+		setFloat("material.shininess", 32.0f);
+		setFloat("material.specularStrength", 0.5f);
 	}
 
 	Shader::~Shader()
@@ -184,7 +194,7 @@ namespace gam703::engine::graphic
 	void Shader::setDiffuseSampler(int index, int value) const
 	{
 		use();
-		setInt("diffuse", value);
+		setInt("material.diffuseTexture", value);
 	}
 
 	void Shader::setSpecularSampler(int index, int value) const
@@ -208,7 +218,7 @@ namespace gam703::engine::graphic
 	void Shader::setColor(const glm::vec3& color) const
 	{
 		use();
-		setVec3("color", color);
+		setVec3("material.color", color);
 	}
 
 	Shader createDefaultShader()
