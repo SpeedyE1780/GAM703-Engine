@@ -20,6 +20,11 @@ namespace gam703::engine::core
 		sceneObject->updateProjectionMatrix(m_projectionMatrix);
 		sceneObject->getMaterial()->getShader()->setVec3("ambientLight.color", m_ambientLight.m_color);
 		sceneObject->getMaterial()->getShader()->setFloat("ambientLight.intensity", m_ambientLight.m_intensity);
+
+		if (m_directionalLight)
+		{
+			m_directionalLight->updateShaderLightInfo(*sceneObject->getMaterial()->getShader());
+		}
 	}
 
 	void SceneRenderer::removeRenderer(core_interface::IRenderer* sceneObject)
@@ -72,6 +77,16 @@ namespace gam703::engine::core
 		for (auto* renderer : m_sceneObjects)
 		{
 			renderer->updateProjectionMatrix(m_projectionMatrix);
+		}
+	}
+
+	void SceneRenderer::setDirectionalLight(core_interface::ILight* light)
+	{
+		m_directionalLight = dynamic_cast<components::DirectionalLight*>(light);
+
+		for (auto* renderer : m_sceneObjects)
+		{
+			m_directionalLight->updateShaderLightInfo(*renderer->getMaterial()->getShader());
 		}
 	}
 

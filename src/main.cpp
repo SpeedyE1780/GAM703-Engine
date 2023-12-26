@@ -1,8 +1,9 @@
 #include <engine/core/Engine.hpp>
 
-#include <engine/components/Transform.hpp>
 #include <engine/components/Camera.hpp>
+#include <engine/components/DirectionalLight.hpp>
 #include <engine/components/Renderer.hpp>
+#include <engine/components/Transform.hpp>
 
 #include <engine/gui/Button.hpp>
 #include <engine/gui/Checkbox.hpp>
@@ -66,6 +67,11 @@ int main()
 	//cameraTransform->addComponent<gam703::game::components::MovementController>();
 
 	scene->setActiveCamera(camera);
+
+	auto* directionalLightTransform = scene->addTransform(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(glm::radians(-90.f), 0.0f, 0.0f));
+	auto* directionalLight = directionalLightTransform->addComponent < engine::components::DirectionalLight>(glm::vec3(1.0f, 1.0f, 1.0f), 1.0f);
+
+	scene->getSceneRenderer()->setDirectionalLight(directionalLight);
 
 	auto& window = engine.getWindow();
 	window.addGUIElement<engine::gui::Text>("This is some useful text.");

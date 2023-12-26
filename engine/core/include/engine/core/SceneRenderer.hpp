@@ -5,6 +5,8 @@
 #include <engine/core-interfaces/ICamera.hpp>
 #include <engine/core-interfaces/IRenderer.hpp>
 
+#include <engine/components/DirectionalLight.hpp>
+
 #include <glm/mat4x4.hpp>
 
 #include <vector>
@@ -33,6 +35,10 @@ namespace gam703::engine::core
 		virtual void calculateProjectionMatrix(float aspectRatio) override;
 		virtual void render() const override;
 
+		virtual void setDirectionalLight(core_interface::ILight* light) override;
+		virtual core_interface::ILight* getDirectionalLight() override { return m_directionalLight; }
+		virtual const core_interface::ILight* getDirectionalLight() const override { return m_directionalLight; }
+
 	private:
 		struct AmbientLight
 		{
@@ -44,7 +50,7 @@ namespace gam703::engine::core
 		core_interface::ICamera* m_activeCamera = nullptr;
 		glm::mat4 m_projectionMatrix = glm::mat4(1);
 		AmbientLight m_ambientLight{};
-
+		components::DirectionalLight* m_directionalLight = nullptr;
 	};
 }
 

@@ -8,6 +8,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 #CPP
 src/ICamera.cpp
 src/IComponent.cpp
+src/ILight.cpp
 src/IRenderer.cpp
 src/ITransform.cpp
 
@@ -18,6 +19,7 @@ include/engine/core-interfaces/IComponent.hpp
 include/engine/core-interfaces/IEngine.hpp
 include/engine/core-interfaces/IEngine.fwd.hpp
 include/engine/core-interfaces/IInput.hpp
+include/engine/core-interfaces/ILight.hpp
 include/engine/core-interfaces/IModel.hpp
 include/engine/core-interfaces/IRenderer.hpp
 include/engine/core-interfaces/IScene.hpp

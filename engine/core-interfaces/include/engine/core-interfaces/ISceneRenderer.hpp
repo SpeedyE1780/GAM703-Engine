@@ -2,6 +2,7 @@
 #define GAM703_ENGINE_CORE_INTERFACES_ISCENE_RENDERER_HPP
 
 #include <engine/core-interfaces/IRenderer.hpp>
+#include <engine/core-interfaces/ILight.hpp>
 
 #include <glm/glm.hpp>
 
@@ -22,6 +23,9 @@ namespace gam703::engine::core_interface
 		virtual const glm::vec3& getAmbientLightColor() const = 0;
 		virtual void setAmbientLightIntensity(float intensity) = 0;
 		virtual float getAmbientLightIntensity() const = 0;
+		virtual void setDirectionalLight(ILight* light) = 0;
+		virtual ILight* getDirectionalLight() = 0;
+		virtual const ILight* getDirectionalLight() const = 0;
 	};
 }
 
