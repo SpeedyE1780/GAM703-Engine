@@ -18,7 +18,8 @@ namespace gam703::engine::core
 	{
 		m_sceneObjects.push_back(sceneObject);
 		sceneObject->updateProjectionMatrix(m_projectionMatrix);
-		sceneObject->getMaterial()->getShader()->setVec3("ambientLight", m_ambientLightColor);
+		sceneObject->getMaterial()->getShader()->setVec3("ambientLight.color", m_ambientLight.m_color);
+		sceneObject->getMaterial()->getShader()->setFloat("ambientLight.intensity", m_ambientLight.m_intensity);
 	}
 
 	void SceneRenderer::removeRenderer(core_interface::IRenderer* sceneObject)
@@ -27,13 +28,35 @@ namespace gam703::engine::core
 		m_sceneObjects.erase(newEnd, end(m_sceneObjects));
 	}
 
-	void SceneRenderer::setAmbientLight(const glm::vec3& ambientLight)
+	void SceneRenderer::setAmbientLight(const glm::vec3& color, float strength)
 	{
-		m_ambientLightColor = ambientLight;
+		m_ambientLight.m_color = color;
+		m_ambientLight.m_intensity = strength;
 
 		for (auto* renderer : m_sceneObjects)
 		{
-			renderer->getMaterial()->getShader()->setVec3("ambientLight", m_ambientLightColor);
+			renderer->getMaterial()->getShader()->setVec3("ambientLight.color", m_ambientLight.m_color);
+			renderer->getMaterial()->getShader()->setFloat("ambientLight.intensity", m_ambientLight.m_intensity);
+		}
+	}
+
+	void SceneRenderer::setAmbientLightColor(const glm::vec3& color)
+	{
+		m_ambientLight.m_color = color;
+
+		for (auto* renderer : m_sceneObjects)
+		{
+			renderer->getMaterial()->getShader()->setVec3("ambientLight.color", m_ambientLight.m_color);
+		}
+	}
+
+	void SceneRenderer::setAmbientLightIntensity(float intensity)
+	{
+		m_ambientLight.m_intensity = intensity;
+
+		for (auto* renderer : m_sceneObjects)
+		{
+			renderer->getMaterial()->getShader()->setFloat("ambientLight.intensity", m_ambientLight.m_intensity);
 		}
 	}
 

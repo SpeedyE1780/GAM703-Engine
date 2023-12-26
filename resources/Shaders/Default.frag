@@ -13,14 +13,19 @@ struct Material
     float specularStrength;
 };
 
+struct AmbientLight
+{
+    vec3 color;
+    float intensity;
+};
 
-uniform vec3 ambientLight = vec3(1.0, 1.0, 1.0);
 uniform vec3 lightPosition;
 uniform vec3 lightColor = vec3(1.0, 1.0, 1.0);
 
 uniform vec3 cameraPosition;
 
 uniform Material material;
+uniform AmbientLight ambientLight;
 
 void main()
 {
@@ -35,6 +40,6 @@ void main()
     float specularImpact = pow(max(dot(viewDirection, reflectDirection), 0.0), material.shininess);
     vec3 specularColor = material.specularStrength * specularImpact * lightColor;
 
-    vec3 outputColor = (ambientLight + diffuseColor + specularColor) * material.color;
+    vec3 outputColor = ((ambientLight.color * ambientLight.intensity) + diffuseColor + specularColor) * material.color;
     FragColor = texture(material.diffuseTexture, TexCoords) * vec4(outputColor, 1);
 }

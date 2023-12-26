@@ -12,15 +12,21 @@ struct Material
     float specularStrength;
 };
 
+struct AmbientLight
+{
+    vec3 color;
+    float intensity;
+};
+
 uniform vec3 secondColor = vec3(0.0, 0.0, 0.0);
 
-uniform vec3 ambientLight = vec3(1.0, 1.0, 1.0);
 uniform vec3 lightPosition;
 uniform vec3 lightColor = vec3(1.0, 1.0, 1.0);
 
 uniform vec3 cameraPosition;
 
 uniform Material material;
+uniform AmbientLight ambientLight;
 
 void main()
 {
@@ -34,7 +40,7 @@ void main()
     float specularImpact = pow(max(dot(viewDirection, reflectDirection), 0.0), material.shininess);
     vec3 specularColor = material.specularStrength * specularImpact * lightColor;
 
-    vec3 lightColor = ambientLight + diffuseColor + specularColor;
+    vec3 lightColor = (ambientLight.color * ambientLight.intensity) + diffuseColor + specularColor;
 
     vec3 pos = floor(Position / 10);
     float patternMask = mod(pos.x + mod(pos.y, 2) + mod(pos.z, 2), 2);

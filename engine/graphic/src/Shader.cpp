@@ -102,7 +102,7 @@ namespace gam703::engine::graphic
 		setDefaultValues();
 	}
 
-	void Shader::setDefaultValues()
+	void Shader::setDefaultValues() const
 	{
 		setColor(glm::vec3(1.0f, 1.0f, 1.0f));
 		setFloat("material.shininess", 32.0f);

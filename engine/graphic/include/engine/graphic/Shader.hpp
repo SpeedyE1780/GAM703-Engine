@@ -39,7 +39,7 @@ namespace gam703::engine::graphic
 		virtual void setColor(const glm::vec3& color) const override;
 	private:
 		void createShaderProgram();
-		void setDefaultValues();
+		void setDefaultValues() const;
 
 		unsigned int m_id = 0;
 		std::string m_vertexShaderPath;

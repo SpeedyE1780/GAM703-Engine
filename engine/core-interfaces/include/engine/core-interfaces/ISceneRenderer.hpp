@@ -17,8 +17,11 @@ namespace gam703::engine::core_interface
 		virtual void calculateProjectionMatrix(float aspectRatio) = 0;
 		virtual void render() const = 0;
 
-		virtual void setAmbientLight(const glm::vec3& ambientLight) = 0;
-		virtual const glm::vec3& getAmbientLight() const = 0;
+		virtual void setAmbientLight(const glm::vec3& color, float strength) = 0;
+		virtual void setAmbientLightColor(const glm::vec3& color) = 0;
+		virtual const glm::vec3& getAmbientLightColor() const = 0;
+		virtual void setAmbientLightIntensity(float intensity) = 0;
+		virtual float getAmbientLightIntensity() const = 0;
 	};
 }
 

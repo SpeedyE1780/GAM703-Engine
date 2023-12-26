@@ -76,12 +76,12 @@ int main()
 	int counter = 0;
 	engine::gui::Text* text = nullptr;
 
-	window.addGUIElement<engine::gui::Button>("BUTTON", [&counter, &text, scene, colorPicker]()
+	window.addGUIElement<engine::gui::Button>("BUTTON", [&counter, &text, scene, colorPicker, slider]()
 		{
 			counter++;
 			text->setContent(std::format("counter: {}", counter));
 			auto [r, g, b, a] = colorPicker->getColors();
-			scene->getSceneRenderer()->setAmbientLight(glm::vec3(r, g, b));
+			scene->getSceneRenderer()->setAmbientLight(glm::vec3(r, g, b), slider->getValue());
 		});
 
 	text = window.addGUIElement<engine::gui::Text>(std::format("counter: {}", counter));
@@ -90,8 +90,5 @@ int main()
 	engine.start();
 
 	std::cout << "DEMO: " << (demo->isChecked() ? "TRUE" : "FALSE") << " ANOTHER: " << (another->isChecked() ? "TRUE" : "FALSE") << std::endl;
-	std::cout << "SLIDER: " << slider->getValue() << std::endl;
-	auto [r, g, b, a] = colorPicker->getColors();
-	std::cout << "COLOR: " << r << " " << g << " " << b << " " << a << std::endl;
 	return 0;
 }
