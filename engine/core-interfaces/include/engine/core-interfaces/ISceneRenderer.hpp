@@ -26,6 +26,9 @@ namespace gam703::engine::core_interface
 		virtual void setDirectionalLight(ILight* light) = 0;
 		virtual ILight* getDirectionalLight() = 0;
 		virtual const ILight* getDirectionalLight() const = 0;
+
+		virtual void addLightSource(ILight* light) = 0;
+		virtual void removeLightSource(ILight* light) = 0;
 	};
 }
 

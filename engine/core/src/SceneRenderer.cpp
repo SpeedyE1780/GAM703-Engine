@@ -25,12 +25,33 @@ namespace gam703::engine::core
 		{
 			m_directionalLight->updateShaderLightInfo(*sceneObject->getMaterial()->getShader());
 		}
+
+		for (auto* lightSource : m_lightSources)
+		{
+			lightSource->updateShaderLightInfo(*sceneObject->getMaterial()->getShader());
+		}
 	}
 
 	void SceneRenderer::removeRenderer(core_interface::IRenderer* sceneObject)
 	{
 		auto newEnd = std::remove_if(begin(m_sceneObjects), end(m_sceneObjects), [sceneObject](core_interface::IRenderer* renderer) { return sceneObject == renderer; });
 		m_sceneObjects.erase(newEnd, end(m_sceneObjects));
+	}
+
+	void SceneRenderer::addLightSource(core_interface::ILight* light)
+	{
+		m_lightSources.push_back(light);
+
+		for (auto* renderer : m_sceneObjects)
+		{
+			light->updateShaderLightInfo(*renderer->getMaterial()->getShader());
+		}
+	}
+
+	void SceneRenderer::removeLightSource(core_interface::ILight* light)
+	{
+		auto newEnd = std::remove_if(begin(m_lightSources), end(m_lightSources), [light](core_interface::ILight* lightSource) { return light == lightSource; });
+		m_lightSources.erase(newEnd, end(m_lightSources));
 	}
 
 	void SceneRenderer::setAmbientLight(const glm::vec3& color, float strength)
@@ -97,8 +118,12 @@ namespace gam703::engine::core
 
 		for (auto* renderer : m_sceneObjects)
 		{
+			for (auto* lightSource : m_lightSources)
+			{
+				lightSource->updateShaderLightInfo(*renderer->getMaterial()->getShader());
+			}
+
 			renderer->render(m_activeCamera->GetViewMatrix(), m_activeCamera->getTransform()->getPosition());
 		}
 	}
 }
-

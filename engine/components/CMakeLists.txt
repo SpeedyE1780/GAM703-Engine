@@ -8,6 +8,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 #CPP
 src/Camera.cpp
 src/DirectionalLight.cpp
+src/PointLight.cpp
 src/Renderer.cpp
 src/Transform.cpp
 
@@ -15,6 +16,7 @@ src/Transform.cpp
 include/engine/components/Camera.hpp
 include/engine/components/Config.hpp
 include/engine/components/DirectionalLight.hpp
+include/engine/components/PointLight.hpp
 include/engine/components/Renderer.hpp
 include/engine/components/Transform.hpp
 include/engine/components/Transform.fwd.hpp

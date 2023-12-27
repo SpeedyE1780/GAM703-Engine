@@ -2,6 +2,7 @@
 
 #include <engine/components/Camera.hpp>
 #include <engine/components/DirectionalLight.hpp>
+#include <engine/components/PointLight.hpp>
 #include <engine/components/Renderer.hpp>
 #include <engine/components/Transform.hpp>
 
@@ -73,21 +74,30 @@ int main()
 
 	scene->getSceneRenderer()->setDirectionalLight(directionalLight);
 
+	auto* pointLightTransform = scene->addTransform(glm::vec3(0.0f, 30.0f, 0.0f));
+	pointLightTransform->addComponent<engine::components::Renderer>(cubeModel);
+	auto* pointLight = pointLightTransform->addComponent<engine::components::PointLight>(5.0f, glm::vec3(1.0f, 0.0f, 0.0f), 5.0f);
+
+	scene->getSceneRenderer()->addLightSource(pointLight);
+
 	auto& window = engine.getWindow();
 	window.addGUIElement<engine::gui::Text>("This is some useful text.");
 	auto* demo = window.addGUIElement<engine::gui::Checkbox>("Demo Window", true);
 	auto* another = window.addGUIElement<engine::gui::Checkbox>("Another Window", false);
 	auto* slider = window.addGUIElement<engine::gui::Slider>("Float");
+	auto* pointLightHeight = window.addGUIElement<engine::gui::Slider>("pointLightHeight", 0.0f, 30.0f);
 	auto* colorPicker = window.addGUIElement<engine::gui::ColorPicker>("COLOR");
 	int counter = 0;
 	engine::gui::Text* text = nullptr;
 
-	window.addGUIElement<engine::gui::Button>("BUTTON", [&counter, &text, scene, colorPicker, slider]()
+	window.addGUIElement<engine::gui::Button>("BUTTON", [&counter, &text, scene, colorPicker, slider, pointLightHeight, pointLightTransform]()
 		{
 			counter++;
 			text->setContent(std::format("counter: {}", counter));
 			auto [r, g, b, a] = colorPicker->getColors();
 			scene->getSceneRenderer()->setAmbientLight(glm::vec3(r, g, b), slider->getValue());
+
+			pointLightTransform->setPosition(glm::vec3(0.0f, pointLightHeight->getValue(), 0.0f));
 		});
 
 	text = window.addGUIElement<engine::gui::Text>(std::format("counter: {}", counter));

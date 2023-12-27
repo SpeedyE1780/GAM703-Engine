@@ -39,6 +39,9 @@ namespace gam703::engine::core
 		virtual core_interface::ILight* getDirectionalLight() override { return m_directionalLight; }
 		virtual const core_interface::ILight* getDirectionalLight() const override { return m_directionalLight; }
 
+		virtual void addLightSource(core_interface::ILight* light) override;
+		virtual void removeLightSource(core_interface::ILight* light) override;
+
 	private:
 		struct AmbientLight
 		{
@@ -46,11 +49,12 @@ namespace gam703::engine::core
 			float m_intensity = 0.1f;
 		};
 
-		std::vector<core_interface::IRenderer*> m_sceneObjects = {};
+		std::vector<core_interface::IRenderer*> m_sceneObjects{};
 		core_interface::ICamera* m_activeCamera = nullptr;
 		glm::mat4 m_projectionMatrix = glm::mat4(1);
 		AmbientLight m_ambientLight{};
 		components::DirectionalLight* m_directionalLight = nullptr;
+		std::vector<core_interface::ILight*> m_lightSources{};
 	};
 }
 
