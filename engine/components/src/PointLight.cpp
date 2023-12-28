@@ -1,14 +1,14 @@
 #include <engine/components/PointLight.hpp>
-#include <engine/components/Transform.hpp>
+#include <engine/core-interfaces/Transform.hpp>
 
 namespace gam703::engine::components
 {
-	PointLight::PointLight(core_interface::ITransform* transform, const glm::vec3& color, float range, float intensity) :
+	PointLight::PointLight(core_interface::Transform* transform, const glm::vec3& color, float range, float intensity) :
 		core_interface::ILight(transform, color, intensity), m_range(range)
 	{
 	}
 
-	core_interface::IComponent* PointLight::clone(core_interface::ITransform* transform) const
+	core_interface::IComponent* PointLight::clone(core_interface::Transform* transform) const
 	{
 		return new PointLight(m_transform, m_color, m_range, m_intensity);
 	}

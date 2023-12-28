@@ -9,9 +9,9 @@ namespace gam703::engine::components
 	class ENGINE_COMPONENTS_API DirectionalLight : public core_interface::ILight
 	{
 	public:
-		DirectionalLight(core_interface::ITransform* transform, const glm::vec3& color, float intensity = 1.0f);
+		DirectionalLight(core_interface::Transform* transform, const glm::vec3& color, float intensity = 1.0f);
 
-		virtual core_interface::IComponent* clone(core_interface::ITransform* transform) const override;
+		virtual core_interface::IComponent* clone(core_interface::Transform* transform) const override;
 
 		virtual void tick(float deltaTime) override {}
 

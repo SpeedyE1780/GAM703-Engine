@@ -10,7 +10,7 @@ src/ICamera.cpp
 src/IComponent.cpp
 src/ILight.cpp
 src/IRenderer.cpp
-src/ITransform.cpp
+src/Transform.cpp
 
 #HPP
 include/engine/core-interfaces/Config.hpp
@@ -29,8 +29,8 @@ include/engine/core-interfaces/IResourceManager.hpp
 include/engine/core-interfaces/IShader.hpp
 include/engine/core-interfaces/ITexture.hpp
 include/engine/core-interfaces/ITime.hpp
-include/engine/core-interfaces/ITransform.hpp
-include/engine/core-interfaces/ITransform.fwd.hpp
+include/engine/core-interfaces/Transform.hpp
+include/engine/core-interfaces/Transform.fwd.hpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include/)
