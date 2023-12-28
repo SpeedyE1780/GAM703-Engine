@@ -61,6 +61,11 @@ namespace gam703::engine::core_interface
 		return *this;
 	}
 
+	ITransform* ITransform::clone() const
+	{
+		return new ITransform(*this);
+	}
+
 	void ITransform::setPosition(const glm::vec3& position)
 	{
 		if (m_position != position)

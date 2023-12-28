@@ -21,9 +21,4 @@ namespace gam703::engine::components
 
 		return *this;
 	}
-
-	core_interface::ITransform* Transform::clone() const
-	{
-		return new Transform(*this);
-	}
 }

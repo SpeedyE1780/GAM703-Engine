@@ -25,7 +25,7 @@ namespace gam703::engine::core_interface
 		ITransform& operator=(const ITransform& transform);
 		virtual ~ITransform() = default;
 
-		virtual ITransform* clone() const = 0;
+		ITransform* clone() const;
 
 		const glm::vec3& getPosition() const { return m_position; }
 		const glm::vec3& getRotation() const { return m_rotation; }

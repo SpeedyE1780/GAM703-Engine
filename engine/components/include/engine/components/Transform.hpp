@@ -22,8 +22,6 @@ namespace gam703::engine::components
 		~Transform() = default;
 		Transform(const Transform& transform);
 		Transform& operator=(const Transform& transform);
-
-		virtual core_interface::ITransform* clone() const override;
 	};
 }
 

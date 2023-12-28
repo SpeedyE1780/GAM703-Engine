@@ -246,4 +246,48 @@ namespace gam703::engine::components::tests
 
 		EXPECT_TRUE(compareMatrix(transformMatrix, transform.getTransformationMatrix()));
 	}
+
+	TEST(TransformTests, CloningTests)
+	{
+		glm::vec3 position(5, 3, 2);
+		glm::vec3 eulerAngles(glm::radians(25.0f), glm::radians(35.0f), glm::radians(45.0f));
+		glm::vec3 scale(1, 2, 3);
+		glm::mat4 transformMatrix = glm::mat4(1);
+		Transform transform{ nullptr, nullptr };
+		const glm::mat4& transformationMatrix = transform.getTransformationMatrix();
+
+		ASSERT_TRUE(compareMatrix(transformMatrix, transformationMatrix));
+
+		transform.setPosition(position);
+
+		ASSERT_EQ(position, transform.getPosition());
+		ASSERT_TRUE(compareMatrix(transformMatrix, transformationMatrix));
+
+		transform.setRotation(eulerAngles);
+
+		ASSERT_EQ(eulerAngles, transform.getRotation());
+		ASSERT_TRUE(compareMatrix(transformMatrix, transformationMatrix));
+
+		transform.setScale(scale);
+		ASSERT_EQ(scale, transform.getScale());
+		ASSERT_TRUE(compareMatrix(transformMatrix, transformationMatrix));
+
+		transform.calculateTransformMatrix();
+		transformMatrix = glm::translate(transformMatrix, position);
+		transformMatrix = calculateRotationMatrix(transformMatrix, eulerAngles);
+		transformMatrix = glm::scale(transformMatrix, scale);
+
+		ASSERT_TRUE(compareMatrix(transformMatrix, transformationMatrix));
+
+		Transform copyConstructor{ transform };
+		Transform copyAssignment{ transform };
+		core_interface::ITransform* clone = transform.clone();
+
+		EXPECT_TRUE(compareMatrix(transformMatrix, copyConstructor.getTransformationMatrix()));
+		EXPECT_TRUE(compareMatrix(transformMatrix, copyAssignment.getTransformationMatrix()));
+		EXPECT_TRUE(compareMatrix(transformMatrix, clone->getTransformationMatrix()));
+
+		delete clone;
+	}
+
 } //gam703::engine::components::tests
