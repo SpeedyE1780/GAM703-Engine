@@ -5,6 +5,8 @@
 #include <engine/core-interfaces/ICamera.hpp>
 #include <engine/core-interfaces/IRenderer.hpp>
 
+#include <engine/components/DirectionalLight.hpp>
+
 #include <glm/mat4x4.hpp>
 
 #include <vector>
@@ -20,17 +22,39 @@ namespace gam703::engine::core
 		virtual void addRenderer(core_interface::IRenderer* sceneObject) override;
 		virtual void removeRenderer(core_interface::IRenderer* sceneObject) override;
 
-		void setActiveCamera(core_interface::ICamera* camera);
+		void setActiveCamera(core_interface::ICamera* camera) { m_activeCamera = camera; }
 		core_interface::ICamera* getActiveCamera() { return m_activeCamera; }
 		const core_interface::ICamera* getActiveCamera() const { return m_activeCamera; }
+
+		virtual void setAmbientLight(const glm::vec3& color, float strength) override;
+		virtual void setAmbientLightColor(const glm::vec3& color) override;
+		virtual const glm::vec3& getAmbientLightColor() const override { return m_ambientLight.m_color; }
+		virtual void setAmbientLightIntensity(float intensity) override;
+		virtual float getAmbientLightIntensity() const { return m_ambientLight.m_intensity; }
 
 		virtual void calculateProjectionMatrix(float aspectRatio) override;
 		virtual void render() const override;
 
+		virtual void setDirectionalLight(core_interface::ILight* light) override;
+		virtual core_interface::ILight* getDirectionalLight() override { return m_directionalLight; }
+		virtual const core_interface::ILight* getDirectionalLight() const override { return m_directionalLight; }
+
+		virtual void addLightSource(core_interface::ILight* light) override;
+		virtual void removeLightSource(core_interface::ILight* light) override;
+
 	private:
-		std::vector<core_interface::IRenderer*> m_sceneObjects = {};
+		struct AmbientLight
+		{
+			glm::vec3 m_color = glm::vec3(1.0f, 1.0f, 1.0f);
+			float m_intensity = 0.1f;
+		};
+
+		std::vector<core_interface::IRenderer*> m_sceneObjects{};
 		core_interface::ICamera* m_activeCamera = nullptr;
 		glm::mat4 m_projectionMatrix = glm::mat4(1);
+		AmbientLight m_ambientLight{};
+		components::DirectionalLight* m_directionalLight = nullptr;
+		std::vector<core_interface::ILight*> m_lightSources{};
 	};
 }
 

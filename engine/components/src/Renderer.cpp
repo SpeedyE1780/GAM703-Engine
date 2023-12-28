@@ -29,13 +29,20 @@ namespace gam703::engine::components
 		return new Renderer(transform, m_model, m_material);
 	}
 
-	void Renderer::render(const glm::mat4& projectionMatrix, const glm::mat4& viewMatrix)
+	void Renderer::updateProjectionMatrix(const glm::mat4& projectionMatrix) const
+	{
+		m_material.getShader()->setMat4("projection", projectionMatrix);
+	}
+
+	void Renderer::render(const glm::mat4& viewMatrix, const glm::vec3& cameraPosition) const
 	{
 		auto* shader = m_material.getShader();
 		shader->use();
-		shader->setMat4("projection", projectionMatrix);
 		shader->setMat4("view", viewMatrix);
 		shader->setMat4("model", m_transform->getTransformationMatrix());
+		shader->setMat3("normalMatrix", m_transform->getNormalMatrix());
+		shader->setVec3("lightPosition", cameraPosition);
+		shader->setVec3("cameraPosition", cameraPosition);
 
 		m_model->draw(m_material);
 	}

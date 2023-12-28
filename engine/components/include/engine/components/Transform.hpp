@@ -29,6 +29,7 @@ namespace gam703::engine::components
 		virtual const glm::vec3& getRotation() const override { return m_rotation; }
 		virtual const glm::vec3& getScale() const override { return m_scale; }
 		virtual const glm::mat4& getTransformationMatrix() const override { return m_transformMatrix; }
+		virtual const glm::mat3& getNormalMatrix() const override { return m_normalMatrix; }
 		virtual const glm::vec3& getFront() const override { return m_front; }
 		virtual const glm::vec3& getRight() const override { return m_right; }
 		virtual const glm::vec3& getUp() const override { return m_up; }
@@ -53,12 +54,13 @@ namespace gam703::engine::components
 		glm::vec3 m_position;
 		glm::vec3 m_rotation;
 		glm::vec3 m_scale;
-		glm::mat4 m_transformMatrix;
+		glm::mat4 m_transformMatrix = glm::mat4(1);
+		glm::mat3 m_normalMatrix = glm::mat3(1);
 		glm::vec3 m_front = glm::vec3(0, 0, 0);
 		glm::vec3 m_up = glm::vec3(0, 0, 0);
 		glm::vec3 m_right = glm::vec3(0, 0, 0);
-		bool m_shouldCalculateTransform;
-		bool m_shouldUpdateDirectionVectors;
+		bool m_shouldCalculateTransform = true;
+		bool m_shouldUpdateDirectionVectors = true;
 	};
 }
 
