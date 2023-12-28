@@ -25,8 +25,6 @@ namespace gam703::engine::components
 
 		virtual core_interface::ITransform* clone() const override;
 
-		virtual void translate(const glm::vec3& offset) override;
-		virtual void translate(float x, float y, float z) override;
 		virtual void rotate(const glm::vec3& eulerAngles) override;
 		virtual void rotate(float x, float y, float z) override;
 

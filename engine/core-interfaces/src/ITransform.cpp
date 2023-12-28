@@ -104,6 +104,19 @@ namespace gam703::engine::core_interface
 		setScale(glm::vec3(x, y, z));
 	}
 
+	void ITransform::translate(const glm::vec3& offset)
+	{
+		if (offset.x != 0 || offset.y != 0 || offset.z != 0)
+		{
+			setPosition(m_position + offset);
+		}
+	}
+
+	void ITransform::translate(float x, float y, float z)
+	{
+		translate(glm::vec3(x, y, z));
+	}
+
 	void ITransform::calculateTransformMatrix()
 	{
 		if (m_shouldCalculateTransform)

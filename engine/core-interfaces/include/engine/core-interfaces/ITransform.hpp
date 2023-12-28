@@ -47,8 +47,8 @@ namespace gam703::engine::core_interface
 		void setScale(const glm::vec3& scale);
 		void setScale(float x, float y, float z);
 
-		virtual void translate(const glm::vec3& offset) = 0;
-		virtual void translate(float x, float y, float z) = 0;
+		void translate(const glm::vec3& offset);
+		void translate(float x, float y, float z);
 		virtual void rotate(const glm::vec3& eulerAngles) = 0;
 		virtual void rotate(float x, float y, float z) = 0;
 

@@ -27,19 +27,6 @@ namespace gam703::engine::components
 		return new Transform(*this);
 	}
 
-	void Transform::translate(const glm::vec3& offset)
-	{
-		if (offset.x != 0 || offset.y != 0 || offset.z != 0)
-		{
-			setPosition(getPosition() + offset);
-		}
-	}
-
-	void Transform::translate(float x, float y, float z)
-	{
-		translate(glm::vec3(x, y, z));
-	}
-
 	void Transform::rotate(const glm::vec3& eulerAngles)
 	{
 		if (eulerAngles.x != 0 || eulerAngles.y != 0 || eulerAngles.z != 0)
