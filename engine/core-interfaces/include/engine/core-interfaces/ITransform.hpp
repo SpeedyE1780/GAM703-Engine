@@ -49,8 +49,8 @@ namespace gam703::engine::core_interface
 
 		void translate(const glm::vec3& offset);
 		void translate(float x, float y, float z);
-		virtual void rotate(const glm::vec3& eulerAngles) = 0;
-		virtual void rotate(float x, float y, float z) = 0;
+		void rotate(const glm::vec3& eulerAngles) ;
+		void rotate(float x, float y, float z);
 
 		IEngine* getEngine() { return m_engine; }
 		const IEngine* getEngine() const { return m_engine; }

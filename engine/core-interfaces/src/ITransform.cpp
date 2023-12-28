@@ -117,6 +117,19 @@ namespace gam703::engine::core_interface
 		translate(glm::vec3(x, y, z));
 	}
 
+	void ITransform::rotate(const glm::vec3& eulerAngles)
+	{
+		if (eulerAngles.x != 0 || eulerAngles.y != 0 || eulerAngles.z != 0)
+		{
+			setRotation(m_rotation + eulerAngles);
+		}
+	}
+
+	void ITransform::rotate(float x, float y, float z)
+	{
+		rotate(glm::vec3(x, y, z));
+	}
+
 	void ITransform::calculateTransformMatrix()
 	{
 		if (m_shouldCalculateTransform)

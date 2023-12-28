@@ -24,10 +24,6 @@ namespace gam703::engine::components
 		Transform& operator=(const Transform& transform);
 
 		virtual core_interface::ITransform* clone() const override;
-
-		virtual void rotate(const glm::vec3& eulerAngles) override;
-		virtual void rotate(float x, float y, float z) override;
-
 	};
 }
 

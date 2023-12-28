@@ -26,17 +26,4 @@ namespace gam703::engine::components
 	{
 		return new Transform(*this);
 	}
-
-	void Transform::rotate(const glm::vec3& eulerAngles)
-	{
-		if (eulerAngles.x != 0 || eulerAngles.y != 0 || eulerAngles.z != 0)
-		{
-			setRotation(getRotation() + eulerAngles);
-		}
-	}
-
-	void Transform::rotate(float x, float y, float z)
-	{
-		rotate(glm::vec3(x, y, z));
-	}
 }
