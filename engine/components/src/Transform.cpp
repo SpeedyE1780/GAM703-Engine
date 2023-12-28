@@ -6,15 +6,13 @@
 namespace gam703::engine::components
 {
 	Transform::Transform(core_interface::IEngine* engine, core_interface::IScene* scene, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) :
-		core_interface::ITransform(engine, scene, position, rotation),
-		m_scale(scale)
+		core_interface::ITransform(engine, scene, position, rotation, scale)
 	{
 		calculateTransformMatrix();
 	}
 
 	Transform::Transform(const Transform& transform) :
 		ITransform(transform),
-		m_scale(transform.m_scale),
 		m_transformMatrix(transform.m_transformMatrix),
 		m_front(transform.m_front),
 		m_up(transform.m_front),
@@ -25,7 +23,6 @@ namespace gam703::engine::components
 	Transform& Transform::operator=(const Transform& transform)
 	{
 		ITransform::operator=(transform);
-		m_scale = transform.m_scale;
 		m_transformMatrix = transform.m_transformMatrix;
 		m_front = transform.m_front;
 		m_up = transform.m_front;
@@ -69,20 +66,6 @@ namespace gam703::engine::components
 
 			m_shouldUpdateDirectionVectors = false;
 		}
-	}
-
-	void Transform::setScale(const glm::vec3& scale)
-	{
-		if (m_scale != scale)
-		{
-			m_scale = scale;
-			m_shouldCalculateTransform = true;
-		}
-	}
-
-	void Transform::setScale(float x, float y, float z)
-	{
-		setScale(glm::vec3(x, y, z));
 	}
 
 	void Transform::translate(const glm::vec3& offset)

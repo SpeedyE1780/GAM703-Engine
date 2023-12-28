@@ -4,11 +4,12 @@
 
 namespace gam703::engine::core_interface
 {
-	ITransform::ITransform(IEngine* engine, IScene* scene, const glm::vec3& position, const glm::vec3& rotation) :
+	ITransform::ITransform(IEngine* engine, IScene* scene, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) :
 		m_engine(engine),
 		m_scene(scene),
 		m_position(position),
-		m_rotation(rotation)
+		m_rotation(rotation),
+		m_scale(scale)
 	{
 	}
 
@@ -17,6 +18,7 @@ namespace gam703::engine::core_interface
 		m_scene(transform.m_scene),
 		m_position(transform.m_position),
 		m_rotation(transform.m_rotation),
+		m_scale(transform.m_scale),
 		m_shouldCalculateTransform(transform.m_shouldCalculateTransform),
 		m_shouldUpdateDirectionVectors(transform.m_shouldUpdateDirectionVectors)
 	{
@@ -30,6 +32,7 @@ namespace gam703::engine::core_interface
 	{
 		m_position = transform.m_position;
 		m_rotation = transform.m_rotation;
+		m_scale = transform.m_scale;
 		m_engine = transform.m_engine;
 		m_scene = transform.m_scene;
 		m_components = std::vector<std::unique_ptr<IComponent>>{};
@@ -71,6 +74,20 @@ namespace gam703::engine::core_interface
 	void ITransform::setRotation(float x, float y, float z)
 	{
 		setRotation(glm::vec3(x, y, z));
+	}
+
+	void ITransform::setScale(const glm::vec3& scale)
+	{
+		if (m_scale != scale)
+		{
+			m_scale = scale;
+			m_shouldCalculateTransform = true;
+		}
+	}
+
+	void ITransform::setScale(float x, float y, float z)
+	{
+		setScale(glm::vec3(x, y, z));
 	}
 
 	void ITransform::updateComponents(float deltaTime)

@@ -16,7 +16,11 @@ namespace gam703::engine::core_interface
 	class ENGINE_CORE_INTERFACES_API ITransform
 	{
 	public:
-		ITransform(IEngine* engine, IScene* scene, const glm::vec3& position = glm::vec3(0.0f, 0.0f, 0.0f), const glm::vec3& rotation = glm::vec3(0.0f, 0.0f, 0.0f));
+		ITransform(IEngine* engine, IScene* scene,
+			const glm::vec3& position = glm::vec3(0.0f, 0.0f, 0.0f),
+			const glm::vec3& rotation = glm::vec3(0.0f, 0.0f, 0.0f),
+			const glm::vec3& scale = glm::vec3(0.0f, 0.0f, 0.0f));
+
 		ITransform(const ITransform& transform);
 		ITransform& operator=(const ITransform& transform);
 		virtual ~ITransform() = default;
@@ -25,7 +29,7 @@ namespace gam703::engine::core_interface
 
 		const glm::vec3& getPosition() const { return m_position; }
 		const glm::vec3& getRotation() const { return m_rotation; }
-		virtual const glm::vec3& getScale() const = 0;
+		const glm::vec3& getScale() const { return m_scale; }
 		virtual const glm::mat4& getTransformationMatrix() const = 0;
 		virtual const glm::mat3& getNormalMatrix() const = 0;
 		virtual const glm::vec3& getFront() const = 0;
@@ -40,8 +44,8 @@ namespace gam703::engine::core_interface
 		void setPosition(float x, float y, float z);
 		void setRotation(const glm::vec3& eulerAngles);
 		void setRotation(float x, float y, float z);
-		virtual void setScale(const glm::vec3& scale) = 0;
-		virtual void setScale(float x, float y, float z) = 0;
+		void setScale(const glm::vec3& scale);
+		void setScale(float x, float y, float z);
 
 		virtual void translate(const glm::vec3& offset) = 0;
 		virtual void translate(float x, float y, float z) = 0;
@@ -86,6 +90,7 @@ namespace gam703::engine::core_interface
 	protected:
 		glm::vec3 m_position{ 0.0f, 0.0f, 0.0f };
 		glm::vec3 m_rotation{ 0.0f, 0.0f, 0.0f };
+		glm::vec3 m_scale{ 1.0f, 1.0f, 1.0f };
 		bool m_shouldCalculateTransform = true;
 		bool m_shouldUpdateDirectionVectors = true;
 
