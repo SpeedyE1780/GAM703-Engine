@@ -1,5 +1,5 @@
-#ifndef GAM703_ENGINE_CORE_INTERFACES_ITRANSFORM_HPP
-#define GAM703_ENGINE_CORE_INTERFACES_ITRANSFORM_HPP
+#ifndef GAM703_ENGINE_CORE_INTERFACES_TRANSFORM_HPP
+#define GAM703_ENGINE_CORE_INTERFACES_TRANSFORM_HPP
 
 #include <engine/core-interfaces/Config.hpp>
 #include <engine/core-interfaces/IComponent.hpp>
@@ -13,19 +13,19 @@
 
 namespace gam703::engine::core_interface
 {
-	class ENGINE_CORE_INTERFACES_API ITransform
+	class ENGINE_CORE_INTERFACES_API Transform
 	{
 	public:
-		ITransform(IEngine* engine, IScene* scene,
+		Transform(IEngine* engine, IScene* scene,
 			const glm::vec3& position = glm::vec3(0.0f, 0.0f, 0.0f),
 			const glm::vec3& rotation = glm::vec3(0.0f, 0.0f, 0.0f),
-			const glm::vec3& scale = glm::vec3(0.0f, 0.0f, 0.0f));
+			const glm::vec3& scale = glm::vec3(1.0f, 1.0f, 1.0f));
 
-		ITransform(const ITransform& transform);
-		ITransform& operator=(const ITransform& transform);
-		virtual ~ITransform() = default;
+		Transform(const Transform& transform);
+		Transform& operator=(const Transform& transform);
+		virtual ~Transform() = default;
 
-		ITransform* clone() const;
+		Transform* clone() const;
 
 		const glm::vec3& getPosition() const { return m_position; }
 		const glm::vec3& getRotation() const { return m_rotation; }
@@ -106,4 +106,4 @@ namespace gam703::engine::core_interface
 	};
 }
 
-#endif // GAM703_ENGINE_CORE_INTERFACES_ITRANSFORM_HPP
+#endif // GAM703_ENGINE_CORE_INTERFACES_TRANSFORM_HPP

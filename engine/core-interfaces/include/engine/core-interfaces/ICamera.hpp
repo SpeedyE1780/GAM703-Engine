@@ -11,7 +11,7 @@ namespace gam703::engine::core_interface
 	class ENGINE_CORE_INTERFACES_API ICamera : public IComponent
 	{
 	public:
-		ICamera(ITransform* transform);
+		ICamera(Transform* transform);
 		virtual ~ICamera() = default;
 		virtual glm::mat4 GetViewMatrix() const = 0;
 		virtual float getFieldOfView() const = 0;

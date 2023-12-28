@@ -2,7 +2,7 @@
 
 namespace gam703::engine::core_interface
 {
-	ICamera::ICamera(ITransform* transform) : IComponent(transform)
+	ICamera::ICamera(Transform* transform) : IComponent(transform)
 	{
 	}
 }

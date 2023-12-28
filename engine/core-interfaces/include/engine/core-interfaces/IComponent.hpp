@@ -4,20 +4,20 @@
 #include <engine/core-interfaces/Config.hpp>
 #include <engine/core-interfaces/IEngine.fwd.hpp>
 #include <engine/core-interfaces/IScene.fwd.hpp>
-#include <engine/core-interfaces/ITransform.fwd.hpp>
+#include <engine/core-interfaces/Transform.fwd.hpp>
 
 namespace gam703::engine::core_interface
 {
 	class ENGINE_CORE_INTERFACES_API IComponent
 	{
 	public:
-		IComponent(ITransform* transform);
+		IComponent(Transform* transform);
 		virtual ~IComponent() = default;
 
-		virtual IComponent* clone(ITransform* transform) const = 0;
+		virtual IComponent* clone(Transform* transform) const = 0;
 
-		ITransform* getTransform() { return m_transform; }
-		const ITransform* getTransform() const { return m_transform; }
+		Transform* getTransform() { return m_transform; }
+		const Transform* getTransform() const { return m_transform; }
 
 		virtual void tick(float deltaTime) = 0;
 
@@ -28,7 +28,7 @@ namespace gam703::engine::core_interface
 		const IScene* getScene() const;
 
 	protected:
-		ITransform* m_transform;
+		Transform* m_transform;
 	};
 }
 

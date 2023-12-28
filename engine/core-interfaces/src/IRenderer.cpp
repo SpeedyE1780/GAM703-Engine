@@ -2,7 +2,7 @@
 
 namespace gam703::engine::core_interface
 {
-	IRenderer::IRenderer(ITransform* transform) :IComponent(transform)
+	IRenderer::IRenderer(Transform* transform) :IComponent(transform)
 	{
 	}
 }

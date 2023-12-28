@@ -1,4 +1,4 @@
-#include <engine/core-interfaces/ITransform.hpp>
+#include <engine/core-interfaces/Transform.hpp>
 
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtx/euler_angles.hpp>
@@ -7,7 +7,7 @@
 
 namespace gam703::engine::core_interface
 {
-	ITransform::ITransform(IEngine* engine, IScene* scene, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) :
+	Transform::Transform(IEngine* engine, IScene* scene, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) :
 		m_engine(engine),
 		m_scene(scene),
 		m_position(position),
@@ -17,7 +17,7 @@ namespace gam703::engine::core_interface
 		calculateTransformMatrix();
 	}
 
-	ITransform::ITransform(const ITransform& transform) : 
+	Transform::Transform(const Transform& transform) : 
 		m_engine(transform.m_engine),
 		m_scene(transform.m_scene),
 		m_position(transform.m_position),
@@ -37,7 +37,7 @@ namespace gam703::engine::core_interface
 			});
 	}
 
-	ITransform& ITransform::operator=(const ITransform& transform)
+	Transform& Transform::operator=(const Transform& transform)
 	{
 		m_engine = transform.m_engine;
 		m_scene = transform.m_scene;
@@ -61,12 +61,12 @@ namespace gam703::engine::core_interface
 		return *this;
 	}
 
-	ITransform* ITransform::clone() const
+	Transform* Transform::clone() const
 	{
-		return new ITransform(*this);
+		return new Transform(*this);
 	}
 
-	void ITransform::setPosition(const glm::vec3& position)
+	void Transform::setPosition(const glm::vec3& position)
 	{
 		if (m_position != position)
 		{
@@ -75,12 +75,12 @@ namespace gam703::engine::core_interface
 		}
 	}
 
-	void ITransform::setPosition(float x, float y, float z)
+	void Transform::setPosition(float x, float y, float z)
 	{
 		setPosition(glm::vec3(x, y, z));
 	}
 
-	void ITransform::setRotation(const glm::vec3& eulerAngles)
+	void Transform::setRotation(const glm::vec3& eulerAngles)
 	{
 		if (m_rotation != eulerAngles)
 		{
@@ -90,12 +90,12 @@ namespace gam703::engine::core_interface
 		}
 	}
 
-	void ITransform::setRotation(float x, float y, float z)
+	void Transform::setRotation(float x, float y, float z)
 	{
 		setRotation(glm::vec3(x, y, z));
 	}
 
-	void ITransform::setScale(const glm::vec3& scale)
+	void Transform::setScale(const glm::vec3& scale)
 	{
 		if (m_scale != scale)
 		{
@@ -104,12 +104,12 @@ namespace gam703::engine::core_interface
 		}
 	}
 
-	void ITransform::setScale(float x, float y, float z)
+	void Transform::setScale(float x, float y, float z)
 	{
 		setScale(glm::vec3(x, y, z));
 	}
 
-	void ITransform::translate(const glm::vec3& offset)
+	void Transform::translate(const glm::vec3& offset)
 	{
 		if (offset.x != 0 || offset.y != 0 || offset.z != 0)
 		{
@@ -117,12 +117,12 @@ namespace gam703::engine::core_interface
 		}
 	}
 
-	void ITransform::translate(float x, float y, float z)
+	void Transform::translate(float x, float y, float z)
 	{
 		translate(glm::vec3(x, y, z));
 	}
 
-	void ITransform::rotate(const glm::vec3& eulerAngles)
+	void Transform::rotate(const glm::vec3& eulerAngles)
 	{
 		if (eulerAngles.x != 0 || eulerAngles.y != 0 || eulerAngles.z != 0)
 		{
@@ -130,12 +130,12 @@ namespace gam703::engine::core_interface
 		}
 	}
 
-	void ITransform::rotate(float x, float y, float z)
+	void Transform::rotate(float x, float y, float z)
 	{
 		rotate(glm::vec3(x, y, z));
 	}
 
-	void ITransform::calculateTransformMatrix()
+	void Transform::calculateTransformMatrix()
 	{
 		if (m_shouldCalculateTransform)
 		{
@@ -149,7 +149,7 @@ namespace gam703::engine::core_interface
 		}
 	}
 
-	void ITransform::updateDirectionVectors()
+	void Transform::updateDirectionVectors()
 	{
 		if (m_shouldUpdateDirectionVectors)
 		{
@@ -167,7 +167,7 @@ namespace gam703::engine::core_interface
 		}
 	}
 
-	void ITransform::updateComponents(float deltaTime)
+	void Transform::updateComponents(float deltaTime)
 	{
 		std::for_each(begin(m_components), end(m_components), [deltaTime](std::unique_ptr<core_interface::IComponent>& component) { component->tick(deltaTime); });
 	}

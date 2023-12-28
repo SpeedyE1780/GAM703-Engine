@@ -16,11 +16,11 @@ namespace gam703::engine::components
 	class ENGINE_COMPONENTS_API Renderer : public core_interface::IRenderer
 	{
 	public:
-		Renderer(core_interface::ITransform* transform, const core_interface::IModel* model);
-		Renderer(core_interface::ITransform* transform, const core_interface::IModel* model, const graphic::Material& material);
+		Renderer(core_interface::Transform* transform, const core_interface::IModel* model);
+		Renderer(core_interface::Transform* transform, const core_interface::IModel* model, const graphic::Material& material);
 		~Renderer();
 
-		virtual core_interface::IComponent* clone(core_interface::ITransform* transform) const override;
+		virtual core_interface::IComponent* clone(core_interface::Transform* transform) const override;
 
 		virtual void render(const glm::mat4& viewMatrix, const glm::vec3& cameraPosition) const override;
 		virtual void tick(float deltaTime) override;

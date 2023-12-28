@@ -11,7 +11,6 @@ src/DirectionalLight.cpp
 src/PointLight.cpp
 src/Renderer.cpp
 src/SpotLight.cpp
-src/Transform.cpp
 
 #HPP
 include/engine/components/Camera.hpp
@@ -20,8 +19,6 @@ include/engine/components/DirectionalLight.hpp
 include/engine/components/PointLight.hpp
 include/engine/components/Renderer.hpp
 include/engine/components/SpotLight.hpp
-include/engine/components/Transform.hpp
-include/engine/components/Transform.fwd.hpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)

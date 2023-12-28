@@ -1,3 +1,5 @@
+#include <engine/core-interfaces/Transform.hpp>
+
 #include <engine/core/Engine.hpp>
 
 #include <engine/components/Camera.hpp>
@@ -5,7 +7,6 @@
 #include <engine/components/PointLight.hpp>
 #include <engine/components/Renderer.hpp>
 #include <engine/components/SpotLight.hpp>
-#include <engine/components/Transform.hpp>
 
 #include <engine/gui/Button.hpp>
 #include <engine/gui/Checkbox.hpp>
@@ -22,8 +23,8 @@
 namespace engine = gam703::engine;
 namespace game = gam703::game;
 
-static engine::core_interface::ITransform* addGroundPlane(engine::core_interface::IEngine& engine,
-	engine::core_interface::ITransform* player,
+static engine::core_interface::Transform* addGroundPlane(engine::core_interface::IEngine& engine,
+	engine::core_interface::Transform* player,
 	const glm::vec3& position = glm::vec3(0.0f, 0.0f, 0.0f),
 	const glm::vec3& mainColor = glm::vec3(1.0f, 1.0f, 1.0f),
 	const glm::vec3& secondColor = glm::vec3(0.0f, 0.0f, 0.0f))

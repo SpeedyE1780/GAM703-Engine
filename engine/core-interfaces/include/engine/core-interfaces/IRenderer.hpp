@@ -12,7 +12,7 @@ namespace gam703::engine::core_interface
 	class ENGINE_CORE_INTERFACES_API IRenderer : public IComponent
 	{
 	public:
-		IRenderer(ITransform* transform);
+		IRenderer(Transform* transform);
 		virtual ~IRenderer() = default;
 		virtual void render(const glm::mat4& viewMatrix, const glm::vec3& cameraPosition) const = 0;
 		virtual  IMaterial* getMaterial() = 0;

@@ -6,7 +6,7 @@
 #include <engine/core/SceneRenderer.hpp>
 
 #include <engine/core-interfaces/IScene.hpp>
-#include <engine/core-interfaces/ITransform.hpp>
+#include <engine/core-interfaces/Transform.hpp>
 
 #include <vector>
 
@@ -23,8 +23,8 @@ namespace gam703::engine::core
 		virtual core_interface::ISceneRenderer* getSceneRenderer() override { return &m_sceneRenderer; }
 		virtual const core_interface::ISceneRenderer* getSceneRenderer() const override { return &m_sceneRenderer; }
 
-		virtual core_interface::ITransform* addTransform(const glm::vec3& position = glm::vec3(0, 0, 0), const glm::vec3& rotation = glm::vec3(0, 0, 0), const glm::vec3& scale = glm::vec3(1, 1, 1)) override;
-		virtual core_interface::ITransform* addTransform(const core_interface::ITransform* transform) override;
+		virtual core_interface::Transform* addTransform(const glm::vec3& position = glm::vec3(0, 0, 0), const glm::vec3& rotation = glm::vec3(0, 0, 0), const glm::vec3& scale = glm::vec3(1, 1, 1)) override;
+		virtual core_interface::Transform* addTransform(const core_interface::Transform* transform) override;
 
 		virtual core_interface::ICamera* getActiveCamera() override { return m_sceneRenderer.getActiveCamera(); }
 		virtual const core_interface::ICamera* getActiveCamera() const override { return m_sceneRenderer.getActiveCamera(); }
@@ -36,7 +36,7 @@ namespace gam703::engine::core
 	private:
 		Engine* m_engine;
 		SceneRenderer m_sceneRenderer;
-		std::vector<std::unique_ptr<core_interface::ITransform>> m_transforms{};
+		std::vector<std::unique_ptr<core_interface::Transform>> m_transforms{};
 	};
 }
 

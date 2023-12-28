@@ -1,7 +1,7 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
-#include <engine/components/Transform.hpp>
+#include <engine/core-interfaces/Transform.hpp>
 
 #include <engine/core/SceneRenderer.hpp>
 
