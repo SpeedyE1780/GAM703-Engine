@@ -6,35 +6,30 @@
 namespace gam703::engine::components
 {
 	Transform::Transform(core_interface::IEngine* engine, core_interface::IScene* scene, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) :
-		core_interface::ITransform(engine, scene, position),
-		m_rotation(rotation), m_scale(scale)
+		core_interface::ITransform(engine, scene, position, rotation),
+		m_scale(scale)
 	{
 		calculateTransformMatrix();
 	}
 
 	Transform::Transform(const Transform& transform) :
 		ITransform(transform),
-		m_rotation(transform.m_rotation),
 		m_scale(transform.m_scale),
 		m_transformMatrix(transform.m_transformMatrix),
 		m_front(transform.m_front),
 		m_up(transform.m_front),
-		m_right(transform.m_right),
-		m_shouldUpdateDirectionVectors(transform.m_shouldUpdateDirectionVectors)
+		m_right(transform.m_right)
 	{
 	}
 
 	Transform& Transform::operator=(const Transform& transform)
 	{
 		ITransform::operator=(transform);
-		m_rotation = transform.m_rotation;
 		m_scale = transform.m_scale;
 		m_transformMatrix = transform.m_transformMatrix;
 		m_front = transform.m_front;
 		m_up = transform.m_front;
 		m_right = transform.m_right;
-		m_shouldCalculateTransform = transform.m_shouldCalculateTransform;
-		m_shouldUpdateDirectionVectors = transform.m_shouldUpdateDirectionVectors;
 
 		return *this;
 	}
@@ -74,21 +69,6 @@ namespace gam703::engine::components
 
 			m_shouldUpdateDirectionVectors = false;
 		}
-	}
-
-	void Transform::setRotation(const glm::vec3& eulerAngles)
-	{
-		if (m_rotation != eulerAngles)
-		{
-			m_rotation = eulerAngles;
-			m_shouldCalculateTransform = true;
-			m_shouldUpdateDirectionVectors = true;
-		}
-	}
-
-	void Transform::setRotation(float x, float y, float z)
-	{
-		setRotation(glm::vec3(x, y, z));
 	}
 
 	void Transform::setScale(const glm::vec3& scale)
