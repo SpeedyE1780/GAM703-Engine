@@ -87,7 +87,11 @@ namespace gam703::engine::core_interface
 
 		std::size_t getComponentsSize() const { return m_components.size(); }
 
-	protected:
+	private:
+		void updateDirectionVectors();
+
+		core_interface::IEngine* m_engine = nullptr;
+		core_interface::IScene* m_scene = nullptr;
 		glm::vec3 m_position{ 0.0f, 0.0f, 0.0f };
 		glm::vec3 m_rotation{ 0.0f, 0.0f, 0.0f };
 		glm::vec3 m_scale{ 1.0f, 1.0f, 1.0f };
@@ -98,13 +102,7 @@ namespace gam703::engine::core_interface
 		glm::mat3 m_normalMatrix = glm::mat3(1);
 		bool m_shouldCalculateTransform = true;
 		bool m_shouldUpdateDirectionVectors = true;
-
-	private:
-		void updateDirectionVectors();
-
 		std::vector<std::unique_ptr<IComponent>> m_components{};
-		core_interface::IEngine* m_engine = nullptr;
-		core_interface::IScene* m_scene = nullptr;
 	};
 }
 

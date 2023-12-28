@@ -39,6 +39,8 @@ namespace gam703::engine::core_interface
 
 	ITransform& ITransform::operator=(const ITransform& transform)
 	{
+		m_engine = transform.m_engine;
+		m_scene = transform.m_scene;
 		m_position = transform.m_position;
 		m_rotation = transform.m_rotation;
 		m_scale = transform.m_scale;
@@ -47,11 +49,9 @@ namespace gam703::engine::core_interface
 		m_right = transform.m_right;
 		m_transformMatrix = transform.m_transformMatrix;
 		m_normalMatrix = transform.m_normalMatrix;
-		m_engine = transform.m_engine;
-		m_scene = transform.m_scene;
-		m_components = std::vector<std::unique_ptr<IComponent>>{};
 		m_shouldCalculateTransform = transform.m_shouldCalculateTransform;
 		m_shouldUpdateDirectionVectors = transform.m_shouldUpdateDirectionVectors;
+		m_components = std::vector<std::unique_ptr<IComponent>>{};
 
 		std::for_each(begin(transform.m_components), end(transform.m_components), [this](const std::unique_ptr<core_interface::IComponent>& component)
 			{

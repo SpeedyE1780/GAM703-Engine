@@ -31,7 +31,7 @@ namespace gam703::engine::components
 	{
 		if (offset.x != 0 || offset.y != 0 || offset.z != 0)
 		{
-			setPosition(m_position + offset);
+			setPosition(getPosition() + offset);
 		}
 	}
 
@@ -44,7 +44,7 @@ namespace gam703::engine::components
 	{
 		if (eulerAngles.x != 0 || eulerAngles.y != 0 || eulerAngles.z != 0)
 		{
-			setRotation(m_rotation + eulerAngles);
+			setRotation(getRotation() + eulerAngles);
 		}
 	}
 
