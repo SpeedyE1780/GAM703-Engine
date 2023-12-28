@@ -10,7 +10,7 @@ namespace gam703::engine::components
 	class ENGINE_COMPONENTS_API PointLight : public core_interface::ILight
 	{
 	public:
-		PointLight(core_interface::ITransform* transform, float range = 5.0f, const glm::vec3& color = glm::vec3(1.0f, 1.0f, 1.0f), float intensity = 1.0f);
+		PointLight(core_interface::ITransform* transform, const glm::vec3& color = glm::vec3(1.0f, 1.0f, 1.0f), float range = 5.0f, float intensity = 1.0f);
 
 		virtual core_interface::IComponent* clone(core_interface::ITransform* transform) const override;
 

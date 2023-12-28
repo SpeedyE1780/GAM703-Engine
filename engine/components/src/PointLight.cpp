@@ -3,14 +3,14 @@
 
 namespace gam703::engine::components
 {
-	PointLight::PointLight(core_interface::ITransform* transform, float range, const glm::vec3& color, float intensity) :
+	PointLight::PointLight(core_interface::ITransform* transform, const glm::vec3& color, float range, float intensity) :
 		core_interface::ILight(transform, color, intensity), m_range(range)
 	{
 	}
 
 	core_interface::IComponent* PointLight::clone(core_interface::ITransform* transform) const
 	{
-		return new PointLight(m_transform, m_range, m_color, m_intensity);
+		return new PointLight(m_transform, m_color, m_range, m_intensity);
 	}
 
 	void PointLight::updateShaderLightInfo(const core_interface::IShader& shader) const

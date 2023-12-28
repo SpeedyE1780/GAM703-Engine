@@ -4,6 +4,7 @@
 #include <engine/components/DirectionalLight.hpp>
 #include <engine/components/PointLight.hpp>
 #include <engine/components/Renderer.hpp>
+#include <engine/components/SpotLight.hpp>
 #include <engine/components/Transform.hpp>
 
 #include <engine/gui/Button.hpp>
@@ -76,9 +77,14 @@ int main()
 
 	auto* pointLightTransform = scene->addTransform(glm::vec3(0.0f, 30.0f, 0.0f));
 	pointLightTransform->addComponent<engine::components::Renderer>(cubeModel);
-	auto* pointLight = pointLightTransform->addComponent<engine::components::PointLight>(5.0f, glm::vec3(1.0f, 0.0f, 0.0f), 5.0f);
+	auto* pointLight = pointLightTransform->addComponent<engine::components::PointLight>(glm::vec3(1.0f, 0.0f, 0.0f), 5.0f, 5.0f);
+
+	auto* spotLightTransform = scene->addTransform(glm::vec3(10.0f, 30.0f, 0.0f), glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
+	spotLightTransform->addComponent < engine::components::Renderer>(cubeModel);
+	auto* spotLight = spotLightTransform->addComponent<engine::components::SpotLight>(glm::vec3(0.0f, 0.0f, 1.0f));
 
 	scene->getSceneRenderer()->addLightSource(pointLight);
+	scene->getSceneRenderer()->addLightSource(spotLight);
 
 	auto& window = engine.getWindow();
 	window.addGUIElement<engine::gui::Text>("This is some useful text.");
@@ -90,7 +96,7 @@ int main()
 	int counter = 0;
 	engine::gui::Text* text = nullptr;
 
-	window.addGUIElement<engine::gui::Button>("BUTTON", [&counter, &text, scene, colorPicker, slider, pointLightHeight, pointLightTransform]()
+	window.addGUIElement<engine::gui::Button>("BUTTON", [&counter, &text, scene, colorPicker, slider, pointLightHeight, pointLightTransform, spotLightTransform]()
 		{
 			counter++;
 			text->setContent(std::format("counter: {}", counter));
@@ -98,6 +104,7 @@ int main()
 			scene->getSceneRenderer()->setAmbientLight(glm::vec3(r, g, b), slider->getValue());
 
 			pointLightTransform->setPosition(glm::vec3(0.0f, pointLightHeight->getValue(), 0.0f));
+			spotLightTransform->setPosition(glm::vec3(10.0f, pointLightHeight->getValue(), 0.0f));
 		});
 
 	text = window.addGUIElement<engine::gui::Text>(std::format("counter: {}", counter));
