@@ -25,27 +25,11 @@ namespace gam703::engine::components
 
 		virtual core_interface::ITransform* clone() const override;
 
-		virtual const glm::mat4& getTransformationMatrix() const override { return m_transformMatrix; }
-		virtual const glm::mat3& getNormalMatrix() const override { return m_normalMatrix; }
-		virtual const glm::vec3& getFront() const override { return m_front; }
-		virtual const glm::vec3& getRight() const override { return m_right; }
-		virtual const glm::vec3& getUp() const override { return m_up; }
-
-		virtual void calculateTransformMatrix() override;
-
 		virtual void translate(const glm::vec3& offset) override;
 		virtual void translate(float x, float y, float z) override;
 		virtual void rotate(const glm::vec3& eulerAngles) override;
 		virtual void rotate(float x, float y, float z) override;
 
-	private:
-		void updateDirectionVectors();
-
-		glm::mat4 m_transformMatrix = glm::mat4(1);
-		glm::mat3 m_normalMatrix = glm::mat3(1);
-		glm::vec3 m_front = glm::vec3(0, 0, 0);
-		glm::vec3 m_up = glm::vec3(0, 0, 0);
-		glm::vec3 m_right = glm::vec3(0, 0, 0);
 	};
 }
 

@@ -8,25 +8,16 @@ namespace gam703::engine::components
 	Transform::Transform(core_interface::IEngine* engine, core_interface::IScene* scene, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) :
 		core_interface::ITransform(engine, scene, position, rotation, scale)
 	{
-		calculateTransformMatrix();
 	}
 
 	Transform::Transform(const Transform& transform) :
-		ITransform(transform),
-		m_transformMatrix(transform.m_transformMatrix),
-		m_front(transform.m_front),
-		m_up(transform.m_front),
-		m_right(transform.m_right)
+		ITransform(transform)
 	{
 	}
 
 	Transform& Transform::operator=(const Transform& transform)
 	{
 		ITransform::operator=(transform);
-		m_transformMatrix = transform.m_transformMatrix;
-		m_front = transform.m_front;
-		m_up = transform.m_front;
-		m_right = transform.m_right;
 
 		return *this;
 	}
@@ -34,38 +25,6 @@ namespace gam703::engine::components
 	core_interface::ITransform* Transform::clone() const
 	{
 		return new Transform(*this);
-	}
-
-	void Transform::calculateTransformMatrix()
-	{
-		if (m_shouldCalculateTransform)
-		{
-			m_transformMatrix = glm::mat4(1);
-			m_transformMatrix = glm::translate(m_transformMatrix, m_position);
-			m_transformMatrix = m_transformMatrix * glm::toMat4(glm::quat(m_rotation));
-			m_transformMatrix = glm::scale(m_transformMatrix, m_scale);
-			m_normalMatrix = glm::mat3(glm::transpose(glm::inverse(m_transformMatrix)));
-			updateDirectionVectors();
-			m_shouldCalculateTransform = false;
-		}
-	}
-
-	void Transform::updateDirectionVectors()
-	{
-		if (m_shouldUpdateDirectionVectors)
-		{
-			glm::vec3 front(
-				cos(m_rotation.y) * cos(m_rotation.x),
-				sin(m_rotation.x),
-				sin(m_rotation.y) * cos(m_rotation.x)
-			);
-
-			m_front = glm::normalize(front);
-			m_right = glm::normalize(glm::cross(m_front, glm::vec3(0, 1, 0)));
-			m_up = glm::normalize(glm::cross(m_right, m_front));
-
-			m_shouldUpdateDirectionVectors = false;
-		}
 	}
 
 	void Transform::translate(const glm::vec3& offset)

@@ -1,5 +1,8 @@
 #include <engine/core-interfaces/ITransform.hpp>
 
+#include <glm/gtx/quaternion.hpp>
+#include <glm/gtx/euler_angles.hpp>
+
 #include <algorithm>
 
 namespace gam703::engine::core_interface
@@ -11,6 +14,7 @@ namespace gam703::engine::core_interface
 		m_rotation(rotation),
 		m_scale(scale)
 	{
+		calculateTransformMatrix();
 	}
 
 	ITransform::ITransform(const ITransform& transform) : 
@@ -19,6 +23,11 @@ namespace gam703::engine::core_interface
 		m_position(transform.m_position),
 		m_rotation(transform.m_rotation),
 		m_scale(transform.m_scale),
+		m_front(transform.m_front),
+		m_up(transform.m_front),
+		m_right(transform.m_right),
+		m_transformMatrix(transform.m_transformMatrix),
+		m_normalMatrix(transform.m_normalMatrix),
 		m_shouldCalculateTransform(transform.m_shouldCalculateTransform),
 		m_shouldUpdateDirectionVectors(transform.m_shouldUpdateDirectionVectors)
 	{
@@ -33,6 +42,11 @@ namespace gam703::engine::core_interface
 		m_position = transform.m_position;
 		m_rotation = transform.m_rotation;
 		m_scale = transform.m_scale;
+		m_front = transform.m_front;
+		m_up = transform.m_front;
+		m_right = transform.m_right;
+		m_transformMatrix = transform.m_transformMatrix;
+		m_normalMatrix = transform.m_normalMatrix;
 		m_engine = transform.m_engine;
 		m_scene = transform.m_scene;
 		m_components = std::vector<std::unique_ptr<IComponent>>{};
@@ -88,6 +102,38 @@ namespace gam703::engine::core_interface
 	void ITransform::setScale(float x, float y, float z)
 	{
 		setScale(glm::vec3(x, y, z));
+	}
+
+	void ITransform::calculateTransformMatrix()
+	{
+		if (m_shouldCalculateTransform)
+		{
+			m_transformMatrix = glm::mat4(1);
+			m_transformMatrix = glm::translate(m_transformMatrix, m_position);
+			m_transformMatrix = m_transformMatrix * glm::toMat4(glm::quat(m_rotation));
+			m_transformMatrix = glm::scale(m_transformMatrix, m_scale);
+			m_normalMatrix = glm::mat3(glm::transpose(glm::inverse(m_transformMatrix)));
+			updateDirectionVectors();
+			m_shouldCalculateTransform = false;
+		}
+	}
+
+	void ITransform::updateDirectionVectors()
+	{
+		if (m_shouldUpdateDirectionVectors)
+		{
+			glm::vec3 front(
+				cos(m_rotation.y) * cos(m_rotation.x),
+				sin(m_rotation.x),
+				sin(m_rotation.y) * cos(m_rotation.x)
+			);
+
+			m_front = glm::normalize(front);
+			m_right = glm::normalize(glm::cross(m_front, glm::vec3(0, 1, 0)));
+			m_up = glm::normalize(glm::cross(m_right, m_front));
+
+			m_shouldUpdateDirectionVectors = false;
+		}
 	}
 
 	void ITransform::updateComponents(float deltaTime)

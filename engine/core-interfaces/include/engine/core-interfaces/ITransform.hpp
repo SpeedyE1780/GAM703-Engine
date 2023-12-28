@@ -30,13 +30,13 @@ namespace gam703::engine::core_interface
 		const glm::vec3& getPosition() const { return m_position; }
 		const glm::vec3& getRotation() const { return m_rotation; }
 		const glm::vec3& getScale() const { return m_scale; }
-		virtual const glm::mat4& getTransformationMatrix() const = 0;
-		virtual const glm::mat3& getNormalMatrix() const = 0;
-		virtual const glm::vec3& getFront() const = 0;
-		virtual const glm::vec3& getRight() const = 0;
-		virtual const glm::vec3& getUp() const = 0;
+		const glm::mat4& getTransformationMatrix() const { return m_transformMatrix; }
+		const glm::mat3& getNormalMatrix() const { return m_normalMatrix; }
+		const glm::vec3& getFront() const { return m_front; }
+		const glm::vec3& getRight() const { return m_right; }
+		const glm::vec3& getUp() const { return m_up; }
 
-		virtual void calculateTransformMatrix() = 0;
+		void calculateTransformMatrix();
 
 		void updateComponents(float deltaTime);
 
@@ -91,10 +91,17 @@ namespace gam703::engine::core_interface
 		glm::vec3 m_position{ 0.0f, 0.0f, 0.0f };
 		glm::vec3 m_rotation{ 0.0f, 0.0f, 0.0f };
 		glm::vec3 m_scale{ 1.0f, 1.0f, 1.0f };
+		glm::vec3 m_front = glm::vec3(0, 0, 0);
+		glm::vec3 m_up = glm::vec3(0, 0, 0);
+		glm::vec3 m_right = glm::vec3(0, 0, 0);
+		glm::mat4 m_transformMatrix = glm::mat4(1);
+		glm::mat3 m_normalMatrix = glm::mat3(1);
 		bool m_shouldCalculateTransform = true;
 		bool m_shouldUpdateDirectionVectors = true;
 
 	private:
+		void updateDirectionVectors();
+
 		std::vector<std::unique_ptr<IComponent>> m_components{};
 		core_interface::IEngine* m_engine = nullptr;
 		core_interface::IScene* m_scene = nullptr;
