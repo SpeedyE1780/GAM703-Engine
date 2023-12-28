@@ -5,21 +5,21 @@
 
 namespace gam703::engine::components
 {
-	Transform::Transform(core_interface::IEngine* engine, core_interface::IScene* scene, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) : core_interface::ITransform(engine, scene), m_position(position), m_rotation(rotation), m_scale(scale)
+	Transform::Transform(core_interface::IEngine* engine, core_interface::IScene* scene, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) :
+		core_interface::ITransform(engine, scene, position),
+		m_rotation(rotation), m_scale(scale)
 	{
 		calculateTransformMatrix();
 	}
 
 	Transform::Transform(const Transform& transform) :
 		ITransform(transform),
-		m_position(transform.m_position),
 		m_rotation(transform.m_rotation),
 		m_scale(transform.m_scale),
 		m_transformMatrix(transform.m_transformMatrix),
 		m_front(transform.m_front),
 		m_up(transform.m_front),
 		m_right(transform.m_right),
-		m_shouldCalculateTransform(transform.m_shouldCalculateTransform),
 		m_shouldUpdateDirectionVectors(transform.m_shouldUpdateDirectionVectors)
 	{
 	}
@@ -27,7 +27,6 @@ namespace gam703::engine::components
 	Transform& Transform::operator=(const Transform& transform)
 	{
 		ITransform::operator=(transform);
-		m_position = transform.m_position;
 		m_rotation = transform.m_rotation;
 		m_scale = transform.m_scale;
 		m_transformMatrix = transform.m_transformMatrix;
@@ -75,20 +74,6 @@ namespace gam703::engine::components
 
 			m_shouldUpdateDirectionVectors = false;
 		}
-	}
-
-	void Transform::setPosition(const glm::vec3& position)
-	{
-		if (m_position != position)
-		{
-			m_position = position;
-			m_shouldCalculateTransform = true;
-		}
-	}
-
-	void Transform::setPosition(float x, float y, float z)
-	{
-		setPosition(glm::vec3(x, y, z));
 	}
 
 	void Transform::setRotation(const glm::vec3& eulerAngles)

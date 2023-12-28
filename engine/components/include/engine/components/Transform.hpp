@@ -25,7 +25,6 @@ namespace gam703::engine::components
 
 		virtual core_interface::ITransform* clone() const override;
 
-		virtual const glm::vec3& getPosition() const override { return m_position; }
 		virtual const glm::vec3& getRotation() const override { return m_rotation; }
 		virtual const glm::vec3& getScale() const override { return m_scale; }
 		virtual const glm::mat4& getTransformationMatrix() const override { return m_transformMatrix; }
@@ -36,8 +35,6 @@ namespace gam703::engine::components
 
 		virtual void calculateTransformMatrix() override;
 
-		virtual void setPosition(const glm::vec3& position) override;
-		virtual void setPosition(float x, float y, float z) override;
 		virtual void setRotation(const glm::vec3& eulerAngles) override;
 		virtual void setRotation(float x, float y, float z) override;
 		virtual void setScale(const glm::vec3& scale) override;
@@ -51,7 +48,6 @@ namespace gam703::engine::components
 	private:
 		void updateDirectionVectors();
 
-		glm::vec3 m_position;
 		glm::vec3 m_rotation;
 		glm::vec3 m_scale;
 		glm::mat4 m_transformMatrix = glm::mat4(1);
@@ -59,7 +55,6 @@ namespace gam703::engine::components
 		glm::vec3 m_front = glm::vec3(0, 0, 0);
 		glm::vec3 m_up = glm::vec3(0, 0, 0);
 		glm::vec3 m_right = glm::vec3(0, 0, 0);
-		bool m_shouldCalculateTransform = true;
 		bool m_shouldUpdateDirectionVectors = true;
 	};
 }

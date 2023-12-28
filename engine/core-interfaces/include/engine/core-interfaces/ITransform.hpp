@@ -16,14 +16,14 @@ namespace gam703::engine::core_interface
 	class ENGINE_CORE_INTERFACES_API ITransform
 	{
 	public:
-		ITransform(IEngine* engine, IScene* scene);
+		ITransform(IEngine* engine, IScene* scene, const glm::vec3& position = glm::vec3(0.0f, 0.0f, 0.0f));
 		ITransform(const ITransform& transform);
 		ITransform& operator=(const ITransform& transform);
 		virtual ~ITransform() = default;
 
 		virtual ITransform* clone() const = 0;
 
-		virtual const glm::vec3& getPosition() const = 0;
+		const glm::vec3& getPosition() const { return m_position; };
 		virtual const glm::vec3& getRotation() const = 0;
 		virtual const glm::vec3& getScale() const = 0;
 		virtual const glm::mat4& getTransformationMatrix() const = 0;
@@ -36,8 +36,8 @@ namespace gam703::engine::core_interface
 
 		void updateComponents(float deltaTime);
 
-		virtual void setPosition(const glm::vec3& position) = 0;
-		virtual void setPosition(float x, float y, float z) = 0;
+		void setPosition(const glm::vec3& position);
+		void setPosition(float x, float y, float z);
 		virtual void setRotation(const glm::vec3& eulerAngles) = 0;
 		virtual void setRotation(float x, float y, float z) = 0;
 		virtual void setScale(const glm::vec3& scale) = 0;
@@ -83,8 +83,12 @@ namespace gam703::engine::core_interface
 
 		std::size_t getComponentsSize() const { return m_components.size(); }
 
+	protected:
+		bool m_shouldCalculateTransform = true;
+		glm::vec3 m_position{ 0.0f, 0.0f, 0.0f };
+
 	private:
-		std::vector<std::unique_ptr<IComponent>> m_components = {};
+		std::vector<std::unique_ptr<IComponent>> m_components{};
 		core_interface::IEngine* m_engine = nullptr;
 		core_interface::IScene* m_scene = nullptr;
 	};
