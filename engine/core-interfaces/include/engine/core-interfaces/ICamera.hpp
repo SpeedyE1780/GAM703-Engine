@@ -8,14 +8,22 @@
 
 namespace gam703::engine::core_interface
 {
-	class ENGINE_CORE_INTERFACES_API ICamera : public IComponent
+	class ENGINE_CORE_INTERFACES_API Camera : public IComponent
 	{
 	public:
-		ICamera(Transform* transform);
-		virtual ~ICamera() = default;
-		virtual glm::mat4 GetViewMatrix() const = 0;
-		virtual float getFieldOfView() const = 0;
-		virtual void setFieldOfView(float fieldOfView) = 0;
+		Camera(Transform* transform);
+		Camera(Transform* transform, float fieldOfView);
+		virtual ~Camera() = default;
+
+		virtual core_interface::IComponent* clone(core_interface::Transform* transform) const override;
+		virtual void tick(float deltaTime) override;
+
+		glm::mat4 getViewMatrix() const;
+		float getFieldOfView() const { return m_fieldOfView; }
+		void setFieldOfView(float fieldOfView);
+
+	private:
+		float m_fieldOfView = 45.0f;
 	};
 }
 
