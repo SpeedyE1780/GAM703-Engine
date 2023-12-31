@@ -8,8 +8,10 @@ target_sources(${PROJECT_NAME} PRIVATE
 #CPP
 src/ICamera.cpp
 src/IComponent.cpp
+src/IEngine.cpp
 src/ILight.cpp
 src/IRenderer.cpp
+src/Time.cpp
 src/Transform.cpp
 
 #HPP
@@ -28,7 +30,7 @@ include/engine/core-interfaces/ISceneRenderer.hpp
 include/engine/core-interfaces/IResourceManager.hpp
 include/engine/core-interfaces/IShader.hpp
 include/engine/core-interfaces/ITexture.hpp
-include/engine/core-interfaces/ITime.hpp
+include/engine/core-interfaces/Time.hpp
 include/engine/core-interfaces/Transform.hpp
 include/engine/core-interfaces/Transform.fwd.hpp
 )

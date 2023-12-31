@@ -13,7 +13,6 @@ src/Input.cpp
 src/ResourceManager.cpp
 src/Scene.cpp
 src/SceneRenderer.cpp
-src/Time.cpp
 
 #HPP
 include/engine/core/Config.hpp
@@ -23,7 +22,6 @@ include/engine/core/Input.hpp
 include/engine/core/ResourceManager.hpp
 include/engine/core/Scene.hpp
 include/engine/core/SceneRenderer.hpp
-include/engine/core/Time.hpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include/)

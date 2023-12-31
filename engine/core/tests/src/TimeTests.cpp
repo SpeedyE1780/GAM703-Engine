@@ -1,11 +1,11 @@
-#include <engine/core/Time.hpp>
+#include <engine/core-interfaces/Time.hpp>
 
 #include <gtest/gtest.h>
 
 TEST(TimeTests, SetTime)
 {
 	const double expected = 20;
-	gam703::engine::core::Time time(expected);
+	gam703::engine::core_interface::Time time(expected);
 
 	EXPECT_EQ(expected, time.getTime());
 }
@@ -13,7 +13,7 @@ TEST(TimeTests, SetTime)
 TEST(TimeTests, UpdateDeltaTime)
 {
 	const double initialTime = 20;
-	gam703::engine::core::Time time(initialTime);
+	gam703::engine::core_interface::Time time(initialTime);
 
 	ASSERT_EQ(initialTime, time.getTime());
 
@@ -29,7 +29,7 @@ TEST(TimeTests, SetTimeScale)
 {
 	const double initialTime = 20;
 	const double timeScale = 2;
-	gam703::engine::core::Time time(initialTime, timeScale);
+	gam703::engine::core_interface::Time time(initialTime, timeScale);
 
 	ASSERT_EQ(initialTime, time.getTime());
 	EXPECT_EQ(timeScale, time.getTimeScale());
@@ -39,7 +39,7 @@ TEST(TimeTests, UpdateScaledDeltaTime)
 {
 	const double initialTime = 20;
 	const double timeScale = 2;
-	gam703::engine::core::Time time(initialTime, timeScale);
+	gam703::engine::core_interface::Time time(initialTime, timeScale);
 
 	ASSERT_EQ(initialTime, time.getTime());
 	ASSERT_EQ(timeScale, time.getTimeScale());
@@ -59,7 +59,7 @@ TEST(TimeTests, UpdateTimeScaleThenRevert)
 {
 	const double initialTime = 20;
 	const double timeScale = 2;
-	gam703::engine::core::Time time(initialTime, timeScale);
+	gam703::engine::core_interface::Time time(initialTime, timeScale);
 
 	ASSERT_EQ(initialTime, time.getTime());
 	ASSERT_EQ(timeScale, time.getTimeScale());
