@@ -40,7 +40,6 @@ namespace gam703::engine::core
 
 		gui::Window m_window;
 		Input m_inputHandler;
-		core_interface::Time m_time;
 		Scene m_scene;
 		ResourceManager m_resourceManager{};
 		bool m_isRunning = false;
