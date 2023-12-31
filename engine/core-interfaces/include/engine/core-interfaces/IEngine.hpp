@@ -5,7 +5,7 @@
 #include <engine/core-interfaces/IInput.hpp>
 #include <engine/core-interfaces/IResourceManager.hpp>
 #include <engine/core-interfaces/IScene.hpp>
-#include <engine/core-interfaces/ITime.hpp>
+#include <engine/core-interfaces/Time.hpp>
 
 namespace gam703::engine::core_interface
 {
@@ -15,8 +15,8 @@ namespace gam703::engine::core_interface
 		virtual ~IEngine() = default;
 		virtual IInput* getInput() = 0;
 		virtual const IInput* getInput() const = 0;
-		virtual ITime* getTime() = 0;
-		virtual const ITime* getTime() const = 0;
+		virtual Time* getTime() = 0;
+		virtual const Time* getTime() const = 0;
 		virtual IResourceManager* getResourceManager() = 0;
 		virtual const IResourceManager* getResourceManager() const = 0;
 		virtual IScene* getScene() = 0;
