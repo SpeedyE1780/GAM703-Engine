@@ -3,7 +3,7 @@
 
 #include <engine/core-interfaces/Transform.fwd.hpp>
 #include <engine/core-interfaces/ISceneRenderer.hpp>
-#include <engine/core-interfaces/ICamera.hpp>
+#include <engine/core-interfaces/Camera.hpp>
 
 #include <glm/glm.hpp>
 

@@ -1,6 +1,7 @@
 #ifndef GAM703_ENGINE_CORE_INTERFACES_ISCENE_RENDERER_HPP
 #define GAM703_ENGINE_CORE_INTERFACES_ISCENE_RENDERER_HPP
 
+#include <engine/core-interfaces/Camera.hpp>
 #include <engine/core-interfaces/IRenderer.hpp>
 #include <engine/core-interfaces/ILight.hpp>
 
@@ -29,6 +30,13 @@ namespace gam703::engine::core_interface
 
 		virtual void addLightSource(ILight* light) = 0;
 		virtual void removeLightSource(ILight* light) = 0;
+
+		void setActiveCamera(Camera* camera) { m_activeCamera = camera; }
+		Camera* getActiveCamera() { return m_activeCamera; }
+		const Camera* getActiveCamera() const { return m_activeCamera; }
+
+	protected:
+		Camera* m_activeCamera = nullptr;
 	};
 }
 

@@ -6,14 +6,12 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE ENGINE_COMPONENTS_EXPORT)
 
 target_sources(${PROJECT_NAME} PRIVATE
 #CPP
-src/Camera.cpp
 src/DirectionalLight.cpp
 src/PointLight.cpp
 src/Renderer.cpp
 src/SpotLight.cpp
 
 #HPP
-include/engine/components/Camera.hpp
 include/engine/components/Config.hpp
 include/engine/components/DirectionalLight.hpp
 include/engine/components/PointLight.hpp

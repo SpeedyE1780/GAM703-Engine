@@ -1,4 +1,4 @@
-#include <engine/core-interfaces/ICamera.hpp>
+#include <engine/core-interfaces/Camera.hpp>
 #include <engine/core-interfaces/IEngine.hpp>
 #include <engine/core-interfaces/IScene.hpp>
 #include <engine/core-interfaces/Transform.hpp>

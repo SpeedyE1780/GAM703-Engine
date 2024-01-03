@@ -2,7 +2,6 @@
 #define GAM703_ENGINE_CORE_SCENE_RENDERER_HPP
 
 #include <engine/core-interfaces/ISceneRenderer.hpp>
-#include <engine/core-interfaces/ICamera.hpp>
 #include <engine/core-interfaces/IRenderer.hpp>
 
 #include <engine/components/DirectionalLight.hpp>
@@ -21,10 +20,6 @@ namespace gam703::engine::core
 
 		virtual void addRenderer(core_interface::IRenderer* sceneObject) override;
 		virtual void removeRenderer(core_interface::IRenderer* sceneObject) override;
-
-		void setActiveCamera(core_interface::Camera* camera) { m_activeCamera = camera; }
-		core_interface::Camera* getActiveCamera() { return m_activeCamera; }
-		const core_interface::Camera* getActiveCamera() const { return m_activeCamera; }
 
 		virtual void setAmbientLight(const glm::vec3& color, float strength) override;
 		virtual void setAmbientLightColor(const glm::vec3& color) override;
@@ -50,7 +45,6 @@ namespace gam703::engine::core
 		};
 
 		std::vector<core_interface::IRenderer*> m_sceneObjects{};
-		core_interface::Camera* m_activeCamera = nullptr;
 		glm::mat4 m_projectionMatrix = glm::mat4(1);
 		AmbientLight m_ambientLight{};
 		components::DirectionalLight* m_directionalLight = nullptr;
