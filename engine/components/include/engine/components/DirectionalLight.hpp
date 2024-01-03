@@ -15,7 +15,7 @@ namespace gam703::engine::components
 
 		virtual void tick(float deltaTime) override {}
 
-		virtual void updateShaderLightInfo(const core_interface::IShader& shader) const override;
+		virtual void updateShaderLightInfo(const core_interface::Shader& shader) const override;
 	};
 }
 

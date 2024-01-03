@@ -14,7 +14,7 @@ namespace gam703::engine::components
 		return new SpotLight(transform, m_color, m_innerAngle, m_outerAngle, m_range, m_intensity);
 	}
 
-	void SpotLight::updateShaderLightInfo(const core_interface::IShader& shader) const
+	void SpotLight::updateShaderLightInfo(const core_interface::Shader& shader) const
 	{
 		shader.setVec3("spotLight.position", m_transform->getPosition());
 		shader.setVec3("spotLight.direction", m_transform->getFront());
