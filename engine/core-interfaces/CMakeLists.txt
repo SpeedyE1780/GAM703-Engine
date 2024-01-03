@@ -9,6 +9,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 src/Camera.cpp
 src/IComponent.cpp
 src/IEngine.cpp
+src/IMaterial.cpp
 src/ILight.cpp
 src/IRenderer.cpp
 src/Time.cpp

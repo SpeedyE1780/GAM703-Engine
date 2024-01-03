@@ -6,7 +6,7 @@ namespace gam703::engine::graphic
 	{
 	}
 
-	void Model::draw(const core_interface::IMaterial& material) const
+	void Model::draw(const core_interface::Material& material) const
 	{
 		std::for_each(begin(m_meshes), end(m_meshes), [&material](const Mesh& mesh) { mesh.draw(material); });
 	}

@@ -11,44 +11,18 @@ namespace gam703::engine::graphic
 	}
 
 	Material::Material(const Material& material) :
-		m_shader(material.m_shader),
-		m_color(material.m_color)
+		core_interface::Material(material),
+		m_shader(material.m_shader)
 
 	{
-		m_shader.setColor(m_color);
+		m_shader.setColor(getColor());
 	}
 
 	Material& Material::operator=(const Material& material)
 	{
+		core_interface::Material::operator=(material);
 		m_shader = material.m_shader;
-		m_color = material.m_color;
-		m_shader.setColor(m_color);
+		m_shader.setColor(getColor());
 		return *this;
-	}
-
-	void Material::setDiffuseTexture(int diffuseIndex, int textureIndex) const
-	{
-		m_shader.setDiffuseSampler(diffuseIndex, textureIndex);
-	}
-
-	void Material::setSpecularTexture(int specularIndex, int textureIndex) const
-	{
-		m_shader.setSpecularSampler(specularIndex, textureIndex);
-	}
-
-	void Material::setNormalTexture(int normalIndex, int textureIndex) const
-	{
-		m_shader.setNormalSampler(normalIndex, textureIndex);
-	}
-
-	void Material::setHeightTexture(int heightIndex, int textureIndex) const
-	{
-		m_shader.setHeightSampler(heightIndex, textureIndex);
-	}
-
-	void Material::setColor(const glm::vec3& color)
-	{
-		m_color = color;
-		m_shader.setColor(m_color);
 	}
 }

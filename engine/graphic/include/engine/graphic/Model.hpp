@@ -23,7 +23,7 @@ namespace gam703::engine::graphic
 	{
 	public:
 		Model(const std::vector<Mesh>& meshes);
-		virtual void draw(const core_interface::IMaterial& material) const override;
+		virtual void draw(const core_interface::Material& material) const override;
 
 	private:
 		std::vector<Mesh> m_meshes;

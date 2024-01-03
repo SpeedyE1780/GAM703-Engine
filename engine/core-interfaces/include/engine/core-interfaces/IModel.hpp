@@ -9,7 +9,7 @@ namespace gam703::engine::core_interface
 	{
 	public:
 		~IModel() = default;
-		virtual void draw(const IMaterial& material) const = 0;
+		virtual void draw(const Material& material) const = 0;
 
 	};
 }
