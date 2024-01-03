@@ -1,7 +1,7 @@
 #ifndef GAM703_ENGINE_CORE_INTERFACES_IMODEL_HPP
 #define GAM703_ENGINE_CORE_INTERFACES_IMODEL_HPP
 
-#include <engine/core-interfaces/IMaterial.hpp>
+#include <engine/core-interfaces/Material.hpp>
 
 namespace gam703::engine::core_interface
 {

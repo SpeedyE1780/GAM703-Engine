@@ -1,7 +1,6 @@
 #ifndef GAM703_ENGINE_GRAPHIC_MODEL_HPP
 #define GAM703_ENGINE_GRAPHIC_MODEL_HPP
 
-#include <engine/core-interfaces/IMaterial.hpp>
 #include <engine/core-interfaces/IModel.hpp>
 
 #include <engine/graphic/Config.hpp>

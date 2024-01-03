@@ -220,4 +220,9 @@ namespace gam703::engine::core_interface
 		setFloat("material.shininess", 32.0f);
 		setFloat("material.specularStrength", 0.5f);
 	}
+
+	Shader createDefaultShader()
+	{
+		return Shader("resources/Shaders/Default.vert", "resources/Shaders/Default.frag");
+	}
 }

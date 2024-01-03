@@ -1,7 +1,7 @@
 #ifndef GAM703_ENGINE_GRAPHIC_MESH_HPP
 #define GAM703_ENGINE_GRAPHIC_MESH_HPP
 
-#include <engine/core-interfaces/IMaterial.hpp>
+#include <engine/core-interfaces/Material.hpp>
 #include <engine/core-interfaces/ITexture.hpp>
 
 #include <glm/glm.hpp>

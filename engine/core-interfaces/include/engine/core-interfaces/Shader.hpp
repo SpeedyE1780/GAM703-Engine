@@ -44,6 +44,9 @@ namespace gam703::engine::core_interface
 		std::string m_vertexShaderPath;
 		std::string m_fragmentShaderPath;
 	};
+
+	ENGINE_CORE_INTERFACES_API Shader createDefaultShader();
+
 }
 
 #endif // GAM703_ENGINE_CORE_INTERFACES_ISHADER_HPP

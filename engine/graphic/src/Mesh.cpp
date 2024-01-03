@@ -1,5 +1,4 @@
 #include <engine/graphic/Mesh.hpp>
-#include <engine/graphic/Shader.hpp>
 
 #include <glad/glad.h>
 

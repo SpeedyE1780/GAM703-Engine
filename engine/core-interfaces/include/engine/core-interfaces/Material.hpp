@@ -11,7 +11,8 @@ namespace gam703::engine::core_interface
 	class ENGINE_CORE_INTERFACES_API Material
 	{
 	public:
-		Material() = default;
+		Material();
+		Material(const core_interface::Shader& shader);
 		Material(const Material& material);
 		Material& operator=(const Material& material);
 
@@ -22,11 +23,12 @@ namespace gam703::engine::core_interface
 		void setSpecularTexture(int specularIndex, int textureIndex) const;
 		void setNormalTexture(int normalIndex, int textureIndex) const;
 		void setHeightTexture(int heightIndex, int textureIndex) const;
-		virtual Shader* getShader() = 0;
-		virtual const Shader* getShader() const = 0;
+		Shader* getShader() { return &m_shader; }
+		const Shader* getShader() const { return &m_shader; }
 
 	private:
 		glm::vec3 m_color = glm::vec3(1, 1, 1);
+		core_interface::Shader m_shader;
 	};
 }
 

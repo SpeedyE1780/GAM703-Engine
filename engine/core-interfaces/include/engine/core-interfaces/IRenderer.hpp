@@ -3,7 +3,7 @@
 
 #include <engine/core-interfaces/Config.hpp>
 #include <engine/core-interfaces/IComponent.hpp>
-#include <engine/core-interfaces/IMaterial.hpp>
+#include <engine/core-interfaces/Material.hpp>
 
 #include <glm/mat4x4.hpp>
 

@@ -6,18 +6,13 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE ENGINE_GRAPHIC_EXPORT)
 
 target_sources(${PROJECT_NAME} PRIVATE
 #CPP
-src/Material.cpp
 src/Mesh.cpp
 src/Model.cpp
 src/ModelLoader.cpp
-src/Shader.cpp 
 src/Texture.cpp
 
 #HPP
 include/engine/graphic/Config.hpp
-include/engine/graphic/Shader.hpp
-include/engine/graphic/Shader.fwd.hpp
-include/engine/graphic/Material.hpp
 include/engine/graphic/Mesh.hpp
 include/engine/graphic/Model.hpp
 include/engine/graphic/ModelLoader.hpp

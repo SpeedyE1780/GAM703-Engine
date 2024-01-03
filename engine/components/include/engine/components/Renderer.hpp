@@ -7,8 +7,6 @@
 #include <engine/core-interfaces/IModel.hpp>
 #include <engine/core-interfaces/IRenderer.hpp>
 
-#include <engine/graphic/Material.hpp>
-
 #include <glm/mat4x4.hpp>
 
 namespace gam703::engine::components
@@ -17,7 +15,7 @@ namespace gam703::engine::components
 	{
 	public:
 		Renderer(core_interface::Transform* transform, const core_interface::IModel* model);
-		Renderer(core_interface::Transform* transform, const core_interface::IModel* model, const graphic::Material& material);
+		Renderer(core_interface::Transform* transform, const core_interface::IModel* model, const core_interface::Material& material);
 		~Renderer();
 
 		virtual core_interface::IComponent* clone(core_interface::Transform* transform) const override;
@@ -32,7 +30,7 @@ namespace gam703::engine::components
 
 	private:
 		const core_interface::IModel* m_model;
-		graphic::Material m_material;
+		core_interface::Material m_material;
 	};
 }
 

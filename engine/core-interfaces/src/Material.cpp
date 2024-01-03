@@ -1,16 +1,30 @@
-#include <engine/core-interfaces/IMaterial.hpp>
+#include <engine/core-interfaces/Material.hpp>
+#include <engine/core-interfaces/Shader.hpp>
 
 namespace gam703::engine::core_interface
 {
+	Material::Material() : m_shader(createDefaultShader())
+	{
+	}
+
+	Material::Material(const core_interface::Shader& shader) : m_shader(shader)
+	{
+	}
+
 	Material::Material(const Material& material) :
-		m_color(material.m_color)
+		m_color(material.m_color),
+		m_shader(material.m_shader)
 
 	{
+		m_shader.setColor(m_color);
 	}
 
 	Material& Material::operator=(const Material& material)
 	{
 		m_color = material.m_color;
+		m_shader = material.m_shader;
+		m_shader.setColor(m_color);
+		return *this;
 		return *this;
 	}
 
