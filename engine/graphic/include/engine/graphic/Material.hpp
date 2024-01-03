@@ -12,7 +12,7 @@ namespace gam703::engine::graphic
 	{
 	public:
 		Material();
-		Material(const Shader& shader);
+		Material(const core_interface::IShader& shader);
 		Material(const Material& material);
 		Material& operator=(const Material& material);
 
@@ -20,7 +20,7 @@ namespace gam703::engine::graphic
 		virtual const core_interface::IShader* getShader() const override { return &m_shader; }
 
 	private:
-		Shader m_shader;
+		core_interface::IShader m_shader;
 	};
 }
 

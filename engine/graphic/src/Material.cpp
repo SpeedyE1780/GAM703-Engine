@@ -6,7 +6,7 @@ namespace gam703::engine::graphic
 	{
 	}
 
-	Material::Material(const Shader& shader) : m_shader(shader)
+	Material::Material(const core_interface::IShader& shader) : m_shader(shader)
 	{
 	}
 

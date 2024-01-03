@@ -12,7 +12,10 @@ namespace gam703::engine::core_interface
 	class ENGINE_CORE_INTERFACES_API IShader
 	{
 	public:
-		virtual ~IShader() = default;
+		IShader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
+		IShader(const IShader& shader);
+		IShader& operator=(const IShader& shader);
+		~IShader();
 		void use() const;
 		unsigned int getId() const;
 		void setBool(const std::string& name, bool value) const;
@@ -33,8 +36,13 @@ namespace gam703::engine::core_interface
 		void setHeightSampler(int index, int value) const;
 		void setColor(const glm::vec3& color) const;
 
-	protected:
+	private:
+		void createShaderProgram();
+		void setDefaultValues() const;
+
 		unsigned int m_id = 0;
+		std::string m_vertexShaderPath;
+		std::string m_fragmentShaderPath;
 	};
 }
 
