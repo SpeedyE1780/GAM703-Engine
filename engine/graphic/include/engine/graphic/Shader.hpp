@@ -18,30 +18,11 @@ namespace gam703::engine::graphic
 		Shader(const Shader& shader);
 		Shader& operator=(const Shader& shader);
 		~Shader();
-		virtual void use() const override;
-		virtual unsigned int getId() const override { return m_id; }
-		virtual void setBool(const std::string& name, bool value) const override;
-		virtual void setInt(const std::string& name, int value) const override;
-		virtual void setFloat(const std::string& name, float value) const override;
-		virtual void setVec2(const std::string& name, const glm::vec2& value) const override;
-		virtual void setVec2(const std::string& name, float x, float y) const override;
-		virtual void setVec3(const std::string& name, const glm::vec3& value) const override;
-		virtual void setVec3(const std::string& name, float x, float y, float z) const override;
-		virtual void setVec4(const std::string& name, const glm::vec4& value) const override;
-		virtual void setVec4(const std::string& name, float x, float y, float z, float w) const override;
-		virtual void setMat2(const std::string& name, const glm::mat2& mat) const override;
-		virtual void setMat3(const std::string& name, const glm::mat3& mat) const override;
-		virtual void setMat4(const std::string& name, const glm::mat4& mat) const override;
-		virtual void setDiffuseSampler(int index, int value) const override;
-		virtual void setSpecularSampler(int index, int value) const override;
-		virtual void setNormalSampler(int index, int value) const override;
-		virtual void setHeightSampler(int index, int value) const override;
-		virtual void setColor(const glm::vec3& color) const override;
+
 	private:
 		void createShaderProgram();
 		void setDefaultValues() const;
 
-		unsigned int m_id = 0;
 		std::string m_vertexShaderPath;
 		std::string m_fragmentShaderPath;
 	};

@@ -12,6 +12,7 @@ src/IEngine.cpp
 src/IMaterial.cpp
 src/ILight.cpp
 src/IRenderer.cpp
+src/IShader.cpp
 src/Time.cpp
 src/Transform.cpp
 
@@ -38,4 +39,5 @@ include/engine/core-interfaces/Transform.fwd.hpp
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include/)
 
+target_link_libraries(${PROJECT_NAME} PRIVATE glad)
 target_link_libraries(${PROJECT_NAME} PUBLIC glm)
