@@ -11,6 +11,7 @@ src/IComponent.cpp
 src/IEngine.cpp
 src/ILight.cpp
 src/IRenderer.cpp
+src/ITexture.cpp
 src/Material.cpp
 src/Shader.cpp
 src/Time.cpp

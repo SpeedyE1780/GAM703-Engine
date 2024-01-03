@@ -10,7 +10,7 @@ namespace gam703::engine::core
 	{
 	}
 
-	const core_interface::ITexture* ResourceManager::getTexture(const std::filesystem::path& path, graphic::Texture::TextureType type)
+	const core_interface::ITexture* ResourceManager::getTexture(const std::filesystem::path& path, core_interface::ITexture::TextureType type)
 	{
 		if (auto texture = m_textures.find(path); texture != m_textures.end())
 		{
@@ -19,8 +19,8 @@ namespace gam703::engine::core
 
 		if (int textureID = graphic::loadTextureFromFile(path); textureID > 0)
 		{
-			graphic::Texture* texture = new graphic::Texture(textureID, type);
-			m_textures[path] = std::unique_ptr<graphic::Texture>(texture);
+			core_interface::ITexture* texture = new core_interface::ITexture(textureID, type);
+			m_textures[path] = std::unique_ptr<core_interface::ITexture>(texture);
 
 			std::cout << "TEXTURE LOADED COUNT: " << m_textures.size() << std::endl;
 
@@ -40,8 +40,8 @@ namespace gam703::engine::core
 
 		if (int textureID = graphic::createWhiteTexture(); textureID > 0)
 		{
-			graphic::Texture* texture = new graphic::Texture(textureID, graphic::Texture::TextureType::Diffuse);
-			m_textures["__WhiteTexture__"] = std::unique_ptr<graphic::Texture>(texture);
+			core_interface::ITexture* texture = new core_interface::ITexture(textureID, core_interface::ITexture::TextureType::Diffuse);
+			m_textures["__WhiteTexture__"] = std::unique_ptr<core_interface::ITexture>(texture);
 
 			std::cout << "TEXTURE LOADED COUNT: " << m_textures.size() << std::endl;
 
