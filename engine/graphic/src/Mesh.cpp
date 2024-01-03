@@ -4,7 +4,7 @@
 
 namespace gam703::engine::graphic
 {
-	Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const std::vector<const core_interface::ITexture*>& textures) : m_vertices(vertices), m_indices(indices), m_textures(textures)
+	Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const std::vector<const core_interface::Texture*>& textures) : m_vertices(vertices), m_indices(indices), m_textures(textures)
 	{
 		setupMesh();
 	}
@@ -22,31 +22,31 @@ namespace gam703::engine::graphic
 
 			switch (m_textures[i]->getType())
 			{
-			case core_interface::ITexture::TextureType::Diffuse:
+			case core_interface::Texture::TextureType::Diffuse:
 			{
 				material.setDiffuseTexture(diffuseIndex, i);
 				diffuseIndex++;
 				break;
 			}
-			case core_interface::ITexture::TextureType::Specular:
+			case core_interface::Texture::TextureType::Specular:
 			{
 				material.setSpecularTexture(specularIndex, i);
 				specularIndex++;
 				break;
 			}
-			case core_interface::ITexture::TextureType::Normal:
+			case core_interface::Texture::TextureType::Normal:
 			{
 				material.setNormalTexture(normalIndex, i);
 				normalIndex++;
 				break;
 			}
-			case core_interface::ITexture::TextureType::Height:
+			case core_interface::Texture::TextureType::Height:
 			{
 				material.setHeightTexture(heightIndex, i);
 				heightIndex++;
 				break;
 			}
-			case core_interface::ITexture::TextureType::Undefined:
+			case core_interface::Texture::TextureType::Undefined:
 			{
 				break;
 			}

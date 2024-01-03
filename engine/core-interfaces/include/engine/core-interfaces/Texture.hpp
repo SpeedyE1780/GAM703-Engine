@@ -1,11 +1,11 @@
-#ifndef GAM703_ENGINE_CORE_INTERFACES_ITEXTURE_HPP
-#define GAM703_ENGINE_CORE_INTERFACES_ITEXTURE_HPP
+#ifndef GAM703_ENGINE_CORE_INTERFACES_TEXTURE_HPP
+#define GAM703_ENGINE_CORE_INTERFACES_TEXTURE_HPP
 
 #include <engine/core-interfaces/Config.hpp>
 
 namespace gam703::engine::core_interface
 {
-	class ENGINE_CORE_INTERFACES_API ITexture
+	class ENGINE_CORE_INTERFACES_API Texture
 	{
 	public:
 
@@ -18,7 +18,7 @@ namespace gam703::engine::core_interface
 			Height
 		};
 
-		ITexture(unsigned int id, TextureType type);
+		Texture(unsigned int id, TextureType type);
 		unsigned int getID() const { return m_id; }
 		TextureType getType() const { return m_type; }
 
@@ -28,4 +28,4 @@ namespace gam703::engine::core_interface
 	};
 }
 
-#endif // GAM703_ENGINE_CORE_INTERFACES_ITEXTURE_HPP
+#endif // GAM703_ENGINE_CORE_INTERFACES_TEXTURE_HPP
