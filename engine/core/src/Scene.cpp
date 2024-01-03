@@ -25,7 +25,7 @@ namespace gam703::engine::core
 		m_sceneRenderer.calculateProjectionMatrix(m_engine->getWindow().getAspectRatio());
 	}
 
-	void Scene::setActiveCamera(core_interface::ICamera* activeCamera)
+	void Scene::setActiveCamera(core_interface::Camera* activeCamera)
 	{
 		m_sceneRenderer.setActiveCamera(activeCamera);
 		m_sceneRenderer.calculateProjectionMatrix(m_engine->getWindow().getAspectRatio());

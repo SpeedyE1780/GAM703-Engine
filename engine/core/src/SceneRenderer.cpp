@@ -123,7 +123,7 @@ namespace gam703::engine::core
 				lightSource->updateShaderLightInfo(*renderer->getMaterial()->getShader());
 			}
 
-			renderer->render(m_activeCamera->GetViewMatrix(), m_activeCamera->getTransform()->getPosition());
+			renderer->render(m_activeCamera->getViewMatrix(), m_activeCamera->getTransform()->getPosition());
 		}
 	}
 }

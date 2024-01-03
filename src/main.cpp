@@ -2,7 +2,7 @@
 
 #include <engine/core/Engine.hpp>
 
-#include <engine/components/Camera.hpp>
+#include <engine/core-interfaces/Camera.hpp>
 #include <engine/components/DirectionalLight.hpp>
 #include <engine/components/PointLight.hpp>
 #include <engine/components/Renderer.hpp>
@@ -66,7 +66,7 @@ int main()
 	addGroundPlane(engine, playerTransform, glm::vec3(0.0f, 0.0f, -10.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	auto* cameraTransform = scene->addTransform(glm::vec3(0.0f, 20.0f, 20.0f), glm::vec3(glm::radians(-45.0f), glm::radians(-90.0f), 0));
-	auto* camera = cameraTransform->addComponent<engine::components::Camera>();
+	auto* camera = cameraTransform->addComponent<engine::core_interface::Camera>();
 	//cameraTransform->addComponent<gam703::game::components::MovementController>();
 
 	scene->setActiveCamera(camera);
