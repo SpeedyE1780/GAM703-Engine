@@ -9,13 +9,13 @@
 
 namespace gam703::engine::core_interface
 {
-	class ENGINE_CORE_INTERFACES_API IShader
+	class ENGINE_CORE_INTERFACES_API Shader
 	{
 	public:
-		IShader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
-		IShader(const IShader& shader);
-		IShader& operator=(const IShader& shader);
-		~IShader();
+		Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
+		Shader(const Shader& shader);
+		Shader& operator=(const Shader& shader);
+		~Shader();
 		void use() const;
 		unsigned int getId() const;
 		void setBool(const std::string& name, bool value) const;

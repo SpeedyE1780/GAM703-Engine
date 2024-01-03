@@ -12,15 +12,15 @@ namespace gam703::engine::graphic
 	{
 	public:
 		Material();
-		Material(const core_interface::IShader& shader);
+		Material(const core_interface::Shader& shader);
 		Material(const Material& material);
 		Material& operator=(const Material& material);
 
-		virtual core_interface::IShader* getShader() override { return &m_shader; }
-		virtual const core_interface::IShader* getShader() const override { return &m_shader; }
+		virtual core_interface::Shader* getShader() override { return &m_shader; }
+		virtual const core_interface::Shader* getShader() const override { return &m_shader; }
 
 	private:
-		core_interface::IShader m_shader;
+		core_interface::Shader m_shader;
 	};
 }
 
