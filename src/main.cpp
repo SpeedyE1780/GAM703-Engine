@@ -31,7 +31,7 @@ static engine::core_interface::Transform* addGroundPlane(engine::core_interface:
 {
 	const engine::core_interface::IModel* backpackModel = engine.getResourceManager()->getModel("resources/Models/backpack/backpack.obj");
 	const engine::core_interface::IModel* cubeModel = engine.getResourceManager()->getModel("resources/Models/cube/cube.obj");
-	engine::graphic::Shader checkeredShader{ "resources/Shaders/Default.vert", "resources/Shaders/Checkermap.frag" };
+	engine::core_interface::Shader checkeredShader{ "resources/Shaders/Default.vert", "resources/Shaders/Checkermap.frag" };
 
 	auto* backpack = engine.getScene()->addTransform(position + glm::vec3(0.0f, 2.1f, 0.0f));
 	backpack->addComponent<engine::components::Renderer>(backpackModel);

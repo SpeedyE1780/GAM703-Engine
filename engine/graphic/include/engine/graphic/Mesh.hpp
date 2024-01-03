@@ -1,7 +1,7 @@
 #ifndef GAM703_ENGINE_GRAPHIC_MESH_HPP
 #define GAM703_ENGINE_GRAPHIC_MESH_HPP
 
-#include <engine/core-interfaces/IMaterial.hpp>
+#include <engine/core-interfaces/Material.hpp>
 #include <engine/core-interfaces/ITexture.hpp>
 
 #include <glm/glm.hpp>
@@ -28,7 +28,7 @@ namespace gam703::engine::graphic
 	{
 	public:
 		Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const std::vector<const core_interface::ITexture*>& textures);
-		void draw(const core_interface::IMaterial& material) const;
+		void draw(const core_interface::Material& material) const;
 
 	private:
 		void setupMesh();

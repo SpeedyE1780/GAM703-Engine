@@ -11,6 +11,8 @@ src/IComponent.cpp
 src/IEngine.cpp
 src/ILight.cpp
 src/IRenderer.cpp
+src/Material.cpp
+src/Shader.cpp
 src/Time.cpp
 src/Transform.cpp
 
@@ -28,8 +30,9 @@ include/engine/core-interfaces/IScene.hpp
 include/engine/core-interfaces/IScene.fwd.hpp
 include/engine/core-interfaces/ISceneRenderer.hpp
 include/engine/core-interfaces/IResourceManager.hpp
-include/engine/core-interfaces/IShader.hpp
 include/engine/core-interfaces/ITexture.hpp
+include/engine/core-interfaces/Material.hpp
+include/engine/core-interfaces/Shader.hpp
 include/engine/core-interfaces/Time.hpp
 include/engine/core-interfaces/Transform.hpp
 include/engine/core-interfaces/Transform.fwd.hpp
@@ -38,3 +41,6 @@ include/engine/core-interfaces/Transform.fwd.hpp
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include/)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC glm)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE engine-utility)
+target_link_libraries(${PROJECT_NAME} PRIVATE glad)

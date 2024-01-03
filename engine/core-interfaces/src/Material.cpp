@@ -1,18 +1,19 @@
-#include <engine/graphic/Material.hpp>
+#include <engine/core-interfaces/Material.hpp>
+#include <engine/core-interfaces/Shader.hpp>
 
-namespace gam703::engine::graphic
+namespace gam703::engine::core_interface
 {
 	Material::Material() : m_shader(createDefaultShader())
 	{
 	}
 
-	Material::Material(const Shader& shader) : m_shader(shader)
+	Material::Material(const core_interface::Shader& shader) : m_shader(shader)
 	{
 	}
 
 	Material::Material(const Material& material) :
-		m_shader(material.m_shader),
-		m_color(material.m_color)
+		m_color(material.m_color),
+		m_shader(material.m_shader)
 
 	{
 		m_shader.setColor(m_color);
@@ -20,35 +21,36 @@ namespace gam703::engine::graphic
 
 	Material& Material::operator=(const Material& material)
 	{
-		m_shader = material.m_shader;
 		m_color = material.m_color;
+		m_shader = material.m_shader;
 		m_shader.setColor(m_color);
+		return *this;
 		return *this;
 	}
 
 	void Material::setDiffuseTexture(int diffuseIndex, int textureIndex) const
 	{
-		m_shader.setDiffuseSampler(diffuseIndex, textureIndex);
+		getShader()->setDiffuseSampler(diffuseIndex, textureIndex);
 	}
 
 	void Material::setSpecularTexture(int specularIndex, int textureIndex) const
 	{
-		m_shader.setSpecularSampler(specularIndex, textureIndex);
+		getShader()->setSpecularSampler(specularIndex, textureIndex);
 	}
 
 	void Material::setNormalTexture(int normalIndex, int textureIndex) const
 	{
-		m_shader.setNormalSampler(normalIndex, textureIndex);
+		getShader()->setNormalSampler(normalIndex, textureIndex);
 	}
 
 	void Material::setHeightTexture(int heightIndex, int textureIndex) const
 	{
-		m_shader.setHeightSampler(heightIndex, textureIndex);
+		getShader()->setHeightSampler(heightIndex, textureIndex);
 	}
 
 	void Material::setColor(const glm::vec3& color)
 	{
 		m_color = color;
-		m_shader.setColor(m_color);
+		getShader()->setColor(m_color);
 	}
 }
