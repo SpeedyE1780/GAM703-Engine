@@ -4,7 +4,7 @@
 #include <engine/core-interfaces/Config.hpp>
 #include <engine/core-interfaces/IInput.hpp>
 #include <engine/core-interfaces/IResourceManager.hpp>
-#include <engine/core-interfaces/IScene.hpp>
+#include <engine/core-interfaces/Scene.hpp>
 #include <engine/core-interfaces/Time.hpp>
 
 namespace gam703::engine::core_interface
@@ -20,11 +20,12 @@ namespace gam703::engine::core_interface
 		const Time* getTime() const { return &m_time; }
 		virtual IResourceManager* getResourceManager() = 0;
 		virtual const IResourceManager* getResourceManager() const = 0;
-		virtual IScene* getScene() = 0;
-		virtual const IScene* getScene() const = 0;
+		Scene* getScene() { return &m_scene; }
+		const Scene* getScene() const {return &m_scene; }
 		virtual float getAspectRatio() const = 0;
 
 	protected:
+		Scene m_scene;
 		Time m_time;
 	};
 }

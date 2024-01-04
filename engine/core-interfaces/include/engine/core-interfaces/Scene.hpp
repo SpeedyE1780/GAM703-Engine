@@ -1,5 +1,5 @@
-#ifndef GAM703_ENGINE_CORE_INTERFACES_ISCENE_HPP
-#define GAM703_ENGINE_CORE_INTERFACES_ISCENE_HPP
+#ifndef GAM703_ENGINE_CORE_INTERFACES_Scene_HPP
+#define GAM703_ENGINE_CORE_INTERFACES_Scene_HPP
 
 #include <engine/core-interfaces/Config.hpp>
 #include <engine/core-interfaces/IEngine.fwd.hpp>
@@ -14,13 +14,13 @@
 
 namespace gam703::engine::core_interface
 {
-	class ENGINE_CORE_INTERFACES_API IScene
+	class ENGINE_CORE_INTERFACES_API Scene
 	{
 	public:
-		IScene(IEngine* engine);
-		virtual ~IScene() = default;
-		IScene(const IScene&) = delete;
-		IScene& operator=(const IScene&) = delete;
+		Scene(IEngine* engine);
+		virtual ~Scene() = default;
+		Scene(const Scene&) = delete;
+		Scene& operator=(const Scene&) = delete;
 
 		SceneRenderer* getSceneRenderer() { return &m_sceneRenderer; }
 		const SceneRenderer* getSceneRenderer() const { return &m_sceneRenderer; }
@@ -43,4 +43,4 @@ namespace gam703::engine::core_interface
 	};
 }
 
-#endif // GAM703_ENGINE_CORE_INTERFACES_ISCENE_HPP
+#endif // GAM703_ENGINE_CORE_INTERFACES_Scene_HPP

@@ -4,7 +4,6 @@
 #include <engine/core/Config.hpp>
 #include <engine/core/Input.hpp>
 #include <engine/core/ResourceManager.hpp>
-#include <engine/core/Scene.hpp>
 
 #include <engine/core-interfaces/IEngine.hpp>
 
@@ -28,8 +27,6 @@ namespace gam703::engine::core
 		const core_interface::Time* getTime() const { return &m_time; }
 		virtual core_interface::IResourceManager* getResourceManager() override { return &m_resourceManager; }
 		virtual const core_interface::IResourceManager* getResourceManager() const override { return &m_resourceManager; }
-		virtual core_interface::IScene* getScene() override { return &m_scene; }
-		virtual const core_interface::IScene* getScene() const override { return &m_scene; }
 
 		virtual float getAspectRatio() const override { return m_window.getAspectRatio(); }
 
@@ -42,7 +39,6 @@ namespace gam703::engine::core
 
 		gui::Window m_window;
 		Input m_inputHandler;
-		Scene m_scene;
 		ResourceManager m_resourceManager{};
 		bool m_isRunning = false;
 	};

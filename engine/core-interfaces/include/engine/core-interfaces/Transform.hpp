@@ -5,7 +5,7 @@
 #include <engine/core-interfaces/Config.hpp>
 #include <engine/core-interfaces/Component.hpp>
 #include <engine/core-interfaces/IEngine.fwd.hpp>
-#include <engine/core-interfaces/IScene.hpp>
+#include <engine/core-interfaces/Scene.hpp>
 
 #include <glm/glm.hpp>
 
@@ -18,7 +18,7 @@ namespace gam703::engine::core_interface
 	class ENGINE_CORE_INTERFACES_API Transform
 	{
 	public:
-		Transform(IEngine* engine, IScene* scene,
+		Transform(IEngine* engine, Scene* scene,
 			const glm::vec3& position = glm::vec3(0.0f, 0.0f, 0.0f),
 			const glm::vec3& rotation = glm::vec3(0.0f, 0.0f, 0.0f),
 			const glm::vec3& scale = glm::vec3(1.0f, 1.0f, 1.0f));
@@ -57,8 +57,8 @@ namespace gam703::engine::core_interface
 		IEngine* getEngine() { return m_engine; }
 		const IEngine* getEngine() const { return m_engine; }
 
-		IScene* getScene() { return m_scene; }
-		const IScene* getScene() const { return m_scene; }
+		Scene* getScene() { return m_scene; }
+		const Scene* getScene() const { return m_scene; }
 
 		template<typename ComponentType, typename... Args>
 		ComponentType* addComponent(Args&&... args)
@@ -127,7 +127,7 @@ namespace gam703::engine::core_interface
 		void updateDirectionVectors();
 
 		IEngine* m_engine = nullptr;
-		IScene* m_scene = nullptr;
+		Scene* m_scene = nullptr;
 		glm::vec3 m_position{ 0.0f, 0.0f, 0.0f };
 		glm::vec3 m_rotation{ 0.0f, 0.0f, 0.0f };
 		glm::vec3 m_scale{ 1.0f, 1.0f, 1.0f };

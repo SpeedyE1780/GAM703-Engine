@@ -1,21 +1,21 @@
 #include <engine/core-interfaces/IEngine.hpp>
-#include <engine/core-interfaces/IScene.hpp>
+#include <engine/core-interfaces/Scene.hpp>
 #include <engine/core-interfaces/Transform.hpp>
 
 namespace gam703::engine::core_interface
 {
-	IScene::IScene(IEngine* engine) : m_engine(engine)
+	Scene::Scene(IEngine* engine) : m_engine(engine)
 	{
 	}
 
-	Transform* IScene::addTransform(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale)
+	Transform* Scene::addTransform(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale)
 	{
 		auto* transform = new Transform(m_engine, this, position, rotation, scale);
 		m_transforms.push_back(std::unique_ptr<Transform>(transform));
 		return transform;
 	}
 
-	Transform* IScene::addTransform(const Transform* transform)
+	Transform* Scene::addTransform(const Transform* transform)
 	{
 		if (transform)
 		{
@@ -27,13 +27,13 @@ namespace gam703::engine::core_interface
 		return nullptr;
 	}
 
-	void IScene::setActiveCamera(Camera* activeCamera)
+	void Scene::setActiveCamera(Camera* activeCamera)
 	{
 		m_sceneRenderer.setActiveCamera(activeCamera);
 		m_sceneRenderer.calculateProjectionMatrix(m_engine->getAspectRatio());
 	}
 
-	void IScene::updateScene(float deltaTime)
+	void Scene::updateScene(float deltaTime)
 	{
 		std::for_each(begin(m_transforms), end(m_transforms), [deltaTime](std::unique_ptr<Transform>& transform)
 			{
@@ -44,7 +44,7 @@ namespace gam703::engine::core_interface
 		m_sceneRenderer.render();
 	}
 
-	void IScene::updateSceneProjectionMatrix()
+	void Scene::updateSceneProjectionMatrix()
 	{
 		m_sceneRenderer.calculateProjectionMatrix(m_engine->getAspectRatio());
 	}

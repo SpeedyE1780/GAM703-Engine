@@ -3,7 +3,7 @@
 
 #include <engine/core-interfaces/Config.hpp>
 #include <engine/core-interfaces/IEngine.fwd.hpp>
-#include <engine/core-interfaces/IScene.fwd.hpp>
+#include <engine/core-interfaces/Scene.fwd.hpp>
 #include <engine/core-interfaces/Transform.fwd.hpp>
 
 namespace gam703::engine::core_interface
@@ -22,8 +22,8 @@ namespace gam703::engine::core_interface
 		IEngine* getEngine();
 		const IEngine* getEngine() const;
 
-		IScene* getScene();
-		const IScene* getScene() const;
+		Scene* getScene();
+		const Scene* getScene() const;
 
 	protected:
 		Transform* m_transform;
