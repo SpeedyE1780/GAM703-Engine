@@ -12,7 +12,6 @@ src/Engine.cpp
 src/Input.cpp
 src/ResourceManager.cpp
 src/Scene.cpp
-src/SceneRenderer.cpp
 
 #HPP
 include/engine/core/Config.hpp
@@ -21,7 +20,6 @@ include/engine/core/Engine.fwd.hpp
 include/engine/core/Input.hpp
 include/engine/core/ResourceManager.hpp
 include/engine/core/Scene.hpp
-include/engine/core/SceneRenderer.hpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include/)

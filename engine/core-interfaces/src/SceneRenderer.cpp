@@ -1,32 +1,32 @@
 #include <glad/glad.h>
 
-#include <engine/core-interfaces/ISceneRenderer.hpp>
+#include <engine/core-interfaces/SceneRenderer.hpp>
 #include <engine/core-interfaces/Transform.hpp>
 
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace gam703::engine::core_interface
 {
-	void ISceneRenderer::setAmbientLight(const glm::vec3& color, float strength)
+	void SceneRenderer::setAmbientLight(const glm::vec3& color, float strength)
 	{
 		m_ambientLight.m_color = color;
 		m_ambientLight.m_intensity = strength;
 		m_shouldUpdateAmbientLight = true;
 	}
 
-	void ISceneRenderer::setAmbientLightColor(const glm::vec3& color)
+	void SceneRenderer::setAmbientLightColor(const glm::vec3& color)
 	{
 		m_ambientLight.m_color = color;
 		m_shouldUpdateAmbientLight = true;
 	}
 
-	void ISceneRenderer::setAmbientLightIntensity(float intensity)
+	void SceneRenderer::setAmbientLightIntensity(float intensity)
 	{
 		m_ambientLight.m_intensity = intensity;
 		m_shouldUpdateAmbientLight = true;
 	}
 
-	void ISceneRenderer::calculateProjectionMatrix(float aspectRatio)
+	void SceneRenderer::calculateProjectionMatrix(float aspectRatio)
 	{
 		if (!m_activeCamera)
 		{
@@ -41,7 +41,7 @@ namespace gam703::engine::core_interface
 		}
 	}
 
-	void ISceneRenderer::addRenderer(core_interface::IRenderer* sceneObject)
+	void SceneRenderer::addRenderer(core_interface::IRenderer* sceneObject)
 	{
 		m_sceneObjects.push_back(sceneObject);
 		sceneObject->updateProjectionMatrix(m_projectionMatrix);
@@ -49,24 +49,24 @@ namespace gam703::engine::core_interface
 		sceneObject->getMaterial()->getShader()->setFloat("ambientLight.intensity", m_ambientLight.m_intensity);
 	}
 
-	void ISceneRenderer::removeRenderer(core_interface::IRenderer* sceneObject)
+	void SceneRenderer::removeRenderer(core_interface::IRenderer* sceneObject)
 	{
 		auto newEnd = std::remove_if(begin(m_sceneObjects), end(m_sceneObjects), [sceneObject](core_interface::IRenderer* renderer) { return sceneObject == renderer; });
 		m_sceneObjects.erase(newEnd, end(m_sceneObjects));
 	}
 
-	void ISceneRenderer::addLightSource(ILight* light)
+	void SceneRenderer::addLightSource(ILight* light)
 	{
 		m_lightSources.push_back(light);
 	}
 
-	void ISceneRenderer::removeLightSource(ILight* light)
+	void SceneRenderer::removeLightSource(ILight* light)
 	{
 		auto newEnd = std::remove_if(begin(m_lightSources), end(m_lightSources), [light](core_interface::ILight* lightSource) { return light == lightSource; });
 		m_lightSources.erase(newEnd, end(m_lightSources));
 	}
 
-	void ISceneRenderer::render() const
+	void SceneRenderer::render() const
 	{
 		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

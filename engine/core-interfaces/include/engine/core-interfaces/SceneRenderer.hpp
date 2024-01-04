@@ -12,7 +12,7 @@
 
 namespace gam703::engine::core_interface
 {
-	class ENGINE_CORE_INTERFACES_API ISceneRenderer
+	class ENGINE_CORE_INTERFACES_API SceneRenderer
 	{
 	public:
 		void addRenderer(IRenderer* renderer);
