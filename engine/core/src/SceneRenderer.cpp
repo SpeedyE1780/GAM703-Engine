@@ -31,22 +31,6 @@ namespace gam703::engine::core
 		m_sceneObjects.erase(newEnd, end(m_sceneObjects));
 	}
 
-	void SceneRenderer::addLightSource(core_interface::ILight* light)
-	{
-		m_lightSources.push_back(light);
-
-		for (auto* renderer : m_sceneObjects)
-		{
-			light->updateShaderLightInfo(*renderer->getMaterial()->getShader());
-		}
-	}
-
-	void SceneRenderer::removeLightSource(core_interface::ILight* light)
-	{
-		auto newEnd = std::remove_if(begin(m_lightSources), end(m_lightSources), [light](core_interface::ILight* lightSource) { return light == lightSource; });
-		m_lightSources.erase(newEnd, end(m_lightSources));
-	}
-
 	void SceneRenderer::calculateProjectionMatrix(float aspectRatio)
 	{
 		core_interface::ISceneRenderer::calculateProjectionMatrix(aspectRatio);

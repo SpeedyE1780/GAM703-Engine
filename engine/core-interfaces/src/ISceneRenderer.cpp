@@ -32,4 +32,15 @@ namespace gam703::engine::core_interface
 
 		m_projectionMatrix = glm::perspective(glm::radians(m_activeCamera->getFieldOfView()), aspectRatio, 0.1f, 100.0f);
 	}
+
+	void ISceneRenderer::addLightSource(ILight* light)
+	{
+		m_lightSources.push_back(light);
+	}
+
+	void ISceneRenderer::removeLightSource(ILight* light)
+	{
+		auto newEnd = std::remove_if(begin(m_lightSources), end(m_lightSources), [light](core_interface::ILight* lightSource) { return light == lightSource; });
+		m_lightSources.erase(newEnd, end(m_lightSources));
+	}
 }

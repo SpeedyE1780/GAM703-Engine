@@ -22,12 +22,8 @@ namespace gam703::engine::core
 		virtual void calculateProjectionMatrix(float aspectRatio) override;
 		virtual void render() const override;
 
-		virtual void addLightSource(core_interface::ILight* light) override;
-		virtual void removeLightSource(core_interface::ILight* light) override;
-
 	private:
 		std::vector<core_interface::IRenderer*> m_sceneObjects{};
-		std::vector<core_interface::ILight*> m_lightSources{};
 	};
 }
 

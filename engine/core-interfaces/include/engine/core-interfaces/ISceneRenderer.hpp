@@ -8,6 +8,8 @@
 
 #include <glm/glm.hpp>
 
+#include <vector>
+
 namespace gam703::engine::core_interface
 {
 	class ENGINE_CORE_INTERFACES_API ISceneRenderer
@@ -26,8 +28,8 @@ namespace gam703::engine::core_interface
 		void setAmbientLightIntensity(float intensity);
 		float getAmbientLightIntensity() const { return m_ambientLight.m_intensity; }
 
-		virtual void addLightSource(ILight* light) = 0;
-		virtual void removeLightSource(ILight* light) = 0;
+		void addLightSource(ILight* light);
+		void removeLightSource(ILight* light);
 
 		void setActiveCamera(Camera* camera) { m_activeCamera = camera; }
 		Camera* getActiveCamera() { return m_activeCamera; }
@@ -44,6 +46,7 @@ namespace gam703::engine::core_interface
 		mutable bool m_shouldUpdateAmbientLight = false;
 		AmbientLight m_ambientLight{};
 		glm::mat4 m_projectionMatrix = glm::mat4(1);
+		std::vector<core_interface::ILight*> m_lightSources{};
 	};
 }
 
