@@ -28,7 +28,7 @@ namespace gam703::engine::core_interface
 
 	void SceneRenderer::calculateProjectionMatrix(float aspectRatio)
 	{
-		if (!m_activeCamera)
+		if (!m_activeCamera || std::isnan(aspectRatio))
 		{
 			return;
 		}
@@ -41,7 +41,7 @@ namespace gam703::engine::core_interface
 		}
 	}
 
-	void SceneRenderer::addRenderer(core_interface::IRenderer* sceneObject)
+	void SceneRenderer::addRenderer(Renderer* sceneObject)
 	{
 		m_sceneObjects.push_back(sceneObject);
 		sceneObject->updateProjectionMatrix(m_projectionMatrix);
@@ -49,9 +49,9 @@ namespace gam703::engine::core_interface
 		sceneObject->getMaterial()->getShader()->setFloat("ambientLight.intensity", m_ambientLight.m_intensity);
 	}
 
-	void SceneRenderer::removeRenderer(core_interface::IRenderer* sceneObject)
+	void SceneRenderer::removeRenderer(Renderer* sceneObject)
 	{
-		auto newEnd = std::remove_if(begin(m_sceneObjects), end(m_sceneObjects), [sceneObject](core_interface::IRenderer* renderer) { return sceneObject == renderer; });
+		auto newEnd = std::remove_if(begin(m_sceneObjects), end(m_sceneObjects), [sceneObject](Renderer* renderer) { return sceneObject == renderer; });
 		m_sceneObjects.erase(newEnd, end(m_sceneObjects));
 	}
 
@@ -62,7 +62,7 @@ namespace gam703::engine::core_interface
 
 	void SceneRenderer::removeLightSource(Light* light)
 	{
-		auto newEnd = std::remove_if(begin(m_lightSources), end(m_lightSources), [light](core_interface::Light* lightSource) { return light == lightSource; });
+		auto newEnd = std::remove_if(begin(m_lightSources), end(m_lightSources), [light](Light* lightSource) { return light == lightSource; });
 		m_lightSources.erase(newEnd, end(m_lightSources));
 	}
 

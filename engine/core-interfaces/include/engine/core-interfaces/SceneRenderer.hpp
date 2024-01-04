@@ -3,7 +3,7 @@
 
 #include <engine/core-interfaces/Config.hpp>
 #include <engine/core-interfaces/Camera.hpp>
-#include <engine/core-interfaces/IRenderer.hpp>
+#include <engine/core-interfaces/Renderer.hpp>
 #include <engine/core-interfaces/Light.hpp>
 
 #include <glm/glm.hpp>
@@ -15,8 +15,8 @@ namespace gam703::engine::core_interface
 	class ENGINE_CORE_INTERFACES_API SceneRenderer
 	{
 	public:
-		void addRenderer(IRenderer* renderer);
-		void removeRenderer(IRenderer* sceneObject);
+		void addRenderer(Renderer* renderer);
+		void removeRenderer(Renderer* sceneObject);
 
 		void calculateProjectionMatrix(float aspectRatio);
 		void render() const;
@@ -45,8 +45,8 @@ namespace gam703::engine::core_interface
 		mutable bool m_shouldUpdateAmbientLight = false;
 		AmbientLight m_ambientLight{};
 		glm::mat4 m_projectionMatrix = glm::mat4(1);
-		std::vector<core_interface::IRenderer*> m_sceneObjects{};
-		std::vector<core_interface::Light*> m_lightSources{};
+		std::vector<Renderer*> m_sceneObjects{};
+		std::vector<Light*> m_lightSources{};
 	};
 }
 
