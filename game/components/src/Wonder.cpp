@@ -6,11 +6,11 @@
 
 namespace gam703::game::components
 {
-	Wonder::Wonder(engine::core_interface::Transform* transform, engine::core_interface::Transform* playerTransform) : engine::core_interface::IComponent(transform), m_origin(transform->getPosition()), m_player(playerTransform)
+	Wonder::Wonder(engine::core_interface::Transform* transform, engine::core_interface::Transform* playerTransform) : engine::core_interface::Component(transform), m_origin(transform->getPosition()), m_player(playerTransform)
 	{
 	}
 
-	engine::core_interface::IComponent* Wonder::clone(engine::core_interface::Transform* transform) const
+	engine::core_interface::Component* Wonder::clone(engine::core_interface::Transform* transform) const
 	{
 		return new Wonder(transform, m_player);
 	}

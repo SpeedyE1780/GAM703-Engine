@@ -3,7 +3,7 @@
 
 #include <engine/components/Config.hpp>
 
-#include <engine/core-interfaces/IComponent.hpp>
+#include <engine/core-interfaces/Component.hpp>
 #include <engine/core-interfaces/IModel.hpp>
 #include <engine/core-interfaces/IRenderer.hpp>
 
@@ -18,7 +18,7 @@ namespace gam703::engine::components
 		Renderer(core_interface::Transform* transform, const core_interface::IModel* model, const core_interface::Material& material);
 		~Renderer();
 
-		virtual core_interface::IComponent* clone(core_interface::Transform* transform) const override;
+		virtual core_interface::Component* clone(core_interface::Transform* transform) const override;
 
 		virtual void render(const glm::mat4& viewMatrix, const glm::vec3& cameraPosition) const override;
 		virtual void tick(float deltaTime) override;

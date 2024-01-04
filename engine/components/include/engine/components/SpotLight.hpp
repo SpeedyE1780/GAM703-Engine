@@ -12,7 +12,7 @@ namespace gam703::engine::components
 	public:
 		SpotLight(core_interface::Transform* transform, const glm::vec3& color, float innerAngle = 25.0f, float outerAngle = 45.0f, float range = 5.0f, float intensity = 1.0f);
 
-		virtual core_interface::IComponent* clone(core_interface::Transform* transform) const override;
+		virtual core_interface::Component* clone(core_interface::Transform* transform) const override;
 
 		virtual void tick(float deltaTime) override {}
 

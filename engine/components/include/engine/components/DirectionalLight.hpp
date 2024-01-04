@@ -11,7 +11,7 @@ namespace gam703::engine::components
 	public:
 		DirectionalLight(core_interface::Transform* transform, const glm::vec3& color, float intensity = 1.0f);
 
-		virtual core_interface::IComponent* clone(core_interface::Transform* transform) const override;
+		virtual core_interface::Component* clone(core_interface::Transform* transform) const override;
 
 		virtual void tick(float deltaTime) override {}
 

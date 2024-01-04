@@ -2,7 +2,7 @@
 #define GAM703_ENGINE_CORE_INTERFACES_TRANSFORM_HPP
 
 #include <engine/core-interfaces/Config.hpp>
-#include <engine/core-interfaces/IComponent.hpp>
+#include <engine/core-interfaces/Component.hpp>
 #include <engine/core-interfaces/IEngine.fwd.hpp>
 #include <engine/core-interfaces/IScene.hpp>
 
@@ -58,28 +58,28 @@ namespace gam703::engine::core_interface
 		IScene* getScene() { return m_scene; }
 		const IScene* getScene() const { return m_scene; }
 
-		template<typename Component, typename... Args>
-		Component* addComponent(Args&&... args)
+		template<typename ComponentType, typename... Args>
+		ComponentType* addComponent(Args&&... args)
 		{
-			auto* component = new Component(this, std::forward<Args>(args)...);
-			m_components.emplace_back(std::unique_ptr<Component>(component));
+			auto* component = new ComponentType(this, std::forward<Args>(args)...);
+			m_components.emplace_back(std::unique_ptr<ComponentType>(component));
 			return component;
 		}
 
-		template<typename Component>
-		Component* getComponent()
+		template<typename ComponentType>
+		ComponentType* getComponent()
 		{
-			Component* returnValue = nullptr;
-			auto _ = std::find_if(begin(m_components), end(m_components), [&returnValue](std::unique_ptr<core_interface::IComponent>& component) { return returnValue = dynamic_cast<Component*>(component.get()); });
+			ComponentType* returnValue = nullptr;
+			auto _ = std::find_if(begin(m_components), end(m_components), [&returnValue](std::unique_ptr<Component>& component) { return returnValue = dynamic_cast<ComponentType*>(component.get()); });
 			return returnValue;
 		}
 
-		template<typename Component>
+		template<typename ComponentType>
 		void removeComponent()
 		{
-			auto newEnd = std::remove_if(begin(m_components), end(m_components), [](std::unique_ptr<core_interface::IComponent>& component)
+			auto newEnd = std::remove_if(begin(m_components), end(m_components), [](std::unique_ptr<Component>& component)
 				{
-					return dynamic_cast<Component*>(component.get());
+					return dynamic_cast<ComponentType*>(component.get());
 				});
 
 			m_components.erase(newEnd, end(m_components));
@@ -90,8 +90,8 @@ namespace gam703::engine::core_interface
 	private:
 		void updateDirectionVectors();
 
-		core_interface::IEngine* m_engine = nullptr;
-		core_interface::IScene* m_scene = nullptr;
+		IEngine* m_engine = nullptr;
+		IScene* m_scene = nullptr;
 		glm::vec3 m_position{ 0.0f, 0.0f, 0.0f };
 		glm::vec3 m_rotation{ 0.0f, 0.0f, 0.0f };
 		glm::vec3 m_scale{ 1.0f, 1.0f, 1.0f };
@@ -102,7 +102,7 @@ namespace gam703::engine::core_interface
 		glm::mat3 m_normalMatrix = glm::mat3(1);
 		bool m_shouldCalculateTransform = true;
 		bool m_shouldUpdateDirectionVectors = true;
-		std::vector<std::unique_ptr<IComponent>> m_components{};
+		std::vector<std::unique_ptr<Component>> m_components{};
 	};
 }
 

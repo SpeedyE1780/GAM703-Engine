@@ -8,13 +8,13 @@
 
 namespace gam703::engine::core_interface
 {
-	class ENGINE_CORE_INTERFACES_API IComponent
+	class ENGINE_CORE_INTERFACES_API Component
 	{
 	public:
-		IComponent(Transform* transform);
-		virtual ~IComponent() = default;
+		Component(Transform* transform);
+		virtual ~Component() = default;
 
-		virtual IComponent* clone(Transform* transform) const = 0;
+		virtual Component* clone(Transform* transform) const = 0;
 
 		Transform* getTransform() { return m_transform; }
 		const Transform* getTransform() const { return m_transform; }

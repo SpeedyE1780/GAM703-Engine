@@ -8,7 +8,7 @@ namespace gam703::engine::components
 	{
 	}
 
-	core_interface::IComponent* DirectionalLight::clone(core_interface::Transform* transform) const
+	core_interface::Component* DirectionalLight::clone(core_interface::Transform* transform) const
 	{
 		return new DirectionalLight(transform, m_color, m_intensity);
 	}

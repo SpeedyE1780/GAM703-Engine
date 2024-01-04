@@ -24,7 +24,7 @@ namespace gam703::engine::components
 	{
 	}
 
-	core_interface::IComponent* Renderer::clone(core_interface::Transform* transform) const
+	core_interface::Component* Renderer::clone(core_interface::Transform* transform) const
 	{
 		return new Renderer(transform, m_model, m_material);
 	}

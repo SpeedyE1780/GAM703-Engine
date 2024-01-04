@@ -9,7 +9,7 @@ namespace gam703::engine::components
 	{
 	}
 
-	core_interface::IComponent* SpotLight::clone(core_interface::Transform* transform) const
+	core_interface::Component* SpotLight::clone(core_interface::Transform* transform) const
 	{
 		return new SpotLight(transform, m_color, m_innerAngle, m_outerAngle, m_range, m_intensity);
 	}
