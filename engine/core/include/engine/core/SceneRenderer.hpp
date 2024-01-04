@@ -33,7 +33,6 @@ namespace gam703::engine::core
 
 	private:
 		std::vector<core_interface::IRenderer*> m_sceneObjects{};
-		glm::mat4 m_projectionMatrix = glm::mat4(1);
 		components::DirectionalLight* m_directionalLight = nullptr;
 		std::vector<core_interface::ILight*> m_lightSources{};
 	};

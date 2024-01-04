@@ -5,8 +5,6 @@
 
 #include <engine/core/SceneRenderer.hpp>
 
-#include <glm/gtc/matrix_transform.hpp>
-
 namespace gam703::engine::core
 {
 
@@ -56,12 +54,7 @@ namespace gam703::engine::core
 
 	void SceneRenderer::calculateProjectionMatrix(float aspectRatio)
 	{
-		if (!m_activeCamera)
-		{
-			return;
-		}
-
-		m_projectionMatrix = glm::perspective(glm::radians(m_activeCamera->getFieldOfView()), aspectRatio, 0.1f, 100.0f);
+		core_interface::ISceneRenderer::calculateProjectionMatrix(aspectRatio);
 
 		for (auto* renderer : m_sceneObjects)
 		{
