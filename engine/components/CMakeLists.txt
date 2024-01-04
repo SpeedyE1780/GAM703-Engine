@@ -8,14 +8,12 @@ target_sources(${PROJECT_NAME} PRIVATE
 #CPP
 src/DirectionalLight.cpp
 src/PointLight.cpp
-src/Renderer.cpp
 src/SpotLight.cpp
 
 #HPP
 include/engine/components/Config.hpp
 include/engine/components/DirectionalLight.hpp
 include/engine/components/PointLight.hpp
-include/engine/components/Renderer.hpp
 include/engine/components/SpotLight.hpp
 )
 

@@ -1,5 +1,5 @@
-#ifndef GAM703_ENGINE_CORE_INTERFACES_IRENDERER_HPP
-#define GAM703_ENGINE_CORE_INTERFACES_IRENDERER_HPP
+#ifndef GAM703_ENGINE_CORE_INTERFACES_RENDERER_HPP
+#define GAM703_ENGINE_CORE_INTERFACES_RENDERER_HPP
 
 #include <engine/core-interfaces/Config.hpp>
 #include <engine/core-interfaces/Component.hpp>
@@ -10,17 +10,18 @@
 
 namespace gam703::engine::core_interface
 {
-	class ENGINE_CORE_INTERFACES_API IRenderer : public Component
+	class ENGINE_CORE_INTERFACES_API Renderer : public Component
 	{
 	public:
-		IRenderer(Transform* transform, const core_interface::IModel* model);
-		IRenderer(Transform* transform, const core_interface::IModel* model, const Material& material);
+		Renderer(Transform* transform, const core_interface::IModel* model);
+		Renderer(Transform* transform, const core_interface::IModel* model, const Material& material);
+		~Renderer();
 		void render(const glm::mat4& viewMatrix, const glm::vec3& cameraPosition) const;
 		Material* getMaterial() { return &m_material; }
 		const Material* getMaterial() const { return &m_material; }
 		void updateProjectionMatrix(const glm::mat4& projectionMatrix) const;
 
-		virtual IRenderer* clone(core_interface::Transform* transform) const override;
+		virtual Renderer* clone(core_interface::Transform* transform) const override;
 
 	protected:
 		Material m_material{};
@@ -28,4 +29,4 @@ namespace gam703::engine::core_interface
 	};
 }
 
-#endif // GAM703_ENGINE_CORE_INTERFACES_IRENDERER_HPP
+#endif // GAM703_ENGINE_CORE_INTERFACES_RENDERER_HPP

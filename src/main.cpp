@@ -1,11 +1,11 @@
+#include <engine/core-interfaces/Camera.hpp>
+#include <engine/core-interfaces/Renderer.hpp>
 #include <engine/core-interfaces/Transform.hpp>
 
 #include <engine/core/Engine.hpp>
 
-#include <engine/core-interfaces/Camera.hpp>
 #include <engine/components/DirectionalLight.hpp>
 #include <engine/components/PointLight.hpp>
-#include <engine/components/Renderer.hpp>
 #include <engine/components/SpotLight.hpp>
 
 #include <engine/gui/Button.hpp>
@@ -34,11 +34,11 @@ static engine::core_interface::Transform* addGroundPlane(engine::core_interface:
 	engine::core_interface::Shader checkeredShader{ "resources/Shaders/Default.vert", "resources/Shaders/Checkermap.frag" };
 
 	auto* backpack = engine.getScene()->addTransform(position + glm::vec3(0.0f, 2.1f, 0.0f));
-	backpack->addComponent<engine::components::Renderer>(backpackModel);
+	backpack->addComponent<engine::core_interface::Renderer>(backpackModel);
 	backpack->addBehavior<game::components::Wonder>(player);
 
 	auto* cube = engine.getScene()->addTransform(position, glm::vec3(), glm::vec3(5.0f, 0.1f, 5.0f));
-	auto* renderer = cube->addComponent<engine::components::Renderer>(cubeModel, checkeredShader);
+	auto* renderer = cube->addComponent<engine::core_interface::Renderer>(cubeModel, checkeredShader);
 	renderer->getMaterial()->setColor(mainColor);
 	renderer->getMaterial()->getShader()->setVec3("secondColor", secondColor);
 
@@ -55,7 +55,7 @@ int main()
 
 	auto* cubeModel = engine.getResourceManager()->getModel("resources/Models/cube/cube.obj");
 	auto* playerTransform = scene->addTransform(glm::vec3(0.0f, 1.1f, 0.0f));
-	auto* renderer = playerTransform->addComponent<engine::components::Renderer>(cubeModel);
+	auto* renderer = playerTransform->addComponent<engine::core_interface::Renderer>(cubeModel);
 	renderer->getMaterial()->setColor(glm::vec3(0.0f, 0.0f, 1.0f));
 	playerTransform->addBehavior<game::components::MovementController>();
 
@@ -75,11 +75,11 @@ int main()
 	auto* directionalLight = directionalLightTransform->addComponent < engine::components::DirectionalLight>(glm::vec3(1.0f, 1.0f, 1.0f), 1.0f);
 
 	auto* pointLightTransform = scene->addTransform(glm::vec3(0.0f, 30.0f, 0.0f));
-	pointLightTransform->addComponent<engine::components::Renderer>(cubeModel);
+	pointLightTransform->addComponent<engine::core_interface::Renderer>(cubeModel);
 	auto* pointLight = pointLightTransform->addComponent<engine::components::PointLight>(glm::vec3(1.0f, 0.0f, 0.0f), 5.0f, 5.0f);
 
 	auto* spotLightTransform = scene->addTransform(glm::vec3(10.0f, 30.0f, 0.0f), glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
-	spotLightTransform->addComponent < engine::components::Renderer>(cubeModel);
+	spotLightTransform->addComponent < engine::core_interface::Renderer>(cubeModel);
 	auto* spotLight = spotLightTransform->addComponent<engine::components::SpotLight>(glm::vec3(0.0f, 0.0f, 1.0f));
 
 	auto& window = engine.getWindow();

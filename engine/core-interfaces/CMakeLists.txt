@@ -10,9 +10,9 @@ src/Behavior.cpp
 src/Camera.cpp
 src/Component.cpp
 src/IEngine.cpp
-src/IRenderer.cpp
 src/Light.cpp
 src/Material.cpp
+src/Renderer.cpp
 src/Scene.cpp
 src/SceneRenderer.cpp
 src/Shader.cpp
@@ -29,10 +29,10 @@ include/engine/core-interfaces/IEngine.hpp
 include/engine/core-interfaces/IEngine.fwd.hpp
 include/engine/core-interfaces/IInput.hpp
 include/engine/core-interfaces/IModel.hpp
-include/engine/core-interfaces/IRenderer.hpp
 include/engine/core-interfaces/IResourceManager.hpp
 include/engine/core-interfaces/Light.hpp
 include/engine/core-interfaces/Material.hpp
+include/engine/core-interfaces/Renderer.hpp
 include/engine/core-interfaces/Scene.hpp
 include/engine/core-interfaces/Scene.fwd.hpp
 include/engine/core-interfaces/SceneRenderer.hpp
