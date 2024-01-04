@@ -1,3 +1,4 @@
+#include <engine/core-interfaces/IEngine.hpp>
 #include <engine/core-interfaces/IScene.hpp>
 #include <engine/core-interfaces/Transform.hpp>
 
@@ -24,5 +25,11 @@ namespace gam703::engine::core_interface
 		}
 
 		return nullptr;
+	}
+
+	void IScene::setActiveCamera(Camera* activeCamera)
+	{
+		m_sceneRenderer.setActiveCamera(activeCamera);
+		m_sceneRenderer.calculateProjectionMatrix(m_engine->getAspectRatio());
 	}
 }

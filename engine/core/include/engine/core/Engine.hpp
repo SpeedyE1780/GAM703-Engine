@@ -31,6 +31,8 @@ namespace gam703::engine::core
 		virtual core_interface::IScene* getScene() override { return &m_scene; }
 		virtual const core_interface::IScene* getScene() const override { return &m_scene; }
 
+		virtual float getAspectRatio() const override { return m_window.getAspectRatio(); }
+
 		void start();
 		void stop();
 

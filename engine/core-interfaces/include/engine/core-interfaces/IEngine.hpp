@@ -22,6 +22,7 @@ namespace gam703::engine::core_interface
 		virtual const IResourceManager* getResourceManager() const = 0;
 		virtual IScene* getScene() = 0;
 		virtual const IScene* getScene() const = 0;
+		virtual float getAspectRatio() const = 0;
 
 	protected:
 		Time m_time;
