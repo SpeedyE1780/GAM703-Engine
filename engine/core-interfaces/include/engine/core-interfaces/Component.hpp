@@ -19,8 +19,6 @@ namespace gam703::engine::core_interface
 		Transform* getTransform() { return m_transform; }
 		const Transform* getTransform() const { return m_transform; }
 
-		virtual void tick(float deltaTime) = 0;
-
 		IEngine* getEngine();
 		const IEngine* getEngine() const;
 

@@ -12,10 +12,6 @@ namespace gam703::engine::components::tests
 		{
 		}
 
-		virtual void tick(float deltaTime) override
-		{
-		}
-
 		virtual core_interface::Component* clone(core_interface::Transform*) const override
 		{
 			return nullptr;
@@ -26,10 +22,6 @@ namespace gam703::engine::components::tests
 	{
 	public:
 		MockComponent2(core_interface::Transform* transform) : core_interface::Component(transform)
-		{
-		}
-		
-		virtual void tick(float deltaTime) override
 		{
 		}
 
@@ -51,10 +43,6 @@ namespace gam703::engine::components::tests
 
 		}
 
-		virtual void tick(float deltaTime) override
-		{
-		}
-
 		virtual core_interface::Component* clone(core_interface::Transform*) const override
 		{
 			return nullptr;
@@ -71,12 +59,14 @@ namespace gam703::engine::components::tests
 		core_interface::Transform transform{ nullptr, nullptr };
 
 		ASSERT_EQ(0, transform.getComponentsSize());
+		ASSERT_EQ(0, transform.getBehaviorsSize());
 
 		auto* component = transform.addComponent<MockComponent1>();
 
 		EXPECT_TRUE(component != nullptr);
 		EXPECT_EQ(1, transform.getComponentsSize());
 		EXPECT_EQ(&transform, component->getTransform());
+		
 	}
 
 	TEST(ComponentsTest, AddComponentWithArgs)

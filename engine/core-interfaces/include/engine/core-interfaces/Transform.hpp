@@ -1,6 +1,7 @@
 #ifndef GAM703_ENGINE_CORE_INTERFACES_TRANSFORM_HPP
 #define GAM703_ENGINE_CORE_INTERFACES_TRANSFORM_HPP
 
+#include <engine/core-interfaces/Behavior.hpp>
 #include <engine/core-interfaces/Config.hpp>
 #include <engine/core-interfaces/Component.hpp>
 #include <engine/core-interfaces/IEngine.fwd.hpp>
@@ -9,6 +10,7 @@
 #include <glm/glm.hpp>
 
 #include <memory>
+#include <type_traits>
 #include <vector>
 
 namespace gam703::engine::core_interface
@@ -38,7 +40,7 @@ namespace gam703::engine::core_interface
 
 		void calculateTransformMatrix();
 
-		void updateComponents(float deltaTime);
+		void updateBehaviors(float deltaTime);
 
 		void setPosition(const glm::vec3& position);
 		void setPosition(float x, float y, float z);
@@ -61,6 +63,7 @@ namespace gam703::engine::core_interface
 		template<typename ComponentType, typename... Args>
 		ComponentType* addComponent(Args&&... args)
 		{
+			static_assert(std::is_base_of_v<Behavior, ComponentType> == false, "ComponentType is a Behavior, use addBehavior instead");
 			auto* component = new ComponentType(this, std::forward<Args>(args)...);
 			m_components.emplace_back(std::unique_ptr<ComponentType>(component));
 			return component;
@@ -69,6 +72,7 @@ namespace gam703::engine::core_interface
 		template<typename ComponentType>
 		ComponentType* getComponent()
 		{
+			static_assert(std::is_base_of_v<Behavior, ComponentType> == false, "ComponentType is a Behavior, use getBehavior instead");
 			ComponentType* returnValue = nullptr;
 			auto _ = std::find_if(begin(m_components), end(m_components), [&returnValue](std::unique_ptr<Component>& component) { return returnValue = dynamic_cast<ComponentType*>(component.get()); });
 			return returnValue;
@@ -77,6 +81,7 @@ namespace gam703::engine::core_interface
 		template<typename ComponentType>
 		void removeComponent()
 		{
+			static_assert(std::is_base_of_v<Behavior, ComponentType> == false, "ComponentType is a Behavior, use removeBehavior instead");
 			auto newEnd = std::remove_if(begin(m_components), end(m_components), [](std::unique_ptr<Component>& component)
 				{
 					return dynamic_cast<ComponentType*>(component.get());
@@ -85,7 +90,38 @@ namespace gam703::engine::core_interface
 			m_components.erase(newEnd, end(m_components));
 		}
 
+		template<typename BehaviorType, typename... Args>
+		BehaviorType* addBehavior(Args&&... args)
+		{
+			static_assert(std::derived_from<BehaviorType, Behavior>, "BehaviorType is a Component, use addComponent instead");
+			auto* behavior = new BehaviorType(this, std::forward<Args>(args)...);
+			m_behaviors.emplace_back(std::unique_ptr<BehaviorType>(behavior));
+			return behavior;
+		}
+
+		template<typename BehaviorType>
+		BehaviorType* getBehavior()
+		{
+			static_assert(std::derived_from<BehaviorType, Behavior>, "BehaviorType is a Component, use getComponent instead");
+			BehaviorType* returnValue = nullptr;
+			auto _ = std::find_if(begin(m_behaviors), end(m_behaviors), [&returnValue](std::unique_ptr<Behavior>& behavior) { return returnValue = dynamic_cast<BehaviorType*>(behavior.get()); });
+			return returnValue;
+		}
+
+		template<typename BehaviorType>
+		void removeBehavior()
+		{
+			static_assert(std::derived_from<BehaviorType, Behavior>, "BehaviorType is a Component, use removeComponent instead");
+			auto newEnd = std::remove_if(begin(m_behaviors), end(m_behaviors), [](std::unique_ptr<Behavior>& behavior)
+				{
+					return dynamic_cast<BehaviorType*>(behavior.get());
+				});
+
+			m_behaviors.erase(newEnd, end(m_behaviors));
+		}
+
 		std::size_t getComponentsSize() const { return m_components.size(); }
+		std::size_t getBehaviorsSize() const { return m_behaviors.size(); }
 
 	private:
 		void updateDirectionVectors();
@@ -103,6 +139,7 @@ namespace gam703::engine::core_interface
 		bool m_shouldCalculateTransform = true;
 		bool m_shouldUpdateDirectionVectors = true;
 		std::vector<std::unique_ptr<Component>> m_components{};
+		std::vector<std::unique_ptr<Behavior>> m_behaviors{};
 	};
 }
 

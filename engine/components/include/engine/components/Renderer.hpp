@@ -18,10 +18,9 @@ namespace gam703::engine::components
 		Renderer(core_interface::Transform* transform, const core_interface::IModel* model, const core_interface::Material& material);
 		~Renderer();
 
-		virtual core_interface::Component* clone(core_interface::Transform* transform) const override;
+		virtual Renderer* clone(core_interface::Transform* transform) const override;
 
 		virtual void render(const glm::mat4& viewMatrix, const glm::vec3& cameraPosition) const override;
-		virtual void tick(float deltaTime) override;
 
 		virtual core_interface::Material* getMaterial() override { return &m_material; }
 		virtual const core_interface::Material* getMaterial() const override { return &m_material; }

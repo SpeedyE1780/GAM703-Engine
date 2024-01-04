@@ -32,16 +32,8 @@ namespace gam703::engine::core_interface
 		return glm::lookAt(m_transform->getPosition(), m_transform->getPosition() + m_transform->getFront(), m_transform->getUp());
 	}
 
-	Component* Camera::clone(Transform* transform) const
+	Camera* Camera::clone(Transform* transform) const
 	{
 		return new Camera(transform, m_fieldOfView);
-	}
-
-	void Camera::tick(float deltaTime)
-	{
-		if (auto* inputHandler = getEngine()->getInput())
-		{
-			setFieldOfView(glm::clamp(getFieldOfView() - static_cast<float>(inputHandler->getMouseScrollOffsetY()), MinimumFOV, MaximumFOV));
-		}
 	}
 }

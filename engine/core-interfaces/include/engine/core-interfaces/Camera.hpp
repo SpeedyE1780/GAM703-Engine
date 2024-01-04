@@ -15,8 +15,7 @@ namespace gam703::engine::core_interface
 		Camera(Transform* transform, float fieldOfView);
 		virtual ~Camera() = default;
 
-		virtual core_interface::Component* clone(core_interface::Transform* transform) const override;
-		virtual void tick(float deltaTime) override;
+		virtual Camera* clone(Transform* transform) const override;
 
 		glm::mat4 getViewMatrix() const;
 		float getFieldOfView() const { return m_fieldOfView; }

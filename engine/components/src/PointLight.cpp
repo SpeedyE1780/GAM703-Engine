@@ -8,7 +8,7 @@ namespace gam703::engine::components
 	{
 	}
 
-	core_interface::Component* PointLight::clone(core_interface::Transform* transform) const
+	PointLight* PointLight::clone(core_interface::Transform* transform) const
 	{
 		return new PointLight(m_transform, m_color, m_range, m_intensity);
 	}

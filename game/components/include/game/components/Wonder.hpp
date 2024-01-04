@@ -1,7 +1,7 @@
 #ifndef GAM703_GAME_COMPONENTS_WONDER_HPP
 #define GAM703_GAME_COMPONENTS_WONDER_HPP
 
-#include <engine/core-interfaces/Component.hpp>
+#include <engine/core-interfaces/Behavior.hpp>
 
 #include <game/components/Config.hpp>
 
@@ -9,12 +9,12 @@
 
 namespace gam703::game::components
 {
-	class GAME_COMPONENTS_API Wonder : public engine::core_interface::Component
+	class GAME_COMPONENTS_API Wonder : public engine::core_interface::Behavior
 	{
 	public:
 		Wonder(engine::core_interface::Transform* transform, engine::core_interface::Transform* playerTransform);
 
-		virtual engine::core_interface::Component* clone(engine::core_interface::Transform* transform) const override;
+		virtual Wonder* clone(engine::core_interface::Transform* transform) const override;
 		virtual void tick(float deltaTime) override;
 
 	private:

@@ -35,6 +35,11 @@ namespace gam703::engine::core_interface
 			{
 				m_components.push_back(std::unique_ptr<Component>(component->clone(this)));
 			});
+
+		std::for_each(begin(transform.m_behaviors), end(transform.m_behaviors), [this](const std::unique_ptr<Behavior>& behavior)
+			{
+				m_behaviors.push_back(std::unique_ptr<Behavior>(behavior->clone(this)));
+			});
 	}
 
 	Transform& Transform::operator=(const Transform& transform)
@@ -56,6 +61,11 @@ namespace gam703::engine::core_interface
 		std::for_each(begin(transform.m_components), end(transform.m_components), [this](const std::unique_ptr<Component>& component)
 			{
 				m_components.push_back(std::unique_ptr<Component>(component->clone(this)));
+			});
+
+		std::for_each(begin(transform.m_behaviors), end(transform.m_behaviors), [this](const std::unique_ptr<Behavior>& behavior)
+			{
+				m_behaviors.push_back(std::unique_ptr<Behavior>(behavior->clone(this)));
 			});
 
 		return *this;
@@ -167,8 +177,8 @@ namespace gam703::engine::core_interface
 		}
 	}
 
-	void Transform::updateComponents(float deltaTime)
+	void Transform::updateBehaviors(float deltaTime)
 	{
-		std::for_each(begin(m_components), end(m_components), [deltaTime](std::unique_ptr<Component>& component) { component->tick(deltaTime); });
+		std::for_each(begin(m_behaviors), end(m_behaviors), [deltaTime](std::unique_ptr<Behavior>& behavior) { behavior->tick(deltaTime); });
 	}
 }
