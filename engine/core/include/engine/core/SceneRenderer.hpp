@@ -12,10 +12,6 @@ namespace gam703::engine::core
 {
 	class SceneRenderer : public core_interface::ISceneRenderer
 	{
-	public:
-		SceneRenderer() = default;
-
-		virtual void render() const override;
 	};
 }
 

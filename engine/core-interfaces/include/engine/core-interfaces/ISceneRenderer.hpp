@@ -15,13 +15,11 @@ namespace gam703::engine::core_interface
 	class ENGINE_CORE_INTERFACES_API ISceneRenderer
 	{
 	public:
-		virtual ~ISceneRenderer() = default;
-
 		void addRenderer(IRenderer* renderer);
 		void removeRenderer(IRenderer* sceneObject);
 
 		void calculateProjectionMatrix(float aspectRatio);
-		virtual void render() const = 0;
+		void render() const;
 
 		void setAmbientLight(const glm::vec3& color, float strength);
 		void setAmbientLightColor(const glm::vec3& color);
@@ -36,7 +34,7 @@ namespace gam703::engine::core_interface
 		Camera* getActiveCamera() { return m_activeCamera; }
 		const Camera* getActiveCamera() const { return m_activeCamera; }
 
-	protected:
+	private:
 		struct AmbientLight
 		{
 			glm::vec3 m_color = glm::vec3(1.0f, 1.0f, 1.0f);

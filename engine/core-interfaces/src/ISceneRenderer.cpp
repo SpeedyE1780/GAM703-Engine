@@ -1,4 +1,7 @@
+#include <glad/glad.h>
+
 #include <engine/core-interfaces/ISceneRenderer.hpp>
+#include <engine/core-interfaces/Transform.hpp>
 
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -61,5 +64,28 @@ namespace gam703::engine::core_interface
 	{
 		auto newEnd = std::remove_if(begin(m_lightSources), end(m_lightSources), [light](core_interface::ILight* lightSource) { return light == lightSource; });
 		m_lightSources.erase(newEnd, end(m_lightSources));
+	}
+
+	void ISceneRenderer::render() const
+	{
+		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		for (auto* renderer : m_sceneObjects)
+		{
+			if (m_shouldUpdateAmbientLight)
+			{
+				renderer->getMaterial()->getShader()->setAmbientLight(m_ambientLight.m_color, m_ambientLight.m_intensity);
+			}
+
+			for (auto* lightSource : m_lightSources)
+			{
+				lightSource->updateShaderLightInfo(*renderer->getMaterial()->getShader());
+			}
+
+			renderer->render(m_activeCamera->getViewMatrix(), m_activeCamera->getTransform()->getPosition());
+		}
+
+		m_shouldUpdateAmbientLight = false;
 	}
 }
