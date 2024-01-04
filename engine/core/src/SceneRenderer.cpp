@@ -54,38 +54,6 @@ namespace gam703::engine::core
 		m_lightSources.erase(newEnd, end(m_lightSources));
 	}
 
-	void SceneRenderer::setAmbientLight(const glm::vec3& color, float strength)
-	{
-		m_ambientLight.m_color = color;
-		m_ambientLight.m_intensity = strength;
-
-		for (auto* renderer : m_sceneObjects)
-		{
-			renderer->getMaterial()->getShader()->setVec3("ambientLight.color", m_ambientLight.m_color);
-			renderer->getMaterial()->getShader()->setFloat("ambientLight.intensity", m_ambientLight.m_intensity);
-		}
-	}
-
-	void SceneRenderer::setAmbientLightColor(const glm::vec3& color)
-	{
-		m_ambientLight.m_color = color;
-
-		for (auto* renderer : m_sceneObjects)
-		{
-			renderer->getMaterial()->getShader()->setVec3("ambientLight.color", m_ambientLight.m_color);
-		}
-	}
-
-	void SceneRenderer::setAmbientLightIntensity(float intensity)
-	{
-		m_ambientLight.m_intensity = intensity;
-
-		for (auto* renderer : m_sceneObjects)
-		{
-			renderer->getMaterial()->getShader()->setFloat("ambientLight.intensity", m_ambientLight.m_intensity);
-		}
-	}
-
 	void SceneRenderer::calculateProjectionMatrix(float aspectRatio)
 	{
 		if (!m_activeCamera)
@@ -118,6 +86,11 @@ namespace gam703::engine::core
 
 		for (auto* renderer : m_sceneObjects)
 		{
+			if (m_shouldUpdateAmbientLight)
+			{
+				renderer->getMaterial()->getShader()->setAmbientLight(m_ambientLight.m_color, m_ambientLight.m_intensity);
+			}
+
 			for (auto* lightSource : m_lightSources)
 			{
 				lightSource->updateShaderLightInfo(*renderer->getMaterial()->getShader());
@@ -125,5 +98,7 @@ namespace gam703::engine::core
 
 			renderer->render(m_activeCamera->getViewMatrix(), m_activeCamera->getTransform()->getPosition());
 		}
+
+		m_shouldUpdateAmbientLight = false;
 	}
 }

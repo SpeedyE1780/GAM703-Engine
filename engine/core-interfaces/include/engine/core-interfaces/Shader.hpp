@@ -35,6 +35,7 @@ namespace gam703::engine::core_interface
 		void setNormalSampler(int index, int value) const;
 		void setHeightSampler(int index, int value) const;
 		void setColor(const glm::vec3& color) const;
+		void setAmbientLight(const glm::vec3& color, float intensity) const;
 
 	private:
 		void createShaderProgram();
