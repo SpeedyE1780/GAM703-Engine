@@ -5,12 +5,12 @@
 
 namespace gam703::engine::components
 {
-	Renderer::Renderer(core_interface::Transform* transform, const core_interface::IModel* model) : core_interface::IRenderer(transform), m_model(model), m_material()
+	Renderer::Renderer(core_interface::Transform* transform, const core_interface::IModel* model) : core_interface::IRenderer(transform), m_model(model)
 	{
 		getScene()->getSceneRenderer()->addRenderer(this);
 	}
 
-	Renderer::Renderer(core_interface::Transform* transform, const core_interface::IModel* model, const core_interface::Material& material) : core_interface::IRenderer(transform), m_model(model), m_material(material)
+	Renderer::Renderer(core_interface::Transform* transform, const core_interface::IModel* model, const core_interface::Material& material) : core_interface::IRenderer(transform, material), m_model(model)
 	{
 		getScene()->getSceneRenderer()->addRenderer(this);
 	}

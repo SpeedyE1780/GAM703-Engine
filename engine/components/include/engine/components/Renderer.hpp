@@ -22,14 +22,10 @@ namespace gam703::engine::components
 
 		virtual void render(const glm::mat4& viewMatrix, const glm::vec3& cameraPosition) const override;
 
-		virtual core_interface::Material* getMaterial() override { return &m_material; }
-		virtual const core_interface::Material* getMaterial() const override { return &m_material; }
-
 		virtual void updateProjectionMatrix(const glm::mat4& projectionMatrix) const override;
 
 	private:
 		const core_interface::IModel* m_model;
-		core_interface::Material m_material;
 	};
 }
 

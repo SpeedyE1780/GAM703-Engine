@@ -13,11 +13,15 @@ namespace gam703::engine::core_interface
 	{
 	public:
 		IRenderer(Transform* transform);
+		IRenderer(Transform* transform, const Material& material);
 		virtual ~IRenderer() = default;
 		virtual void render(const glm::mat4& viewMatrix, const glm::vec3& cameraPosition) const = 0;
-		virtual  Material* getMaterial() = 0;
-		virtual const Material* getMaterial() const = 0;
+		Material* getMaterial() { return &m_material; }
+		const Material* getMaterial() const { return &m_material; }
 		virtual void updateProjectionMatrix(const glm::mat4& projectionMatrix) const = 0;
+
+	protected:
+		Material m_material{};
 	};
 }
 
