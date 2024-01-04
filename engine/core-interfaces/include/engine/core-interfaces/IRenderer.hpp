@@ -18,7 +18,7 @@ namespace gam703::engine::core_interface
 		virtual void render(const glm::mat4& viewMatrix, const glm::vec3& cameraPosition) const = 0;
 		Material* getMaterial() { return &m_material; }
 		const Material* getMaterial() const { return &m_material; }
-		virtual void updateProjectionMatrix(const glm::mat4& projectionMatrix) const = 0;
+		void updateProjectionMatrix(const glm::mat4& projectionMatrix) const;
 
 	protected:
 		Material m_material{};

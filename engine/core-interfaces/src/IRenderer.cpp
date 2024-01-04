@@ -9,4 +9,9 @@ namespace gam703::engine::core_interface
 	IRenderer::IRenderer(Transform* transform, const Material& material) : Component(transform), m_material(material)
 	{
 	}
+
+	void IRenderer::updateProjectionMatrix(const glm::mat4& projectionMatrix) const
+	{
+		m_material.getShader()->setMat4("projection", projectionMatrix);
+	}
 }

@@ -22,8 +22,6 @@ namespace gam703::engine::components
 
 		virtual void render(const glm::mat4& viewMatrix, const glm::vec3& cameraPosition) const override;
 
-		virtual void updateProjectionMatrix(const glm::mat4& projectionMatrix) const override;
-
 	private:
 		const core_interface::IModel* m_model;
 	};

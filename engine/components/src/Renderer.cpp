@@ -25,11 +25,6 @@ namespace gam703::engine::components
 		return new Renderer(transform, m_model, m_material);
 	}
 
-	void Renderer::updateProjectionMatrix(const glm::mat4& projectionMatrix) const
-	{
-		m_material.getShader()->setMat4("projection", projectionMatrix);
-	}
-
 	void Renderer::render(const glm::mat4& viewMatrix, const glm::vec3& cameraPosition) const
 	{
 		auto* shader = m_material.getShader();
