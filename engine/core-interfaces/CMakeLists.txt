@@ -11,6 +11,7 @@ src/Camera.cpp
 src/Component.cpp
 src/IEngine.cpp
 src/IRenderer.cpp
+src/IScene.cpp
 src/Light.cpp
 src/Material.cpp
 src/SceneRenderer.cpp
