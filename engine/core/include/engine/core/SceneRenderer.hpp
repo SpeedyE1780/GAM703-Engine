@@ -4,8 +4,6 @@
 #include <engine/core-interfaces/ISceneRenderer.hpp>
 #include <engine/core-interfaces/IRenderer.hpp>
 
-#include <engine/components/DirectionalLight.hpp>
-
 #include <glm/mat4x4.hpp>
 
 #include <vector>
@@ -24,16 +22,11 @@ namespace gam703::engine::core
 		virtual void calculateProjectionMatrix(float aspectRatio) override;
 		virtual void render() const override;
 
-		virtual void setDirectionalLight(core_interface::ILight* light) override;
-		virtual core_interface::ILight* getDirectionalLight() override { return m_directionalLight; }
-		virtual const core_interface::ILight* getDirectionalLight() const override { return m_directionalLight; }
-
 		virtual void addLightSource(core_interface::ILight* light) override;
 		virtual void removeLightSource(core_interface::ILight* light) override;
 
 	private:
 		std::vector<core_interface::IRenderer*> m_sceneObjects{};
-		components::DirectionalLight* m_directionalLight = nullptr;
 		std::vector<core_interface::ILight*> m_lightSources{};
 	};
 }

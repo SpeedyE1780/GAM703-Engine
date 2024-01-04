@@ -74,7 +74,7 @@ int main()
 	auto* directionalLightTransform = scene->addTransform(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(glm::radians(-90.f), 0.0f, 0.0f));
 	auto* directionalLight = directionalLightTransform->addComponent < engine::components::DirectionalLight>(glm::vec3(1.0f, 1.0f, 1.0f), 1.0f);
 
-	scene->getSceneRenderer()->setDirectionalLight(directionalLight);
+	scene->getSceneRenderer()->addLightSource(directionalLight);
 
 	auto* pointLightTransform = scene->addTransform(glm::vec3(0.0f, 30.0f, 0.0f));
 	pointLightTransform->addComponent<engine::components::Renderer>(cubeModel);

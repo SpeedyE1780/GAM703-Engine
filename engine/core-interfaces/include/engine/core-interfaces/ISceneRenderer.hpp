@@ -26,10 +26,6 @@ namespace gam703::engine::core_interface
 		void setAmbientLightIntensity(float intensity);
 		float getAmbientLightIntensity() const { return m_ambientLight.m_intensity; }
 
-		virtual void setDirectionalLight(ILight* light) = 0;
-		virtual ILight* getDirectionalLight() = 0;
-		virtual const ILight* getDirectionalLight() const = 0;
-
 		virtual void addLightSource(ILight* light) = 0;
 		virtual void removeLightSource(ILight* light) = 0;
 
