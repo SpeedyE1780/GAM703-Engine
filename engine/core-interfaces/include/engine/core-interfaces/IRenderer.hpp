@@ -20,6 +20,8 @@ namespace gam703::engine::core_interface
 		const Material* getMaterial() const { return &m_material; }
 		void updateProjectionMatrix(const glm::mat4& projectionMatrix) const;
 
+		virtual IRenderer* clone(core_interface::Transform* transform) const override;
+
 	protected:
 		Material m_material{};
 		const IModel* m_model = nullptr;

@@ -28,4 +28,9 @@ namespace gam703::engine::core_interface
 
 		m_model->draw(m_material);
 	}
+
+	IRenderer* IRenderer::clone(core_interface::Transform* transform) const
+	{
+		return new IRenderer(transform, m_model, m_material);
+	}
 }
