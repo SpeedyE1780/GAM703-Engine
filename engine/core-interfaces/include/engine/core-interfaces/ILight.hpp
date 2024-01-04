@@ -13,7 +13,7 @@ namespace gam703::engine::core_interface
 	{
 	public:
 		ILight(core_interface::Transform* transform, const glm::vec3& color, float intensity = 1.0f);
-		~ILight() = default;
+		virtual ~ILight();
 
 		const glm::vec3& getColor() const { return m_color; }
 		void setColor(const glm::vec3& color) { m_color = color; }
