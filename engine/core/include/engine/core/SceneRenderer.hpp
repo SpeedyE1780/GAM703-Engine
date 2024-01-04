@@ -14,16 +14,8 @@ namespace gam703::engine::core
 	{
 	public:
 		SceneRenderer() = default;
-		SceneRenderer(const std::vector<core_interface::IRenderer*>& sceneObjects);
 
-		virtual void addRenderer(core_interface::IRenderer* sceneObject) override;
-		virtual void removeRenderer(core_interface::IRenderer* sceneObject) override;
-
-		virtual void calculateProjectionMatrix(float aspectRatio) override;
 		virtual void render() const override;
-
-	private:
-		std::vector<core_interface::IRenderer*> m_sceneObjects{};
 	};
 }
 

@@ -16,10 +16,11 @@ namespace gam703::engine::core_interface
 	{
 	public:
 		virtual ~ISceneRenderer() = default;
-		virtual void addRenderer(IRenderer* renderer) = 0;
-		virtual void removeRenderer(IRenderer* sceneObject) = 0;
 
-		virtual void calculateProjectionMatrix(float aspectRatio);
+		void addRenderer(IRenderer* renderer);
+		void removeRenderer(IRenderer* sceneObject);
+
+		void calculateProjectionMatrix(float aspectRatio);
 		virtual void render() const = 0;
 
 		void setAmbientLight(const glm::vec3& color, float strength);
@@ -46,6 +47,7 @@ namespace gam703::engine::core_interface
 		mutable bool m_shouldUpdateAmbientLight = false;
 		AmbientLight m_ambientLight{};
 		glm::mat4 m_projectionMatrix = glm::mat4(1);
+		std::vector<core_interface::IRenderer*> m_sceneObjects{};
 		std::vector<core_interface::ILight*> m_lightSources{};
 	};
 }

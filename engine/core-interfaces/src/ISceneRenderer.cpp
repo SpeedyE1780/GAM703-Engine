@@ -31,6 +31,25 @@ namespace gam703::engine::core_interface
 		}
 
 		m_projectionMatrix = glm::perspective(glm::radians(m_activeCamera->getFieldOfView()), aspectRatio, 0.1f, 100.0f);
+
+		for (auto* renderer : m_sceneObjects)
+		{
+			renderer->updateProjectionMatrix(m_projectionMatrix);
+		}
+	}
+
+	void ISceneRenderer::addRenderer(core_interface::IRenderer* sceneObject)
+	{
+		m_sceneObjects.push_back(sceneObject);
+		sceneObject->updateProjectionMatrix(m_projectionMatrix);
+		sceneObject->getMaterial()->getShader()->setVec3("ambientLight.color", m_ambientLight.m_color);
+		sceneObject->getMaterial()->getShader()->setFloat("ambientLight.intensity", m_ambientLight.m_intensity);
+	}
+
+	void ISceneRenderer::removeRenderer(core_interface::IRenderer* sceneObject)
+	{
+		auto newEnd = std::remove_if(begin(m_sceneObjects), end(m_sceneObjects), [sceneObject](core_interface::IRenderer* renderer) { return sceneObject == renderer; });
+		m_sceneObjects.erase(newEnd, end(m_sceneObjects));
 	}
 
 	void ISceneRenderer::addLightSource(ILight* light)
