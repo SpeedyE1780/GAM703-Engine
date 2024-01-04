@@ -12,6 +12,7 @@ src/IEngine.cpp
 src/ILight.cpp
 src/IRenderer.cpp
 src/Material.cpp
+src/SceneRenderer.cpp
 src/Shader.cpp
 src/Texture.cpp
 src/Time.cpp
@@ -29,9 +30,9 @@ include/engine/core-interfaces/IModel.hpp
 include/engine/core-interfaces/IRenderer.hpp
 include/engine/core-interfaces/IScene.hpp
 include/engine/core-interfaces/IScene.fwd.hpp
-include/engine/core-interfaces/ISceneRenderer.hpp
 include/engine/core-interfaces/IResourceManager.hpp
 include/engine/core-interfaces/Material.hpp
+include/engine/core-interfaces/SceneRenderer.hpp
 include/engine/core-interfaces/Shader.hpp
 include/engine/core-interfaces/Texture.hpp
 include/engine/core-interfaces/Time.hpp

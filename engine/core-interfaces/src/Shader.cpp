@@ -194,6 +194,12 @@ namespace gam703::engine::core_interface
 		setVec3("material.color", color);
 	}
 
+	void Shader::setAmbientLight(const glm::vec3& color, float intensity) const
+	{
+		setVec3("ambientLight.color", color);
+		setFloat("ambientLight.intensity", intensity);
+	}
+
 	void Shader::createShaderProgram()
 	{
 		std::string vertexCode = utility::readFile(m_vertexShaderPath);
