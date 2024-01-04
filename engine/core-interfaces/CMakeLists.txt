@@ -9,8 +9,8 @@ target_sources(${PROJECT_NAME} PRIVATE
 src/Camera.cpp
 src/IComponent.cpp
 src/IEngine.cpp
-src/ILight.cpp
 src/IRenderer.cpp
+src/Light.cpp
 src/Material.cpp
 src/SceneRenderer.cpp
 src/Shader.cpp
@@ -25,12 +25,12 @@ include/engine/core-interfaces/IComponent.hpp
 include/engine/core-interfaces/IEngine.hpp
 include/engine/core-interfaces/IEngine.fwd.hpp
 include/engine/core-interfaces/IInput.hpp
-include/engine/core-interfaces/ILight.hpp
 include/engine/core-interfaces/IModel.hpp
 include/engine/core-interfaces/IRenderer.hpp
 include/engine/core-interfaces/IScene.hpp
 include/engine/core-interfaces/IScene.fwd.hpp
 include/engine/core-interfaces/IResourceManager.hpp
+include/engine/core-interfaces/Light.hpp
 include/engine/core-interfaces/Material.hpp
 include/engine/core-interfaces/SceneRenderer.hpp
 include/engine/core-interfaces/Shader.hpp

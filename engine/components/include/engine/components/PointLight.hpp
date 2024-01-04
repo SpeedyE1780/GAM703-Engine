@@ -3,11 +3,11 @@
 
 #include <engine/components/Config.hpp>
 
-#include <engine/core-interfaces/ILight.hpp>
+#include <engine/core-interfaces/Light.hpp>
 
 namespace gam703::engine::components
 {
-	class ENGINE_COMPONENTS_API PointLight : public core_interface::ILight
+	class ENGINE_COMPONENTS_API PointLight : public core_interface::Light
 	{
 	public:
 		PointLight(core_interface::Transform* transform, const glm::vec3& color = glm::vec3(1.0f, 1.0f, 1.0f), float range = 5.0f, float intensity = 1.0f);

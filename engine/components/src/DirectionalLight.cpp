@@ -4,7 +4,7 @@
 
 namespace gam703::engine::components
 {
-	DirectionalLight::DirectionalLight(core_interface::Transform* transform, const glm::vec3& color, float intensity) : core_interface::ILight(transform, color, intensity)
+	DirectionalLight::DirectionalLight(core_interface::Transform* transform, const glm::vec3& color, float intensity) : core_interface::Light(transform, color, intensity)
 	{
 	}
 

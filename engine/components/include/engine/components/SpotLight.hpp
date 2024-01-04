@@ -1,13 +1,13 @@
 #ifndef GAM703_ENGINE_COMPONENTS_SPOT_LIGHT_HPP
 #define GAM703_ENGINE_COMPONENTS_SPOT_LIGHT_HPP
 
-#include <engine/core-interfaces/ILight.hpp>
+#include <engine/core-interfaces/Light.hpp>
 
 #include <engine/components/Config.hpp>
 
 namespace gam703::engine::components
 {
-	class ENGINE_COMPONENTS_API SpotLight : public core_interface::ILight
+	class ENGINE_COMPONENTS_API SpotLight : public core_interface::Light
 	{
 	public:
 		SpotLight(core_interface::Transform* transform, const glm::vec3& color, float innerAngle = 25.0f, float outerAngle = 45.0f, float range = 5.0f, float intensity = 1.0f);

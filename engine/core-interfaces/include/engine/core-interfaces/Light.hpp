@@ -9,11 +9,11 @@
 
 namespace gam703::engine::core_interface
 {
-	class ENGINE_CORE_INTERFACES_API ILight : public core_interface::IComponent
+	class ENGINE_CORE_INTERFACES_API Light : public core_interface::IComponent
 	{
 	public:
-		ILight(core_interface::Transform* transform, const glm::vec3& color, float intensity = 1.0f);
-		virtual ~ILight();
+		Light(core_interface::Transform* transform, const glm::vec3& color, float intensity = 1.0f);
+		virtual ~Light();
 
 		const glm::vec3& getColor() const { return m_color; }
 		void setColor(const glm::vec3& color) { m_color = color; }

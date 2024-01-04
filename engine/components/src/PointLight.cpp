@@ -4,7 +4,7 @@
 namespace gam703::engine::components
 {
 	PointLight::PointLight(core_interface::Transform* transform, const glm::vec3& color, float range, float intensity) :
-		core_interface::ILight(transform, color, intensity), m_range(range)
+		core_interface::Light(transform, color, intensity), m_range(range)
 	{
 	}
 
