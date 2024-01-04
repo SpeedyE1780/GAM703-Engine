@@ -2,14 +2,14 @@
 #define GAM703_ENGINE_CORE_INTERFACES_LIGHT_HPP
 
 #include <engine/core-interfaces/Config.hpp>
-#include <engine/core-interfaces/IComponent.hpp>
+#include <engine/core-interfaces/Component.hpp>
 #include <engine/core-interfaces/Shader.hpp>
 
 #include <glm/glm.hpp>
 
 namespace gam703::engine::core_interface
 {
-	class ENGINE_CORE_INTERFACES_API Light : public core_interface::IComponent
+	class ENGINE_CORE_INTERFACES_API Light : public core_interface::Component
 	{
 	public:
 		Light(core_interface::Transform* transform, const glm::vec3& color, float intensity = 1.0f);

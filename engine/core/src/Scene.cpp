@@ -13,7 +13,7 @@ namespace gam703::engine::core
 	{
 		std::for_each(begin(m_transforms), end(m_transforms), [deltaTime](std::unique_ptr<core_interface::Transform>& transform)
 			{
-				transform->updateComponents(deltaTime);
+				transform->updateBehaviors(deltaTime);
 				transform->calculateTransformMatrix();
 			});
 

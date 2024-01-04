@@ -6,8 +6,9 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE ENGINE_CORE_INTERFACES_EXPORT
 
 target_sources(${PROJECT_NAME} PRIVATE
 #CPP
+src/Behavior.cpp
 src/Camera.cpp
-src/IComponent.cpp
+src/Component.cpp
 src/IEngine.cpp
 src/IRenderer.cpp
 src/Light.cpp
@@ -19,9 +20,10 @@ src/Time.cpp
 src/Transform.cpp
 
 #HPP
+include/engine/core-interfaces/Behavior.hpp
 include/engine/core-interfaces/Camera.hpp
+include/engine/core-interfaces/Component.hpp
 include/engine/core-interfaces/Config.hpp
-include/engine/core-interfaces/IComponent.hpp
 include/engine/core-interfaces/IEngine.hpp
 include/engine/core-interfaces/IEngine.fwd.hpp
 include/engine/core-interfaces/IInput.hpp

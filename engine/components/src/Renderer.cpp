@@ -20,11 +20,7 @@ namespace gam703::engine::components
 		getScene()->getSceneRenderer()->removeRenderer(this);
 	}
 
-	void Renderer::tick(float /*deltaTime*/)
-	{
-	}
-
-	core_interface::IComponent* Renderer::clone(core_interface::Transform* transform) const
+	Renderer* Renderer::clone(core_interface::Transform* transform) const
 	{
 		return new Renderer(transform, m_model, m_material);
 	}

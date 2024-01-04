@@ -31,9 +31,14 @@ namespace gam703::engine::core_interface
 		m_shouldCalculateTransform(transform.m_shouldCalculateTransform),
 		m_shouldUpdateDirectionVectors(transform.m_shouldUpdateDirectionVectors)
 	{
-		std::for_each(begin(transform.m_components), end(transform.m_components), [this](const std::unique_ptr<core_interface::IComponent>& component)
+		std::for_each(begin(transform.m_components), end(transform.m_components), [this](const std::unique_ptr<Component>& component)
 			{
-				m_components.push_back(std::unique_ptr<core_interface::IComponent>(component->clone(this)));
+				m_components.push_back(std::unique_ptr<Component>(component->clone(this)));
+			});
+
+		std::for_each(begin(transform.m_behaviors), end(transform.m_behaviors), [this](const std::unique_ptr<Behavior>& behavior)
+			{
+				m_behaviors.push_back(std::unique_ptr<Behavior>(behavior->clone(this)));
 			});
 	}
 
@@ -51,11 +56,16 @@ namespace gam703::engine::core_interface
 		m_normalMatrix = transform.m_normalMatrix;
 		m_shouldCalculateTransform = transform.m_shouldCalculateTransform;
 		m_shouldUpdateDirectionVectors = transform.m_shouldUpdateDirectionVectors;
-		m_components = std::vector<std::unique_ptr<IComponent>>{};
+		m_components = std::vector<std::unique_ptr<Component>>{};
 
-		std::for_each(begin(transform.m_components), end(transform.m_components), [this](const std::unique_ptr<core_interface::IComponent>& component)
+		std::for_each(begin(transform.m_components), end(transform.m_components), [this](const std::unique_ptr<Component>& component)
 			{
-				m_components.push_back(std::unique_ptr<core_interface::IComponent>(component->clone(this)));
+				m_components.push_back(std::unique_ptr<Component>(component->clone(this)));
+			});
+
+		std::for_each(begin(transform.m_behaviors), end(transform.m_behaviors), [this](const std::unique_ptr<Behavior>& behavior)
+			{
+				m_behaviors.push_back(std::unique_ptr<Behavior>(behavior->clone(this)));
 			});
 
 		return *this;
@@ -167,8 +177,8 @@ namespace gam703::engine::core_interface
 		}
 	}
 
-	void Transform::updateComponents(float deltaTime)
+	void Transform::updateBehaviors(float deltaTime)
 	{
-		std::for_each(begin(m_components), end(m_components), [deltaTime](std::unique_ptr<core_interface::IComponent>& component) { component->tick(deltaTime); });
+		std::for_each(begin(m_behaviors), end(m_behaviors), [deltaTime](std::unique_ptr<Behavior>& behavior) { behavior->tick(deltaTime); });
 	}
 }

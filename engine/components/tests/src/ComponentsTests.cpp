@@ -5,57 +5,45 @@
 
 namespace gam703::engine::components::tests
 {
-	class MockComponent1 : public core_interface::IComponent
+	class MockComponent1 : public core_interface::Component
 	{
 	public:
-		MockComponent1(core_interface::Transform* transform) : core_interface::IComponent(transform)
+		MockComponent1(core_interface::Transform* transform) : core_interface::Component(transform)
 		{
 		}
 
-		virtual void tick(float deltaTime) override
-		{
-		}
-
-		virtual core_interface::IComponent* clone(core_interface::Transform*) const override
+		virtual core_interface::Component* clone(core_interface::Transform*) const override
 		{
 			return nullptr;
 		}
 	};
 
-	class MockComponent2 : public core_interface::IComponent
+	class MockComponent2 : public core_interface::Component
 	{
 	public:
-		MockComponent2(core_interface::Transform* transform) : core_interface::IComponent(transform)
+		MockComponent2(core_interface::Transform* transform) : core_interface::Component(transform)
 		{
 		}
 
-		virtual void tick(float deltaTime) override
-		{
-		}
-
-		virtual core_interface::IComponent* clone(core_interface::Transform*) const override
+		virtual core_interface::Component* clone(core_interface::Transform*) const override
 		{
 			return nullptr;
 		}
 	};
 
-	class MockComponentWithArgs : public core_interface::IComponent
+	class MockComponentWithArgs : public core_interface::Component
 	{
 	public:
-		MockComponentWithArgs(core_interface::Transform* transform) : core_interface::IComponent(transform)
+		MockComponentWithArgs(core_interface::Transform* transform) : core_interface::Component(transform)
 		{
 		}
 
-		MockComponentWithArgs(core_interface::Transform* transform, const std::string& name, int id, float speed, double precision) : core_interface::IComponent(transform), m_name(name), m_id(id), m_speed(speed), m_precision(precision)
+		MockComponentWithArgs(core_interface::Transform* transform, const std::string& name, int id, float speed, double precision) : core_interface::Component(transform), m_name(name), m_id(id), m_speed(speed), m_precision(precision)
 		{
 
 		}
 
-		virtual void tick(float deltaTime) override
-		{
-		}
-
-		virtual core_interface::IComponent* clone(core_interface::Transform*) const override
+		virtual core_interface::Component* clone(core_interface::Transform*) const override
 		{
 			return nullptr;
 		}
@@ -71,12 +59,14 @@ namespace gam703::engine::components::tests
 		core_interface::Transform transform{ nullptr, nullptr };
 
 		ASSERT_EQ(0, transform.getComponentsSize());
+		ASSERT_EQ(0, transform.getBehaviorsSize());
 
 		auto* component = transform.addComponent<MockComponent1>();
 
 		EXPECT_TRUE(component != nullptr);
 		EXPECT_EQ(1, transform.getComponentsSize());
 		EXPECT_EQ(&transform, component->getTransform());
+		
 	}
 
 	TEST(ComponentsTest, AddComponentWithArgs)

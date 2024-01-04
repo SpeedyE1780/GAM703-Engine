@@ -35,7 +35,7 @@ static engine::core_interface::Transform* addGroundPlane(engine::core_interface:
 
 	auto* backpack = engine.getScene()->addTransform(position + glm::vec3(0.0f, 2.1f, 0.0f));
 	backpack->addComponent<engine::components::Renderer>(backpackModel);
-	backpack->addComponent<game::components::Wonder>(player);
+	backpack->addBehavior<game::components::Wonder>(player);
 
 	auto* cube = engine.getScene()->addTransform(position, glm::vec3(), glm::vec3(5.0f, 0.1f, 5.0f));
 	auto* renderer = cube->addComponent<engine::components::Renderer>(cubeModel, checkeredShader);
@@ -57,7 +57,7 @@ int main()
 	auto* playerTransform = scene->addTransform(glm::vec3(0.0f, 1.1f, 0.0f));
 	auto* renderer = playerTransform->addComponent<engine::components::Renderer>(cubeModel);
 	renderer->getMaterial()->setColor(glm::vec3(0.0f, 0.0f, 1.0f));
-	playerTransform->addComponent<game::components::MovementController>();
+	playerTransform->addBehavior<game::components::MovementController>();
 
 	addGroundPlane(engine, playerTransform);
 	addGroundPlane(engine, playerTransform, glm::vec3(10.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));

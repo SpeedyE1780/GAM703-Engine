@@ -1,29 +1,29 @@
-#include <engine/core-interfaces/IComponent.hpp>
+#include <engine/core-interfaces/Component.hpp>
 #include <engine/core-interfaces/IEngine.hpp>
 #include <engine/core-interfaces/Transform.hpp>
 
 namespace gam703::engine::core_interface
 {
-	IComponent::IComponent(Transform* transform) : m_transform(transform)
+	Component::Component(Transform* transform) : m_transform(transform)
 	{
 	}
 
-	IEngine* IComponent::getEngine()
-	{
-		return m_transform->getEngine();
-	}
-
-	const IEngine* IComponent::getEngine() const
+	IEngine* Component::getEngine()
 	{
 		return m_transform->getEngine();
 	}
 
-	IScene* IComponent::getScene()
+	const IEngine* Component::getEngine() const
+	{
+		return m_transform->getEngine();
+	}
+
+	IScene* Component::getScene()
 	{
 		return m_transform->getScene();
 	}
 
-	const IScene* IComponent::getScene() const
+	const IScene* Component::getScene() const
 	{
 		return m_transform->getScene();
 	}
