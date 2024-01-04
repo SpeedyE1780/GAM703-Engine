@@ -1,5 +1,5 @@
 #include <engine/core-interfaces/Light.hpp>
-#include <engine/core-interfaces/IScene.hpp>
+#include <engine/core-interfaces/Scene.hpp>
 
 namespace gam703::engine::core_interface
 {

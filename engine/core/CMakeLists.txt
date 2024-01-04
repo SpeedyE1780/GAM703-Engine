@@ -11,7 +11,6 @@ target_sources(${PROJECT_NAME} PRIVATE
 src/Engine.cpp
 src/Input.cpp
 src/ResourceManager.cpp
-src/Scene.cpp
 
 #HPP
 include/engine/core/Config.hpp
@@ -19,7 +18,6 @@ include/engine/core/Engine.hpp
 include/engine/core/Engine.fwd.hpp
 include/engine/core/Input.hpp
 include/engine/core/ResourceManager.hpp
-include/engine/core/Scene.hpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include/)

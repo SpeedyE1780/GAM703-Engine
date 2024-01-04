@@ -1,6 +1,6 @@
 #include <engine/core-interfaces/Camera.hpp>
 #include <engine/core-interfaces/IEngine.hpp>
-#include <engine/core-interfaces/IScene.hpp>
+#include <engine/core-interfaces/Scene.hpp>
 #include <engine/core-interfaces/Transform.hpp>
 
 #include <glm/gtc/matrix_transform.hpp>
