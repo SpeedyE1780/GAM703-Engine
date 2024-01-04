@@ -55,14 +55,14 @@ namespace gam703::engine::core_interface
 		m_sceneObjects.erase(newEnd, end(m_sceneObjects));
 	}
 
-	void SceneRenderer::addLightSource(ILight* light)
+	void SceneRenderer::addLightSource(Light* light)
 	{
 		m_lightSources.push_back(light);
 	}
 
-	void SceneRenderer::removeLightSource(ILight* light)
+	void SceneRenderer::removeLightSource(Light* light)
 	{
-		auto newEnd = std::remove_if(begin(m_lightSources), end(m_lightSources), [light](core_interface::ILight* lightSource) { return light == lightSource; });
+		auto newEnd = std::remove_if(begin(m_lightSources), end(m_lightSources), [light](core_interface::Light* lightSource) { return light == lightSource; });
 		m_lightSources.erase(newEnd, end(m_lightSources));
 	}
 

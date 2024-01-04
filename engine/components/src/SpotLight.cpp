@@ -5,7 +5,7 @@ namespace gam703::engine::components
 {
 	SpotLight::SpotLight(core_interface::Transform* transform, 
 		const glm::vec3& color, float innerAngle, float outerAngle, float range, float intensity)
-		: ILight(transform, color, intensity), m_innerAngle(innerAngle), m_outerAngle(outerAngle), m_range(range)
+		: Light(transform, color, intensity), m_innerAngle(innerAngle), m_outerAngle(outerAngle), m_range(range)
 	{
 	}
 

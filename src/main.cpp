@@ -74,8 +74,6 @@ int main()
 	auto* directionalLightTransform = scene->addTransform(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(glm::radians(-90.f), 0.0f, 0.0f));
 	auto* directionalLight = directionalLightTransform->addComponent < engine::components::DirectionalLight>(glm::vec3(1.0f, 1.0f, 1.0f), 1.0f);
 
-	scene->getSceneRenderer()->addLightSource(directionalLight);
-
 	auto* pointLightTransform = scene->addTransform(glm::vec3(0.0f, 30.0f, 0.0f));
 	pointLightTransform->addComponent<engine::components::Renderer>(cubeModel);
 	auto* pointLight = pointLightTransform->addComponent<engine::components::PointLight>(glm::vec3(1.0f, 0.0f, 0.0f), 5.0f, 5.0f);
@@ -83,9 +81,6 @@ int main()
 	auto* spotLightTransform = scene->addTransform(glm::vec3(10.0f, 30.0f, 0.0f), glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
 	spotLightTransform->addComponent < engine::components::Renderer>(cubeModel);
 	auto* spotLight = spotLightTransform->addComponent<engine::components::SpotLight>(glm::vec3(0.0f, 0.0f, 1.0f));
-
-	scene->getSceneRenderer()->addLightSource(pointLight);
-	scene->getSceneRenderer()->addLightSource(spotLight);
 
 	auto& window = engine.getWindow();
 	window.addGUIElement<engine::gui::Text>("This is some useful text.");
