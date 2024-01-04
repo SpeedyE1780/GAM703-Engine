@@ -32,6 +32,8 @@ namespace gam703::engine::core_interface
 		const Camera* getActiveCamera() const { return m_sceneRenderer.getActiveCamera(); }
 		void setActiveCamera(Camera* camera);
 
+		void updateScene(float deltaTime);
+
 		virtual void updateSceneProjectionMatrix() = 0;
 
 	protected:

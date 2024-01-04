@@ -32,4 +32,15 @@ namespace gam703::engine::core_interface
 		m_sceneRenderer.setActiveCamera(activeCamera);
 		m_sceneRenderer.calculateProjectionMatrix(m_engine->getAspectRatio());
 	}
+
+	void IScene::updateScene(float deltaTime)
+	{
+		std::for_each(begin(m_transforms), end(m_transforms), [deltaTime](std::unique_ptr<Transform>& transform)
+			{
+				transform->updateBehaviors(deltaTime);
+				transform->calculateTransformMatrix();
+			});
+
+		m_sceneRenderer.render();
+	}
 }
