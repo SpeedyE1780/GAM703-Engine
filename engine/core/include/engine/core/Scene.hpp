@@ -18,8 +18,6 @@ namespace gam703::engine::core
 		Scene(Engine* engine);
 		Scene(const Scene&) = delete;
 		Scene& operator=(const Scene&) = delete;
-
-		virtual void updateSceneProjectionMatrix() override;
 	};
 }
 

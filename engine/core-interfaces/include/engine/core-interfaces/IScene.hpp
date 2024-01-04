@@ -34,7 +34,7 @@ namespace gam703::engine::core_interface
 
 		void updateScene(float deltaTime);
 
-		virtual void updateSceneProjectionMatrix() = 0;
+		void updateSceneProjectionMatrix();
 
 	protected:
 		IEngine* m_engine;

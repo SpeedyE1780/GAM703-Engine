@@ -43,4 +43,9 @@ namespace gam703::engine::core_interface
 
 		m_sceneRenderer.render();
 	}
+
+	void IScene::updateSceneProjectionMatrix()
+	{
+		m_sceneRenderer.calculateProjectionMatrix(m_engine->getAspectRatio());
+	}
 }

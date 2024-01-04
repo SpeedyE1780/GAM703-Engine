@@ -8,9 +8,4 @@ namespace gam703::engine::core
 	Scene::Scene(Engine* engine) : IScene(engine)
 	{
 	}
-
-	void Scene::updateSceneProjectionMatrix()
-	{
-		m_sceneRenderer.calculateProjectionMatrix(m_engine->getAspectRatio());
-	}
 }
