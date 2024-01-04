@@ -19,11 +19,6 @@ namespace gam703::engine::components
 		~Renderer();
 
 		virtual Renderer* clone(core_interface::Transform* transform) const override;
-
-		virtual void render(const glm::mat4& viewMatrix, const glm::vec3& cameraPosition) const override;
-
-	private:
-		const core_interface::IModel* m_model;
 	};
 }
 
