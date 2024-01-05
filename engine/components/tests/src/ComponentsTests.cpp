@@ -1,49 +1,50 @@
-#include <engine/core-interfaces/Transform.hpp>
+#include <engine/components/Transform.hpp>
+#include <engine/core/Engine.hpp>
 #include <gtest/gtest.h>
 
 #include <string>
 
 namespace gam703::engine::components::tests
 {
-	class MockComponent1 : public core_interface::Component
+	class MockComponent1 : public Component
 	{
 	public:
-		MockComponent1(core_interface::Transform* transform) : core_interface::Component(transform)
+		MockComponent1(Transform& transform) : Component(transform)
 		{
 		}
 
-		virtual core_interface::Component* clone(core_interface::Transform*) const override
+		virtual Component* clone(Transform&) const override
 		{
 			return nullptr;
 		}
 	};
 
-	class MockComponent2 : public core_interface::Component
+	class MockComponent2 : public Component
 	{
 	public:
-		MockComponent2(core_interface::Transform* transform) : core_interface::Component(transform)
+		MockComponent2(Transform& transform) : Component(transform)
 		{
 		}
 
-		virtual core_interface::Component* clone(core_interface::Transform*) const override
+		virtual Component* clone(Transform&) const override
 		{
 			return nullptr;
 		}
 	};
 
-	class MockComponentWithArgs : public core_interface::Component
+	class MockComponentWithArgs : public Component
 	{
 	public:
-		MockComponentWithArgs(core_interface::Transform* transform) : core_interface::Component(transform)
+		MockComponentWithArgs(Transform& transform) : Component(transform)
 		{
 		}
 
-		MockComponentWithArgs(core_interface::Transform* transform, const std::string& name, int id, float speed, double precision) : core_interface::Component(transform), m_name(name), m_id(id), m_speed(speed), m_precision(precision)
+		MockComponentWithArgs(Transform& transform, const std::string& name, int id, float speed, double precision) : Component(transform), m_name(name), m_id(id), m_speed(speed), m_precision(precision)
 		{
 
 		}
 
-		virtual core_interface::Component* clone(core_interface::Transform*) const override
+		virtual Component* clone(Transform&) const override
 		{
 			return nullptr;
 		}
@@ -56,7 +57,8 @@ namespace gam703::engine::components::tests
 
 	TEST(ComponentsTest, AddComponent)
 	{
-		core_interface::Transform transform{ nullptr, nullptr };
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform{ engine };
 
 		ASSERT_EQ(0, transform.getComponentsSize());
 		ASSERT_EQ(0, transform.getBehaviorsSize());
@@ -65,13 +67,13 @@ namespace gam703::engine::components::tests
 
 		EXPECT_TRUE(component != nullptr);
 		EXPECT_EQ(1, transform.getComponentsSize());
-		EXPECT_EQ(&transform, component->getTransform());
-		
+		EXPECT_EQ(&transform, &component->getTransform());
 	}
 
 	TEST(ComponentsTest, AddComponentWithArgs)
 	{
-		core_interface::Transform transform{ nullptr, nullptr };
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform{ engine };
 		std::string name = "Hello World!";
 		int id = 20;
 		float speed = 32.23f;
@@ -106,7 +108,8 @@ namespace gam703::engine::components::tests
 
 	TEST(ComponentsTest, GetComponent)
 	{
-		core_interface::Transform transform{ nullptr, nullptr };
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform{ engine };
 
 		ASSERT_EQ(0, transform.getComponentsSize());
 		ASSERT_EQ(nullptr, transform.getComponent<MockComponent1>());
@@ -122,7 +125,8 @@ namespace gam703::engine::components::tests
 
 	TEST(ComponentsTest, RemoveComponent)
 	{
-		core_interface::Transform transform{ nullptr, nullptr };
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform{ engine };
 		transform.addComponent<MockComponent1>();
 		ASSERT_EQ(1, transform.getComponentsSize());
 
@@ -133,18 +137,19 @@ namespace gam703::engine::components::tests
 
 	TEST(ComponentsTest, MultipleComponents)
 	{
-		core_interface::Transform transform{ nullptr, nullptr };
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform{ engine };
 		ASSERT_EQ(0, transform.getComponentsSize());
 
 		auto* mock1 = transform.addComponent<MockComponent1>();
 
 		EXPECT_EQ(1, transform.getComponentsSize());
-		EXPECT_EQ(&transform, mock1->getTransform());
+		EXPECT_EQ(&transform, &mock1->getTransform());
 
 		auto* mock2 = transform.addComponent<MockComponent2>();
 
 		EXPECT_EQ(2, transform.getComponentsSize());
-		EXPECT_EQ(&transform, mock2->getTransform());
+		EXPECT_EQ(&transform, &mock2->getTransform());
 
 		transform.removeComponent<MockComponent1>();
 		EXPECT_EQ(1, transform.getComponentsSize());
