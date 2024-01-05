@@ -28,6 +28,11 @@ namespace gam703::engine::graphic
 	{
 	}
 
+	Texture::~Texture()
+	{
+		glDeleteTextures(1, &m_id);
+	}
+
 	unsigned int loadTextureFromFile(const std::filesystem::path& path)
 	{
 		stbi_set_flip_vertically_on_load(true);

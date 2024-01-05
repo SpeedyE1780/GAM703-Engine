@@ -21,6 +21,7 @@ namespace gam703::engine::graphic
 		};
 
 		Texture(unsigned int id, TextureType type);
+		~Texture();
 		unsigned int getID() const { return m_id; }
 		TextureType getType() const { return m_type; }
 
