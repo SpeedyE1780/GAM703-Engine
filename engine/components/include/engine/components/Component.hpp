@@ -21,8 +21,8 @@ namespace gam703::engine::components
 		Transform& getTransform() { return m_transform; }
 		const Transform& getTransform() const { return m_transform; }
 
-		core::Engine* getEngine();
-		const core::Engine* getEngine() const;
+		core::Engine& getEngine();
+		const core::Engine& getEngine() const;
 
 		core::Scene* getScene();
 		const core::Scene* getScene() const;

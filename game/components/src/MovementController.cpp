@@ -20,7 +20,7 @@ namespace gam703::game::components
 
 	void MovementController::tick(float deltaTime)
 	{
-		if (auto* inputHandler = getEngine()->getInput())
+		if (auto* inputHandler = getEngine().getInput())
 		{
 			float velocity = m_movementSpeed * deltaTime;
 

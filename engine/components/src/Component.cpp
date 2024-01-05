@@ -7,12 +7,12 @@ namespace gam703::engine::components
 	{
 	}
 
-	core::Engine* Component::getEngine()
+	core::Engine& Component::getEngine()
 	{
 		return m_transform.getEngine();
 	}
 
-	const core::Engine* Component::getEngine() const
+	const core::Engine& Component::getEngine() const
 	{
 		return m_transform.getEngine();
 	}
