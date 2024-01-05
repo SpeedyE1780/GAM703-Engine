@@ -1,4 +1,6 @@
-#include <engine/core-interfaces/Transform.hpp>
+#include <engine/components/Transform.hpp>
+
+#include <engine/core/Engine.hpp>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -35,7 +37,8 @@ namespace gam703::engine::components::tests
 
 	TEST(TransformTests, TransformConstructor)
 	{
-		core_interface::Transform transform{ nullptr, nullptr };
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform{ engine };
 
 		glm::vec3 position = glm::vec3(0, 0, 0);
 		glm::vec3 scale = glm::vec3(1, 1, 1);
@@ -51,7 +54,8 @@ namespace gam703::engine::components::tests
 	TEST(TransformTests, TranslationTest)
 	{
 		glm::vec3 position = glm::vec3(2, 5, 2);
-		core_interface::Transform transform{ nullptr, nullptr, position };
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform{ engine, position };
 		glm::mat4 transformMatrix = glm::translate(glm::mat4(1), position);
 
 		EXPECT_EQ(position, transform.getPosition());
@@ -61,7 +65,8 @@ namespace gam703::engine::components::tests
 	TEST(TransformTests, RotationXAxis)
 	{
 		glm::vec3 eulerAngles(glm::radians(90.0f), 0, 0);
-		core_interface::Transform transform{ nullptr, nullptr, glm::vec3(0,0,0), eulerAngles };
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform{ engine, glm::vec3(0,0,0), eulerAngles };
 		glm::mat4 transformMatrix = calculateRotationMatrix(glm::mat4(1), eulerAngles);
 
 		EXPECT_EQ(eulerAngles, transform.getRotation());
@@ -71,7 +76,8 @@ namespace gam703::engine::components::tests
 	TEST(TransformTests, RotationYAxis)
 	{
 		glm::vec3 eulerAngles(0, glm::radians(90.0f), 0);
-		core_interface::Transform transform{ nullptr, nullptr, glm::vec3(0,0,0), eulerAngles };
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform{ engine, glm::vec3(0,0,0), eulerAngles };
 		glm::mat4 transformMatrix = calculateRotationMatrix(glm::mat4(1), eulerAngles);
 
 		EXPECT_EQ(eulerAngles, transform.getRotation());
@@ -81,7 +87,8 @@ namespace gam703::engine::components::tests
 	TEST(TransformTests, RotationZAxis)
 	{
 		glm::vec3 eulerAngles(0, 0, glm::radians(90.0f));
-		core_interface::Transform transform{ nullptr, nullptr, glm::vec3(0,0,0), eulerAngles };
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform{ engine, glm::vec3(0,0,0), eulerAngles };
 		glm::mat4 transformMatrix = calculateRotationMatrix(glm::mat4(1), eulerAngles);
 
 		EXPECT_EQ(eulerAngles, transform.getRotation());
@@ -91,7 +98,8 @@ namespace gam703::engine::components::tests
 	TEST(TransformTests, RotationXYAxis)
 	{
 		glm::vec3 eulerAngles(glm::radians(90.0f), glm::radians(90.0f), 0);
-		core_interface::Transform transform{ nullptr, nullptr, glm::vec3(0,0,0), eulerAngles };
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform{ engine, glm::vec3(0,0,0), eulerAngles };
 		glm::mat4 transformMatrix = calculateRotationMatrix(glm::mat4(1), eulerAngles);
 
 		EXPECT_EQ(eulerAngles, transform.getRotation());
@@ -101,7 +109,8 @@ namespace gam703::engine::components::tests
 	TEST(TransformTests, RotationXZAxis)
 	{
 		glm::vec3 eulerAngles(glm::radians(90.0f), 0, glm::radians(90.0f));
-		core_interface::Transform transform{ nullptr, nullptr, glm::vec3(0,0,0), eulerAngles };
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform{ engine, glm::vec3(0,0,0), eulerAngles };
 		glm::mat4 transformMatrix = calculateRotationMatrix(glm::mat4(1), eulerAngles);
 
 		EXPECT_EQ(eulerAngles, transform.getRotation());
@@ -111,7 +120,8 @@ namespace gam703::engine::components::tests
 	TEST(TransformTests, RotationYZAxis)
 	{
 		glm::vec3 eulerAngles(0, glm::radians(90.0f), glm::radians(90.0f));
-		core_interface::Transform transform{ nullptr, nullptr, glm::vec3(0,0,0), eulerAngles };
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform{ engine, glm::vec3(0,0,0), eulerAngles };
 		glm::mat4 transformMatrix = calculateRotationMatrix(glm::mat4(1), eulerAngles);
 
 		EXPECT_EQ(eulerAngles, transform.getRotation());
@@ -121,7 +131,8 @@ namespace gam703::engine::components::tests
 	TEST(TransformTests, RotationXYZAxis)
 	{
 		glm::vec3 eulerAngles(glm::radians(90.0f), glm::radians(90.0f), glm::radians(90.0f));
-		core_interface::Transform transform{ nullptr, nullptr, glm::vec3(0,0,0), eulerAngles };
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform{ engine, glm::vec3(0,0,0), eulerAngles };
 		glm::mat4 transformMatrix = calculateRotationMatrix(glm::mat4(1), eulerAngles);
 
 		EXPECT_EQ(eulerAngles, transform.getRotation());
@@ -131,7 +142,8 @@ namespace gam703::engine::components::tests
 	TEST(TransformTests, UniformScaleTest)
 	{
 		glm::vec3 scale(2, 2, 2);
-		core_interface::Transform transform{ nullptr, nullptr, glm::vec3(0,0,0), glm::vec3(0,0,0), scale };
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform{ engine, glm::vec3(0,0,0), glm::vec3(0,0,0), scale };
 
 		glm::mat4 transformMatrix = glm::scale(glm::mat4(1), scale);
 
@@ -142,7 +154,8 @@ namespace gam703::engine::components::tests
 	TEST(TransformTests, NonUniformScaleTest)
 	{
 		glm::vec3 scale(1, 2, 3);
-		core_interface::Transform transform{ nullptr, nullptr, glm::vec3(0,0,0), glm::vec3(0,0,0), scale };
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform{ engine, glm::vec3(0,0,0), glm::vec3(0,0,0), scale };
 
 		glm::mat4 transformMatrix = glm::scale(glm::mat4(1), scale);
 
@@ -156,7 +169,8 @@ namespace gam703::engine::components::tests
 		glm::vec3 eulerAngles(glm::radians(25.0f), glm::radians(35.0f), glm::radians(45.0f));
 		glm::vec3 scale(1, 2, 3);
 		glm::mat4 transformMatrix = glm::mat4(1);
-		core_interface::Transform transform{ nullptr, nullptr };
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform{ engine };
 		const glm::mat4& transformationMatrix = transform.getTransformationMatrix();
 
 		ASSERT_TRUE(compareMatrix(transformMatrix, transformationMatrix));
@@ -189,7 +203,8 @@ namespace gam703::engine::components::tests
 		glm::vec3 eulerAngles(glm::radians(25.0f), glm::radians(35.0f), glm::radians(45.0f));
 		glm::vec3 scale(1, 2, 3);
 		glm::mat4 transformMatrix = glm::mat4(1);
-		core_interface::Transform transform{ nullptr, nullptr };
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform{ engine };
 		const glm::mat4& transformationMatrix = transform.getTransformationMatrix();
 
 		ASSERT_TRUE(compareMatrix(transformMatrix, transformationMatrix));
@@ -219,7 +234,8 @@ namespace gam703::engine::components::tests
 	TEST(TransformTests, TranslateTest)
 	{
 		glm::vec3 position(1, 2, 3);
-		core_interface::Transform transform(nullptr, nullptr, position);
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform(engine, position);
 		glm::mat4 transformMatrix = glm::translate(glm::mat4(1), position);
 
 		ASSERT_TRUE(compareMatrix(transformMatrix, transform.getTransformationMatrix()));
@@ -235,7 +251,8 @@ namespace gam703::engine::components::tests
 	TEST(TransformTests, RotationTest)
 	{
 		glm::vec3 eulerAngles(20, 0, 0);
-		core_interface::Transform transform(nullptr, nullptr, glm::vec3(0, 0, 0), eulerAngles);
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform(engine, glm::vec3(0, 0, 0), eulerAngles);
 		glm::mat4 transformMatrix = glm::rotate(glm::mat4(1), 20.0f, glm::vec3(1, 0, 0));
 
 		ASSERT_TRUE(compareMatrix(transformMatrix, transform.getTransformationMatrix()));
@@ -253,7 +270,8 @@ namespace gam703::engine::components::tests
 		glm::vec3 eulerAngles(glm::radians(25.0f), glm::radians(35.0f), glm::radians(45.0f));
 		glm::vec3 scale(1, 2, 3);
 		glm::mat4 transformMatrix = glm::mat4(1);
-		core_interface::Transform transform{ nullptr, nullptr };
+		core::Engine engine{ "TEST", 1280, 720 };
+		Transform transform{ engine };
 		const glm::mat4& transformationMatrix = transform.getTransformationMatrix();
 
 		ASSERT_TRUE(compareMatrix(transformMatrix, transformationMatrix));
@@ -279,9 +297,9 @@ namespace gam703::engine::components::tests
 
 		ASSERT_TRUE(compareMatrix(transformMatrix, transformationMatrix));
 
-		core_interface::Transform copyConstructor{ transform };
-		core_interface::Transform copyAssignment{ transform };
-		core_interface::Transform* clone = transform.clone();
+		Transform copyConstructor{ transform };
+		Transform copyAssignment{ transform };
+		Transform* clone = transform.clone();
 
 		EXPECT_TRUE(compareMatrix(transformMatrix, copyConstructor.getTransformationMatrix()));
 		EXPECT_TRUE(compareMatrix(transformMatrix, copyAssignment.getTransformationMatrix()));
