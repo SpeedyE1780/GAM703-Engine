@@ -16,6 +16,8 @@
 #include <game/components/MovementController.hpp>
 #include <game/components/Wonder.hpp>
 
+#include <irrKlang/irrKlang.h>
+
 #include <iostream>
 #include <format>
 
@@ -50,7 +52,7 @@ int main()
 
 	engine::core::Engine engine("GAM703", 1280, 720);
 	auto& scene = engine.getScene();
-
+	irrklang::ISoundEngine* soundEngine = irrklang::createIrrKlangDevice();
 
 	auto* cubeModel = engine.getResourceManager().getModel("resources/Models/cube/cube.obj");
 	auto* playerTransform = scene.addTransform(glm::vec3(0.0f, 1.1f, 0.0f));
@@ -105,7 +107,11 @@ int main()
 	text = window.addGUIElement<engine::gui::Text>(std::format("counter: {}", counter));
 	text->shouldRenderOnNewLine(false);
 
+	soundEngine->play2D("resources/Audio/bell.wav");
+
 	engine.start();
+
+	soundEngine->drop();
 
 	std::cout << "DEMO: " << (demo->isChecked() ? "TRUE" : "FALSE") << " ANOTHER: " << (another->isChecked() ? "TRUE" : "FALSE") << std::endl;
 	return 0;
