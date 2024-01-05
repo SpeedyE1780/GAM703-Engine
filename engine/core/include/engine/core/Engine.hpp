@@ -21,8 +21,8 @@ namespace gam703::engine::core
 
 		gui::Window& getWindow() { return m_window; }
 		const gui::Window& getWindow() const { return m_window; }
-		Input* getInput() { return &m_inputHandler; }
-		const Input* getInput() const { return &m_inputHandler; }
+		Input& getInput() { return m_inputHandler; }
+		const Input& getInput() const { return m_inputHandler; }
 		Time* getTime() { return &m_time; }
 		const Time* getTime() const { return &m_time; }
 		Scene& getScene() { return m_scene; }

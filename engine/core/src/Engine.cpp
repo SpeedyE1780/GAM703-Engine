@@ -20,9 +20,7 @@ namespace gam703::engine::core
 
 		void processInput(Engine& engine)
 		{
-			auto* inputHandler = engine.getInput();
-
-			if (inputHandler->isKeyPressed(GLFW_KEY_ESCAPE))
+			if (engine.getInput().isKeyPressed(GLFW_KEY_ESCAPE))
 			{
 				engine.stop();
 			}
@@ -32,7 +30,7 @@ namespace gam703::engine::core
 		{
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
-				engine->getInput()->processMouseMovement(mouseX, mouseY);
+				engine->getInput().processMouseMovement(mouseX, mouseY);
 			}
 		}
 
@@ -40,7 +38,7 @@ namespace gam703::engine::core
 		{
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
-				engine->getInput()->processMouseScroll(xOffset, yOffset);
+				engine->getInput().processMouseScroll(xOffset, yOffset);
 			}
 		}
 
