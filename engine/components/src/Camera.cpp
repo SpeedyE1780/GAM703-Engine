@@ -10,11 +10,11 @@ namespace gam703::engine::components
 	constexpr float MinimumFOV = 1.0f;
 	constexpr float MaximumFOV = 120.0f;
 
-	Camera::Camera(Transform* transform) : Component(transform)
+	Camera::Camera(Transform& transform) : Component(transform)
 	{
 	}
 
-	Camera::Camera(Transform* transform, float fieldOfView) : Component(transform), m_fieldOfView(fieldOfView)
+	Camera::Camera(Transform& transform, float fieldOfView) : Component(transform), m_fieldOfView(fieldOfView)
 	{
 	}
 
@@ -29,10 +29,10 @@ namespace gam703::engine::components
 
 	glm::mat4 Camera::getViewMatrix() const
 	{
-		return glm::lookAt(m_transform->getPosition(), m_transform->getPosition() + m_transform->getFront(), m_transform->getUp());
+		return glm::lookAt(m_transform.getPosition(), m_transform.getPosition() + m_transform.getFront(), m_transform.getUp());
 	}
 
-	Camera* Camera::clone(Transform* transform) const
+	Camera* Camera::clone(Transform& transform) const
 	{
 		return new Camera(transform, m_fieldOfView);
 	}

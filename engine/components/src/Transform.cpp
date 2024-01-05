@@ -33,12 +33,12 @@ namespace gam703::engine::components
 	{
 		std::for_each(begin(transform.m_components), end(transform.m_components), [this](const std::unique_ptr<Component>& component)
 			{
-				m_components.push_back(std::unique_ptr<Component>(component->clone(this)));
+				m_components.push_back(std::unique_ptr<Component>(component->clone(*this)));
 			});
 
 		std::for_each(begin(transform.m_behaviors), end(transform.m_behaviors), [this](const std::unique_ptr<Behavior>& behavior)
 			{
-				m_behaviors.push_back(std::unique_ptr<Behavior>(behavior->clone(this)));
+				m_behaviors.push_back(std::unique_ptr<Behavior>(behavior->clone(*this)));
 			});
 	}
 
@@ -60,12 +60,12 @@ namespace gam703::engine::components
 
 		std::for_each(begin(transform.m_components), end(transform.m_components), [this](const std::unique_ptr<Component>& component)
 			{
-				m_components.push_back(std::unique_ptr<Component>(component->clone(this)));
+				m_components.push_back(std::unique_ptr<Component>(component->clone(*this)));
 			});
 
 		std::for_each(begin(transform.m_behaviors), end(transform.m_behaviors), [this](const std::unique_ptr<Behavior>& behavior)
 			{
-				m_behaviors.push_back(std::unique_ptr<Behavior>(behavior->clone(this)));
+				m_behaviors.push_back(std::unique_ptr<Behavior>(behavior->clone(*this)));
 			});
 
 		return *this;

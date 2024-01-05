@@ -9,9 +9,9 @@ namespace gam703::engine::components
 	class ENGINE_COMPONENTS_API DirectionalLight : public Light
 	{
 	public:
-		DirectionalLight(Transform* transform, const glm::vec3& color, float intensity = 1.0f);
+		DirectionalLight(Transform& transform, const glm::vec3& color, float intensity = 1.0f);
 
-		virtual DirectionalLight* clone(Transform* transform) const override;
+		virtual DirectionalLight* clone(Transform& transform) const override;
 
 		virtual void updateShaderLightInfo(const graphic::Shader& shader) const override;
 	};

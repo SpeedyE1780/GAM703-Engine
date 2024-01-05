@@ -3,7 +3,7 @@
 
 namespace gam703::engine::components
 {
-	Light::Light(Transform* transform, const glm::vec3& color, float intensity) : Component(transform), m_color(color), m_intensity(intensity)
+	Light::Light(Transform& transform, const glm::vec3& color, float intensity) : Component(transform), m_color(color), m_intensity(intensity)
 	{
 		getScene()->getSceneRenderer()->addLightSource(this);
 	}

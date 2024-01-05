@@ -65,7 +65,7 @@ namespace gam703::engine::components
 		ComponentType* addComponent(Args&&... args)
 		{
 			static_assert(std::is_base_of_v<Behavior, ComponentType> == false, "ComponentType is a Behavior, use addBehavior instead");
-			auto* component = new ComponentType(this, std::forward<Args>(args)...);
+			auto* component = new ComponentType(*this, std::forward<Args>(args)...);
 			m_components.emplace_back(std::unique_ptr<ComponentType>(component));
 			return component;
 		}
@@ -95,7 +95,7 @@ namespace gam703::engine::components
 		BehaviorType* addBehavior(Args&&... args)
 		{
 			static_assert(std::derived_from<BehaviorType, Behavior>, "BehaviorType is a Component, use addComponent instead");
-			auto* behavior = new BehaviorType(this, std::forward<Args>(args)...);
+			auto* behavior = new BehaviorType(*this, std::forward<Args>(args)...);
 			m_behaviors.emplace_back(std::unique_ptr<BehaviorType>(behavior));
 			return behavior;
 		}

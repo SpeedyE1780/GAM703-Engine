@@ -13,13 +13,13 @@ namespace gam703::engine::components
 	class ENGINE_COMPONENTS_API Component
 	{
 	public:
-		Component(Transform* transform);
+		Component(Transform& transform);
 		virtual ~Component() = default;
 
-		virtual Component* clone(Transform* transform) const = 0;
+		virtual Component* clone(Transform& transform) const = 0;
 
-		Transform* getTransform() { return m_transform; }
-		const Transform* getTransform() const { return m_transform; }
+		Transform& getTransform() { return m_transform; }
+		const Transform& getTransform() const { return m_transform; }
 
 		core::Engine* getEngine();
 		const core::Engine* getEngine() const;
@@ -28,7 +28,7 @@ namespace gam703::engine::components
 		const core::Scene* getScene() const;
 
 	protected:
-		Transform* m_transform;
+		Transform& m_transform;
 	};
 }
 
