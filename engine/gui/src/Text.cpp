@@ -4,12 +4,12 @@
 
 namespace gam703::engine::gui
 {
-	Text::Text(const std::string& content) : m_content(content)
+	Text::Text(const std::string& label) : GUIElement(label)
 	{
 	}
 
 	void Text::renderElement() const
 	{
-		ImGui::Text(m_content.c_str());
+		ImGui::Text(m_label.c_str());
 	}
 }

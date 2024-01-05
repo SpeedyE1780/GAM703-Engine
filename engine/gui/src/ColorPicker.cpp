@@ -4,12 +4,12 @@
 
 namespace gam703::engine::gui
 {
-	ColorPicker::ColorPicker(const std::string& content) : m_content(content)
+	ColorPicker::ColorPicker(const std::string& label) : GUIElement(label)
 	{
 	}
 
 	void ColorPicker::renderElement() const
 	{
-		ImGui::ColorEdit4("clear color", m_colors);
+		ImGui::ColorEdit4(m_label.c_str(), m_colors);
 	}
 }

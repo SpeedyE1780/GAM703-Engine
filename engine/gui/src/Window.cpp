@@ -76,7 +76,7 @@ namespace gam703::engine::gui
 		ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
 		ImGuiIO& io = ImGui::GetIO();
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-		std::for_each(begin(m_elements), end(m_elements), [](const std::unique_ptr<IGUIElement>& element) { element->render(); });
+		std::for_each(begin(m_elements), end(m_elements), [](const std::unique_ptr<GUIElement>& element) { element->render(); });
 		ImGui::End();
 	}
 

@@ -2,23 +2,22 @@
 #define GAM703_ENGINE_GUI_BUTTON_HPP
 
 #include <engine/gui/Config.hpp>
-#include <engine/gui/IGUIElement.hpp>
+#include <engine/gui/GUIElement.hpp>
 
 #include <functional>
 #include <string>
 
 namespace gam703::engine::gui
 {
-	class ENGINE_GUI_API Button : public IGUIElement
+	class ENGINE_GUI_API Button : public GUIElement
 	{
 	public:
-		Button(const std::string& context, std::function<void()> callback);
+		Button(const std::string& label, std::function<void()> callback);
 
 	protected:
 		virtual void renderElement() const override;
 
 	private:
-		std::string m_content;
 		std::function<void()> m_callback;
 	};
 }
