@@ -12,7 +12,7 @@ namespace gam703::engine::components
 		return new DirectionalLight(transform, m_color, m_intensity);
 	}
 
-	void DirectionalLight::updateShaderLightInfo(const core_interface::Shader& shader) const
+	void DirectionalLight::updateShaderLightInfo(const graphic::Shader& shader) const
 	{
 		shader.setVec3("directionalLight.color", m_color);
 		shader.setFloat("directionalLight.intensity", m_intensity);

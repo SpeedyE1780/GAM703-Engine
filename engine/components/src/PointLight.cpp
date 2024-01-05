@@ -13,7 +13,7 @@ namespace gam703::engine::components
 		return new PointLight(m_transform, m_color, m_range, m_intensity);
 	}
 
-	void PointLight::updateShaderLightInfo(const core_interface::Shader& shader) const
+	void PointLight::updateShaderLightInfo(const graphic::Shader& shader) const
 	{
 		shader.setVec3("pointLight.position", m_transform->getPosition());
 		shader.setVec3("pointLight.color", m_color);

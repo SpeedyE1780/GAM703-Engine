@@ -4,7 +4,7 @@
 #include <engine/components/Config.hpp>
 #include <engine/components/Component.hpp>
 
-#include <engine/core-interfaces/Shader.hpp>
+#include <engine/graphic/Shader.hpp>
 
 #include <glm/glm.hpp>
 
@@ -22,7 +22,7 @@ namespace gam703::engine::components
 		float getIntensity() const { return m_intensity; }
 		void setIntensity(float intensity) { m_intensity = intensity; }
 
-		virtual void updateShaderLightInfo(const core_interface::Shader& shader) const = 0;
+		virtual void updateShaderLightInfo(const graphic::Shader& shader) const = 0;
 
 	protected:
 		glm::vec3 m_color{ 1.0f, 1.0f, 1.0f };

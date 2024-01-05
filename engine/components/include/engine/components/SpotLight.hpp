@@ -14,7 +14,7 @@ namespace gam703::engine::components
 
 		virtual SpotLight* clone(Transform* transform) const override;
 
-		virtual void updateShaderLightInfo(const core_interface::Shader& shader) const override;
+		virtual void updateShaderLightInfo(const graphic::Shader& shader) const override;
 
 	private:
 		float m_innerAngle;

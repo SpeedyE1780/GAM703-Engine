@@ -18,14 +18,14 @@ namespace gam703::engine::core
 		ResourceManager(const ResourceManager& other) = delete;
 		ResourceManager& operator=(const ResourceManager& other) = delete;
 		
-		virtual const core_interface::Texture* getTexture(const std::filesystem::path& path, core_interface::Texture::TextureType type) override;
-		virtual const core_interface::Texture* getWhiteTexture() override;
-		virtual const core_interface::IModel* getModel(const std::filesystem::path& path) override;
+		virtual const graphic::Texture* getTexture(const std::filesystem::path& path, graphic::Texture::TextureType type) override;
+		virtual const graphic::Texture* getWhiteTexture() override;
+		virtual const graphic::Model* getModel(const std::filesystem::path& path) override;
 
 	private:
 		graphic::ModelLoader m_modelLoader;
-		std::map<std::filesystem::path, std::unique_ptr<core_interface::Texture>> m_textures{};
-		std::map<std::filesystem::path, std::unique_ptr<core_interface::IModel>> m_models{};
+		std::map<std::filesystem::path, std::unique_ptr<graphic::Texture>> m_textures{};
+		std::map<std::filesystem::path, std::unique_ptr<graphic::Model>> m_models{};
 	};
 }
 

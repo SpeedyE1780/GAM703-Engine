@@ -1,8 +1,6 @@
 #ifndef GAM703_ENGINE_GRAPHIC_MODEL_HPP
 #define GAM703_ENGINE_GRAPHIC_MODEL_HPP
 
-#include <engine/core-interfaces/IModel.hpp>
-
 #include <engine/graphic/Config.hpp>
 #include <engine/graphic/Mesh.hpp>
 
@@ -18,11 +16,11 @@ enum aiTextureType;
 
 namespace gam703::engine::graphic
 {
-	class ENGINE_GRAPHIC_API Model : public core_interface::IModel
+	class ENGINE_GRAPHIC_API Model
 	{
 	public:
 		Model(const std::vector<Mesh>& meshes);
-		virtual void draw(const core_interface::Material& material) const override;
+		void draw(const Material& material) const;
 
 	private:
 		std::vector<Mesh> m_meshes;

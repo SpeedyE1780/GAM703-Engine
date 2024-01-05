@@ -1,4 +1,4 @@
-#include <engine/core-interfaces/Shader.hpp>
+#include <engine/graphic/Shader.hpp>
 
 #include <engine/utility/File.hpp>
 
@@ -8,7 +8,7 @@
 
 #include <iostream>
 
-namespace gam703::engine::core_interface
+namespace gam703::engine::graphic
 {
 	namespace
 	{

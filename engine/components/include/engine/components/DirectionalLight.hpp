@@ -13,7 +13,7 @@ namespace gam703::engine::components
 
 		virtual DirectionalLight* clone(Transform* transform) const override;
 
-		virtual void updateShaderLightInfo(const core_interface::Shader& shader) const override;
+		virtual void updateShaderLightInfo(const graphic::Shader& shader) const override;
 	};
 }
 

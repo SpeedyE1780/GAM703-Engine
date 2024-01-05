@@ -24,6 +24,10 @@ namespace gam703::engine::graphic
 		}
 	}
 
+	Texture::Texture(unsigned int id, TextureType type) : m_id(id), m_type(type)
+	{
+	}
+
 	unsigned int loadTextureFromFile(const std::filesystem::path& path)
 	{
 		stbi_set_flip_vertically_on_load(true);

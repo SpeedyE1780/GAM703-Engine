@@ -2,7 +2,7 @@
 #define GAM703_ENGINE_GRAPHIC_MODEL_LOADER_HPP
 
 #include <engine/core-interfaces/IResourceManager.hpp>
-#include <engine/core-interfaces/Texture.hpp>
+#include <engine/graphic/Texture.hpp>
 
 #include <engine/graphic/Config.hpp>
 #include <engine/graphic/Model.hpp>
@@ -19,7 +19,7 @@ namespace gam703::engine::graphic
 		Model* loadModel(const std::filesystem::path& path);
 		void processNode(std::vector<Mesh>& meshes, const aiNode* node, const aiScene* scene);
 		Mesh processMesh(const aiMesh* mesh, const aiScene* scene);
-		void loadMaterialTextures(std::vector<const core_interface::Texture*>& textures, const aiMaterial* mat, aiTextureType type);
+		void loadMaterialTextures(std::vector<const Texture*>& textures, const aiMaterial* mat, aiTextureType type);
 
 	private:
 		core_interface::IResourceManager* m_resourceManager;

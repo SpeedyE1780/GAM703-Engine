@@ -1,15 +1,15 @@
-#ifndef GAM703_ENGINE_CORE_INTERFACES_ISHADER_HPP
-#define GAM703_ENGINE_CORE_INTERFACES_ISHADER_HPP
+#ifndef GAM703_ENGINE_GRAPHIC_SHADER_HPP
+#define GAM703_ENGINE_GRAPHIC_SHADER_HPP
 
-#include <engine/core-interfaces/Config.hpp>
+#include <engine/graphic/Config.hpp>
 
 #include <glm/glm.hpp>
 
 #include <string>
 
-namespace gam703::engine::core_interface
+namespace gam703::engine::graphic
 {
-	class ENGINE_CORE_INTERFACES_API Shader
+	class ENGINE_GRAPHIC_API Shader
 	{
 	public:
 		Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
@@ -46,8 +46,8 @@ namespace gam703::engine::core_interface
 		std::string m_fragmentShaderPath;
 	};
 
-	ENGINE_CORE_INTERFACES_API Shader createDefaultShader();
+	ENGINE_GRAPHIC_API Shader createDefaultShader();
 
 }
 
-#endif // GAM703_ENGINE_CORE_INTERFACES_ISHADER_HPP
+#endif // GAM703_ENGINE_GRAPHIC_SHADER_HPP

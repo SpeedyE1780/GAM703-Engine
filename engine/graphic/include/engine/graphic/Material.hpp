@@ -1,18 +1,18 @@
-#ifndef GAM703_ENGINE_CORE_INTERFACES_IMATERIAL_HPP
-#define GAM703_ENGINE_CORE_INTERFACES_IMATERIAL_HPP
+#ifndef GAM703_ENGINE_GRAPHIC_MATERIAL_HPP
+#define GAM703_ENGINE_GRAPHIC_MATERIAL_HPP
 
-#include <engine/core-interfaces/Config.hpp>
-#include <engine/core-interfaces/Shader.hpp>
+#include <engine/graphic/Config.hpp>
+#include <engine/graphic/Shader.hpp>
 
 #include <glm/glm.hpp>
 
-namespace gam703::engine::core_interface
+namespace gam703::engine::graphic
 {
-	class ENGINE_CORE_INTERFACES_API Material
+	class ENGINE_GRAPHIC_API Material
 	{
 	public:
 		Material();
-		Material(const core_interface::Shader& shader);
+		Material(const Shader& shader);
 		Material(const Material& material);
 		Material& operator=(const Material& material);
 
@@ -28,8 +28,8 @@ namespace gam703::engine::core_interface
 
 	private:
 		glm::vec3 m_color = glm::vec3(1, 1, 1);
-		core_interface::Shader m_shader;
+		Shader m_shader;
 	};
 }
 
-#endif // GAM703_ENGINE_CORE_INTERFACES_IMATERIAL_HPP
+#endif // GAM703_ENGINE_GRAPHIC_MATERIAL_HPP

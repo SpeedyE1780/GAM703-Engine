@@ -33,6 +33,7 @@ include/engine/components/Transform.hpp
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC engine-core-interfaces)
+target_link_libraries(${PROJECT_NAME} PUBLIC engine-graphic)
 target_link_libraries(${PROJECT_NAME} PUBLIC glm)
 
 add_subdirectory(tests)
