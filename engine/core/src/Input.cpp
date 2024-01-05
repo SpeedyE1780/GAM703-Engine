@@ -2,9 +2,9 @@
 
 namespace gam703::engine::core
 {
-	Input::Input(gui::Window* window) : m_window(window)
+	Input::Input(gui::Window& window) : m_window(window)
 	{
-		std::tie(m_lastMouseX, m_lastMouseY) = m_window->getMousePosition();
+		std::tie(m_lastMouseX, m_lastMouseY) = m_window.getMousePosition();
 	}
 
 	void Input::processMouseMovement(double mouseX, double mouseY)
