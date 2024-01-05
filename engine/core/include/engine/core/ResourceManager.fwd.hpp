@@ -1,0 +1,9 @@
+#ifndef GAM703_ENGINE_CORE_RESOURCE_MANAGER_FWD_HPP
+#define GAM703_ENGINE_CORE_RESOURCE_MANAGER_FWD_HPP
+
+namespace gam703::engine::core
+{
+	class ResourceManager;
+}
+
+#endif // GAM703_ENGINE_CORE_RESOURCE_MANAGER_FWD_HPP

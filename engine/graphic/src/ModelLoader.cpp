@@ -2,6 +2,8 @@
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
 
+#include <engine/core/ResourceManager.hpp>
+
 #include <engine/graphic/ModelLoader.hpp>
 
 #include <glm/glm.hpp>
@@ -50,7 +52,7 @@ namespace gam703::engine::graphic
 		}
 	}
 
-	ModelLoader::ModelLoader(core_interface::IResourceManager* resourceManager) : m_resourceManager(resourceManager)
+	ModelLoader::ModelLoader(core::ResourceManager* resourceManager) : m_resourceManager(resourceManager)
 	{
 	}
 

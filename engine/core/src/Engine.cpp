@@ -1,4 +1,5 @@
 #include <engine/core/Engine.hpp>
+#include <engine/core/Scene.hpp>
 
 #include <imgui/imconfig.h>
 #include <imgui/backends/imgui_impl_glfw.h>
@@ -63,7 +64,7 @@ namespace gam703::engine::core
 		}
 	}
 
-	Engine::Engine(const std::string& title, int width, int height) : IEngine(glfwGetTime()), m_window(title, width, height), m_inputHandler(&m_window)
+	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height), m_inputHandler(&m_window), m_time(glfwGetTime()), m_scene(this)
 	{
 		m_window.setUserData(this);
 		m_window.setResizeCallback(resizeWindow);

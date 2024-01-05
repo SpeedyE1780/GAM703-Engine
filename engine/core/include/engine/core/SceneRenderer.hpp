@@ -1,18 +1,19 @@
-#ifndef GAM703_ENGINE_CORE_INTERFACES_ISCENE_RENDERER_HPP
-#define GAM703_ENGINE_CORE_INTERFACES_ISCENE_RENDERER_HPP
+#ifndef GAM703_ENGINE_CORE_SCENE_RENDERER_HPP
+#define GAM703_ENGINE_CORE_SCENE_RENDERER_HPP
 
-#include <engine/core-interfaces/Config.hpp>
 #include <engine/components/Camera.hpp>
 #include <engine/components/Renderer.hpp>
 #include <engine/components/Light.hpp>
+
+#include <engine/core/Config.hpp>
 
 #include <glm/glm.hpp>
 
 #include <vector>
 
-namespace gam703::engine::core_interface
+namespace gam703::engine::core
 {
-	class ENGINE_CORE_INTERFACES_API SceneRenderer
+	class ENGINE_CORE_API SceneRenderer
 	{
 	public:
 		void addRenderer(components::Renderer* renderer);
@@ -50,4 +51,4 @@ namespace gam703::engine::core_interface
 	};
 }
 
-#endif // GAM703_ENGINE_CORE_INTERFACES_ISCENE_RENDERER_HPP
+#endif // GAM703_ENGINE_CORE_SCENE_RENDERER_HPP

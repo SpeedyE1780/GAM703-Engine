@@ -1,11 +1,11 @@
-#ifndef GAM703_ENGINE_CORE_INTERFACES_TIME_HPP
-#define GAM703_ENGINE_CORE_INTERFACES_TIME_HPP
+#ifndef GAM703_ENGINE_CORE_TIME_HPP
+#define GAM703_ENGINE_CORE_TIME_HPP
 
-#include <engine/core-interfaces/Config.hpp>
+#include <engine/core/Config.hpp>
 
-namespace gam703::engine::core_interface
+namespace gam703::engine::core
 {
-	class ENGINE_CORE_INTERFACES_API Time
+	class ENGINE_CORE_API Time
 	{
 	public:
 		Time(double time, double timeScale = 1);
@@ -27,4 +27,4 @@ namespace gam703::engine::core_interface
 	};
 }
 
-#endif // GAM703_ENGINE_CORE_INTERFACES_TIME_HPP
+#endif // GAM703_ENGINE_CORE_TIME_HPP

@@ -1,8 +1,6 @@
 #ifndef GAM703_ENGINE_CORE_RESOURCE_MANAGER_HPP
 #define GAM703_ENGINE_CORE_RESOURCE_MANAGER_HPP
 
-#include <engine/core-interfaces/IResourceManager.hpp>
-
 #include <engine/graphic/ModelLoader.hpp>
 
 #include <map>
@@ -10,7 +8,7 @@
 
 namespace gam703::engine::core
 {
-	class ResourceManager : public core_interface::IResourceManager
+	class ResourceManager
 	{
 	public:
 		ResourceManager();
@@ -18,9 +16,9 @@ namespace gam703::engine::core
 		ResourceManager(const ResourceManager& other) = delete;
 		ResourceManager& operator=(const ResourceManager& other) = delete;
 		
-		virtual const graphic::Texture* getTexture(const std::filesystem::path& path, graphic::Texture::TextureType type) override;
-		virtual const graphic::Texture* getWhiteTexture() override;
-		virtual const graphic::Model* getModel(const std::filesystem::path& path) override;
+		const graphic::Texture* getTexture(const std::filesystem::path& path, graphic::Texture::TextureType type);
+		const graphic::Texture* getWhiteTexture();
+		const graphic::Model* getModel(const std::filesystem::path& path);
 
 	private:
 		graphic::ModelLoader m_modelLoader;

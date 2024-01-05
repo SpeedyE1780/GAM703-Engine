@@ -1,4 +1,4 @@
-#include <engine/core-interfaces/IEngine.hpp>
+#include <engine/core/Engine.hpp>
 #include <engine/components/Transform.hpp>
 
 #include <game/components/MovementController.hpp>

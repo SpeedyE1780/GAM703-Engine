@@ -1,24 +1,26 @@
-#ifndef GAM703_ENGINE_CORE_INTERFACES_Scene_HPP
-#define GAM703_ENGINE_CORE_INTERFACES_Scene_HPP
+#ifndef GAM703_ENGINE_CORE_Scene_HPP
+#define GAM703_ENGINE_CORE_Scene_HPP
 
-#include <engine/core-interfaces/Config.hpp>
-#include <engine/core-interfaces/IEngine.fwd.hpp>
 #include <engine/components/Transform.hpp>
-#include <engine/core-interfaces/SceneRenderer.hpp>
 #include <engine/components/Camera.hpp>
+
+#include <engine/core/Config.hpp>
+#include <engine/core/SceneRenderer.hpp>
+
+#include <engine/core/Engine.fwd.hpp>
 
 #include <glm/glm.hpp>
 
 #include <memory>
 #include <vector>
 
-namespace gam703::engine::core_interface
+namespace gam703::engine::core
 {
-	class ENGINE_CORE_INTERFACES_API Scene
+	class ENGINE_CORE_API Scene
 	{
 	public:
-		Scene(IEngine* engine);
-		virtual ~Scene() = default;
+		Scene(Engine* engine);
+		~Scene() = default;
 		Scene(const Scene&) = delete;
 		Scene& operator=(const Scene&) = delete;
 
@@ -37,10 +39,10 @@ namespace gam703::engine::core_interface
 		void updateSceneProjectionMatrix();
 
 	protected:
-		IEngine* m_engine;
+		Engine* m_engine;
 		SceneRenderer m_sceneRenderer{};
 		std::vector<std::unique_ptr<components::Transform>> m_transforms{};
 	};
 }
 
-#endif // GAM703_ENGINE_CORE_INTERFACES_Scene_HPP
+#endif // GAM703_ENGINE_CORE_Scene_HPP

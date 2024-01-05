@@ -1,10 +1,12 @@
-#include <engine/core-interfaces/IEngine.hpp>
-#include <engine/core-interfaces/Scene.hpp>
+#include <engine/core/Scene.hpp>
+
+#include <engine/core/Engine.hpp>
+
 #include <engine/components/Transform.hpp>
 
-namespace gam703::engine::core_interface
+namespace gam703::engine::core
 {
-	Scene::Scene(IEngine* engine) : m_engine(engine)
+	Scene::Scene(Engine* engine) : m_engine(engine)
 	{
 	}
 

@@ -2,11 +2,11 @@
 
 #include <engine/components/Transform.hpp>
 
-#include <engine/core-interfaces/SceneRenderer.hpp>
+#include <engine/core/SceneRenderer.hpp>
 
 #include <glm/gtc/matrix_transform.hpp>
 
-namespace gam703::engine::core_interface
+namespace gam703::engine::core
 {
 	void SceneRenderer::setAmbientLight(const glm::vec3& color, float strength)
 	{

@@ -7,7 +7,7 @@
 
 namespace gam703::engine::components
 {
-	Transform::Transform(core_interface::IEngine* engine, core_interface::Scene* scene, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) :
+	Transform::Transform(core::Engine* engine, core::Scene* scene, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) :
 		m_engine(engine),
 		m_scene(scene),
 		m_position(position),
