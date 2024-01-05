@@ -1,6 +1,6 @@
-#include <engine/core-interfaces/Time.hpp>
+#include <engine/core/Time.hpp>
 
-namespace gam703::engine::core_interface
+namespace gam703::engine::core
 {
 	Time::Time(double time, double timeScale) : m_time(time), m_timeScale(timeScale)
 	{

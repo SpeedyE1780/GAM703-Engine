@@ -5,19 +5,16 @@
 #include <engine/core-interfaces/IInput.hpp>
 #include <engine/core-interfaces/IResourceManager.hpp>
 #include <engine/core-interfaces/Scene.hpp>
-#include <engine/core-interfaces/Time.hpp>
 
 namespace gam703::engine::core_interface
 {
 	class ENGINE_CORE_INTERFACES_API IEngine
 	{
 	public:
-		IEngine(double time, double timeScale = 1.0f);
+		IEngine();
 		virtual ~IEngine() = default;
 		virtual IInput* getInput() = 0;
 		virtual const IInput* getInput() const = 0;
-		Time* getTime() { return &m_time; }
-		const Time* getTime() const { return &m_time; }
 		virtual IResourceManager* getResourceManager() = 0;
 		virtual const IResourceManager* getResourceManager() const = 0;
 		Scene* getScene() { return &m_scene; }
@@ -26,7 +23,6 @@ namespace gam703::engine::core_interface
 
 	protected:
 		Scene m_scene;
-		Time m_time;
 	};
 }
 

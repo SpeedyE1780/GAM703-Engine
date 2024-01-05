@@ -63,7 +63,7 @@ namespace gam703::engine::core
 		}
 	}
 
-	Engine::Engine(const std::string& title, int width, int height) : IEngine(glfwGetTime()), m_window(title, width, height), m_inputHandler(&m_window)
+	Engine::Engine(const std::string& title, int width, int height) : IEngine(), m_window(title, width, height), m_inputHandler(&m_window), m_time(glfwGetTime())
 	{
 		m_window.setUserData(this);
 		m_window.setResizeCallback(resizeWindow);

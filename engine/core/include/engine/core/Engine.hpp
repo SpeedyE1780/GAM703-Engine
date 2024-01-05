@@ -4,6 +4,7 @@
 #include <engine/core/Config.hpp>
 #include <engine/core/Input.hpp>
 #include <engine/core/ResourceManager.hpp>
+#include <engine/core/Time.hpp>
 
 #include <engine/core-interfaces/IEngine.hpp>
 
@@ -23,8 +24,8 @@ namespace gam703::engine::core
 		const gui::Window& getWindow() const { return m_window; }
 		virtual core_interface::IInput* getInput() override { return &m_inputHandler; }
 		virtual const core_interface::IInput* getInput() const override { return &m_inputHandler; }
-		core_interface::Time* getTime() { return &m_time; }
-		const core_interface::Time* getTime() const { return &m_time; }
+		Time* getTime() { return &m_time; }
+		const Time* getTime() const { return &m_time; }
 		virtual core_interface::IResourceManager* getResourceManager() override { return &m_resourceManager; }
 		virtual const core_interface::IResourceManager* getResourceManager() const override { return &m_resourceManager; }
 
@@ -39,6 +40,7 @@ namespace gam703::engine::core
 
 		gui::Window m_window;
 		Input m_inputHandler;
+		Time m_time;
 		ResourceManager m_resourceManager{};
 		bool m_isRunning = false;
 	};

@@ -9,7 +9,6 @@ target_sources(${PROJECT_NAME} PRIVATE
 src/IEngine.cpp
 src/Scene.cpp
 src/SceneRenderer.cpp
-src/Time.cpp
 
 #HPP
 include/engine/core-interfaces/Config.hpp
@@ -20,7 +19,6 @@ include/engine/core-interfaces/IResourceManager.hpp
 include/engine/core-interfaces/Scene.hpp
 include/engine/core-interfaces/Scene.fwd.hpp
 include/engine/core-interfaces/SceneRenderer.hpp
-include/engine/core-interfaces/Time.hpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include/)
