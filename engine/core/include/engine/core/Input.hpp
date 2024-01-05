@@ -15,7 +15,7 @@ namespace gam703::engine::core
 	public:
 		Input(gui::Window* window);
 
-		bool isKeyPressed(int key);
+		bool isKeyPressed(int key) const { return m_window->isKeyPressed(key); }
 		void processMouseMovement(double mouseX, double mouseY);
 		void processMouseScroll(double scrollOffsetX, double scrollOffsetY);
 
@@ -26,7 +26,7 @@ namespace gam703::engine::core
 		double getMouseScrollOffsetY() const { return m_mouseScrollOffsetY; }
 
 		void resetMouseOffset();
-		void setCursorMode(int mode);
+		void setCursorMode(int mode) const { m_window->setCursorMode(mode); }
 
 	private:
 		gui::Window* m_window;
