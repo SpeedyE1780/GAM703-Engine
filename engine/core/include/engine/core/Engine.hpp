@@ -25,8 +25,8 @@ namespace gam703::engine::core
 		const Input* getInput() const { return &m_inputHandler; }
 		Time* getTime() { return &m_time; }
 		const Time* getTime() const { return &m_time; }
-		Scene* getScene() { return &m_scene; }
-		const Scene* getScene() const { return &m_scene; }
+		Scene& getScene() { return m_scene; }
+		const Scene& getScene() const { return m_scene; }
 		ResourceManager* getResourceManager() { return &m_resourceManager; }
 		const ResourceManager* getResourceManager() const { return &m_resourceManager; }
 

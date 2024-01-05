@@ -14,7 +14,7 @@ namespace gam703::engine::core
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
 				engine->getWindow().resizeWindow(width, height);
-				engine->getScene()->getSceneRenderer()->calculateProjectionMatrix(engine->getWindow().getAspectRatio());
+				engine->getScene().getSceneRenderer()->calculateProjectionMatrix(engine->getWindow().getAspectRatio());
 			}
 		}
 

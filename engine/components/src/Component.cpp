@@ -17,12 +17,12 @@ namespace gam703::engine::components
 		return m_transform.getEngine();
 	}
 
-	core::Scene* Component::getScene()
+	core::Scene& Component::getScene()
 	{
 		return m_transform.getScene();
 	}
 
-	const core::Scene* Component::getScene() const
+	const core::Scene& Component::getScene() const
 	{
 		return m_transform.getScene();
 	}
