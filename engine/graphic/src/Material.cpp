@@ -28,27 +28,27 @@ namespace gam703::engine::graphic
 
 	void Material::setDiffuseTexture(int diffuseIndex, int textureIndex) const
 	{
-		getShader()->setDiffuseSampler(diffuseIndex, textureIndex);
+		m_shader.setDiffuseSampler(diffuseIndex, textureIndex);
 	}
 
 	void Material::setSpecularTexture(int specularIndex, int textureIndex) const
 	{
-		getShader()->setSpecularSampler(specularIndex, textureIndex);
+		m_shader.setSpecularSampler(specularIndex, textureIndex);
 	}
 
 	void Material::setNormalTexture(int normalIndex, int textureIndex) const
 	{
-		getShader()->setNormalSampler(normalIndex, textureIndex);
+		m_shader.setNormalSampler(normalIndex, textureIndex);
 	}
 
 	void Material::setHeightTexture(int heightIndex, int textureIndex) const
 	{
-		getShader()->setHeightSampler(heightIndex, textureIndex);
+		m_shader.setHeightSampler(heightIndex, textureIndex);
 	}
 
 	void Material::setColor(const glm::vec3& color)
 	{
 		m_color = color;
-		getShader()->setColor(m_color);
+		m_shader.setColor(m_color);
 	}
 }

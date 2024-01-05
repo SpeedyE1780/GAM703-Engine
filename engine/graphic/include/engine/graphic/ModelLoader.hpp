@@ -14,7 +14,7 @@ namespace gam703::engine::graphic
 	class ENGINE_GRAPHIC_API ModelLoader
 	{
 	public:
-		ModelLoader(core::ResourceManager* resourceManager);
+		ModelLoader(core::ResourceManager& resourceManager);
 
 		Model* loadModel(const std::filesystem::path& path);
 		void processNode(std::vector<Mesh>& meshes, const aiNode* node, const aiScene* scene);
@@ -22,7 +22,7 @@ namespace gam703::engine::graphic
 		void loadMaterialTextures(std::vector<const Texture*>& textures, const aiMaterial* mat, aiTextureType type);
 
 	private:
-		core::ResourceManager* m_resourceManager;
+		core::ResourceManager& m_resourceManager;
 		std::filesystem::path m_currentDirectory;
 	};
 }

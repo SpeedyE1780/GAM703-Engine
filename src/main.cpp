@@ -39,7 +39,7 @@ static engine::components::Transform* addGroundPlane(engine::core::Engine& engin
 	auto* cube = engine.getScene().addTransform(position, glm::vec3(), glm::vec3(5.0f, 0.1f, 5.0f));
 	auto* renderer = cube->addComponent<engine::components::Renderer>(cubeModel, checkeredShader);
 	renderer->getMaterial().setColor(mainColor);
-	renderer->getMaterial().getShader()->setVec3("secondColor", secondColor);
+	renderer->getMaterial().getShader().setVec3("secondColor", secondColor);
 
 	return cube;
 }

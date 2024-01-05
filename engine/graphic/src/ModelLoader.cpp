@@ -52,7 +52,7 @@ namespace gam703::engine::graphic
 		}
 	}
 
-	ModelLoader::ModelLoader(core::ResourceManager* resourceManager) : m_resourceManager(resourceManager)
+	ModelLoader::ModelLoader(core::ResourceManager& resourceManager) : m_resourceManager(resourceManager)
 	{
 	}
 
@@ -132,7 +132,7 @@ namespace gam703::engine::graphic
 
 		if (textures.size() == 0)
 		{
-			textures.push_back(m_resourceManager->getWhiteTexture());
+			textures.push_back(m_resourceManager.getWhiteTexture());
 		}
 
 		return Mesh(vertices, indices, textures);
@@ -145,7 +145,7 @@ namespace gam703::engine::graphic
 			aiString str;
 			mat->GetTexture(type, i, &str);
 
-			textures.push_back(m_resourceManager->getTexture(m_currentDirectory / str.C_Str(), convertAITextureType(type)));
+			textures.push_back(m_resourceManager.getTexture(m_currentDirectory / str.C_Str(), convertAITextureType(type)));
 		}
 	}
 

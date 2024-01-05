@@ -23,8 +23,8 @@ namespace gam703::engine::graphic
 		void setSpecularTexture(int specularIndex, int textureIndex) const;
 		void setNormalTexture(int normalIndex, int textureIndex) const;
 		void setHeightTexture(int heightIndex, int textureIndex) const;
-		Shader* getShader() { return &m_shader; }
-		const Shader* getShader() const { return &m_shader; }
+		Shader& getShader() { return m_shader; }
+		const Shader& getShader() const { return m_shader; }
 
 	private:
 		glm::vec3 m_color = glm::vec3(1, 1, 1);
