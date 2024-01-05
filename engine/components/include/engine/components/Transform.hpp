@@ -58,8 +58,8 @@ namespace gam703::engine::components
 		core::Engine& getEngine() { return m_engine; }
 		const core::Engine& getEngine() const { return m_engine; }
 
-		core::Scene* getScene();
-		const core::Scene* getScene() const;
+		core::Scene& getScene();
+		const core::Scene& getScene() const;
 
 		template<typename ComponentType, typename... Args>
 		ComponentType* addComponent(Args&&... args)

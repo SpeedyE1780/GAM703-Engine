@@ -2,14 +2,9 @@
 
 namespace gam703::engine::core
 {
-	Input::Input(gui::Window* window) : m_window(window)
+	Input::Input(gui::Window& window) : m_window(window)
 	{
-		std::tie(m_lastMouseX, m_lastMouseY) = m_window->getMousePosition();
-	}
-
-	bool Input::isKeyPressed(int key)
-	{
-		return m_window->isKeyPressed(key);
+		std::tie(m_lastMouseX, m_lastMouseY) = m_window.getMousePosition();
 	}
 
 	void Input::processMouseMovement(double mouseX, double mouseY)
@@ -42,11 +37,6 @@ namespace gam703::engine::core
 		m_mouseOffsetY = 0;
 		m_mouseScrollOffsetX = 0;
 		m_mouseScrollOffsetY = 0;
-	}
-
-	void Input::setCursorMode(int mode)
-	{
-		m_window->setCursorMode(mode);
 	}
 
 } //gam703::engine::core

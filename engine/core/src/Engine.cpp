@@ -14,15 +14,13 @@ namespace gam703::engine::core
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
 				engine->getWindow().resizeWindow(width, height);
-				engine->getScene()->getSceneRenderer()->calculateProjectionMatrix(engine->getWindow().getAspectRatio());
+				engine->getScene().getSceneRenderer().calculateProjectionMatrix(engine->getWindow().getAspectRatio());
 			}
 		}
 
 		void processInput(Engine& engine)
 		{
-			auto* inputHandler = engine.getInput();
-
-			if (inputHandler->isKeyPressed(GLFW_KEY_ESCAPE))
+			if (engine.getInput().isKeyPressed(GLFW_KEY_ESCAPE))
 			{
 				engine.stop();
 			}
@@ -32,7 +30,7 @@ namespace gam703::engine::core
 		{
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
-				engine->getInput()->processMouseMovement(mouseX, mouseY);
+				engine->getInput().processMouseMovement(mouseX, mouseY);
 			}
 		}
 
@@ -40,7 +38,7 @@ namespace gam703::engine::core
 		{
 			if (auto* engine = static_cast<Engine*>(glfwGetWindowUserPointer(glfwWindow)))
 			{
-				engine->getInput()->processMouseScroll(xOffset, yOffset);
+				engine->getInput().processMouseScroll(xOffset, yOffset);
 			}
 		}
 
@@ -64,7 +62,7 @@ namespace gam703::engine::core
 		}
 	}
 
-	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height), m_inputHandler(&m_window), m_time(glfwGetTime()), m_scene(this)
+	Engine::Engine(const std::string& title, int width, int height) : m_window(title, width, height), m_inputHandler(m_window), m_time(glfwGetTime()), m_scene(*this)
 	{
 		m_window.setUserData(this);
 		m_window.setResizeCallback(resizeWindow);

@@ -23,7 +23,7 @@ namespace gam703::engine::components
 		if (m_fieldOfView != fieldOfView)
 		{
 			m_fieldOfView = fieldOfView;
-			getScene()->updateSceneProjectionMatrix();
+			getScene().updateSceneProjectionMatrix();
 		}
 	}
 

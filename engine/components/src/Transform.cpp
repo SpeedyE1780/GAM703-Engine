@@ -153,12 +153,12 @@ namespace gam703::engine::components
 		std::for_each(begin(m_behaviors), end(m_behaviors), [deltaTime](std::unique_ptr<Behavior>& behavior) { behavior->tick(deltaTime); });
 	}
 
-	core::Scene* Transform::getScene()
+	core::Scene& Transform::getScene()
 	{
 		return m_engine.getScene();
 	}
 
-	const core::Scene* Transform::getScene() const
+	const core::Scene& Transform::getScene() const
 	{
 		return m_engine.getScene();
 	}

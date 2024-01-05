@@ -24,8 +24,8 @@ namespace gam703::engine::components
 		core::Engine& getEngine();
 		const core::Engine& getEngine() const;
 
-		core::Scene* getScene();
-		const core::Scene* getScene() const;
+		core::Scene& getScene();
+		const core::Scene& getScene() const;
 
 	protected:
 		Transform& m_transform;

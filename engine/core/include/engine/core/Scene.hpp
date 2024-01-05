@@ -19,13 +19,13 @@ namespace gam703::engine::core
 	class ENGINE_CORE_API Scene
 	{
 	public:
-		Scene(Engine* engine);
+		Scene(Engine& engine);
 		~Scene() = default;
 		Scene(const Scene&) = delete;
 		Scene& operator=(const Scene&) = delete;
 
-		SceneRenderer* getSceneRenderer() { return &m_sceneRenderer; }
-		const SceneRenderer* getSceneRenderer() const { return &m_sceneRenderer; }
+		SceneRenderer& getSceneRenderer() { return m_sceneRenderer; }
+		const SceneRenderer& getSceneRenderer() const { return m_sceneRenderer; }
 
 		components::Transform* addTransform(const glm::vec3& position = glm::vec3(0, 0, 0), const glm::vec3& rotation = glm::vec3(0, 0, 0), const glm::vec3& scale = glm::vec3(1, 1, 1));
 		components::Transform* addTransform(const components::Transform* transform);
@@ -39,7 +39,7 @@ namespace gam703::engine::core
 		void updateSceneProjectionMatrix();
 
 	protected:
-		Engine* m_engine;
+		Engine& m_engine;
 		SceneRenderer m_sceneRenderer{};
 		std::vector<std::unique_ptr<components::Transform>> m_transforms{};
 	};

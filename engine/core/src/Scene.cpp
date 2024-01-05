@@ -6,13 +6,13 @@
 
 namespace gam703::engine::core
 {
-	Scene::Scene(Engine* engine) : m_engine(engine)
+	Scene::Scene(Engine& engine) : m_engine(engine)
 	{
 	}
 
 	components::Transform* Scene::addTransform(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale)
 	{
-		auto* transform = new components::Transform(*m_engine, position, rotation, scale);
+		auto* transform = new components::Transform(m_engine, position, rotation, scale);
 		m_transforms.push_back(std::unique_ptr<components::Transform>(transform));
 		return transform;
 	}
@@ -32,7 +32,7 @@ namespace gam703::engine::core
 	void Scene::setActiveCamera(components::Camera* activeCamera)
 	{
 		m_sceneRenderer.setActiveCamera(activeCamera);
-		m_sceneRenderer.calculateProjectionMatrix(m_engine->getAspectRatio());
+		m_sceneRenderer.calculateProjectionMatrix(m_engine.getWindow().getAspectRatio());
 	}
 
 	void Scene::updateScene(float deltaTime)
@@ -48,6 +48,6 @@ namespace gam703::engine::core
 
 	void Scene::updateSceneProjectionMatrix()
 	{
-		m_sceneRenderer.calculateProjectionMatrix(m_engine->getAspectRatio());
+		m_sceneRenderer.calculateProjectionMatrix(m_engine.getWindow().getAspectRatio());
 	}
 }
