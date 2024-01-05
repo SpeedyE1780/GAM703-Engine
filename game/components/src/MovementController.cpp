@@ -43,6 +43,11 @@ namespace gam703::game::components
 			m_transform.translate(glm::vec3(1.0f, 0.0f, 0.0f) * velocity);
 		}
 
+		if (inputHandler.isKeyPressed(GLFW_KEY_SPACE))
+		{
+			getEngine().getAudioEngine().play("resources/Audio/bell.wav");
+		}
+
 		float xoffset = inputHandler.getMouseOffsetX() * m_mouseSensitivity;
 		float yoffset = inputHandler.getMouseOffsetY() * m_mouseSensitivity;
 

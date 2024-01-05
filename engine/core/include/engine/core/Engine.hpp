@@ -1,6 +1,8 @@
 #ifndef GAM703_ENGINE_CORE_ENGINE_HPP
 #define GAM703_ENGINE_CORE_ENGINE_HPP
 
+#include <engine/audio/AudioEngine.hpp>
+
 #include <engine/core/Config.hpp>
 #include <engine/core/Input.hpp>
 #include <engine/core/ResourceManager.hpp>
@@ -29,6 +31,8 @@ namespace gam703::engine::core
 		const Scene& getScene() const { return m_scene; }
 		ResourceManager& getResourceManager() { return m_resourceManager; }
 		const ResourceManager& getResourceManager() const { return m_resourceManager; }
+		audio::AudioEngine& getAudioEngine() { return m_audioEngine; }
+		const audio::AudioEngine& getAudioEngine() const { return m_audioEngine; }
 
 		void start();
 		void stop();
@@ -42,6 +46,7 @@ namespace gam703::engine::core
 		Time m_time;
 		Scene m_scene;
 		ResourceManager m_resourceManager{};
+		audio::AudioEngine m_audioEngine{};
 		bool m_isRunning = false;
 	};
 }
