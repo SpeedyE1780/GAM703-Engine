@@ -28,8 +28,8 @@ static engine::components::Transform* addGroundPlane(engine::core::Engine& engin
 	const glm::vec3& mainColor = glm::vec3(1.0f, 1.0f, 1.0f),
 	const glm::vec3& secondColor = glm::vec3(0.0f, 0.0f, 0.0f))
 {
-	const engine::graphic::Model* backpackModel = engine.getResourceManager()->getModel("resources/Models/backpack/backpack.obj");
-	const engine::graphic::Model* cubeModel = engine.getResourceManager()->getModel("resources/Models/cube/cube.obj");
+	const engine::graphic::Model* backpackModel = engine.getResourceManager().getModel("resources/Models/backpack/backpack.obj");
+	const engine::graphic::Model* cubeModel = engine.getResourceManager().getModel("resources/Models/cube/cube.obj");
 	engine::graphic::Shader checkeredShader{ "resources/Shaders/Default.vert", "resources/Shaders/Checkermap.frag" };
 
 	auto* backpack = engine.getScene().addTransform(position + glm::vec3(0.0f, 2.1f, 0.0f));
@@ -52,7 +52,7 @@ int main()
 	auto& scene = engine.getScene();
 
 
-	auto* cubeModel = engine.getResourceManager()->getModel("resources/Models/cube/cube.obj");
+	auto* cubeModel = engine.getResourceManager().getModel("resources/Models/cube/cube.obj");
 	auto* playerTransform = scene.addTransform(glm::vec3(0.0f, 1.1f, 0.0f));
 	auto* renderer = playerTransform->addComponent<engine::components::Renderer>(cubeModel);
 	renderer->getMaterial().setColor(glm::vec3(0.0f, 0.0f, 1.0f));

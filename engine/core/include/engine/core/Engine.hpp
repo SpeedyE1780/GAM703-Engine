@@ -27,8 +27,8 @@ namespace gam703::engine::core
 		const Time& getTime() const { return m_time; }
 		Scene& getScene() { return m_scene; }
 		const Scene& getScene() const { return m_scene; }
-		ResourceManager* getResourceManager() { return &m_resourceManager; }
-		const ResourceManager* getResourceManager() const { return &m_resourceManager; }
+		ResourceManager& getResourceManager() { return m_resourceManager; }
+		const ResourceManager& getResourceManager() const { return m_resourceManager; }
 
 		float getAspectRatio() const { return m_window.getAspectRatio(); }
 
