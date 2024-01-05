@@ -32,7 +32,7 @@ namespace gam703::engine::core
 	void Scene::setActiveCamera(components::Camera* activeCamera)
 	{
 		m_sceneRenderer.setActiveCamera(activeCamera);
-		m_sceneRenderer.calculateProjectionMatrix(m_engine->getAspectRatio());
+		m_sceneRenderer.calculateProjectionMatrix(m_engine->getWindow().getAspectRatio());
 	}
 
 	void Scene::updateScene(float deltaTime)
@@ -48,6 +48,6 @@ namespace gam703::engine::core
 
 	void Scene::updateSceneProjectionMatrix()
 	{
-		m_sceneRenderer.calculateProjectionMatrix(m_engine->getAspectRatio());
+		m_sceneRenderer.calculateProjectionMatrix(m_engine->getWindow().getAspectRatio());
 	}
 }

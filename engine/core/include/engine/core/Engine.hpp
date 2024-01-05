@@ -30,8 +30,6 @@ namespace gam703::engine::core
 		ResourceManager& getResourceManager() { return m_resourceManager; }
 		const ResourceManager& getResourceManager() const { return m_resourceManager; }
 
-		float getAspectRatio() const { return m_window.getAspectRatio(); }
-
 		void start();
 		void stop();
 
