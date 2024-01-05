@@ -1,10 +1,14 @@
 #ifndef GAM703_GAME_COMPONENTS_CONFIG_HPP
 #define GAM703_GAME_COMPONENTS_CONFIG_HPP
 
+#ifdef GAME_COMPONENTS_DLL
 #ifdef GAME_COMPONENTS_EXPORT
 #define GAME_COMPONENTS_API __declspec(dllexport)
 #else
 #define GAME_COMPONENTS_API __declspec(dllimport)
 #endif
+#else
+#define GAME_COMPONENTS_API
+#endif // GAME_COMPONENTS_DLL
 
 #endif // GAM703_GAME_COMPONENTS_CONFIG_HPP

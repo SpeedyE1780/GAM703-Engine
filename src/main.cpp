@@ -1,12 +1,11 @@
-#include <engine/core-interfaces/Camera.hpp>
-#include <engine/core-interfaces/Renderer.hpp>
-#include <engine/core-interfaces/Transform.hpp>
-
 #include <engine/core/Engine.hpp>
 
+#include <engine/components/Camera.hpp>
 #include <engine/components/DirectionalLight.hpp>
 #include <engine/components/PointLight.hpp>
+#include <engine/components/Renderer.hpp>
 #include <engine/components/SpotLight.hpp>
+#include <engine/components/Transform.hpp>
 
 #include <engine/gui/Button.hpp>
 #include <engine/gui/Checkbox.hpp>
@@ -23,8 +22,8 @@
 namespace engine = gam703::engine;
 namespace game = gam703::game;
 
-static engine::core_interface::Transform* addGroundPlane(engine::core_interface::IEngine& engine,
-	engine::core_interface::Transform* player,
+static engine::components::Transform* addGroundPlane(engine::core_interface::IEngine& engine,
+	engine::components::Transform* player,
 	const glm::vec3& position = glm::vec3(0.0f, 0.0f, 0.0f),
 	const glm::vec3& mainColor = glm::vec3(1.0f, 1.0f, 1.0f),
 	const glm::vec3& secondColor = glm::vec3(0.0f, 0.0f, 0.0f))
@@ -34,11 +33,11 @@ static engine::core_interface::Transform* addGroundPlane(engine::core_interface:
 	engine::core_interface::Shader checkeredShader{ "resources/Shaders/Default.vert", "resources/Shaders/Checkermap.frag" };
 
 	auto* backpack = engine.getScene()->addTransform(position + glm::vec3(0.0f, 2.1f, 0.0f));
-	backpack->addComponent<engine::core_interface::Renderer>(backpackModel);
+	backpack->addComponent<engine::components::Renderer>(backpackModel);
 	backpack->addBehavior<game::components::Wonder>(player);
 
 	auto* cube = engine.getScene()->addTransform(position, glm::vec3(), glm::vec3(5.0f, 0.1f, 5.0f));
-	auto* renderer = cube->addComponent<engine::core_interface::Renderer>(cubeModel, checkeredShader);
+	auto* renderer = cube->addComponent<engine::components::Renderer>(cubeModel, checkeredShader);
 	renderer->getMaterial()->setColor(mainColor);
 	renderer->getMaterial()->getShader()->setVec3("secondColor", secondColor);
 
@@ -55,7 +54,7 @@ int main()
 
 	auto* cubeModel = engine.getResourceManager()->getModel("resources/Models/cube/cube.obj");
 	auto* playerTransform = scene->addTransform(glm::vec3(0.0f, 1.1f, 0.0f));
-	auto* renderer = playerTransform->addComponent<engine::core_interface::Renderer>(cubeModel);
+	auto* renderer = playerTransform->addComponent<engine::components::Renderer>(cubeModel);
 	renderer->getMaterial()->setColor(glm::vec3(0.0f, 0.0f, 1.0f));
 	playerTransform->addBehavior<game::components::MovementController>();
 
@@ -66,7 +65,7 @@ int main()
 	addGroundPlane(engine, playerTransform, glm::vec3(0.0f, 0.0f, -10.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	auto* cameraTransform = scene->addTransform(glm::vec3(0.0f, 20.0f, 20.0f), glm::vec3(glm::radians(-45.0f), glm::radians(-90.0f), 0));
-	auto* camera = cameraTransform->addComponent<engine::core_interface::Camera>();
+	auto* camera = cameraTransform->addComponent<engine::components::Camera>();
 	//cameraTransform->addComponent<gam703::game::components::MovementController>();
 
 	scene->setActiveCamera(camera);
@@ -75,11 +74,11 @@ int main()
 	auto* directionalLight = directionalLightTransform->addComponent < engine::components::DirectionalLight>(glm::vec3(1.0f, 1.0f, 1.0f), 1.0f);
 
 	auto* pointLightTransform = scene->addTransform(glm::vec3(0.0f, 30.0f, 0.0f));
-	pointLightTransform->addComponent<engine::core_interface::Renderer>(cubeModel);
+	pointLightTransform->addComponent<engine::components::Renderer>(cubeModel);
 	auto* pointLight = pointLightTransform->addComponent<engine::components::PointLight>(glm::vec3(1.0f, 0.0f, 0.0f), 5.0f, 5.0f);
 
 	auto* spotLightTransform = scene->addTransform(glm::vec3(10.0f, 30.0f, 0.0f), glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
-	spotLightTransform->addComponent < engine::core_interface::Renderer>(cubeModel);
+	spotLightTransform->addComponent < engine::components::Renderer>(cubeModel);
 	auto* spotLight = spotLightTransform->addComponent<engine::components::SpotLight>(glm::vec3(0.0f, 0.0f, 1.0f));
 
 	auto& window = engine.getWindow();

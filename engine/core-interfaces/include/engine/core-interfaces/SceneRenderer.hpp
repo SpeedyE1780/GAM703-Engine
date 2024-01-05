@@ -2,9 +2,9 @@
 #define GAM703_ENGINE_CORE_INTERFACES_ISCENE_RENDERER_HPP
 
 #include <engine/core-interfaces/Config.hpp>
-#include <engine/core-interfaces/Camera.hpp>
-#include <engine/core-interfaces/Renderer.hpp>
-#include <engine/core-interfaces/Light.hpp>
+#include <engine/components/Camera.hpp>
+#include <engine/components/Renderer.hpp>
+#include <engine/components/Light.hpp>
 
 #include <glm/glm.hpp>
 
@@ -15,8 +15,8 @@ namespace gam703::engine::core_interface
 	class ENGINE_CORE_INTERFACES_API SceneRenderer
 	{
 	public:
-		void addRenderer(Renderer* renderer);
-		void removeRenderer(Renderer* sceneObject);
+		void addRenderer(components::Renderer* renderer);
+		void removeRenderer(components::Renderer* sceneObject);
 
 		void calculateProjectionMatrix(float aspectRatio);
 		void render() const;
@@ -27,12 +27,12 @@ namespace gam703::engine::core_interface
 		void setAmbientLightIntensity(float intensity);
 		float getAmbientLightIntensity() const { return m_ambientLight.m_intensity; }
 
-		void addLightSource(Light* light);
-		void removeLightSource(Light* light);
+		void addLightSource(components::Light* light);
+		void removeLightSource(components::Light* light);
 
-		void setActiveCamera(Camera* camera) { m_activeCamera = camera; }
-		Camera* getActiveCamera() { return m_activeCamera; }
-		const Camera* getActiveCamera() const { return m_activeCamera; }
+		void setActiveCamera(components::Camera* camera) { m_activeCamera = camera; }
+		components::Camera* getActiveCamera() { return m_activeCamera; }
+		const components::Camera* getActiveCamera() const { return m_activeCamera; }
 
 	private:
 		struct AmbientLight
@@ -41,12 +41,12 @@ namespace gam703::engine::core_interface
 			float m_intensity = 0.1f;
 		};
 
-		Camera* m_activeCamera = nullptr;
+		components::Camera* m_activeCamera = nullptr;
 		mutable bool m_shouldUpdateAmbientLight = false;
 		AmbientLight m_ambientLight{};
 		glm::mat4 m_projectionMatrix = glm::mat4(1);
-		std::vector<Renderer*> m_sceneObjects{};
-		std::vector<Light*> m_lightSources{};
+		std::vector<components::Renderer*> m_sceneObjects{};
+		std::vector<components::Light*> m_lightSources{};
 	};
 }
 

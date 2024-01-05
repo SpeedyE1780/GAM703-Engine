@@ -1,4 +1,4 @@
-#include <engine/core-interfaces/Transform.hpp>
+#include <engine/components/Transform.hpp>
 
 #include <engine/utility/Math.hpp>
 
@@ -6,11 +6,11 @@
 
 namespace gam703::game::components
 {
-	Wonder::Wonder(engine::core_interface::Transform* transform, engine::core_interface::Transform* playerTransform) : engine::core_interface::Behavior(transform), m_origin(transform->getPosition()), m_player(playerTransform)
+	Wonder::Wonder(engine::components::Transform* transform, engine::components::Transform* playerTransform) : engine::components::Behavior(transform), m_origin(transform->getPosition()), m_player(playerTransform)
 	{
 	}
 
-	Wonder* Wonder::clone(engine::core_interface::Transform* transform) const
+	Wonder* Wonder::clone(engine::components::Transform* transform) const
 	{
 		return new Wonder(transform, m_player);
 	}

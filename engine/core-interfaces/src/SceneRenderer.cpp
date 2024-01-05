@@ -1,7 +1,8 @@
 #include <glad/glad.h>
 
+#include <engine/components/Transform.hpp>
+
 #include <engine/core-interfaces/SceneRenderer.hpp>
-#include <engine/core-interfaces/Transform.hpp>
 
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -41,7 +42,7 @@ namespace gam703::engine::core_interface
 		}
 	}
 
-	void SceneRenderer::addRenderer(Renderer* sceneObject)
+	void SceneRenderer::addRenderer(components::Renderer* sceneObject)
 	{
 		m_sceneObjects.push_back(sceneObject);
 		sceneObject->updateProjectionMatrix(m_projectionMatrix);
@@ -49,20 +50,20 @@ namespace gam703::engine::core_interface
 		sceneObject->getMaterial()->getShader()->setFloat("ambientLight.intensity", m_ambientLight.m_intensity);
 	}
 
-	void SceneRenderer::removeRenderer(Renderer* sceneObject)
+	void SceneRenderer::removeRenderer(components::Renderer* sceneObject)
 	{
-		auto newEnd = std::remove_if(begin(m_sceneObjects), end(m_sceneObjects), [sceneObject](Renderer* renderer) { return sceneObject == renderer; });
+		auto newEnd = std::remove_if(begin(m_sceneObjects), end(m_sceneObjects), [sceneObject](components::Renderer* renderer) { return sceneObject == renderer; });
 		m_sceneObjects.erase(newEnd, end(m_sceneObjects));
 	}
 
-	void SceneRenderer::addLightSource(Light* light)
+	void SceneRenderer::addLightSource(components::Light* light)
 	{
 		m_lightSources.push_back(light);
 	}
 
-	void SceneRenderer::removeLightSource(Light* light)
+	void SceneRenderer::removeLightSource(components::Light* light)
 	{
-		auto newEnd = std::remove_if(begin(m_lightSources), end(m_lightSources), [light](Light* lightSource) { return light == lightSource; });
+		auto newEnd = std::remove_if(begin(m_lightSources), end(m_lightSources), [light](components::Light* lightSource) { return light == lightSource; });
 		m_lightSources.erase(newEnd, end(m_lightSources));
 	}
 

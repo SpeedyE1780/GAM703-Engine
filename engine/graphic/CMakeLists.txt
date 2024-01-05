@@ -1,8 +1,8 @@
 project(engine-graphic)
 
-add_library(${PROJECT_NAME})
+add_library(${PROJECT_NAME} STATIC)
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE ENGINE_GRAPHIC_EXPORT)
+target_compile_definitions(${PROJECT_NAME} PRIVATE ENGINE_GRAPHIC_DLL ENGINE_GRAPHIC_EXPORT)
 
 target_sources(${PROJECT_NAME} PRIVATE
 #CPP
@@ -22,8 +22,8 @@ include/engine/graphic/Texture.hpp
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC engine-core-interfaces)
-target_link_libraries(${PROJECT_NAME} PRIVATE engine-utility)
 target_link_libraries(${PROJECT_NAME} PUBLIC glm)
+
 target_link_libraries(${PROJECT_NAME} PRIVATE glad)
 target_link_libraries(${PROJECT_NAME} PRIVATE assimp)
 target_link_libraries(${PROJECT_NAME} PRIVATE stb)

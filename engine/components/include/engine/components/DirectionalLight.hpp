@@ -2,16 +2,16 @@
 #define GAM703_ENGINE_COMPONENTS_DIRECTIONAL_LIGHTS_HPP
 
 #include <engine/components/Config.hpp>
-#include <engine/core-interfaces/Light.hpp>
+#include <engine/components/Light.hpp>
 
 namespace gam703::engine::components
 {
-	class ENGINE_COMPONENTS_API DirectionalLight : public core_interface::Light
+	class ENGINE_COMPONENTS_API DirectionalLight : public Light
 	{
 	public:
-		DirectionalLight(core_interface::Transform* transform, const glm::vec3& color, float intensity = 1.0f);
+		DirectionalLight(Transform* transform, const glm::vec3& color, float intensity = 1.0f);
 
-		virtual DirectionalLight* clone(core_interface::Transform* transform) const override;
+		virtual DirectionalLight* clone(Transform* transform) const override;
 
 		virtual void updateShaderLightInfo(const core_interface::Shader& shader) const override;
 	};

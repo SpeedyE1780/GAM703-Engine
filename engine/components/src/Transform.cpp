@@ -1,13 +1,13 @@
-#include <engine/core-interfaces/Transform.hpp>
+#include <engine/components/Transform.hpp>
 
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtx/euler_angles.hpp>
 
 #include <algorithm>
 
-namespace gam703::engine::core_interface
+namespace gam703::engine::components
 {
-	Transform::Transform(IEngine* engine, Scene* scene, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) :
+	Transform::Transform(core_interface::IEngine* engine, core_interface::Scene* scene, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) :
 		m_engine(engine),
 		m_scene(scene),
 		m_position(position),

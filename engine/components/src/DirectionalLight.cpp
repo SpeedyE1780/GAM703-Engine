@@ -1,14 +1,13 @@
 #include <engine/components/DirectionalLight.hpp>
-
-#include <engine/core-interfaces/Transform.hpp>
+#include <engine/components/Transform.hpp>
 
 namespace gam703::engine::components
 {
-	DirectionalLight::DirectionalLight(core_interface::Transform* transform, const glm::vec3& color, float intensity) : core_interface::Light(transform, color, intensity)
+	DirectionalLight::DirectionalLight(Transform* transform, const glm::vec3& color, float intensity) : Light(transform, color, intensity)
 	{
 	}
 
-	DirectionalLight* DirectionalLight::clone(core_interface::Transform* transform) const
+	DirectionalLight* DirectionalLight::clone(Transform* transform) const
 	{
 		return new DirectionalLight(transform, m_color, m_intensity);
 	}

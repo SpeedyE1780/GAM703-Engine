@@ -1,14 +1,14 @@
-#include <engine/core-interfaces/Renderer.hpp>
-#include <engine/core-interfaces/Transform.hpp>
+#include <engine/components/Renderer.hpp>
+#include <engine/components/Transform.hpp>
 
-namespace gam703::engine::core_interface
+namespace gam703::engine::components
 {
 	Renderer::Renderer(Transform* transform, const core_interface::IModel* model) : Component(transform), m_model(model)
 	{
 		getScene()->getSceneRenderer()->addRenderer(this);
 	}
 
-	Renderer::Renderer(Transform* transform, const core_interface::IModel* model, const Material& material) : Component(transform), m_model(model), m_material(material)
+	Renderer::Renderer(Transform* transform, const core_interface::IModel* model, const core_interface::Material& material) : Component(transform), m_model(model), m_material(material)
 	{
 		getScene()->getSceneRenderer()->addRenderer(this);
 	}
@@ -36,7 +36,7 @@ namespace gam703::engine::core_interface
 		m_model->draw(m_material);
 	}
 
-	Renderer* Renderer::clone(core_interface::Transform* transform) const
+	Renderer* Renderer::clone(Transform* transform) const
 	{
 		return new Renderer(transform, m_model, m_material);
 	}

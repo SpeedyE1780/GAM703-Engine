@@ -3,16 +3,16 @@
 
 #include <engine/components/Config.hpp>
 
-#include <engine/core-interfaces/Light.hpp>
+#include <engine/components/Light.hpp>
 
 namespace gam703::engine::components
 {
-	class ENGINE_COMPONENTS_API PointLight : public core_interface::Light
+	class ENGINE_COMPONENTS_API PointLight : public Light
 	{
 	public:
-		PointLight(core_interface::Transform* transform, const glm::vec3& color = glm::vec3(1.0f, 1.0f, 1.0f), float range = 5.0f, float intensity = 1.0f);
+		PointLight(Transform* transform, const glm::vec3& color = glm::vec3(1.0f, 1.0f, 1.0f), float range = 5.0f, float intensity = 1.0f);
 
-		virtual PointLight* clone(core_interface::Transform* transform) const override;
+		virtual PointLight* clone(Transform* transform) const override;
 
 		virtual void updateShaderLightInfo(const core_interface::Shader& shader) const override;
 

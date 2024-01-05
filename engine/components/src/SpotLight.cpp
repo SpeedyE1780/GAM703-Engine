@@ -1,15 +1,15 @@
-#include <engine/core-interfaces/Transform.hpp>
+#include <engine/components/Transform.hpp>
 #include <engine/components/SpotLight.hpp>
 
 namespace gam703::engine::components
 {
-	SpotLight::SpotLight(core_interface::Transform* transform, 
+	SpotLight::SpotLight(Transform* transform, 
 		const glm::vec3& color, float innerAngle, float outerAngle, float range, float intensity)
 		: Light(transform, color, intensity), m_innerAngle(innerAngle), m_outerAngle(outerAngle), m_range(range)
 	{
 	}
 
-	SpotLight* SpotLight::clone(core_interface::Transform* transform) const
+	SpotLight* SpotLight::clone(Transform* transform) const
 	{
 		return new SpotLight(transform, m_color, m_innerAngle, m_outerAngle, m_range, m_intensity);
 	}

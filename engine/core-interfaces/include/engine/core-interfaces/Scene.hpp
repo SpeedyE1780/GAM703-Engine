@@ -3,9 +3,9 @@
 
 #include <engine/core-interfaces/Config.hpp>
 #include <engine/core-interfaces/IEngine.fwd.hpp>
-#include <engine/core-interfaces/Transform.hpp>
+#include <engine/components/Transform.hpp>
 #include <engine/core-interfaces/SceneRenderer.hpp>
-#include <engine/core-interfaces/Camera.hpp>
+#include <engine/components/Camera.hpp>
 
 #include <glm/glm.hpp>
 
@@ -25,12 +25,12 @@ namespace gam703::engine::core_interface
 		SceneRenderer* getSceneRenderer() { return &m_sceneRenderer; }
 		const SceneRenderer* getSceneRenderer() const { return &m_sceneRenderer; }
 
-		Transform* addTransform(const glm::vec3& position = glm::vec3(0, 0, 0), const glm::vec3& rotation = glm::vec3(0, 0, 0), const glm::vec3& scale = glm::vec3(1, 1, 1));
-		Transform* addTransform(const Transform* transform);
+		components::Transform* addTransform(const glm::vec3& position = glm::vec3(0, 0, 0), const glm::vec3& rotation = glm::vec3(0, 0, 0), const glm::vec3& scale = glm::vec3(1, 1, 1));
+		components::Transform* addTransform(const components::Transform* transform);
 
-		Camera* getActiveCamera() { return m_sceneRenderer.getActiveCamera(); }
-		const Camera* getActiveCamera() const { return m_sceneRenderer.getActiveCamera(); }
-		void setActiveCamera(Camera* camera);
+		components::Camera* getActiveCamera() { return m_sceneRenderer.getActiveCamera(); }
+		const components::Camera* getActiveCamera() const { return m_sceneRenderer.getActiveCamera(); }
+		void setActiveCamera(components::Camera* camera);
 
 		void updateScene(float deltaTime);
 
@@ -39,7 +39,7 @@ namespace gam703::engine::core_interface
 	protected:
 		IEngine* m_engine;
 		SceneRenderer m_sceneRenderer{};
-		std::vector<std::unique_ptr<Transform>> m_transforms{};
+		std::vector<std::unique_ptr<components::Transform>> m_transforms{};
 	};
 }
 

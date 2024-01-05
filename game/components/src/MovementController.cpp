@@ -1,5 +1,5 @@
 #include <engine/core-interfaces/IEngine.hpp>
-#include <engine/core-interfaces/Transform.hpp>
+#include <engine/components/Transform.hpp>
 
 #include <game/components/MovementController.hpp>
 
@@ -7,13 +7,13 @@
 
 namespace gam703::game::components
 {
-	MovementController::MovementController(engine::core_interface::Transform* transform) : engine::core_interface::Behavior(transform),
+	MovementController::MovementController(engine::components::Transform* transform) : engine::components::Behavior(transform),
 		m_pitch(glm::degrees(transform->getRotation().x)),
 		m_yaw(glm::degrees(transform->getRotation().y))
 	{
 	}
 
-	MovementController* MovementController::clone(engine::core_interface::Transform* transform) const
+	MovementController* MovementController::clone(engine::components::Transform* transform) const
 	{
 		return new MovementController(transform);
 	}

@@ -1,18 +1,18 @@
 #ifndef GAM703_ENGINE_COMPONENTS_SPOT_LIGHT_HPP
 #define GAM703_ENGINE_COMPONENTS_SPOT_LIGHT_HPP
 
-#include <engine/core-interfaces/Light.hpp>
+#include <engine/components/Light.hpp>
 
 #include <engine/components/Config.hpp>
 
 namespace gam703::engine::components
 {
-	class ENGINE_COMPONENTS_API SpotLight : public core_interface::Light
+	class ENGINE_COMPONENTS_API SpotLight : public Light
 	{
 	public:
-		SpotLight(core_interface::Transform* transform, const glm::vec3& color, float innerAngle = 25.0f, float outerAngle = 45.0f, float range = 5.0f, float intensity = 1.0f);
+		SpotLight(Transform* transform, const glm::vec3& color, float innerAngle = 25.0f, float outerAngle = 45.0f, float range = 5.0f, float intensity = 1.0f);
 
-		virtual SpotLight* clone(core_interface::Transform* transform) const override;
+		virtual SpotLight* clone(Transform* transform) const override;
 
 		virtual void updateShaderLightInfo(const core_interface::Shader& shader) const override;
 

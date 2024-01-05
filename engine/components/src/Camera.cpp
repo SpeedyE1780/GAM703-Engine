@@ -1,11 +1,12 @@
-#include <engine/core-interfaces/Camera.hpp>
+#include <engine/components/Camera.hpp>
+#include <engine/components/Transform.hpp>
+
 #include <engine/core-interfaces/IEngine.hpp>
 #include <engine/core-interfaces/Scene.hpp>
-#include <engine/core-interfaces/Transform.hpp>
 
 #include <glm/gtc/matrix_transform.hpp>
 
-namespace gam703::engine::core_interface
+namespace gam703::engine::components
 {
 	constexpr float MinimumFOV = 1.0f;
 	constexpr float MaximumFOV = 120.0f;
