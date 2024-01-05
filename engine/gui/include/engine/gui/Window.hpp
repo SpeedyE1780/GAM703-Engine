@@ -2,7 +2,7 @@
 #define GAM703_ENGINE_GUI_WINDOW_HPP
 
 #include <engine/gui/Config.hpp>
-#include <engine/gui/IGUIElement.hpp>
+#include <engine/gui/GUIElement.hpp>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -42,7 +42,7 @@ namespace gam703::engine::gui
 		Element* addGUIElement(Args&&... args)
 		{
 			auto* element = new Element(std::forward<Args>(args)...);
-			m_elements.emplace_back(std::unique_ptr<Element>(element));
+			m_elements.emplace_back(std::unique_ptr<GUIElement>(element));
 			return element;
 		}
 
@@ -51,7 +51,7 @@ namespace gam703::engine::gui
 	private:
 		GLFWwindow* m_window;
 		const std::string m_title;
-		std::vector<std::unique_ptr<IGUIElement>> m_elements;
+		std::vector<std::unique_ptr<GUIElement>> m_elements;
 		int m_width;
 		int m_height;
 	};

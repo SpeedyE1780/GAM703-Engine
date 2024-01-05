@@ -2,16 +2,16 @@
 #define GAM703_ENGINE_GUI_CHECKBOX_HPP
 
 #include <engine/gui/Config.hpp>
-#include <engine/gui/IGUIElement.hpp>
+#include <engine/gui/GUIElement.hpp>
 
 #include <string>
 
 namespace gam703::engine::gui
 {
-	class ENGINE_GUI_API Checkbox : public IGUIElement
+	class ENGINE_GUI_API Checkbox : public GUIElement
 	{
 	public:
-		Checkbox(const std::string& content, bool initialState = false);
+		Checkbox(const std::string& label, bool initialState = false);
 
 		bool isChecked() const { return m_state; }
 
@@ -19,7 +19,6 @@ namespace gam703::engine::gui
 		virtual void renderElement() const override;
 
 	private:
-		std::string m_content;
 		mutable bool m_state;
 	};
 }

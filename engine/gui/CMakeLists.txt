@@ -11,7 +11,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 src/Button.cpp
 src/Checkbox.cpp
 src/ColorPicker.cpp
-src/IGUIElement.cpp
+src/GUIElement.cpp
 src/Slider.cpp
 src/Text.cpp
 src/Window.cpp
@@ -21,7 +21,7 @@ include/engine/gui/Button.hpp
 include/engine/gui/Config.hpp
 include/engine/gui/Checkbox.hpp
 include/engine/gui/ColorPicker.hpp
-include/engine/gui/IGUIElement.hpp
+include/engine/gui/GUIElement.hpp
 include/engine/gui/Slider.hpp
 include/engine/gui/Text.hpp
 include/engine/gui/Window.hpp

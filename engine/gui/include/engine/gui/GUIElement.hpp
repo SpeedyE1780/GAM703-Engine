@@ -3,18 +3,23 @@
 
 #include <engine/gui/Config.hpp>
 
+#include <string>
+
 namespace gam703::engine::gui
 {
-	class ENGINE_GUI_API IGUIElement
+	class ENGINE_GUI_API GUIElement
 	{
 	public:
-		virtual ~IGUIElement() = default;
+		GUIElement(const std::string& label);
+		virtual ~GUIElement() = default;
 
 		void shouldRenderOnNewLine(bool newLine) { m_shouldRenderOnNewLine = newLine; }
 		void render() const;
 
 	protected:
 		virtual void renderElement() const = 0;
+
+		std::string m_label{};
 
 	private:
 		bool m_shouldRenderOnNewLine = true;

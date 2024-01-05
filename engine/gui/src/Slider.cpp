@@ -6,7 +6,7 @@
 
 namespace gam703::engine::gui
 {
-	Slider::Slider(const std::string& content, float minimum, float maximum) : m_content(content), m_value(minimum), m_minimum(minimum), m_maximum(maximum)
+	Slider::Slider(const std::string& label, float minimum, float maximum) : GUIElement(label), m_value(minimum), m_minimum(minimum), m_maximum(maximum)
 	{
 		if (m_minimum >= m_maximum)
 		{
@@ -16,6 +16,6 @@ namespace gam703::engine::gui
 
 	void Slider::renderElement() const
 	{
-		ImGui::SliderFloat(m_content.c_str(), &m_value, m_minimum, m_maximum);
+		ImGui::SliderFloat(m_label.c_str(), &m_value, m_minimum, m_maximum);
 	}
 }

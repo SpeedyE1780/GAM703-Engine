@@ -4,13 +4,13 @@
 
 namespace gam703::engine::gui
 {
-	Button::Button(const std::string& content, std::function<void()> callback) : m_content(content), m_callback(move(callback))
+	Button::Button(const std::string& label, std::function<void()> callback) : GUIElement(label), m_callback(move(callback))
 	{
 	}
 
 	void Button::renderElement() const
 	{
-		if (ImGui::Button(m_content.c_str()))
+		if (ImGui::Button(m_label.c_str()))
 		{
 			m_callback();
 		}
