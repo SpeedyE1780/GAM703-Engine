@@ -1,61 +1,49 @@
-#include <engine/components/Transform.hpp>
+#include <engine/core-interfaces/Transform.hpp>
 #include <gtest/gtest.h>
 
 #include <string>
 
 namespace gam703::engine::components::tests
 {
-	class MockComponent1 : public core_interface::IComponent
+	class MockComponent1 : public core_interface::Component
 	{
 	public:
-		MockComponent1(core_interface::ITransform* transform) : core_interface::IComponent(transform)
+		MockComponent1(core_interface::Transform* transform) : core_interface::Component(transform)
 		{
 		}
 
-		virtual void tick(float deltaTime) override
-		{
-		}
-
-		virtual core_interface::IComponent* clone(core_interface::ITransform*) const override
+		virtual core_interface::Component* clone(core_interface::Transform*) const override
 		{
 			return nullptr;
 		}
 	};
 
-	class MockComponent2 : public core_interface::IComponent
+	class MockComponent2 : public core_interface::Component
 	{
 	public:
-		MockComponent2(core_interface::ITransform* transform) : core_interface::IComponent(transform)
+		MockComponent2(core_interface::Transform* transform) : core_interface::Component(transform)
 		{
 		}
 
-		virtual void tick(float deltaTime) override
-		{
-		}
-
-		virtual core_interface::IComponent* clone(core_interface::ITransform*) const override
+		virtual core_interface::Component* clone(core_interface::Transform*) const override
 		{
 			return nullptr;
 		}
 	};
 
-	class MockComponentWithArgs : public core_interface::IComponent
+	class MockComponentWithArgs : public core_interface::Component
 	{
 	public:
-		MockComponentWithArgs(core_interface::ITransform* transform) : core_interface::IComponent(transform)
+		MockComponentWithArgs(core_interface::Transform* transform) : core_interface::Component(transform)
 		{
 		}
 
-		MockComponentWithArgs(core_interface::ITransform* transform, const std::string& name, int id, float speed, double precision) : core_interface::IComponent(transform), m_name(name), m_id(id), m_speed(speed), m_precision(precision)
+		MockComponentWithArgs(core_interface::Transform* transform, const std::string& name, int id, float speed, double precision) : core_interface::Component(transform), m_name(name), m_id(id), m_speed(speed), m_precision(precision)
 		{
 
 		}
 
-		virtual void tick(float deltaTime) override
-		{
-		}
-
-		virtual core_interface::IComponent* clone(core_interface::ITransform*) const override
+		virtual core_interface::Component* clone(core_interface::Transform*) const override
 		{
 			return nullptr;
 		}
@@ -68,20 +56,22 @@ namespace gam703::engine::components::tests
 
 	TEST(ComponentsTest, AddComponent)
 	{
-		Transform transform{ nullptr, nullptr };
+		core_interface::Transform transform{ nullptr, nullptr };
 
 		ASSERT_EQ(0, transform.getComponentsSize());
+		ASSERT_EQ(0, transform.getBehaviorsSize());
 
 		auto* component = transform.addComponent<MockComponent1>();
 
 		EXPECT_TRUE(component != nullptr);
 		EXPECT_EQ(1, transform.getComponentsSize());
 		EXPECT_EQ(&transform, component->getTransform());
+		
 	}
 
 	TEST(ComponentsTest, AddComponentWithArgs)
 	{
-		Transform transform{ nullptr, nullptr };
+		core_interface::Transform transform{ nullptr, nullptr };
 		std::string name = "Hello World!";
 		int id = 20;
 		float speed = 32.23f;
@@ -116,7 +106,7 @@ namespace gam703::engine::components::tests
 
 	TEST(ComponentsTest, GetComponent)
 	{
-		Transform transform{ nullptr, nullptr };
+		core_interface::Transform transform{ nullptr, nullptr };
 
 		ASSERT_EQ(0, transform.getComponentsSize());
 		ASSERT_EQ(nullptr, transform.getComponent<MockComponent1>());
@@ -132,7 +122,7 @@ namespace gam703::engine::components::tests
 
 	TEST(ComponentsTest, RemoveComponent)
 	{
-		Transform transform{ nullptr, nullptr };
+		core_interface::Transform transform{ nullptr, nullptr };
 		transform.addComponent<MockComponent1>();
 		ASSERT_EQ(1, transform.getComponentsSize());
 
@@ -143,7 +133,7 @@ namespace gam703::engine::components::tests
 
 	TEST(ComponentsTest, MultipleComponents)
 	{
-		Transform transform{ nullptr, nullptr };
+		core_interface::Transform transform{ nullptr, nullptr };
 		ASSERT_EQ(0, transform.getComponentsSize());
 
 		auto* mock1 = transform.addComponent<MockComponent1>();

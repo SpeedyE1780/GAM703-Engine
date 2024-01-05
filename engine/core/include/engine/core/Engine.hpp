@@ -7,15 +7,13 @@
 #include <engine/core/Scene.hpp>
 #include <engine/core/Time.hpp>
 
-#include <engine/core-interfaces/IEngine.hpp>
-
 #include <engine/gui/Window.hpp>
 
 #include <string>
 
 namespace gam703::engine::core
 {
-	class ENGINE_CORE_API Engine : public core_interface::IEngine
+	class ENGINE_CORE_API Engine
 	{
 	public:
 		Engine(const std::string& title, int width, int height);
@@ -23,14 +21,16 @@ namespace gam703::engine::core
 
 		gui::Window& getWindow() { return m_window; }
 		const gui::Window& getWindow() const { return m_window; }
-		virtual core_interface::IInput* getInput() override { return &m_inputHandler; }
-		virtual const core_interface::IInput* getInput() const override { return &m_inputHandler; }
-		core_interface::ITime* getTime() { return &m_time; }
-		const core_interface::ITime* getTime() const { return &m_time; }
-		virtual core_interface::IResourceManager* getResourceManager() override { return &m_resourceManager; }
-		virtual const core_interface::IResourceManager* getResourceManager() const override { return &m_resourceManager; }
-		virtual core_interface::IScene* getScene() override { return &m_scene; }
-		virtual const core_interface::IScene* getScene() const override { return &m_scene; }
+		Input* getInput() { return &m_inputHandler; }
+		const Input* getInput() const { return &m_inputHandler; }
+		Time* getTime() { return &m_time; }
+		const Time* getTime() const { return &m_time; }
+		Scene* getScene() { return &m_scene; }
+		const Scene* getScene() const { return &m_scene; }
+		ResourceManager* getResourceManager() { return &m_resourceManager; }
+		const ResourceManager* getResourceManager() const { return &m_resourceManager; }
+
+		float getAspectRatio() const { return m_window.getAspectRatio(); }
 
 		void start();
 		void stop();

@@ -2,6 +2,8 @@
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
 
+#include <engine/core/ResourceManager.hpp>
+
 #include <engine/graphic/ModelLoader.hpp>
 
 #include <glm/glm.hpp>
@@ -22,35 +24,35 @@ namespace gam703::engine::graphic
 			return glm::vec3(aiVector.x, aiVector.y, aiVector.z);
 		}
 
-		core_interface::ITexture::TextureType convertAITextureType(aiTextureType type)
+		Texture::TextureType convertAITextureType(aiTextureType type)
 		{
 			switch (type)
 			{
 			case aiTextureType_DIFFUSE:
 			{
-				return core_interface::ITexture::TextureType::Diffuse;
+				return Texture::TextureType::Diffuse;
 			}
 			case aiTextureType_SPECULAR:
 			{
-				return core_interface::ITexture::TextureType::Specular;
+				return Texture::TextureType::Specular;
 			}
 			case aiTextureType_HEIGHT:
 			{
-				return core_interface::ITexture::TextureType::Height;
+				return Texture::TextureType::Height;
 			}
 			case aiTextureType_AMBIENT:
 			{
-				return core_interface::ITexture::TextureType::Normal;
+				return Texture::TextureType::Normal;
 			}
 			default:
 			{
-				return core_interface::ITexture::TextureType::Undefined;
+				return Texture::TextureType::Undefined;
 			}
 			}
 		}
 	}
 
-	ModelLoader::ModelLoader(core_interface::IResourceManager* resourceManager) : m_resourceManager(resourceManager)
+	ModelLoader::ModelLoader(core::ResourceManager* resourceManager) : m_resourceManager(resourceManager)
 	{
 	}
 
@@ -122,7 +124,7 @@ namespace gam703::engine::graphic
 		}
 
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-		std::vector<const core_interface::ITexture*> textures{};
+		std::vector<const Texture*> textures{};
 		loadMaterialTextures(textures, material, aiTextureType_DIFFUSE);
 		loadMaterialTextures(textures, material, aiTextureType_SPECULAR);
 		loadMaterialTextures(textures, material, aiTextureType_HEIGHT);
@@ -136,7 +138,7 @@ namespace gam703::engine::graphic
 		return Mesh(vertices, indices, textures);
 	}
 
-	void ModelLoader::loadMaterialTextures(std::vector<const core_interface::ITexture*>& textures, const aiMaterial* mat, aiTextureType type)
+	void ModelLoader::loadMaterialTextures(std::vector<const Texture*>& textures, const aiMaterial* mat, aiTextureType type)
 	{
 		for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
 		{

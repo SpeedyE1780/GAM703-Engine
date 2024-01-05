@@ -10,7 +10,7 @@ namespace gam703::engine::core
 	{
 	}
 
-	const core_interface::ITexture* ResourceManager::getTexture(const std::filesystem::path& path, graphic::Texture::TextureType type)
+	const graphic::Texture* ResourceManager::getTexture(const std::filesystem::path& path, graphic::Texture::TextureType type)
 	{
 		if (auto texture = m_textures.find(path); texture != m_textures.end())
 		{
@@ -31,7 +31,7 @@ namespace gam703::engine::core
 		return 0;
 	}
 
-	const core_interface::ITexture* ResourceManager::getWhiteTexture()
+	const graphic::Texture* ResourceManager::getWhiteTexture()
 	{
 		if (auto texture = m_textures.find("__WhiteTexture__"); texture != m_textures.end())
 		{
@@ -52,7 +52,7 @@ namespace gam703::engine::core
 		return 0;
 	}
 
-	const core_interface::IModel* ResourceManager::getModel(const std::filesystem::path& path)
+	const graphic::Model* ResourceManager::getModel(const std::filesystem::path& path)
 	{
 		if (auto model = m_models.find(path); model != m_models.end())
 		{

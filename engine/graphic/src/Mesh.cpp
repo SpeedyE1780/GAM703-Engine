@@ -1,16 +1,15 @@
 #include <engine/graphic/Mesh.hpp>
-#include <engine/graphic/Shader.hpp>
 
 #include <glad/glad.h>
 
 namespace gam703::engine::graphic
 {
-	Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const std::vector<const core_interface::ITexture*>& textures) : m_vertices(vertices), m_indices(indices), m_textures(textures)
+	Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const std::vector<const Texture*>& textures) : m_vertices(vertices), m_indices(indices), m_textures(textures)
 	{
 		setupMesh();
 	}
 
-	void Mesh::draw(const core_interface::IMaterial& material) const
+	void Mesh::draw(const Material& material) const
 	{
 		unsigned int diffuseIndex = 1;
 		unsigned int specularIndex = 1;
@@ -23,31 +22,31 @@ namespace gam703::engine::graphic
 
 			switch (m_textures[i]->getType())
 			{
-			case core_interface::ITexture::TextureType::Diffuse:
+			case Texture::TextureType::Diffuse:
 			{
 				material.setDiffuseTexture(diffuseIndex, i);
 				diffuseIndex++;
 				break;
 			}
-			case core_interface::ITexture::TextureType::Specular:
+			case Texture::TextureType::Specular:
 			{
 				material.setSpecularTexture(specularIndex, i);
 				specularIndex++;
 				break;
 			}
-			case core_interface::ITexture::TextureType::Normal:
+			case Texture::TextureType::Normal:
 			{
 				material.setNormalTexture(normalIndex, i);
 				normalIndex++;
 				break;
 			}
-			case core_interface::ITexture::TextureType::Height:
+			case Texture::TextureType::Height:
 			{
 				material.setHeightTexture(heightIndex, i);
 				heightIndex++;
 				break;
 			}
-			case core_interface::ITexture::TextureType::Undefined:
+			case Texture::TextureType::Undefined:
 			{
 				break;
 			}

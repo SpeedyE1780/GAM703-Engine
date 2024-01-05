@@ -1,27 +1,21 @@
 #include <engine/components/Camera.hpp>
+#include <engine/components/Transform.hpp>
 
-#include <engine/core-interfaces/IEngine.hpp>
-#include <engine/core-interfaces/ITransform.hpp>
+#include <engine/core/Scene.hpp>
 
-#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 namespace gam703::engine::components
 {
 	constexpr float MinimumFOV = 1.0f;
 	constexpr float MaximumFOV = 120.0f;
 
-	Camera::Camera(core_interface::ITransform* transform) : core_interface::ICamera(transform)
+	Camera::Camera(Transform* transform) : Component(transform)
 	{
 	}
 
-	core_interface::IComponent* Camera::clone(core_interface::ITransform* transform) const
+	Camera::Camera(Transform* transform, float fieldOfView) : Component(transform), m_fieldOfView(fieldOfView)
 	{
-		return new Camera(transform);
-	}
-
-	glm::mat4 Camera::GetViewMatrix() const
-	{
-		return glm::lookAt(m_transform->getPosition(), m_transform->getPosition() + m_transform->getFront(), m_transform->getUp());
 	}
 
 	void Camera::setFieldOfView(float fieldOfView)
@@ -33,11 +27,13 @@ namespace gam703::engine::components
 		}
 	}
 
-	void Camera::tick(float deltaTime)
+	glm::mat4 Camera::getViewMatrix() const
 	{
-		if (auto* inputHandler = getEngine()->getInput())
-		{
-			setFieldOfView(glm::clamp(m_fieldOfView - static_cast<float>(inputHandler->getMouseScrollOffsetY()), MinimumFOV, MaximumFOV));
-		}
+		return glm::lookAt(m_transform->getPosition(), m_transform->getPosition() + m_transform->getFront(), m_transform->getUp());
 	}
-}// gam703::engine::components
+
+	Camera* Camera::clone(Transform* transform) const
+	{
+		return new Camera(transform, m_fieldOfView);
+	}
+}

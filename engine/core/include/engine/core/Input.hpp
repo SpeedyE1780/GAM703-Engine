@@ -3,8 +3,6 @@
 
 #include <engine/core/Config.hpp>
 
-#include <engine/core-interfaces/IInput.hpp>
-
 #include <engine/gui/Window.hpp>
 
 #include <glad/glad.h>
@@ -12,23 +10,23 @@
 
 namespace gam703::engine::core
 {
-	class ENGINE_CORE_API Input : public core_interface::IInput
+	class ENGINE_CORE_API Input
 	{
 	public:
 		Input(gui::Window* window);
 
-		virtual bool isKeyPressed(int key) override;
-		virtual void processMouseMovement(double mouseX, double mouseY) override;
-		virtual void processMouseScroll(double scrollOffsetX, double scrollOffsetY) override;
+		bool isKeyPressed(int key);
+		void processMouseMovement(double mouseX, double mouseY);
+		void processMouseScroll(double scrollOffsetX, double scrollOffsetY);
 
-		virtual double getMouseOffsetX() const override { return m_mouseOffsetX; }
-		virtual double getMouseOffsetY() const { return m_mouseOffsetY; }
+		double getMouseOffsetX() const { return m_mouseOffsetX; }
+		double getMouseOffsetY() const { return m_mouseOffsetY; }
 
-		virtual double getMouseScrollOffsetX() const override { return m_mouseScrollOffsetX; }
-		virtual double getMouseScrollOffsetY() const override { return m_mouseScrollOffsetY; }
+		double getMouseScrollOffsetX() const { return m_mouseScrollOffsetX; }
+		double getMouseScrollOffsetY() const { return m_mouseScrollOffsetY; }
 
-		virtual void resetMouseOffset() override;
-		virtual void setCursorMode(int mode) override;
+		void resetMouseOffset();
+		void setCursorMode(int mode);
 
 	private:
 		gui::Window* m_window;

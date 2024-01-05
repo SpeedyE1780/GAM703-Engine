@@ -1,16 +1,14 @@
 #include <engine/components/Renderer.hpp>
-
-#include <engine/core-interfaces/IEngine.hpp>
-#include <engine/core-interfaces/ITransform.hpp>
+#include <engine/components/Transform.hpp>
 
 namespace gam703::engine::components
 {
-	Renderer::Renderer(core_interface::ITransform* transform, const core_interface::IModel* model) : core_interface::IRenderer(transform), m_model(model), m_material()
+	Renderer::Renderer(Transform* transform, const graphic::Model* model) : Component(transform), m_model(model)
 	{
 		getScene()->getSceneRenderer()->addRenderer(this);
 	}
 
-	Renderer::Renderer(core_interface::ITransform* transform, const core_interface::IModel* model, const graphic::Material& material) : core_interface::IRenderer(transform), m_model(model), m_material(material)
+	Renderer::Renderer(Transform* transform, const graphic::Model* model, const graphic::Material& material) : Component(transform), m_model(model), m_material(material)
 	{
 		getScene()->getSceneRenderer()->addRenderer(this);
 	}
@@ -18,15 +16,6 @@ namespace gam703::engine::components
 	Renderer::~Renderer()
 	{
 		getScene()->getSceneRenderer()->removeRenderer(this);
-	}
-
-	void Renderer::tick(float /*deltaTime*/)
-	{
-	}
-
-	core_interface::IComponent* Renderer::clone(core_interface::ITransform* transform) const
-	{
-		return new Renderer(transform, m_model, m_material);
 	}
 
 	void Renderer::updateProjectionMatrix(const glm::mat4& projectionMatrix) const
@@ -45,5 +34,10 @@ namespace gam703::engine::components
 		shader->setVec3("cameraPosition", cameraPosition);
 
 		m_model->draw(m_material);
+	}
+
+	Renderer* Renderer::clone(Transform* transform) const
+	{
+		return new Renderer(transform, m_model, m_material);
 	}
 }

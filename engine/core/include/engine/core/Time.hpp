@@ -1,25 +1,24 @@
 #ifndef GAM703_ENGINE_CORE_TIME_HPP
 #define GAM703_ENGINE_CORE_TIME_HPP
 
-#include <engine/core-interfaces/ITime.hpp>
-
 #include <engine/core/Config.hpp>
 
 namespace gam703::engine::core
 {
-	class ENGINE_CORE_API Time : public core_interface::ITime
+	class ENGINE_CORE_API Time
 	{
 	public:
 		Time(double time, double timeScale = 1);
+		~Time() = default;
 
-		virtual void processTime(double time) override;
+		void processTime(double time);
 
-		virtual double getTime() const override { return m_time; }
-		virtual double getDeltaTime() const override { return m_deltaTime * m_timeScale; }
-		virtual double getUnscaledDeltaTime() const override { return m_deltaTime; }
-		virtual double getTimeScale() const override { return m_timeScale; }
+		double getTime() const { return m_time; }
+		double getDeltaTime() const { return m_deltaTime * m_timeScale; }
+		double getUnscaledDeltaTime() const { return m_deltaTime; }
+		double getTimeScale() const { return m_timeScale; }
 
-		virtual void setTimeScale(double timeScale) override { m_timeScale = timeScale; }
+		void setTimeScale(double timeScale) { m_timeScale = timeScale; }
 
 	private:
 		double m_time = 0;

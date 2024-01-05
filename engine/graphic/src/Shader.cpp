@@ -1,10 +1,10 @@
 #include <engine/graphic/Shader.hpp>
 
+#include <engine/utility/File.hpp>
+
 #include <glad/glad.h>
 
 #include <glm/gtc/type_ptr.hpp>
-
-#include <engine/utility/File.hpp>
 
 #include <iostream>
 
@@ -80,33 +80,6 @@ namespace gam703::engine::graphic
 		glDeleteProgram(m_id);
 		createShaderProgram();
 		return *this;
-	}
-
-	void Shader::createShaderProgram()
-	{
-		std::string vertexCode = utility::readFile(m_vertexShaderPath);
-		std::string fragmentCode = utility::readFile(m_fragmentShaderPath);
-
-		unsigned int vertex = createVertexShader(vertexCode);
-		unsigned int fragment = createFragmentShader(fragmentCode);
-
-		m_id = glCreateProgram();
-		glAttachShader(m_id, vertex);
-		glAttachShader(m_id, fragment);
-		glLinkProgram(m_id);
-		checkCompileErrors(m_id, "PROGRAM");
-
-		glDeleteShader(vertex);
-		glDeleteShader(fragment);
-
-		setDefaultValues();
-	}
-
-	void Shader::setDefaultValues() const
-	{
-		setColor(glm::vec3(1.0f, 1.0f, 1.0f));
-		setFloat("material.shininess", 32.0f);
-		setFloat("material.specularStrength", 0.5f);
 	}
 
 	Shader::~Shader()
@@ -219,6 +192,39 @@ namespace gam703::engine::graphic
 	{
 		use();
 		setVec3("material.color", color);
+	}
+
+	void Shader::setAmbientLight(const glm::vec3& color, float intensity) const
+	{
+		setVec3("ambientLight.color", color);
+		setFloat("ambientLight.intensity", intensity);
+	}
+
+	void Shader::createShaderProgram()
+	{
+		std::string vertexCode = utility::readFile(m_vertexShaderPath);
+		std::string fragmentCode = utility::readFile(m_fragmentShaderPath);
+
+		unsigned int vertex = createVertexShader(vertexCode);
+		unsigned int fragment = createFragmentShader(fragmentCode);
+
+		m_id = glCreateProgram();
+		glAttachShader(m_id, vertex);
+		glAttachShader(m_id, fragment);
+		glLinkProgram(m_id);
+		checkCompileErrors(m_id, "PROGRAM");
+
+		glDeleteShader(vertex);
+		glDeleteShader(fragment);
+
+		setDefaultValues();
+	}
+
+	void Shader::setDefaultValues() const
+	{
+		setColor(glm::vec3(1.0f, 1.0f, 1.0f));
+		setFloat("material.shininess", 32.0f);
+		setFloat("material.specularStrength", 0.5f);
 	}
 
 	Shader createDefaultShader()

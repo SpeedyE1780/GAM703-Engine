@@ -1,19 +1,18 @@
 #include <engine/components/DirectionalLight.hpp>
-
-#include <engine/core-interfaces/ITransform.hpp>
+#include <engine/components/Transform.hpp>
 
 namespace gam703::engine::components
 {
-	DirectionalLight::DirectionalLight(core_interface::ITransform* transform, const glm::vec3& color, float intensity) : core_interface::ILight(transform, color, intensity)
+	DirectionalLight::DirectionalLight(Transform* transform, const glm::vec3& color, float intensity) : Light(transform, color, intensity)
 	{
 	}
 
-	core_interface::IComponent* DirectionalLight::clone(core_interface::ITransform* transform) const
+	DirectionalLight* DirectionalLight::clone(Transform* transform) const
 	{
 		return new DirectionalLight(transform, m_color, m_intensity);
 	}
 
-	void DirectionalLight::updateShaderLightInfo(const core_interface::IShader& shader) const
+	void DirectionalLight::updateShaderLightInfo(const graphic::Shader& shader) const
 	{
 		shader.setVec3("directionalLight.color", m_color);
 		shader.setFloat("directionalLight.intensity", m_intensity);

@@ -1,18 +1,18 @@
 #ifndef GAM703_GAME_COMPONENTS_MOVEMENT_CONTROLLER_HPP
 #define GAM703_GAME_COMPONENTS_MOVEMENT_CONTROLLER_HPP
 
-#include <engine/core-interfaces/ICamera.hpp>
+#include <engine/components/Behavior.hpp>
 
 #include <game/components/Config.hpp>
 
 namespace gam703::game::components
 {
-	class GAME_COMPONENTS_API MovementController : public engine::core_interface::IComponent
+	class GAME_COMPONENTS_API MovementController : public engine::components::Behavior
 	{
 	public:
-		MovementController(engine::core_interface::ITransform* transform);
+		MovementController(engine::components::Transform* transform);
 
-		virtual engine::core_interface::IComponent* clone(engine::core_interface::ITransform* transform) const override;
+		virtual MovementController* clone(engine::components::Transform* transform) const override;
 
 		float getYaw() const { return m_yaw; }
 		float getPitch() const { return m_pitch; }

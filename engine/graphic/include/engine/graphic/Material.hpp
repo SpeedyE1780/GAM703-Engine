@@ -1,14 +1,14 @@
 #ifndef GAM703_ENGINE_GRAPHIC_MATERIAL_HPP
 #define GAM703_ENGINE_GRAPHIC_MATERIAL_HPP
 
-#include <engine/core-interfaces/IMaterial.hpp>
-
 #include <engine/graphic/Config.hpp>
 #include <engine/graphic/Shader.hpp>
 
+#include <glm/glm.hpp>
+
 namespace gam703::engine::graphic
 {
-	class ENGINE_GRAPHIC_API Material : public core_interface::IMaterial
+	class ENGINE_GRAPHIC_API Material
 	{
 	public:
 		Material();
@@ -16,18 +16,19 @@ namespace gam703::engine::graphic
 		Material(const Material& material);
 		Material& operator=(const Material& material);
 
-		virtual void setDiffuseTexture(int diffuseIndex, int textureIndex) const override;
-		virtual void setSpecularTexture(int specularIndex, int textureIndex) const override;
-		virtual void setNormalTexture(int normalIndex, int textureIndex) const override;
-		virtual void setHeightTexture(int heightIndex, int textureIndex) const override;
-		virtual void setColor(const glm::vec3& color) override;
+		const glm::vec3& getColor() const { return m_color; }
+		void setColor(const glm::vec3& color);
 
-		virtual core_interface::IShader* getShader() override { return &m_shader; }
-		virtual const core_interface::IShader* getShader() const override { return &m_shader; }
+		void setDiffuseTexture(int diffuseIndex, int textureIndex) const;
+		void setSpecularTexture(int specularIndex, int textureIndex) const;
+		void setNormalTexture(int normalIndex, int textureIndex) const;
+		void setHeightTexture(int heightIndex, int textureIndex) const;
+		Shader* getShader() { return &m_shader; }
+		const Shader* getShader() const { return &m_shader; }
 
 	private:
-		Shader m_shader;
 		glm::vec3 m_color = glm::vec3(1, 1, 1);
+		Shader m_shader;
 	};
 }
 

@@ -3,18 +3,18 @@
 
 namespace gam703::engine::components
 {
-	SpotLight::SpotLight(core_interface::ITransform* transform, 
+	SpotLight::SpotLight(Transform* transform, 
 		const glm::vec3& color, float innerAngle, float outerAngle, float range, float intensity)
-		: ILight(transform, color, intensity), m_innerAngle(innerAngle), m_outerAngle(outerAngle), m_range(range)
+		: Light(transform, color, intensity), m_innerAngle(innerAngle), m_outerAngle(outerAngle), m_range(range)
 	{
 	}
 
-	core_interface::IComponent* SpotLight::clone(core_interface::ITransform* transform) const
+	SpotLight* SpotLight::clone(Transform* transform) const
 	{
 		return new SpotLight(transform, m_color, m_innerAngle, m_outerAngle, m_range, m_intensity);
 	}
 
-	void SpotLight::updateShaderLightInfo(const core_interface::IShader& shader) const
+	void SpotLight::updateShaderLightInfo(const graphic::Shader& shader) const
 	{
 		shader.setVec3("spotLight.position", m_transform->getPosition());
 		shader.setVec3("spotLight.direction", m_transform->getFront());

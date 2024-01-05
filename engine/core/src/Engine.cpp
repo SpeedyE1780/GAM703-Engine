@@ -1,4 +1,5 @@
 #include <engine/core/Engine.hpp>
+#include <engine/core/Scene.hpp>
 
 #include <imgui/imconfig.h>
 #include <imgui/backends/imgui_impl_glfw.h>

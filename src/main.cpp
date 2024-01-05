@@ -22,19 +22,19 @@
 namespace engine = gam703::engine;
 namespace game = gam703::game;
 
-static engine::core_interface::ITransform* addGroundPlane(engine::core_interface::IEngine& engine,
-	engine::core_interface::ITransform* player,
+static engine::components::Transform* addGroundPlane(engine::core::Engine& engine,
+	engine::components::Transform* player,
 	const glm::vec3& position = glm::vec3(0.0f, 0.0f, 0.0f),
 	const glm::vec3& mainColor = glm::vec3(1.0f, 1.0f, 1.0f),
 	const glm::vec3& secondColor = glm::vec3(0.0f, 0.0f, 0.0f))
 {
-	const engine::core_interface::IModel* backpackModel = engine.getResourceManager()->getModel("resources/Models/backpack/backpack.obj");
-	const engine::core_interface::IModel* cubeModel = engine.getResourceManager()->getModel("resources/Models/cube/cube.obj");
+	const engine::graphic::Model* backpackModel = engine.getResourceManager()->getModel("resources/Models/backpack/backpack.obj");
+	const engine::graphic::Model* cubeModel = engine.getResourceManager()->getModel("resources/Models/cube/cube.obj");
 	engine::graphic::Shader checkeredShader{ "resources/Shaders/Default.vert", "resources/Shaders/Checkermap.frag" };
 
 	auto* backpack = engine.getScene()->addTransform(position + glm::vec3(0.0f, 2.1f, 0.0f));
 	backpack->addComponent<engine::components::Renderer>(backpackModel);
-	backpack->addComponent<game::components::Wonder>(player);
+	backpack->addBehavior<game::components::Wonder>(player);
 
 	auto* cube = engine.getScene()->addTransform(position, glm::vec3(), glm::vec3(5.0f, 0.1f, 5.0f));
 	auto* renderer = cube->addComponent<engine::components::Renderer>(cubeModel, checkeredShader);
@@ -56,7 +56,7 @@ int main()
 	auto* playerTransform = scene->addTransform(glm::vec3(0.0f, 1.1f, 0.0f));
 	auto* renderer = playerTransform->addComponent<engine::components::Renderer>(cubeModel);
 	renderer->getMaterial()->setColor(glm::vec3(0.0f, 0.0f, 1.0f));
-	playerTransform->addComponent<game::components::MovementController>();
+	playerTransform->addBehavior<game::components::MovementController>();
 
 	addGroundPlane(engine, playerTransform);
 	addGroundPlane(engine, playerTransform, glm::vec3(10.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -73,8 +73,6 @@ int main()
 	auto* directionalLightTransform = scene->addTransform(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(glm::radians(-90.f), 0.0f, 0.0f));
 	auto* directionalLight = directionalLightTransform->addComponent < engine::components::DirectionalLight>(glm::vec3(1.0f, 1.0f, 1.0f), 1.0f);
 
-	scene->getSceneRenderer()->setDirectionalLight(directionalLight);
-
 	auto* pointLightTransform = scene->addTransform(glm::vec3(0.0f, 30.0f, 0.0f));
 	pointLightTransform->addComponent<engine::components::Renderer>(cubeModel);
 	auto* pointLight = pointLightTransform->addComponent<engine::components::PointLight>(glm::vec3(1.0f, 0.0f, 0.0f), 5.0f, 5.0f);
@@ -82,9 +80,6 @@ int main()
 	auto* spotLightTransform = scene->addTransform(glm::vec3(10.0f, 30.0f, 0.0f), glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
 	spotLightTransform->addComponent < engine::components::Renderer>(cubeModel);
 	auto* spotLight = spotLightTransform->addComponent<engine::components::SpotLight>(glm::vec3(0.0f, 0.0f, 1.0f));
-
-	scene->getSceneRenderer()->addLightSource(pointLight);
-	scene->getSceneRenderer()->addLightSource(spotLight);
 
 	auto& window = engine.getWindow();
 	window.addGUIElement<engine::gui::Text>("This is some useful text.");
