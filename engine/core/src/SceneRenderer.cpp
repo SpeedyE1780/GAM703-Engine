@@ -46,8 +46,8 @@ namespace gam703::engine::core
 	{
 		m_sceneObjects.push_back(sceneObject);
 		sceneObject->updateProjectionMatrix(m_projectionMatrix);
-		sceneObject->getMaterial().getShader()->setVec3("ambientLight.color", m_ambientLight.m_color);
-		sceneObject->getMaterial().getShader()->setFloat("ambientLight.intensity", m_ambientLight.m_intensity);
+		sceneObject->getMaterial().getShader().setVec3("ambientLight.color", m_ambientLight.m_color);
+		sceneObject->getMaterial().getShader().setFloat("ambientLight.intensity", m_ambientLight.m_intensity);
 	}
 
 	void SceneRenderer::removeRenderer(components::Renderer* sceneObject)
@@ -76,12 +76,12 @@ namespace gam703::engine::core
 		{
 			if (m_shouldUpdateAmbientLight)
 			{
-				renderer->getMaterial().getShader()->setAmbientLight(m_ambientLight.m_color, m_ambientLight.m_intensity);
+				renderer->getMaterial().getShader().setAmbientLight(m_ambientLight.m_color, m_ambientLight.m_intensity);
 			}
 
 			for (auto* lightSource : m_lightSources)
 			{
-				lightSource->updateShaderLightInfo(*renderer->getMaterial().getShader());
+				lightSource->updateShaderLightInfo(renderer->getMaterial().getShader());
 			}
 
 			renderer->render(m_activeCamera->getViewMatrix(), m_activeCamera->getTransform().getPosition());
