@@ -96,7 +96,7 @@ int main()
 			counter++;
 			text->setContent(std::format("counter: {}", counter));
 			auto [r, g, b, a] = colorPicker->getColors();
-			scene.getSceneRenderer()->setAmbientLight(glm::vec3(r, g, b), slider->getValue());
+			scene.getSceneRenderer().setAmbientLight(glm::vec3(r, g, b), slider->getValue());
 
 			pointLightTransform->setPosition(glm::vec3(0.0f, pointLightHeight->getValue(), 0.0f));
 			spotLightTransform->setPosition(glm::vec3(10.0f, pointLightHeight->getValue(), 0.0f));
