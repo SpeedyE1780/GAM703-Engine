@@ -19,7 +19,7 @@ namespace gam703::engine::core
 	class ENGINE_CORE_API Scene
 	{
 	public:
-		Scene(Engine* engine);
+		Scene(Engine& engine);
 		~Scene() = default;
 		Scene(const Scene&) = delete;
 		Scene& operator=(const Scene&) = delete;
@@ -39,7 +39,7 @@ namespace gam703::engine::core
 		void updateSceneProjectionMatrix();
 
 	protected:
-		Engine* m_engine;
+		Engine& m_engine;
 		SceneRenderer m_sceneRenderer{};
 		std::vector<std::unique_ptr<components::Transform>> m_transforms{};
 	};

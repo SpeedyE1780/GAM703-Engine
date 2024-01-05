@@ -28,7 +28,7 @@ namespace gam703::engine::core
 		}
 
 		std::cout << "ERROR LOADING TEXTURE" << std::endl;
-		return 0;
+		return nullptr;
 	}
 
 	const graphic::Texture* ResourceManager::getWhiteTexture()
@@ -49,7 +49,7 @@ namespace gam703::engine::core
 		}
 
 		std::cout << "ERROR LOADING TEXTURE" << std::endl;
-		return 0;
+		return nullptr;
 	}
 
 	const graphic::Model* ResourceManager::getModel(const std::filesystem::path& path)
