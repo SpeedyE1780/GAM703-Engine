@@ -1,8 +1,8 @@
 project(engine-gui)
 
-add_library(${PROJECT_NAME})
+add_library(${PROJECT_NAME} STATIC)
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE ENGINE_GUI_EXPORT)
+target_compile_definitions(${PROJECT_NAME} PRIVATE ENGINE_GUI_DLL ENGINE_GUI_EXPORT)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include/)
 
@@ -29,5 +29,6 @@ include/engine/gui/Window.hpp
 
 target_link_libraries(${PROJECT_NAME} PUBLIC glad)
 target_link_libraries(${PROJECT_NAME} PUBLIC glfw)
-target_link_libraries(${PROJECT_NAME} PRIVATE glm)
 target_link_libraries(${PROJECT_NAME} PUBLIC imgui)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE glm)
