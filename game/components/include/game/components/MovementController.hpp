@@ -10,9 +10,9 @@ namespace gam703::game::components
 	class GAME_COMPONENTS_API MovementController : public engine::components::Behavior
 	{
 	public:
-		MovementController(engine::components::Transform* transform);
+		MovementController(engine::components::Transform& transform);
 
-		virtual MovementController* clone(engine::components::Transform* transform) const override;
+		virtual MovementController* clone(engine::components::Transform& transform) const override;
 
 		float getYaw() const { return m_yaw; }
 		float getPitch() const { return m_pitch; }

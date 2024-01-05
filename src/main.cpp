@@ -38,8 +38,8 @@ static engine::components::Transform* addGroundPlane(engine::core::Engine& engin
 
 	auto* cube = engine.getScene()->addTransform(position, glm::vec3(), glm::vec3(5.0f, 0.1f, 5.0f));
 	auto* renderer = cube->addComponent<engine::components::Renderer>(cubeModel, checkeredShader);
-	renderer->getMaterial()->setColor(mainColor);
-	renderer->getMaterial()->getShader()->setVec3("secondColor", secondColor);
+	renderer->getMaterial().setColor(mainColor);
+	renderer->getMaterial().getShader()->setVec3("secondColor", secondColor);
 
 	return cube;
 }
@@ -55,7 +55,7 @@ int main()
 	auto* cubeModel = engine.getResourceManager()->getModel("resources/Models/cube/cube.obj");
 	auto* playerTransform = scene->addTransform(glm::vec3(0.0f, 1.1f, 0.0f));
 	auto* renderer = playerTransform->addComponent<engine::components::Renderer>(cubeModel);
-	renderer->getMaterial()->setColor(glm::vec3(0.0f, 0.0f, 1.0f));
+	renderer->getMaterial().setColor(glm::vec3(0.0f, 0.0f, 1.0f));
 	playerTransform->addBehavior<game::components::MovementController>();
 
 	addGroundPlane(engine, playerTransform);

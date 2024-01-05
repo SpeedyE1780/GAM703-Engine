@@ -11,10 +11,10 @@ namespace gam703::engine::components
 	class ENGINE_COMPONENTS_API Camera : public Component
 	{
 	public:
-		Camera(Transform* transform);
-		Camera(Transform* transform, float fieldOfView);
+		Camera(Transform& transform);
+		Camera(Transform& transform, float fieldOfView);
 
-		virtual Camera* clone(Transform* transform) const override;
+		virtual Camera* clone(Transform& transform) const override;
 
 		glm::mat4 getViewMatrix() const;
 		float getFieldOfView() const { return m_fieldOfView; }

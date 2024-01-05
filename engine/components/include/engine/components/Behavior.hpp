@@ -9,10 +9,11 @@ namespace gam703::engine::components
 	class ENGINE_COMPONENTS_API Behavior : public Component
 	{
 	public:
-		Behavior(Transform* transform);
+		Behavior(Transform& transform);
+		virtual ~Behavior() = default;
 
 		virtual void tick(float deltaTime) = 0;
-		virtual Behavior* clone(Transform* transform) const override = 0;
+		virtual Behavior* clone(Transform& transform) const override = 0;
 	};
 }
 

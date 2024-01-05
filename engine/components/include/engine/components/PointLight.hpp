@@ -10,9 +10,9 @@ namespace gam703::engine::components
 	class ENGINE_COMPONENTS_API PointLight : public Light
 	{
 	public:
-		PointLight(Transform* transform, const glm::vec3& color = glm::vec3(1.0f, 1.0f, 1.0f), float range = 5.0f, float intensity = 1.0f);
+		PointLight(Transform& transform, const glm::vec3& color = glm::vec3(1.0f, 1.0f, 1.0f), float range = 5.0f, float intensity = 1.0f);
 
-		virtual PointLight* clone(Transform* transform) const override;
+		virtual PointLight* clone(Transform& transform) const override;
 
 		virtual void updateShaderLightInfo(const graphic::Shader& shader) const override;
 

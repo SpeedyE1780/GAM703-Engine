@@ -10,9 +10,9 @@ namespace gam703::engine::components
 	class ENGINE_COMPONENTS_API SpotLight : public Light
 	{
 	public:
-		SpotLight(Transform* transform, const glm::vec3& color, float innerAngle = 25.0f, float outerAngle = 45.0f, float range = 5.0f, float intensity = 1.0f);
+		SpotLight(Transform& transform, const glm::vec3& color, float innerAngle = 25.0f, float outerAngle = 45.0f, float range = 5.0f, float intensity = 1.0f);
 
-		virtual SpotLight* clone(Transform* transform) const override;
+		virtual SpotLight* clone(Transform& transform) const override;
 
 		virtual void updateShaderLightInfo(const graphic::Shader& shader) const override;
 

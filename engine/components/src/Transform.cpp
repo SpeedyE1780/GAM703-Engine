@@ -1,5 +1,7 @@
 #include <engine/components/Transform.hpp>
 
+#include <engine/core/Engine.hpp>
+
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtx/euler_angles.hpp>
 
@@ -7,9 +9,8 @@
 
 namespace gam703::engine::components
 {
-	Transform::Transform(core::Engine* engine, core::Scene* scene, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) :
+	Transform::Transform(core::Engine& engine, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) :
 		m_engine(engine),
-		m_scene(scene),
 		m_position(position),
 		m_rotation(rotation),
 		m_scale(scale)
@@ -19,7 +20,6 @@ namespace gam703::engine::components
 
 	Transform::Transform(const Transform& transform) : 
 		m_engine(transform.m_engine),
-		m_scene(transform.m_scene),
 		m_position(transform.m_position),
 		m_rotation(transform.m_rotation),
 		m_scale(transform.m_scale),
@@ -33,42 +33,13 @@ namespace gam703::engine::components
 	{
 		std::for_each(begin(transform.m_components), end(transform.m_components), [this](const std::unique_ptr<Component>& component)
 			{
-				m_components.push_back(std::unique_ptr<Component>(component->clone(this)));
+				m_components.push_back(std::unique_ptr<Component>(component->clone(*this)));
 			});
 
 		std::for_each(begin(transform.m_behaviors), end(transform.m_behaviors), [this](const std::unique_ptr<Behavior>& behavior)
 			{
-				m_behaviors.push_back(std::unique_ptr<Behavior>(behavior->clone(this)));
+				m_behaviors.push_back(std::unique_ptr<Behavior>(behavior->clone(*this)));
 			});
-	}
-
-	Transform& Transform::operator=(const Transform& transform)
-	{
-		m_engine = transform.m_engine;
-		m_scene = transform.m_scene;
-		m_position = transform.m_position;
-		m_rotation = transform.m_rotation;
-		m_scale = transform.m_scale;
-		m_front = transform.m_front;
-		m_up = transform.m_front;
-		m_right = transform.m_right;
-		m_transformMatrix = transform.m_transformMatrix;
-		m_normalMatrix = transform.m_normalMatrix;
-		m_shouldCalculateTransform = transform.m_shouldCalculateTransform;
-		m_shouldUpdateDirectionVectors = transform.m_shouldUpdateDirectionVectors;
-		m_components = std::vector<std::unique_ptr<Component>>{};
-
-		std::for_each(begin(transform.m_components), end(transform.m_components), [this](const std::unique_ptr<Component>& component)
-			{
-				m_components.push_back(std::unique_ptr<Component>(component->clone(this)));
-			});
-
-		std::for_each(begin(transform.m_behaviors), end(transform.m_behaviors), [this](const std::unique_ptr<Behavior>& behavior)
-			{
-				m_behaviors.push_back(std::unique_ptr<Behavior>(behavior->clone(this)));
-			});
-
-		return *this;
 	}
 
 	Transform* Transform::clone() const
@@ -181,4 +152,15 @@ namespace gam703::engine::components
 	{
 		std::for_each(begin(m_behaviors), end(m_behaviors), [deltaTime](std::unique_ptr<Behavior>& behavior) { behavior->tick(deltaTime); });
 	}
+
+	core::Scene* Transform::getScene()
+	{
+		return m_engine.getScene();
+	}
+
+	const core::Scene* Transform::getScene() const
+	{
+		return m_engine.getScene();
+	}
+
 }

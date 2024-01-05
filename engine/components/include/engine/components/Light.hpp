@@ -13,7 +13,7 @@ namespace gam703::engine::components
 	class ENGINE_COMPONENTS_API Light : public Component
 	{
 	public:
-		Light(Transform* transform, const glm::vec3& color, float intensity = 1.0f);
+		Light(Transform& transform, const glm::vec3& color, float intensity = 1.0f);
 		virtual ~Light();
 
 		const glm::vec3& getColor() const { return m_color; }

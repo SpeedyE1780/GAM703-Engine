@@ -19,13 +19,13 @@ namespace gam703::engine::components
 	class ENGINE_COMPONENTS_API Transform
 	{
 	public:
-		Transform(core::Engine* engine, core::Scene* scene,
+		Transform(core::Engine& engine,
 			const glm::vec3& position = glm::vec3(0.0f, 0.0f, 0.0f),
 			const glm::vec3& rotation = glm::vec3(0.0f, 0.0f, 0.0f),
 			const glm::vec3& scale = glm::vec3(1.0f, 1.0f, 1.0f));
 
 		Transform(const Transform& transform);
-		Transform& operator=(const Transform& transform);
+		Transform& operator=(const Transform& transform) = delete;
 		~Transform() = default;
 
 		Transform* clone() const;
@@ -55,17 +55,17 @@ namespace gam703::engine::components
 		void rotate(const glm::vec3& eulerAngles) ;
 		void rotate(float x, float y, float z);
 
-		core::Engine* getEngine() { return m_engine; }
-		const core::Engine* getEngine() const { return m_engine; }
+		core::Engine& getEngine() { return m_engine; }
+		const core::Engine& getEngine() const { return m_engine; }
 
-		core::Scene* getScene() { return m_scene; }
-		const core::Scene* getScene() const { return m_scene; }
+		core::Scene* getScene();
+		const core::Scene* getScene() const;
 
 		template<typename ComponentType, typename... Args>
 		ComponentType* addComponent(Args&&... args)
 		{
 			static_assert(std::is_base_of_v<Behavior, ComponentType> == false, "ComponentType is a Behavior, use addBehavior instead");
-			auto* component = new ComponentType(this, std::forward<Args>(args)...);
+			auto* component = new ComponentType(*this, std::forward<Args>(args)...);
 			m_components.emplace_back(std::unique_ptr<ComponentType>(component));
 			return component;
 		}
@@ -95,7 +95,7 @@ namespace gam703::engine::components
 		BehaviorType* addBehavior(Args&&... args)
 		{
 			static_assert(std::derived_from<BehaviorType, Behavior>, "BehaviorType is a Component, use addComponent instead");
-			auto* behavior = new BehaviorType(this, std::forward<Args>(args)...);
+			auto* behavior = new BehaviorType(*this, std::forward<Args>(args)...);
 			m_behaviors.emplace_back(std::unique_ptr<BehaviorType>(behavior));
 			return behavior;
 		}
@@ -127,8 +127,7 @@ namespace gam703::engine::components
 	private:
 		void updateDirectionVectors();
 
-		core::Engine* m_engine = nullptr;
-		core::Scene* m_scene = nullptr;
+		core::Engine& m_engine;
 		glm::vec3 m_position{ 0.0f, 0.0f, 0.0f };
 		glm::vec3 m_rotation{ 0.0f, 0.0f, 0.0f };
 		glm::vec3 m_scale{ 1.0f, 1.0f, 1.0f };
