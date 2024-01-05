@@ -11,6 +11,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 src/Engine.cpp
 src/Input.cpp
 src/ResourceManager.cpp
+src/Scene.cpp
 src/Time.cpp
 
 #HPP
@@ -19,6 +20,8 @@ include/engine/core/Engine.hpp
 include/engine/core/Engine.fwd.hpp
 include/engine/core/Input.hpp
 include/engine/core/ResourceManager.hpp
+include/engine/core/Scene.hpp
+include/engine/core/Scene.fwd.hpp
 include/engine/core/Time.hpp
 )
 

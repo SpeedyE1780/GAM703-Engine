@@ -6,7 +6,7 @@
 #include <engine/components/Component.hpp>
 
 #include <engine/core-interfaces/IEngine.fwd.hpp>
-#include <engine/core-interfaces/Scene.hpp>
+#include <engine/core/Scene.hpp>
 
 #include <glm/glm.hpp>
 
@@ -19,14 +19,14 @@ namespace gam703::engine::components
 	class ENGINE_COMPONENTS_API Transform
 	{
 	public:
-		Transform(core_interface::IEngine* engine, core_interface::Scene* scene,
+		Transform(core_interface::IEngine* engine, core::Scene* scene,
 			const glm::vec3& position = glm::vec3(0.0f, 0.0f, 0.0f),
 			const glm::vec3& rotation = glm::vec3(0.0f, 0.0f, 0.0f),
 			const glm::vec3& scale = glm::vec3(1.0f, 1.0f, 1.0f));
 
 		Transform(const Transform& transform);
 		Transform& operator=(const Transform& transform);
-		virtual ~Transform() = default;
+		~Transform() = default;
 
 		Transform* clone() const;
 
@@ -58,8 +58,8 @@ namespace gam703::engine::components
 		core_interface::IEngine* getEngine() { return m_engine; }
 		const core_interface::IEngine* getEngine() const { return m_engine; }
 
-		core_interface::Scene* getScene() { return m_scene; }
-		const core_interface::Scene* getScene() const { return m_scene; }
+		core::Scene* getScene() { return m_scene; }
+		const core::Scene* getScene() const { return m_scene; }
 
 		template<typename ComponentType, typename... Args>
 		ComponentType* addComponent(Args&&... args)
@@ -128,7 +128,7 @@ namespace gam703::engine::components
 		void updateDirectionVectors();
 
 		core_interface::IEngine* m_engine = nullptr;
-		core_interface::Scene* m_scene = nullptr;
+		core::Scene* m_scene = nullptr;
 		glm::vec3 m_position{ 0.0f, 0.0f, 0.0f };
 		glm::vec3 m_rotation{ 0.0f, 0.0f, 0.0f };
 		glm::vec3 m_scale{ 1.0f, 1.0f, 1.0f };

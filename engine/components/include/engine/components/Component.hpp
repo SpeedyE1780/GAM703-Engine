@@ -5,7 +5,8 @@
 #include <engine/components/Transform.fwd.hpp>
 
 #include <engine/core-interfaces/IEngine.fwd.hpp>
-#include <engine/core-interfaces/Scene.fwd.hpp>
+
+#include <engine/core/Scene.fwd.hpp>
 
 namespace gam703::engine::components
 {
@@ -23,8 +24,8 @@ namespace gam703::engine::components
 		core_interface::IEngine* getEngine();
 		const core_interface::IEngine* getEngine() const;
 
-		core_interface::Scene* getScene();
-		const core_interface::Scene* getScene() const;
+		core::Scene* getScene();
+		const core::Scene* getScene() const;
 
 	protected:
 		Transform* m_transform;

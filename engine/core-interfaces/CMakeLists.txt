@@ -6,8 +6,6 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE ENGINE_CORE_INTERFACES_DLL EN
 
 target_sources(${PROJECT_NAME} PRIVATE
 #CPP
-src/IEngine.cpp
-src/Scene.cpp
 src/SceneRenderer.cpp
 
 #HPP
@@ -16,8 +14,6 @@ include/engine/core-interfaces/IEngine.hpp
 include/engine/core-interfaces/IEngine.fwd.hpp
 include/engine/core-interfaces/IInput.hpp
 include/engine/core-interfaces/IResourceManager.hpp
-include/engine/core-interfaces/Scene.hpp
-include/engine/core-interfaces/Scene.fwd.hpp
 include/engine/core-interfaces/SceneRenderer.hpp
 )
 

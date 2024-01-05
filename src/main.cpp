@@ -22,7 +22,7 @@
 namespace engine = gam703::engine;
 namespace game = gam703::game;
 
-static engine::components::Transform* addGroundPlane(engine::core_interface::IEngine& engine,
+static engine::components::Transform* addGroundPlane(engine::core::Engine& engine,
 	engine::components::Transform* player,
 	const glm::vec3& position = glm::vec3(0.0f, 0.0f, 0.0f),
 	const glm::vec3& mainColor = glm::vec3(1.0f, 1.0f, 1.0f),
