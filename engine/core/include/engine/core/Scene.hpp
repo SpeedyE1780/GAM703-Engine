@@ -1,11 +1,13 @@
 #ifndef GAM703_ENGINE_CORE_Scene_HPP
 #define GAM703_ENGINE_CORE_Scene_HPP
 
-#include <engine/core/Config.hpp>
-#include <engine/core-interfaces/IEngine.fwd.hpp>
 #include <engine/components/Transform.hpp>
-#include <engine/core-interfaces/SceneRenderer.hpp>
 #include <engine/components/Camera.hpp>
+
+#include <engine/core/Config.hpp>
+#include <engine/core/SceneRenderer.hpp>
+
+#include <engine/core-interfaces/IEngine.fwd.hpp>
 
 #include <glm/glm.hpp>
 
@@ -22,8 +24,8 @@ namespace gam703::engine::core
 		Scene(const Scene&) = delete;
 		Scene& operator=(const Scene&) = delete;
 
-		core_interface::SceneRenderer* getSceneRenderer() { return &m_sceneRenderer; }
-		const core_interface::SceneRenderer* getSceneRenderer() const { return &m_sceneRenderer; }
+		SceneRenderer* getSceneRenderer() { return &m_sceneRenderer; }
+		const SceneRenderer* getSceneRenderer() const { return &m_sceneRenderer; }
 
 		components::Transform* addTransform(const glm::vec3& position = glm::vec3(0, 0, 0), const glm::vec3& rotation = glm::vec3(0, 0, 0), const glm::vec3& scale = glm::vec3(1, 1, 1));
 		components::Transform* addTransform(const components::Transform* transform);
@@ -38,7 +40,7 @@ namespace gam703::engine::core
 
 	protected:
 		core_interface::IEngine* m_engine;
-		core_interface::SceneRenderer m_sceneRenderer{};
+		SceneRenderer m_sceneRenderer{};
 		std::vector<std::unique_ptr<components::Transform>> m_transforms{};
 	};
 }

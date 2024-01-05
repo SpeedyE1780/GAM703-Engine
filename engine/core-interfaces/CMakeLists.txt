@@ -5,16 +5,12 @@ add_library(${PROJECT_NAME} STATIC)
 target_compile_definitions(${PROJECT_NAME} PRIVATE ENGINE_CORE_INTERFACES_DLL ENGINE_CORE_INTERFACES_EXPORT)
 
 target_sources(${PROJECT_NAME} PRIVATE
-#CPP
-src/SceneRenderer.cpp
-
 #HPP
 include/engine/core-interfaces/Config.hpp
 include/engine/core-interfaces/IEngine.hpp
 include/engine/core-interfaces/IEngine.fwd.hpp
 include/engine/core-interfaces/IInput.hpp
 include/engine/core-interfaces/IResourceManager.hpp
-include/engine/core-interfaces/SceneRenderer.hpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include/)

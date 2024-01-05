@@ -12,6 +12,7 @@ src/Engine.cpp
 src/Input.cpp
 src/ResourceManager.cpp
 src/Scene.cpp
+src/SceneRenderer.cpp
 src/Time.cpp
 
 #HPP
@@ -22,6 +23,7 @@ include/engine/core/Input.hpp
 include/engine/core/ResourceManager.hpp
 include/engine/core/Scene.hpp
 include/engine/core/Scene.fwd.hpp
+include/engine/core/SceneRenderer.hpp
 include/engine/core/Time.hpp
 )
 
@@ -30,6 +32,5 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include/
 target_link_libraries(${PROJECT_NAME} PUBLIC engine-core-interfaces)
 target_link_libraries(${PROJECT_NAME} PUBLIC engine-graphic)
 target_link_libraries(${PROJECT_NAME} PUBLIC engine-gui)
-
 
 add_subdirectory(tests)
