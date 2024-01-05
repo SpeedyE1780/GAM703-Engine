@@ -10,7 +10,6 @@ include/engine/core-interfaces/Config.hpp
 include/engine/core-interfaces/IEngine.hpp
 include/engine/core-interfaces/IEngine.fwd.hpp
 include/engine/core-interfaces/IInput.hpp
-include/engine/core-interfaces/IResourceManager.hpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include/)

@@ -29,8 +29,8 @@ namespace gam703::engine::core
 		const Time* getTime() const { return &m_time; }
 		Scene* getScene() { return &m_scene; }
 		const Scene* getScene() const { return &m_scene; }
-		virtual core_interface::IResourceManager* getResourceManager() override { return &m_resourceManager; }
-		virtual const core_interface::IResourceManager* getResourceManager() const override { return &m_resourceManager; }
+		ResourceManager* getResourceManager() { return &m_resourceManager; }
+		const ResourceManager* getResourceManager() const { return &m_resourceManager; }
 
 		virtual float getAspectRatio() const override { return m_window.getAspectRatio(); }
 

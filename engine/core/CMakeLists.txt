@@ -21,6 +21,7 @@ include/engine/core/Engine.hpp
 include/engine/core/Engine.fwd.hpp
 include/engine/core/Input.hpp
 include/engine/core/ResourceManager.hpp
+include/engine/core/ResourceManager.fwd.hpp
 include/engine/core/Scene.hpp
 include/engine/core/Scene.fwd.hpp
 include/engine/core/SceneRenderer.hpp
