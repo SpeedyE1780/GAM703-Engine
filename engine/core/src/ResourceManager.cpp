@@ -6,7 +6,7 @@
 
 namespace gam703::engine::core
 {
-	ResourceManager::ResourceManager() : m_modelLoader(this)
+	ResourceManager::ResourceManager() : m_modelLoader(*this)
 	{
 	}
 
