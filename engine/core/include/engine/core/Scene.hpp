@@ -7,7 +7,7 @@
 #include <engine/core/Config.hpp>
 #include <engine/core/SceneRenderer.hpp>
 
-#include <engine/core-interfaces/IEngine.fwd.hpp>
+#include <engine/core/Engine.fwd.hpp>
 
 #include <glm/glm.hpp>
 
@@ -19,7 +19,7 @@ namespace gam703::engine::core
 	class ENGINE_CORE_API Scene
 	{
 	public:
-		Scene(core_interface::IEngine* engine);
+		Scene(Engine* engine);
 		~Scene() = default;
 		Scene(const Scene&) = delete;
 		Scene& operator=(const Scene&) = delete;
@@ -39,7 +39,7 @@ namespace gam703::engine::core
 		void updateSceneProjectionMatrix();
 
 	protected:
-		core_interface::IEngine* m_engine;
+		Engine* m_engine;
 		SceneRenderer m_sceneRenderer{};
 		std::vector<std::unique_ptr<components::Transform>> m_transforms{};
 	};

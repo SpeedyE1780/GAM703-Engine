@@ -28,14 +28,12 @@ add_subdirectory(3rd-party/stb)
 
 add_subdirectory(engine/components)
 add_subdirectory(engine/core)
-add_subdirectory(engine/core-interfaces)
 add_subdirectory(engine/graphic)
 add_subdirectory(engine/gui)
 add_subdirectory(engine/utility)
 
 add_subdirectory(game/components)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE engine-core)
 target_link_libraries(${PROJECT_NAME} PRIVATE game-components)
 
 add_custom_target(copy-files ALL

@@ -1,20 +1,18 @@
 #include <engine/components/Component.hpp>
 #include <engine/components/Transform.hpp>
 
-#include <engine/core-interfaces/IEngine.hpp>
-
 namespace gam703::engine::components
 {
 	Component::Component(Transform* transform) : m_transform(transform)
 	{
 	}
 
-	core_interface::IEngine* Component::getEngine()
+	core::Engine* Component::getEngine()
 	{
 		return m_transform->getEngine();
 	}
 
-	const core_interface::IEngine* Component::getEngine() const
+	const core::Engine* Component::getEngine() const
 	{
 		return m_transform->getEngine();
 	}

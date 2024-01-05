@@ -7,15 +7,13 @@
 #include <engine/core/Scene.hpp>
 #include <engine/core/Time.hpp>
 
-#include <engine/core-interfaces/IEngine.hpp>
-
 #include <engine/gui/Window.hpp>
 
 #include <string>
 
 namespace gam703::engine::core
 {
-	class ENGINE_CORE_API Engine : public core_interface::IEngine
+	class ENGINE_CORE_API Engine
 	{
 	public:
 		Engine(const std::string& title, int width, int height);
@@ -23,8 +21,8 @@ namespace gam703::engine::core
 
 		gui::Window& getWindow() { return m_window; }
 		const gui::Window& getWindow() const { return m_window; }
-		virtual core_interface::IInput* getInput() override { return &m_inputHandler; }
-		virtual const core_interface::IInput* getInput() const override { return &m_inputHandler; }
+		Input* getInput() { return &m_inputHandler; }
+		const Input* getInput() const { return &m_inputHandler; }
 		Time* getTime() { return &m_time; }
 		const Time* getTime() const { return &m_time; }
 		Scene* getScene() { return &m_scene; }
@@ -32,7 +30,7 @@ namespace gam703::engine::core
 		ResourceManager* getResourceManager() { return &m_resourceManager; }
 		const ResourceManager* getResourceManager() const { return &m_resourceManager; }
 
-		virtual float getAspectRatio() const override { return m_window.getAspectRatio(); }
+		float getAspectRatio() const { return m_window.getAspectRatio(); }
 
 		void start();
 		void stop();

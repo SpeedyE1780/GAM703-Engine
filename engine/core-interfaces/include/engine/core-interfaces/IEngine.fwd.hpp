@@ -1,9 +1,0 @@
-#ifndef GAM703_ENGINE_CORE_INTERFACES_IENGINE_FWD_HPP
-#define GAM703_ENGINE_CORE_INTERFACES_IENGINE_FWD_HPP
-
-namespace gam703::engine::core_interface
-{
-	class IEngine;
-}
-
-#endif // GAM703_ENGINE_CORE_INTERFACES_IENGINE_FWD_HPP
