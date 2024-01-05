@@ -18,8 +18,8 @@ namespace gam703::engine::components
 		Renderer(Transform& transform, const graphic::Model* model, const graphic::Material& material);
 		~Renderer();
 		void render(const glm::mat4& viewMatrix, const glm::vec3& cameraPosition) const;
-		graphic::Material* getMaterial() { return &m_material; }
-		const graphic::Material* getMaterial() const { return &m_material; }
+		graphic::Material& getMaterial() { return m_material; }
+		const graphic::Material& getMaterial() const { return m_material; }
 		void updateProjectionMatrix(const glm::mat4& projectionMatrix) const;
 
 		virtual Renderer* clone(Transform& transform) const override;
