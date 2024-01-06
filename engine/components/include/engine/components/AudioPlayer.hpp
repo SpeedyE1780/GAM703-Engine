@@ -2,6 +2,7 @@
 #define GAM703_ENGINE_COMPONENTS_AUDIO_PLAYER_HPP
 
 #include <engine/audio/AudioSource.hpp>
+#include <engine/audio/AudioMixer.fwd.hpp>
 
 #include <engine/components/Config.hpp>
 #include <engine/components/Component.hpp>
@@ -26,6 +27,7 @@ namespace gam703::engine::components
 
 		void play(bool loop = false) const { m_audioSource.play(loop); }
 		void setStreamMode(StreamMode mode) const { m_audioSource.getSoundSource()->setStreamMode(static_cast<irrklang::E_STREAM_MODE>(mode)); }
+		void setAudioMixer(audio::AudioMixer* mixer) const { m_audioSource.setAudioMixer(mixer); }
 
 		virtual AudioPlayer* clone(Transform& transform) const override;
 

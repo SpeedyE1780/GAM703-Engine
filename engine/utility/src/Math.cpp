@@ -13,4 +13,9 @@ namespace gam703::engine::utility
 
 		return current + direction;
 	}
+
+	float clamp(float value, float min, float max)
+	{
+		return glm::clamp(value, min, max);
+	}
 }

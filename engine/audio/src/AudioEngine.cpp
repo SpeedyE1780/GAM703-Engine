@@ -30,4 +30,20 @@ namespace gam703::engine::audio
 		std::cout << "ERROR SOUND SOURCE NOT FOUND" << std::endl;
 		return nullptr;
 	}
+
+	AudioMixer* AudioEngine::addAudioMixer(const std::string& name)
+	{
+		m_audioMixers.emplace(name, AudioMixer());
+		return &m_audioMixers.at(name);
+	}
+
+	AudioMixer* AudioEngine::getAudioMixer(const std::string& name)
+	{
+		if (auto audioMixer = m_audioMixers.find(name); audioMixer != m_audioMixers.end())
+		{
+			return &audioMixer->second;
+		}
+
+		return nullptr;
+	}
 }

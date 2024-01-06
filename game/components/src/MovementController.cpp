@@ -12,6 +12,7 @@ namespace gam703::game::components
 		m_yaw(glm::degrees(transform.getRotation().y))
 	{
 		m_bell = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/bell.wav");
+		m_bell->setAudioMixer(getEngine().getAudioEngine().getAudioMixer("SFX"));
 	}
 
 	MovementController* MovementController::clone(engine::components::Transform& transform) const
