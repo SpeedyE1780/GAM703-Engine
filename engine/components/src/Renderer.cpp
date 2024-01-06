@@ -30,7 +30,6 @@ namespace gam703::engine::components
 		shader.setMat4("view", viewMatrix);
 		shader.setMat4("model", m_transform.getTransformationMatrix());
 		shader.setMat3("normalMatrix", m_transform.getNormalMatrix());
-		shader.setVec3("lightPosition", cameraPosition);
 		shader.setVec3("cameraPosition", cameraPosition);
 
 		m_model->draw(m_material);
