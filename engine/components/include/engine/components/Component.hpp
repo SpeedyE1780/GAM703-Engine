@@ -14,7 +14,7 @@ namespace gam703::engine::components
 	class ENGINE_COMPONENTS_API Component
 	{
 	public:
-		/// @brief Create a component that this is owned by the transform
+		/// @brief Create a component that is owned by the transform
 		/// @param transform The Transform owning this component
 		Component(Transform& transform);
 		virtual ~Component() = default;

@@ -10,7 +10,7 @@ namespace gam703::engine::components
 	class ENGINE_COMPONENTS_API Behavior : public Component
 	{
 	public:
-		/// @brief Create a behavior that this is owned by the transform
+		/// @brief Create a behavior that is owned by the transform
 		/// @param transform The Transform owning this behavior
 		Behavior(Transform& transform);
 		virtual ~Behavior() = default;
