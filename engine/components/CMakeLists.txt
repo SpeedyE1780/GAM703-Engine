@@ -6,6 +6,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE ENGINE_COMPONENTS_DLL ENGINE_
 
 target_sources(${PROJECT_NAME} PRIVATE
 #CPP
+src/AudioPlayer.cpp
 src/Behavior.cpp
 src/Camera.cpp
 src/Component.cpp
@@ -17,6 +18,7 @@ src/SpotLight.cpp
 src/Transform.cpp
 
 #HPP
+include/engine/components/AudioPlayer.hpp
 include/engine/components/Behavior.hpp
 include/engine/components/Camera.hpp
 include/engine/components/Component.hpp
@@ -32,6 +34,7 @@ include/engine/components/Transform.hpp
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
+target_link_libraries(${PROJECT_NAME} PUBLIC engine-audio)
 target_link_libraries(${PROJECT_NAME} PUBLIC engine-core)
 target_link_libraries(${PROJECT_NAME} PUBLIC engine-graphic)
 target_link_libraries(${PROJECT_NAME} PUBLIC glm)

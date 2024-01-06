@@ -1,8 +1,7 @@
 #ifndef GAM703_GAME_COMPONENTS_MOVEMENT_CONTROLLER_HPP
 #define GAM703_GAME_COMPONENTS_MOVEMENT_CONTROLLER_HPP
 
-#include <engine/audio/AudioSource.hpp>
-
+#include <engine/components/AudioPlayer.hpp>
 #include <engine/components/Behavior.hpp>
 
 #include <game/components/Config.hpp>
@@ -24,7 +23,7 @@ namespace gam703::game::components
 		virtual void tick(float deltaTime) override;
 
 	private:
-		engine::audio::AudioSource* m_bell;
+		engine::components::AudioPlayer* m_bell;
 		float m_yaw = 0.0f;
 		float m_pitch = 0.0f;
 		float m_movementSpeed = 2.5f;
