@@ -75,10 +75,13 @@ namespace gam703::engine::graphic
 
 	Shader& Shader::operator=(const Shader& shader)
 	{
-		m_vertexShaderPath = shader.m_vertexShaderPath;
-		m_fragmentShaderPath = shader.m_fragmentShaderPath;
-		glDeleteProgram(m_id);
-		createShaderProgram();
+		if (m_vertexShaderPath != shader.m_vertexShaderPath || m_fragmentShaderPath != shader.m_fragmentShaderPath)
+		{
+			m_vertexShaderPath = shader.m_vertexShaderPath;
+			m_fragmentShaderPath = shader.m_fragmentShaderPath;
+			glDeleteProgram(m_id);
+			createShaderProgram();
+		}
 		return *this;
 	}
 
