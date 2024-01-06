@@ -43,7 +43,7 @@ namespace gam703::engine::graphic
 		/// @param textures Mesh textures
 		Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const std::vector<const Texture*>& textures);
 
-		/// @brief Draw mesh with selected material
+		/// @brief Draw Mesh on screen
 		/// @param material Material used to set texture indices
 		void draw(const Material& material) const;
 
