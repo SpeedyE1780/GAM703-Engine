@@ -18,7 +18,7 @@ namespace gam703::engine::components
 		calculateTransformMatrix();
 	}
 
-	Transform::Transform(const Transform& transform) : 
+	Transform::Transform(const Transform& transform) :
 		m_engine(transform.m_engine),
 		m_position(transform.m_position),
 		m_rotation(transform.m_rotation),
@@ -49,11 +49,8 @@ namespace gam703::engine::components
 
 	void Transform::setPosition(const glm::vec3& position)
 	{
-		if (m_position != position)
-		{
-			m_position = position;
-			m_shouldCalculateTransform = true;
-		}
+		m_shouldCalculateTransform = m_position != position;
+		m_position = position;
 	}
 
 	void Transform::setPosition(float x, float y, float z)
@@ -63,12 +60,8 @@ namespace gam703::engine::components
 
 	void Transform::setRotation(const glm::vec3& eulerAngles)
 	{
-		if (m_rotation != eulerAngles)
-		{
-			m_rotation = eulerAngles;
-			m_shouldCalculateTransform = true;
-			m_shouldUpdateDirectionVectors = true;
-		}
+		m_shouldCalculateTransform = m_shouldUpdateDirectionVectors = m_rotation != eulerAngles;
+		m_rotation = eulerAngles;
 	}
 
 	void Transform::setRotation(float x, float y, float z)
@@ -78,11 +71,8 @@ namespace gam703::engine::components
 
 	void Transform::setScale(const glm::vec3& scale)
 	{
-		if (m_scale != scale)
-		{
-			m_scale = scale;
-			m_shouldCalculateTransform = true;
-		}
+		m_shouldCalculateTransform = m_scale != scale;
+		m_scale = scale;
 	}
 
 	void Transform::setScale(float x, float y, float z)
@@ -92,10 +82,7 @@ namespace gam703::engine::components
 
 	void Transform::translate(const glm::vec3& offset)
 	{
-		if (offset.x != 0 || offset.y != 0 || offset.z != 0)
-		{
-			setPosition(m_position + offset);
-		}
+		setPosition(m_position + offset);
 	}
 
 	void Transform::translate(float x, float y, float z)
@@ -105,10 +92,7 @@ namespace gam703::engine::components
 
 	void Transform::rotate(const glm::vec3& eulerAngles)
 	{
-		if (eulerAngles.x != 0 || eulerAngles.y != 0 || eulerAngles.z != 0)
-		{
-			setRotation(m_rotation + eulerAngles);
-		}
+		setRotation(m_rotation + eulerAngles);
 	}
 
 	void Transform::rotate(float x, float y, float z)
@@ -162,5 +146,4 @@ namespace gam703::engine::components
 	{
 		return m_engine.getScene();
 	}
-
 }
