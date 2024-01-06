@@ -22,8 +22,11 @@ namespace gam703::engine::audio
 
 	void AudioMixer::setVolume(float volume)
 	{
-		m_volume = utility::clamp(volume, 0.0f, 1.0f);;
-		updateAudioSources();
+		if (m_volume != volume)
+		{
+			m_volume = utility::clamp(volume, 0.0f, 1.0f);;
+			updateAudioSources();
+		}
 	}
 
 	void AudioMixer::setParentMixer(AudioMixer* mixer)
