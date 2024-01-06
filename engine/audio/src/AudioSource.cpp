@@ -21,11 +21,17 @@ namespace gam703::engine::audio
 	void AudioSource::setVolume(float volume)
 	{
 		m_volume = utility::clamp(volume, 0.0f, 1.0f);
+		updateVolume();
+	}
+
+	float AudioSource::getOutputVolume() const
+	{
+		return m_audioMixer ? m_audioMixer->getOutputVolume() * m_volume : m_volume;
 	}
 
 	void AudioSource::updateVolume() const
 	{
-		float volume = m_audioMixer ? m_audioMixer->getVolume() * m_volume : m_volume;
+		float volume = getOutputVolume();
 
 		m_soundSource.setDefaultVolume(volume);
 
@@ -49,14 +55,19 @@ namespace gam703::engine::audio
 
 	void AudioSource::setAudioMixer(AudioMixer* mixer)
 	{
-		if (m_audioMixer)
+		if (m_audioMixer != mixer)
 		{
-			m_audioMixer->removeAudioSource(this);
-		}
+			if (m_audioMixer)
+			{
+				m_audioMixer->removeAudioSource(this);
+			}
 
-		if (m_audioMixer = mixer)
-		{
-			m_audioMixer->addAudioSource(this);
+			if (m_audioMixer = mixer)
+			{
+				m_audioMixer->addAudioSource(this);
+			}
+
+			updateVolume();
 		}
 	}
 }

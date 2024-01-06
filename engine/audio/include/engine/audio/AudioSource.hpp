@@ -22,6 +22,7 @@ namespace gam703::engine::audio
 		void updateVolume() const;
 		void setVolume(float volume);
 		float getVolume() const { return m_volume; }
+		float getOutputVolume() const;
 
 		void setAudioMixer(AudioMixer* mixer);
 

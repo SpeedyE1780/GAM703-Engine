@@ -51,8 +51,10 @@ int main()
 	engine::core::Engine engine("GAM703", 1280, 720);
 	auto& scene = engine.getScene();
 
+	auto* masterMixer = engine.getAudioEngine().addAudioMixer("Master");
 	auto* backgroundMusicMixer = engine.getAudioEngine().addAudioMixer("BM");
-	engine.getAudioEngine().addAudioMixer("SFX");
+	backgroundMusicMixer->setParentMixer(masterMixer);
+	engine.getAudioEngine().addAudioMixer("SFX")->setParentMixer(masterMixer);
 
 	auto* cubeModel = engine.getResourceManager().getModel("resources/Models/cube/cube.obj");
 	auto* playerTransform = scene.addTransform(glm::vec3(0.0f, 1.1f, 0.0f));
@@ -107,14 +109,17 @@ int main()
 	text = window.addGUIElement<engine::gui::Text>(std::format("counter: {}", counter));
 	text->shouldRenderOnNewLine(false);
 
-	auto* backgroundVolume = window.addGUIElement<engine::gui::Slider>("Background Music");
-	auto* sfxVolume = window.addGUIElement<engine::gui::Slider>("SFX Music");
+	auto* masterVolume = window.addGUIElement<engine::gui::Slider>("Master Volume");
+	auto* backgroundVolume = window.addGUIElement<engine::gui::Slider>("Background Music Volume");
+	auto* sfxVolume = window.addGUIElement<engine::gui::Slider>("SFX Volume");
 
-	window.addGUIElement<engine::gui::Button>("Update Mixers", [backgroundVolume, sfxVolume, &engine]()
+	window.addGUIElement<engine::gui::Button>("Update Mixers", [masterVolume, backgroundVolume, sfxVolume, &engine]()
 		{
+			auto* master = engine.getAudioEngine().getAudioMixer("Master");
 			auto* backgroundMusic = engine.getAudioEngine().getAudioMixer("BM");
 			auto* sfx = engine.getAudioEngine().getAudioMixer("SFX");
 
+			master->setVolume(masterVolume->getValue());
 			backgroundMusic->setVolume(backgroundVolume->getValue());
 			sfx->setVolume(sfxVolume->getValue());
 		});

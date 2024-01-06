@@ -16,9 +16,16 @@ namespace gam703::engine::audio
 
 		void setVolume(float volume);
 		float getVolume() const { return m_volume; }
+		float getOutputVolume() const { return m_parent ? m_parent->getOutputVolume() * m_volume : m_volume; }
+
+		void setParentMixer(AudioMixer* mixer);
 
 	private:
-		std::vector<AudioSource*> m_sources;
+		void updateAudioSources() const;
+
+		AudioMixer* m_parent = nullptr;
+		std::vector<AudioMixer*> m_children{};
+		std::vector<AudioSource*> m_sources{};
 		float m_volume = 1.0f;
 	};
 }
