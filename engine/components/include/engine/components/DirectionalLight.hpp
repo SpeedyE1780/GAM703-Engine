@@ -6,7 +6,7 @@
 
 namespace gam703::engine::components
 {
-	/// @brief DirectionalLight acts like a sun and lights up all object in the scene
+	/// @brief DirectionalLight acts like a sun and lights up all objects in the scene
 	class ENGINE_COMPONENTS_API DirectionalLight : public Light
 	{
 	public:
@@ -17,7 +17,7 @@ namespace gam703::engine::components
 		DirectionalLight(Transform& transform, const glm::vec3& color, float intensity = 1.0f);
 
 		/// @brief Create a copy attached to the new transform
-		/// @param transform transform The new transform that will own the clone
+		/// @param transform The new transform that will own the clone
 		/// @return The cloned DirectionalLight belonging to the transform
 		virtual DirectionalLight* clone(Transform& transform) const override;
 
