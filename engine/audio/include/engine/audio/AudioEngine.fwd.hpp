@@ -1,0 +1,9 @@
+#ifndef GAM703_ENGINE_AUDIO_AUDIO_ENGINE_FWD_HPP
+#define GAM703_ENGINE_AUDIO_AUDIO_ENGINE_FWD_HPP
+
+namespace gam703::engine::audio
+{
+	class AudioEngine;
+}
+
+#endif // GAM703_ENGINE_AUDIO_AUDIO_ENGINE_FWD_HPP

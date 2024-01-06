@@ -11,6 +11,7 @@ namespace gam703::game::components
 		m_pitch(glm::degrees(transform.getRotation().x)),
 		m_yaw(glm::degrees(transform.getRotation().y))
 	{
+		m_bell = getEngine().getAudioEngine().getAudioSource("resources/Audio/bell.wav");
 	}
 
 	MovementController* MovementController::clone(engine::components::Transform& transform) const
@@ -45,7 +46,7 @@ namespace gam703::game::components
 
 		if (inputHandler.isKeyPressed(GLFW_KEY_SPACE))
 		{
-			getEngine().getAudioEngine().play("resources/Audio/bell.wav");
+			m_bell->play();
 		}
 
 		float xoffset = inputHandler.getMouseOffsetX() * m_mouseSensitivity;
