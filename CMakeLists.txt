@@ -36,10 +36,12 @@ add_subdirectory(game/components)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE game-components)
 
+set_target_properties(${PROJECT_NAME} PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>)
+
 add_custom_target(copy-files ALL
     COMMAND ${CMAKE_COMMAND} -E copy_directory
     ${CMAKE_SOURCE_DIR}/resources/
-    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/resources/
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/resources/
     )
 
 add_dependencies(${PROJECT_NAME} copy-files)

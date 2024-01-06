@@ -9,6 +9,14 @@ target_sources(${PROJECT_NAME} PRIVATE src/FileTests.cpp src/main.cpp src/MathTe
 target_link_libraries(${PROJECT_NAME} PRIVATE engine-utility)
 target_link_libraries(${PROJECT_NAME} PRIVATE gtest)
 
+set_target_properties(${PROJECT_NAME} PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>)
+
 add_test(test_all ${PROJECT_NAME})
 
-configure_file(${PROJECT_SOURCE_DIR}/ReadTest.txt ${CMAKE_BINARY_DIR}/bin/ReadTest.txt)
+add_custom_target(copy-tests-files ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different 
+    ${PROJECT_SOURCE_DIR}/ReadTest.txt
+    ${CMAKE_BINARY_DIR}/bin/$<CONFIG>/ReadTest.txt
+    )
+
+add_dependencies(${PROJECT_NAME} copy-tests-files)

@@ -12,6 +12,7 @@ CTestTestfile.cmake
 _deps
 
 out/build/
+_projects/
 CMakeSettings.json
 
 ## Ignore Visual Studio temporary files, build results, and
