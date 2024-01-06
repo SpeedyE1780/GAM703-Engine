@@ -53,7 +53,7 @@ namespace gam703::engine::core
 		void resetMouseOffset();
 
 		/// @brief Set the cursor mode in the window
-		/// @param mode The current cursor mode (Normal, Hidden, Disabled)
+		/// @param mode The cursor mode (Normal, Hidden, Disabled)
 		void setCursorMode(int mode) const { m_window.setCursorMode(mode); }
 
 	private:
