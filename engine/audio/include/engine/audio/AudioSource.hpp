@@ -15,7 +15,7 @@ namespace gam703::engine::audio
 
 		irrklang::ISoundSource* getSoundSource() const { return &m_soundSource; }
 
-		void play() const;
+		void play(bool loop = false) const;
 
 	private:
 		AudioEngine& m_engine;

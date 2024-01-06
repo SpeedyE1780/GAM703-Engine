@@ -7,8 +7,8 @@ namespace gam703::engine::audio
 	{
 	}
 
-	void AudioSource::play() const
+	void AudioSource::play(bool loop) const
 	{
-		m_engine.play(*this);
+		m_engine.play(*this, loop);
 	}
 }

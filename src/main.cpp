@@ -104,6 +104,10 @@ int main()
 	text = window.addGUIElement<engine::gui::Text>(std::format("counter: {}", counter));
 	text->shouldRenderOnNewLine(false);
 
+	auto* backgroundMusicPlayer = scene.addTransform()->addComponent<engine::components::AudioPlayer>("resources/Audio/breakout.mp3");
+	backgroundMusicPlayer->setStreamMode(engine::components::AudioPlayer::StreamMode::Streaming);
+	backgroundMusicPlayer->play(true);
+
 	engine.start();
 
 	std::cout << "DEMO: " << (demo->isChecked() ? "TRUE" : "FALSE") << " ANOTHER: " << (another->isChecked() ? "TRUE" : "FALSE") << std::endl;

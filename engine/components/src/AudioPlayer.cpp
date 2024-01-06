@@ -8,7 +8,7 @@ namespace gam703::engine::components
 	{
 	}
 
-	AudioPlayer::AudioPlayer(Transform& transform, const std::string& audioFile) : AudioPlayer(transform, *getEngine().getAudioEngine().getAudioSource(audioFile))
+	AudioPlayer::AudioPlayer(Transform& transform, const std::string& audioFile) : Component(transform), m_audioSource(*getEngine().getAudioEngine().getAudioSource(audioFile))
 	{
 	}
 

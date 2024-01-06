@@ -17,8 +17,8 @@ namespace  gam703::engine::audio
 		AudioEngine();
 		~AudioEngine();
 
-		void play(const std::string& audioFile) const { m_engine->play2D(audioFile.c_str()); }
-		void play(const AudioSource& audioSource) const { m_engine->play2D(audioSource.getSoundSource()); }
+		void play(const std::string& audioFile, bool loop = false) const { m_engine->play2D(audioFile.c_str(), loop); }
+		void play(const AudioSource& audioSource, bool loop = false) const { m_engine->play2D(audioSource.getSoundSource(), loop); }
 
 		AudioSource* getAudioSource(const std::string& audioFile);
 
