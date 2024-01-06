@@ -38,5 +38,4 @@ namespace gam703::engine::core
 		m_mouseScrollOffsetX = 0;
 		m_mouseScrollOffsetY = 0;
 	}
-
 } //gam703::engine::core
