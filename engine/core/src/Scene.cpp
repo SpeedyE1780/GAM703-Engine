@@ -17,16 +17,11 @@ namespace gam703::engine::core
 		return transform;
 	}
 
-	components::Transform* Scene::addTransform(const components::Transform* transform)
+	components::Transform* Scene::addTransform(const components::Transform& transform)
 	{
-		if (transform)
-		{
-			auto* newTransform = transform->clone();
-			m_transforms.push_back(std::unique_ptr<components::Transform>(newTransform));
-			return newTransform;
-		}
-
-		return nullptr;
+		auto* newTransform = transform.clone();
+		m_transforms.push_back(std::unique_ptr<components::Transform>(newTransform));
+		return newTransform;
 	}
 
 	void Scene::setActiveCamera(components::Camera* activeCamera)
