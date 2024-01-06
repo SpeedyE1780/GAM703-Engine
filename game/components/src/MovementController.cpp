@@ -11,6 +11,8 @@ namespace gam703::game::components
 		m_pitch(glm::degrees(transform.getRotation().x)),
 		m_yaw(glm::degrees(transform.getRotation().y))
 	{
+		m_bell = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/bell.wav");
+		m_bell->setAudioMixer(getEngine().getAudioEngine().getAudioMixer("SFX"));
 	}
 
 	MovementController* MovementController::clone(engine::components::Transform& transform) const
@@ -41,6 +43,11 @@ namespace gam703::game::components
 		if (inputHandler.isKeyPressed(GLFW_KEY_D))
 		{
 			m_transform.translate(glm::vec3(1.0f, 0.0f, 0.0f) * velocity);
+		}
+
+		if (inputHandler.isKeyPressed(GLFW_KEY_SPACE))
+		{
+			m_bell->play();
 		}
 
 		float xoffset = inputHandler.getMouseOffsetX() * m_mouseSensitivity;

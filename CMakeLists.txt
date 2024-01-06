@@ -24,8 +24,10 @@ add_subdirectory(3rd-party/glad)
 add_subdirectory(3rd-party/glm)
 add_subdirectory(3rd-party/gtest)
 add_subdirectory(3rd-party/imgui)
+add_subdirectory(3rd-party/irrklang)
 add_subdirectory(3rd-party/stb)
 
+add_subdirectory(engine/audio)
 add_subdirectory(engine/components)
 add_subdirectory(engine/core)
 add_subdirectory(engine/graphic)
@@ -35,6 +37,7 @@ add_subdirectory(engine/utility)
 add_subdirectory(game/components)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE game-components)
+target_link_libraries(${PROJECT_NAME} PRIVATE irrKlang)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>)
 
