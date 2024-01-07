@@ -48,3 +48,11 @@ add_custom_target(copy-files ALL
     )
 
 add_dependencies(${PROJECT_NAME} copy-files)
+
+find_package(Doxygen)
+if (Doxygen_FOUND)
+    add_subdirectory(docs)
+    add_dependencies(${PROJECT_NAME} engine-docs)
+else()
+	message(STATUS "Doxygen not found, no docs will be built")
+endif()
