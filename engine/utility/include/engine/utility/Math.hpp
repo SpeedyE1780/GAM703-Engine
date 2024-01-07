@@ -20,6 +20,12 @@ namespace gam703::engine::utility
 	/// @param max Maximum Value
 	/// @return Clamped value
 	ENGINE_UTILITY_API float clamp(float value, float min, float max);
+
+	/// @brief Generate a random value between a minimum and maximum value
+	/// @param minimum Minimum Value
+	/// @param maximum Maximum Value
+	/// @return Random value in range [minimum, maximum[
+	ENGINE_UTILITY_API float generateRandomNumber(float minimum, float maximum);
 }
 
 #endif // GAM703_ENGINE_UTILITY_MATH_HPP
