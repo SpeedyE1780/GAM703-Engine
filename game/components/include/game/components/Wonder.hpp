@@ -25,6 +25,7 @@ namespace gam703::game::components
 		bool m_isChasingPlayer = false;
 		engine::components::Transform* m_player = nullptr;
 		engine::components::AudioPlayer* m_alert = nullptr;
+		engine::components::AudioPlayer* m_deactivate = nullptr;
 	};
 }
 

@@ -11,7 +11,10 @@ namespace gam703::game::components
 	Wonder::Wonder(engine::components::Transform& transform, engine::components::Transform* playerTransform) : engine::components::Behavior(transform), m_origin(transform.getPosition()), m_player(playerTransform)
 	{
 		m_alert = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Alert.wav");
-		m_alert->setAudioMixer(getEngine().getAudioEngine().getAudioMixer("SFX"));
+		m_deactivate = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Deactivate.wav");
+		auto* sfxMixer = getEngine().getAudioEngine().getAudioMixer("SFX");
+		m_alert->setAudioMixer(sfxMixer);
+		m_deactivate->setAudioMixer(sfxMixer);
 	}
 
 	Wonder* Wonder::clone(engine::components::Transform& transform) const
@@ -23,10 +26,15 @@ namespace gam703::game::components
 	{
 		if (glm::distance(m_origin, m_player->getPosition()) > m_radius)
 		{
+			if (m_isChasingPlayer)
+			{
+				m_deactivate->play();
+				m_isChasingPlayer = false;
+			}
+
 			m_angle += deltaTime;
 			m_transform.setPosition(m_origin + glm::vec3(glm::cos(m_angle), 0.0f, glm::sin(m_angle)) * m_radius);
 			m_transform.setRotation(0.0f, m_angle, 0.0f);
-			m_isChasingPlayer = false;
 		}
 		else
 		{
