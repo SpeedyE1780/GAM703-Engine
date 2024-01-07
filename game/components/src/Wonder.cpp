@@ -12,9 +12,11 @@ namespace gam703::game::components
 	{
 		m_alert = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Alert.wav");
 		m_deactivate = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Deactivate.wav");
+		m_battleStart = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Battle Start.wav");
 		auto* sfxMixer = getEngine().getAudioEngine().getAudioMixer("SFX");
 		m_alert->setAudioMixer(sfxMixer);
 		m_deactivate->setAudioMixer(sfxMixer);
+		m_battleStart->setAudioMixer(sfxMixer);
 	}
 
 	Wonder* Wonder::clone(engine::components::Transform& transform) const
@@ -24,7 +26,8 @@ namespace gam703::game::components
 
 	void Wonder::tick(float deltaTime)
 	{
-		if (glm::distance(m_origin, m_player->getPosition()) > m_radius)
+		float playerDistanceToOrign = glm::distance(m_origin, m_player->getPosition());
+		if (playerDistanceToOrign > m_radius)
 		{
 			if (m_isChasingPlayer)
 			{
@@ -45,6 +48,12 @@ namespace gam703::game::components
 			}
 
 			m_transform.setPosition(engine::utility::moveTowards(m_transform.getPosition(), m_player->getPosition(), deltaTime));
+			float distanceToPlayer = glm::distance(m_transform.getPosition(), m_player->getPosition());
+
+			if (distanceToPlayer - deltaTime < 0.2f)
+			{
+				m_battleStart->play();
+			}
 		}
 	}
 }
