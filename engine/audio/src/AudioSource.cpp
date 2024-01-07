@@ -20,8 +20,11 @@ namespace gam703::engine::audio
 
 	void AudioSource::setVolume(float volume)
 	{
-		m_volume = utility::clamp(volume, 0.0f, 1.0f);
-		updateVolume();
+		if (m_volume != volume)
+		{
+			m_volume = utility::clamp(volume, 0.0f, 1.0f);
+			updateVolume();
+		}
 	}
 
 	float AudioSource::getOutputVolume() const

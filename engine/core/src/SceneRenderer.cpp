@@ -8,10 +8,10 @@
 
 namespace gam703::engine::core
 {
-	void SceneRenderer::setAmbientLight(const glm::vec3& color, float strength)
+	void SceneRenderer::setAmbientLight(const glm::vec3& color, float intensity)
 	{
 		m_ambientLight.m_color = color;
-		m_ambientLight.m_intensity = strength;
+		m_ambientLight.m_intensity = intensity;
 		m_shouldUpdateAmbientLight = true;
 	}
 

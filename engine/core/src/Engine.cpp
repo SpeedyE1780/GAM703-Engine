@@ -42,7 +42,6 @@ namespace gam703::engine::core
 			}
 		}
 
-
 		void initializeIMGUI(GLFWwindow* window)
 		{
 			// Setup Dear ImGui context
@@ -114,5 +113,4 @@ namespace gam703::engine::core
 	{
 		m_isRunning = false;
 	}
-
 } //gam703::engine::core

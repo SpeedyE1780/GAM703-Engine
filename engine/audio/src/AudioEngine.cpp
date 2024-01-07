@@ -33,6 +33,11 @@ namespace gam703::engine::audio
 
 	AudioMixer* AudioEngine::addAudioMixer(const std::string& name)
 	{
+		if (auto audioMixer = m_audioMixers.find(name); audioMixer != m_audioMixers.end())
+		{
+			return &audioMixer->second;
+		}
+
 		m_audioMixers.emplace(name, AudioMixer());
 		return &m_audioMixers.at(name);
 	}

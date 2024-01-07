@@ -1,7 +1,6 @@
 #ifndef GAM703_ENGINE_AUDIO_AUDIO_MIXER_FWD_HPP
 #define GAM703_ENGINE_AUDIO_AUDIO_MIXER_FWD_HPP
 
-
 namespace gam703::engine::audio
 {
 	class AudioMixer;
