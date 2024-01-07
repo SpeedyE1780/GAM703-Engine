@@ -49,7 +49,7 @@ namespace gam703::engine::components
 
 	void Transform::setPosition(const glm::vec3& position)
 	{
-		m_shouldCalculateTransform = m_position != position;
+		m_shouldCalculateTransform |= m_position != position;
 		m_position = position;
 	}
 
@@ -60,7 +60,7 @@ namespace gam703::engine::components
 
 	void Transform::setRotation(const glm::vec3& eulerAngles)
 	{
-		m_shouldCalculateTransform = m_shouldUpdateDirectionVectors = m_rotation != eulerAngles;
+		m_shouldCalculateTransform |= m_shouldUpdateDirectionVectors = m_rotation != eulerAngles;
 		m_rotation = eulerAngles;
 	}
 
@@ -71,7 +71,7 @@ namespace gam703::engine::components
 
 	void Transform::setScale(const glm::vec3& scale)
 	{
-		m_shouldCalculateTransform = m_scale != scale;
+		m_shouldCalculateTransform |= m_scale != scale;
 		m_scale = scale;
 	}
 
