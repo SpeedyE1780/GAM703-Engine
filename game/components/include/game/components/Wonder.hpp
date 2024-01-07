@@ -1,6 +1,7 @@
 #ifndef GAM703_GAME_COMPONENTS_WONDER_HPP
 #define GAM703_GAME_COMPONENTS_WONDER_HPP
 
+#include <engine/components/AudioPlayer.hpp>
 #include <engine/components/Behavior.hpp>
 
 #include <game/components/Config.hpp>
@@ -21,7 +22,11 @@ namespace gam703::game::components
 		glm::vec3 m_origin;
 		float m_radius = 4.5f;
 		float m_angle = 0.0f;
+		bool m_isChasingPlayer = false;
 		engine::components::Transform* m_player = nullptr;
+		engine::components::AudioPlayer* m_alert = nullptr;
+		engine::components::AudioPlayer* m_deactivate = nullptr;
+		engine::components::AudioPlayer* m_battleStart = nullptr;
 	};
 }
 

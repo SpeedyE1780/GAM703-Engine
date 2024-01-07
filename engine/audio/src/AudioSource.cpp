@@ -4,6 +4,8 @@
 
 #include <engine/utility/Math.hpp>
 
+#include <iostream>
+
 namespace gam703::engine::audio
 {
 	AudioSource::AudioSource(AudioEngine& engine, irrklang::ISoundSource& source) : m_engine(engine), m_soundSource(source)
@@ -12,9 +14,16 @@ namespace gam703::engine::audio
 
 	AudioSource::~AudioSource()
 	{
-		if (m_activeSound)
+		try
 		{
-			m_activeSound->drop();
+			if (m_activeSound)
+			{
+				m_activeSound->drop();
+			}
+		}
+		catch(...)
+		{
+			std::cout << "WEIRD SOUND DROP ERROR" << std::endl;
 		}
 	}
 
