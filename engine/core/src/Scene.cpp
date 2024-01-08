@@ -24,6 +24,22 @@ namespace gam703::engine::core
 		return newTransform;
 	}
 
+	void Scene::removeTransform(const components::Transform& transform)
+	{
+		auto newEnd = std::remove_if(begin(m_transforms), end(m_transforms), [&transform, this](std::unique_ptr<components::Transform>& sceneTransform)
+			{
+				if (&transform == sceneTransform.get())
+				{
+					m_deletedTransforms.emplace_back(std::move(sceneTransform));
+					return true;
+				}
+
+				return false;
+			});
+
+		m_transforms.erase(newEnd, end(m_transforms));
+	}
+
 	void Scene::setActiveCamera(components::Camera* activeCamera)
 	{
 		m_sceneRenderer.setActiveCamera(activeCamera);
@@ -32,13 +48,18 @@ namespace gam703::engine::core
 
 	void Scene::updateScene(float deltaTime)
 	{
-		std::for_each(begin(m_transforms), end(m_transforms), [deltaTime](std::unique_ptr<components::Transform>& transform)
+		std::for_each(rbegin(m_transforms), rend(m_transforms), [deltaTime](std::unique_ptr<components::Transform>& transform)
 			{
 				transform->updateBehaviors(deltaTime);
 				transform->calculateTransformMatrix();
 			});
 
 		m_sceneRenderer.render();
+
+		if (m_deletedTransforms.size() > 0)
+		{
+			m_deletedTransforms.clear();
+		}
 	}
 
 	void Scene::updateSceneProjectionMatrix()

@@ -47,6 +47,10 @@ namespace gam703::engine::core
 		/// @return A clone of the given transform
 		components::Transform* addTransform(const components::Transform& transform);
 
+		/// @brief Remove transform from the scene
+		/// @param transform The transform that will be removed
+		void removeTransform(const components::Transform& transform);
+
 		/// @brief Get the camera currently rendering the scene
 		/// @return The camera currently rendering the scene
 		components::Camera* getActiveCamera() { return m_sceneRenderer.getActiveCamera(); }
@@ -73,6 +77,8 @@ namespace gam703::engine::core
 		SceneRenderer m_sceneRenderer{};
 		/// @brief All the transform in the scene
 		std::vector<std::unique_ptr<components::Transform>> m_transforms{};
+		/// @brief The transforms that needs to be deleted
+		std::vector<std::unique_ptr<components::Transform>> m_deletedTransforms{};
 	};
 }
 
