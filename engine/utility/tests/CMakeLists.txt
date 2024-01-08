@@ -16,7 +16,7 @@ add_test(test_all ${PROJECT_NAME})
 add_custom_target(copy-tests-files ALL
     COMMAND ${CMAKE_COMMAND} -E copy_if_different 
     ${PROJECT_SOURCE_DIR}/ReadTest.txt
-    ${CMAKE_BINARY_DIR}/bin/$<CONFIG>/ReadTest.txt
+    ${COPY_DIRECTORY_PATH}/ReadTest.txt
     )
 
 add_dependencies(${PROJECT_NAME} copy-tests-files)

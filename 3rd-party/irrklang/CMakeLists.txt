@@ -10,7 +10,7 @@ target_link_libraries(${PROJECT_NAME} INTERFACE ${irrKlang-prebuilt})
 add_custom_target(copy-irrKlang-dll ALL
     COMMAND ${CMAKE_COMMAND} -E copy_directory
     ${PROJECT_SOURCE_DIR}/dll
-    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>
+    ${COPY_DIRECTORY_PATH}/
     )
 
 add_dependencies(${PROJECT_NAME} copy-irrKlang-dll)
