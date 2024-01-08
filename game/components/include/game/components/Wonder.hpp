@@ -13,7 +13,7 @@ namespace gam703::game::components
 	class GAME_COMPONENTS_API Wonder : public engine::components::Behavior
 	{
 	public:
-		Wonder(engine::components::Transform& transform, engine::components::Transform* playerTransform);
+		Wonder(engine::components::Transform& transform, engine::components::Transform* playerTransform, const glm::vec3& origin, float radius = 4.5f);
 
 		virtual Wonder* clone(engine::components::Transform& transform) const override;
 		virtual void tick(float deltaTime) override;

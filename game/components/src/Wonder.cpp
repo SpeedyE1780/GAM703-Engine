@@ -8,7 +8,7 @@
 
 namespace gam703::game::components
 {
-	Wonder::Wonder(engine::components::Transform& transform, engine::components::Transform* playerTransform) : engine::components::Behavior(transform), m_origin(transform.getPosition()), m_player(playerTransform)
+	Wonder::Wonder(engine::components::Transform& transform, engine::components::Transform* playerTransform, const glm::vec3& origin, float radius) : engine::components::Behavior(transform), m_origin(origin), m_player(playerTransform), m_radius(radius)
 	{
 		m_alert = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Alert.wav");
 		m_deactivate = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Deactivate.wav");
@@ -21,14 +21,14 @@ namespace gam703::game::components
 
 	Wonder* Wonder::clone(engine::components::Transform& transform) const
 	{
-		return new Wonder(transform, m_player);
+		return new Wonder(transform, m_player, m_origin, m_radius);
 	}
 
 	void Wonder::tick(float deltaTime)
 	{
-		float playerDistanceToOrign = glm::distance(m_origin, m_player->getPosition());
+		float distanceToPlayer = glm::distance(m_transform.getPosition(), m_player->getPosition());
 
-		if (playerDistanceToOrign > m_radius)
+		if (distanceToPlayer > m_radius)
 		{
 			if (m_isChasingPlayer)
 			{

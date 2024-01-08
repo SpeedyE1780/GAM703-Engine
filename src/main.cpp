@@ -14,6 +14,7 @@
 #include <engine/gui/Text.hpp>
 
 #include <game/components/MovementController.hpp>
+#include <game/components/Spawner.hpp>
 #include <game/components/Wonder.hpp>
 
 #include <iostream>
@@ -22,26 +23,20 @@
 namespace engine = gam703::engine;
 namespace game = gam703::game;
 
-static engine::components::Transform* addGroundPlane(engine::core::Engine& engine,
+static void addGroundPlane(engine::core::Engine& engine,
 	engine::components::Transform* player,
 	const glm::vec3& position = glm::vec3(0.0f, 0.0f, 0.0f),
 	const glm::vec3& mainColor = glm::vec3(1.0f, 1.0f, 1.0f),
 	const glm::vec3& secondColor = glm::vec3(0.0f, 0.0f, 0.0f))
 {
-	const engine::graphic::Model* backpackModel = engine.getResourceManager().getModel("resources/Models/backpack/backpack.obj");
 	const engine::graphic::Model* cubeModel = engine.getResourceManager().getModel("resources/Models/cube/cube.obj");
 	engine::graphic::Shader checkeredShader{ "resources/Shaders/Default.vert", "resources/Shaders/Checkermap.frag" };
 
-	auto* backpack = engine.getScene().addTransform(position + glm::vec3(0.0f, 2.1f, 0.0f));
-	backpack->addComponent<engine::components::Renderer>(backpackModel);
-	backpack->addBehavior<game::components::Wonder>(player);
-
-	auto* cube = engine.getScene().addTransform(position, glm::vec3(), glm::vec3(5.0f, 0.1f, 5.0f));
+	auto* cube = engine.getScene().addTransform(position, glm::vec3(), glm::vec3(5.0f, 0.0f, 5.0f));
+	cube->addComponent<game::components::Spawner>(player, 10, 5.0f);
 	auto* renderer = cube->addComponent<engine::components::Renderer>(cubeModel, checkeredShader);
 	renderer->getMaterial().setColor(mainColor);
 	renderer->getMaterial().getShader().setVec3("secondColor", secondColor);
-
-	return cube;
 }
 
 int main()
