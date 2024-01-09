@@ -76,12 +76,21 @@ namespace gam703::engine::core
 		return nullptr;
 	}
 
-	graphic::Shader ResourceManager::getShader(const std::filesystem::path& vertexSource, const std::filesystem::path& fragmentSource)
+	graphic::Shader* ResourceManager::getShader(const std::filesystem::path& vertexSource, const std::filesystem::path& fragmentSource)
 	{
-		return graphic::Shader(getShaderSource(vertexSource, GL_VERTEX_SHADER), getShaderSource(fragmentSource, GL_FRAGMENT_SHADER));
+		std::string key = vertexSource.string() + fragmentSource.string();
+
+		if (auto shader = m_shaders.find(key); shader != m_shaders.end())
+		{
+			return shader->second.get();
+		}
+
+		auto* shader = new graphic::Shader(getShaderSource(vertexSource, GL_VERTEX_SHADER), getShaderSource(fragmentSource, GL_FRAGMENT_SHADER));
+		m_shaders[key] = std::unique_ptr<graphic::Shader>(shader);
+		return shader;
 	}
 
-	graphic::Shader ResourceManager::getDefaultShader()
+	graphic::Shader* ResourceManager::getDefaultShader()
 	{
 		return getShader("resources/Shaders/Default.vert", "resources/Shaders/Default.frag");
 	}

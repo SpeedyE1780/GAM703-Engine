@@ -30,13 +30,13 @@ static void addGroundPlane(engine::core::Engine& engine,
 	const glm::vec3& secondColor = glm::vec3(0.0f, 0.0f, 0.0f))
 {
 	const engine::graphic::Model* cubeModel = engine.getResourceManager().getModel("resources/Models/cube/cube.obj");
-	engine::graphic::Shader checkeredShader = engine.getResourceManager().getShader("resources/Shaders/Default.vert", "resources/Shaders/Checkermap.frag");
+	engine::graphic::Shader* checkeredShader = engine.getResourceManager().getShader("resources/Shaders/Default.vert", "resources/Shaders/Checkermap.frag");
 
 	auto* cube = engine.getScene().addTransform(position, glm::vec3(), glm::vec3(5.0f, 0.0f, 5.0f));
-	cube->addComponent<game::components::Spawner>(player, 10, 5.0f);
-	auto* renderer = cube->addComponent<engine::components::Renderer>(cubeModel, checkeredShader);
+	cube->addComponent<game::components::Spawner>(player, 8000, 5.0f);
+	auto* renderer = cube->addComponent<engine::components::Renderer>(cubeModel, *checkeredShader);
 	renderer->getMaterial().setColor(mainColor);
-	renderer->getMaterial().getShader().setVec3("secondColor", secondColor);
+	renderer->getMaterial().setSecondColor(secondColor);
 }
 
 int main()

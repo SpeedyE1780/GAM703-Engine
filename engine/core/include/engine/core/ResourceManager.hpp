@@ -38,11 +38,11 @@ namespace gam703::engine::core
 		/// @param vertexSource Vertex shader source code
 		/// @param fragmentSource Fragment shader source code
 		/// @return The loaded/newly added shader or nullptr if it couldn't be found
-		graphic::Shader getShader(const std::filesystem::path& vertexSource, const std::filesystem::path& fragmentSource);
+		graphic::Shader* getShader(const std::filesystem::path& vertexSource, const std::filesystem::path& fragmentSource);
 
 		/// @brief Return the default engine shader
 		/// @return getShader("resources/Shaders/Default.vert", "resources/Shaders/Default.frag")
-		graphic::Shader getDefaultShader();
+		graphic::Shader* getDefaultShader();
 
 	private:
 		/// @brief Get/Load a shader's source code
@@ -57,6 +57,8 @@ namespace gam703::engine::core
 		std::map<std::filesystem::path, std::unique_ptr<graphic::Texture>> m_textures{};
 		/// @brief List of all loaded models
 		std::map<std::filesystem::path, std::unique_ptr<graphic::Model>> m_models{};
+		/// @brief List of all loaded shaders
+		std::map<std::string, std::unique_ptr<graphic::Shader>> m_shaders;
 		/// @brief List of all loaded vertex/fragment shaders
 		std::map<std::filesystem::path, std::unique_ptr<graphic::ShaderSource>> m_shaderSources{};
 	};

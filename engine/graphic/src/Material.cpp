@@ -3,7 +3,7 @@
 
 namespace gam703::engine::graphic
 {
-	Material::Material(const Shader& shader) : m_shader(shader)
+	Material::Material(Shader& shader) : m_shader(shader)
 	{
 	}
 
@@ -11,14 +11,12 @@ namespace gam703::engine::graphic
 		m_color(material.m_color),
 		m_shader(material.m_shader)
 	{
-		m_shader.setColor(m_color);
 	}
 
 	Material& Material::operator=(const Material& material)
 	{
 		m_color = material.m_color;
 		m_shader = material.m_shader;
-		m_shader.setColor(m_color);
 		return *this;
 	}
 
@@ -42,9 +40,9 @@ namespace gam703::engine::graphic
 		m_shader.setHeightSampler(heightIndex, textureIndex);
 	}
 
-	void Material::setColor(const glm::vec3& color)
+	void Material::updateShaderUniforms() const
 	{
-		m_color = color;
 		m_shader.setColor(m_color);
+		m_shader.setVec3("secondColor", m_secondColor);
 	}
 }

@@ -5,7 +5,7 @@
 
 namespace gam703::engine::components
 {
-	Renderer::Renderer(Transform& transform, const graphic::Model* model) : Component(transform), m_model(model), m_material(getEngine().getResourceManager().getDefaultShader())
+	Renderer::Renderer(Transform& transform, const graphic::Model* model) : Component(transform), m_model(model), m_material(*getEngine().getResourceManager().getDefaultShader())
 	{
 		getScene().getSceneRenderer().addRenderer(this);
 	}
@@ -27,6 +27,7 @@ namespace gam703::engine::components
 
 	void Renderer::render(const glm::mat4& viewMatrix, const glm::vec3& cameraPosition) const
 	{
+		m_material.updateShaderUniforms();
 		auto& shader = m_material.getShader();
 		shader.use();
 		shader.setMat4("view", viewMatrix);
