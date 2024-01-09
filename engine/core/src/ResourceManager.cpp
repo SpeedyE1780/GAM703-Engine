@@ -2,6 +2,10 @@
 
 #include <engine/graphic/Texture.hpp>
 
+#include <engine/utility/File.hpp>
+
+#include <glad/glad.h>
+
 #include <iostream>
 
 namespace gam703::engine::core
@@ -72,19 +76,27 @@ namespace gam703::engine::core
 		return nullptr;
 	}
 
-	const graphic::Shader* ResourceManager::getShader(const std::filesystem::path& vertexSource, const std::filesystem::path& fragmentSource)
+	graphic::Shader ResourceManager::getShader(const std::filesystem::path& vertexSource, const std::filesystem::path& fragmentSource)
 	{
-		ShaderPaths paths{ vertexSource, fragmentSource };
+		return graphic::Shader(getShaderSource(vertexSource, GL_VERTEX_SHADER), getShaderSource(fragmentSource, GL_FRAGMENT_SHADER));
+	}
 
-		if (auto shader = m_shaders.find(paths); shader != m_shaders.end())
+	graphic::Shader ResourceManager::getDefaultShader()
+	{
+		return getShader("resources/Shaders/Default.vert", "resources/Shaders/Default.frag");
+	}
+
+	graphic::ShaderSource* ResourceManager::getShaderSource(const std::filesystem::path& shaderSourcePath, int shaderType)
+	{
+		if (auto shaderSource = m_shaderSources.find(shaderSourcePath); shaderSource != m_shaderSources.end())
 		{
-			return shader->second.get();
+			return shaderSource->second.get();
 		}
 
-		graphic::Shader* shader = new graphic::Shader(vertexSource.string(), fragmentSource.string());
-		m_shaders[paths] = std::unique_ptr<graphic::Shader>(shader);
-		std::cout << "SHADER LOADED COUNT: " << m_shaders.size() << std::endl;
+		graphic::ShaderSource* shaderSource = new graphic::ShaderSource(utility::readFile(shaderSourcePath), shaderType);
+		m_shaderSources[shaderSourcePath] = std::unique_ptr<graphic::ShaderSource>(shaderSource);
+		std::cout << "SHADER SOURCE LOADED COUNT: " << m_shaderSources.size() << std::endl;
 
-		return shader;
+		return shaderSource;
 	}
 }

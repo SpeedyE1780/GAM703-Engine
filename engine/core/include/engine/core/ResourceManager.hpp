@@ -38,26 +38,18 @@ namespace gam703::engine::core
 		/// @param vertexSource Vertex shader source code
 		/// @param fragmentSource Fragment shader source code
 		/// @return The loaded/newly added shader or nullptr if it couldn't be found
-		const graphic::Shader* getShader(const std::filesystem::path& vertexSource, const std::filesystem::path& fragmentSource);
+		graphic::Shader getShader(const std::filesystem::path& vertexSource, const std::filesystem::path& fragmentSource);
+
+		/// @brief Return the default engine shader
+		/// @return getShader("resources/Shaders/Default.vert", "resources/Shaders/Default.frag")
+		graphic::Shader getDefaultShader();
 
 	private:
-		/// @brief ShaderPaths is used as a key to retrive Shader it stores the path to the vertex and fragment shader source
-		struct ShaderPaths
-		{
-			/// @brief Path to vertex shader
-			std::filesystem::path m_vertexShader;
-			/// @brief Path to fragment shader
-			std::filesystem::path m_fragmentShader;
-
-			/// @brief ShaderPathsCompare is used to compare ShaderPaths in the map
-			struct ShaderPathsCompare
-			{
-				bool operator()(const ShaderPaths& lhs, const ShaderPaths& rhs) const
-				{
-					return lhs.m_vertexShader < rhs.m_vertexShader && lhs.m_fragmentShader < rhs.m_fragmentShader;
-				}
-			};
-		};
+		/// @brief Get/Load a shader's source code
+		/// @param shaderSourcePath The shader source code path
+		/// @param shaderType The type of shader (eg: Vertex/Fragment/Geometry)
+		/// @return A glShader to create a shader
+		graphic::ShaderSource* getShaderSource(const std::filesystem::path& shaderSourcePath, int shaderType);
 
 		/// @brief The model loader class used to load models from file
 		graphic::ModelLoader m_modelLoader;
@@ -65,8 +57,8 @@ namespace gam703::engine::core
 		std::map<std::filesystem::path, std::unique_ptr<graphic::Texture>> m_textures{};
 		/// @brief List of all loaded models
 		std::map<std::filesystem::path, std::unique_ptr<graphic::Model>> m_models{};
-		/// @brief List of all loaded shaders;
-		std::map<ShaderPaths, std::unique_ptr<graphic::Shader>, ShaderPaths::ShaderPathsCompare> m_shaders{};
+		/// @brief List of all loaded vertex/fragment shaders
+		std::map<std::filesystem::path, std::unique_ptr<graphic::ShaderSource>> m_shaderSources{};
 	};
 }
 

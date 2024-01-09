@@ -53,7 +53,7 @@ namespace gam703::engine::components
 
 	protected:
 		/// @brief The material used to set the model properties (eg: Color, Diffuse, Specular...)
-		graphic::Material m_material{};
+		graphic::Material m_material;
 		/// @brief The 3D model being currently rendered
 		const graphic::Model* m_model = nullptr;
 	};

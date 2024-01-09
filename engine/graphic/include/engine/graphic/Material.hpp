@@ -12,9 +12,6 @@ namespace gam703::engine::graphic
 	class ENGINE_GRAPHIC_API Material
 	{
 	public:
-		/// @brief Create material with default shader
-		Material();
-
 		/// @brief Create material with given shader
 		/// @param shader Shader that will be used to create material shader
 		Material(const Shader& shader);

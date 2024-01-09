@@ -3,10 +3,6 @@
 
 namespace gam703::engine::graphic
 {
-	Material::Material() : m_shader(createDefaultShader())
-	{
-	}
-
 	Material::Material(const Shader& shader) : m_shader(shader)
 	{
 	}

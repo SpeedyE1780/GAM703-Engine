@@ -35,4 +35,6 @@ target_link_libraries(${PROJECT_NAME} PUBLIC engine-components)
 target_link_libraries(${PROJECT_NAME} PUBLIC engine-graphic)
 target_link_libraries(${PROJECT_NAME} PUBLIC engine-gui)
 
+target_link_libraries(${PROJECT_NAME} PRIVATE engine-utility)
+
 add_subdirectory(tests)

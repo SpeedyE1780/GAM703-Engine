@@ -1,9 +1,11 @@
 #include <engine/components/Renderer.hpp>
 #include <engine/components/Transform.hpp>
 
+#include <engine/core/Engine.hpp>
+
 namespace gam703::engine::components
 {
-	Renderer::Renderer(Transform& transform, const graphic::Model* model) : Component(transform), m_model(model)
+	Renderer::Renderer(Transform& transform, const graphic::Model* model) : Component(transform), m_model(model), m_material(getEngine().getResourceManager().getDefaultShader())
 	{
 		getScene().getSceneRenderer().addRenderer(this);
 	}
