@@ -16,6 +16,7 @@ namespace gam703::engine::utility
 
 				if (file.is_open())
 				{
+					std::cout << "READING " << filePath << std::endl;
 					file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 					std::stringstream fileContent{};
 					fileContent << file.rdbuf();

@@ -12,12 +12,9 @@ namespace gam703::engine::graphic
 	class ENGINE_GRAPHIC_API Material
 	{
 	public:
-		/// @brief Create material with default shader
-		Material();
-
 		/// @brief Create material with given shader
 		/// @param shader Shader that will be used to create material shader
-		Material(const Shader& shader);
+		Material(Shader& shader);
 
 		/// @brief Create material based on given material
 		/// @param material Material that will be used to create material
@@ -34,7 +31,15 @@ namespace gam703::engine::graphic
 
 		/// @brief Set material color
 		/// @param color New material color
-		void setColor(const glm::vec3& color);
+		void setColor(const glm::vec3& color) { m_color = color; }
+
+		/// @brief Get the material second color
+		/// @return The material second color
+		const glm::vec3& getSecondColor() const { return m_secondColor; }
+
+		/// @brief Set the material second color
+		/// @param secondColor The material second color
+		void setSecondColor(const glm::vec3& secondColor) { m_secondColor = secondColor; }
 
 		/// @brief Set diffuse texture in shader
 		/// @param diffuseIndex Diffuse index in shader
@@ -64,11 +69,16 @@ namespace gam703::engine::graphic
 		/// @return Material shader
 		const Shader& getShader() const { return m_shader; }
 
+		/// @brief Update shader uniforms to reflect the materials values
+		void updateShaderUniforms() const;
+
 	private:
 		/// @brief Material tint color
 		glm::vec3 m_color = glm::vec3(1, 1, 1);
+		/// @brief Material second color (eg: Checkermap)
+		glm::vec3 m_secondColor = glm::vec3(1, 1, 1);
 		/// @brief Shader used to draw 3D model
-		Shader m_shader;
+		Shader& m_shader;
 	};
 }
 

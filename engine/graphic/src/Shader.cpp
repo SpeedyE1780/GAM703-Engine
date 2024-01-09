@@ -1,7 +1,5 @@
 #include <engine/graphic/Shader.hpp>
 
-#include <engine/utility/File.hpp>
-
 #include <glad/glad.h>
 
 #include <glm/gtc/type_ptr.hpp>
@@ -63,22 +61,39 @@ namespace gam703::engine::graphic
 		}
 	}
 
-	Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath) : m_vertexShaderPath(vertexShaderPath), m_fragmentShaderPath(fragmentShaderPath)
+	ShaderSource::ShaderSource(const std::string& sourceCode, int shaderType)
+	{
+		if (shaderType == GL_VERTEX_SHADER)
+		{
+			m_shaderID = createVertexShader(sourceCode);
+		}
+		else if (shaderType == GL_FRAGMENT_SHADER)
+		{
+			m_shaderID = createFragmentShader(sourceCode);
+		}
+	}
+
+	ShaderSource::~ShaderSource()
+	{
+		glDeleteShader(m_shaderID);
+	}
+
+	Shader::Shader(ShaderSource* vertexShader, ShaderSource* fragmentShader) : m_vertex(vertexShader), m_fragment(fragmentShader)
 	{
 		createShaderProgram();
 	}
 
-	Shader::Shader(const Shader& shader) : m_vertexShaderPath(shader.m_vertexShaderPath), m_fragmentShaderPath(shader.m_fragmentShaderPath)
+	Shader::Shader(const Shader& shader) : m_vertex(shader.m_vertex), m_fragment(shader.m_fragment)
 	{
 		createShaderProgram();
 	}
 
 	Shader& Shader::operator=(const Shader& shader)
 	{
-		if (m_vertexShaderPath != shader.m_vertexShaderPath || m_fragmentShaderPath != shader.m_fragmentShaderPath)
+		if (m_vertex != shader.m_vertex || m_fragment != shader.m_fragment)
 		{
-			m_vertexShaderPath = shader.m_vertexShaderPath;
-			m_fragmentShaderPath = shader.m_fragmentShaderPath;
+			m_vertex = shader.m_vertex;
+			m_fragment = shader.m_fragment;
 			glDeleteProgram(m_id);
 			createShaderProgram();
 		}
@@ -205,20 +220,11 @@ namespace gam703::engine::graphic
 
 	void Shader::createShaderProgram()
 	{
-		std::string vertexCode = utility::readFile(m_vertexShaderPath);
-		std::string fragmentCode = utility::readFile(m_fragmentShaderPath);
-
-		unsigned int vertex = createVertexShader(vertexCode);
-		unsigned int fragment = createFragmentShader(fragmentCode);
-
 		m_id = glCreateProgram();
-		glAttachShader(m_id, vertex);
-		glAttachShader(m_id, fragment);
+		glAttachShader(m_id, m_vertex->getShaderID());
+		glAttachShader(m_id, m_fragment->getShaderID());
 		glLinkProgram(m_id);
 		checkCompileErrors(m_id, "PROGRAM");
-
-		glDeleteShader(vertex);
-		glDeleteShader(fragment);
 
 		setDefaultValues();
 	}
@@ -228,10 +234,5 @@ namespace gam703::engine::graphic
 		setColor(glm::vec3(1.0f, 1.0f, 1.0f));
 		setFloat("material.shininess", 32.0f);
 		setFloat("material.specularStrength", 0.5f);
-	}
-
-	Shader createDefaultShader()
-	{
-		return Shader("resources/Shaders/Default.vert", "resources/Shaders/Default.frag");
 	}
 }

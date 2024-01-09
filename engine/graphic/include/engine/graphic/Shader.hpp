@@ -9,6 +9,27 @@
 
 namespace gam703::engine::graphic
 {
+	/// @brief ShaderSource wraps open gl shaders to optimize reading shader source
+	class ENGINE_GRAPHIC_API ShaderSource
+	{
+	public:
+		/// @brief Create a gl shader using the provided source code
+		/// @param sourceCode The shader source code
+		/// @param shaderType The type of shader (eg: Vertex/Fragment/Geometry)
+		ShaderSource(const std::string& sourceCode, int shaderType);
+
+		/// @brief Delete the shader
+		~ShaderSource();
+
+		/// @brief Get the gl shader id
+		/// @return The gl shader id
+		unsigned int getShaderID() const { return m_shaderID; }
+
+	private:
+		/// @brief The gl shader id
+		int m_shaderID = 0;
+	};
+
 	/// @brief Shader contains all information passed to GPU to render 3D model
 	class ENGINE_GRAPHIC_API Shader
 	{
@@ -16,7 +37,7 @@ namespace gam703::engine::graphic
 		/// @brief Create Shader from vertex and fragment shader
 		/// @param vertexShaderPath Vertex Shader source code path
 		/// @param fragmentShaderPath Fragment Shader source code path
-		Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
+		Shader(ShaderSource* vertexShader, ShaderSource* fragmentShader);
 
 		/// @brief Create shader using other shader vertex and fragment shader
 		/// @param shader Contains vertex shader source and fragment shader source path
@@ -137,16 +158,11 @@ namespace gam703::engine::graphic
 
 		/// @brief Shader program id
 		unsigned int m_id = 0;
-		/// @brief Vertex shader code path
-		std::string m_vertexShaderPath;
-		/// @brief Fragment shader code path
-		std::string m_fragmentShaderPath;
+		/// @brief Vertex shader id
+		ShaderSource* m_vertex;
+		/// @brief Fragment shader id
+		ShaderSource* m_fragment;
 	};
-
-	/// @brief Create default engine shader
-	/// @return Shader("resources/Shaders/Default.vert", "resources/Shaders/Default.frag")
-	ENGINE_GRAPHIC_API Shader createDefaultShader();
-
 }
 
 #endif // GAM703_ENGINE_GRAPHIC_SHADER_HPP
