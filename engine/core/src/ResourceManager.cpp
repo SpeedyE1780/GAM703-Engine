@@ -71,4 +71,20 @@ namespace gam703::engine::core
 		std::cout << "ERROR LOADING MODEL" << std::endl;
 		return nullptr;
 	}
+
+	const graphic::Shader* ResourceManager::getShader(const std::filesystem::path& vertexSource, const std::filesystem::path& fragmentSource)
+	{
+		ShaderPaths paths{ vertexSource, fragmentSource };
+
+		if (auto shader = m_shaders.find(paths); shader != m_shaders.end())
+		{
+			return shader->second.get();
+		}
+
+		graphic::Shader* shader = new graphic::Shader(vertexSource.string(), fragmentSource.string());
+		m_shaders[paths] = std::unique_ptr<graphic::Shader>(shader);
+		std::cout << "SHADER LOADED COUNT: " << m_shaders.size() << std::endl;
+
+		return shader;
+	}
 }
