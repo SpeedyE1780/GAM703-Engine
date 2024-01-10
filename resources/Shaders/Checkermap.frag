@@ -3,6 +3,7 @@ out vec4 FragColor;
 
 in vec2 TexCoords;
 in vec3 Position;
+in vec3 LocalPosition;
 in vec3 Normal;
 
 struct Material
@@ -136,7 +137,7 @@ void main()
 
     vec3 outputColor = calculateAmbientLight() + calculateDirectionalLight(normal, viewDirection) + calculatePointLight(normal, viewDirection) + calculateSpotLight(normal, viewDirection);
 
-    vec3 pos = floor(Position / 10);
+    vec3 pos = floor(LocalPosition / 1);
     float patternMask = mod(pos.x + mod(pos.y, 2) + mod(pos.z, 2), 2);
     FragColor = patternMask * vec4(material.color, 1) + (1 - patternMask) * vec4(secondColor, 1);
     FragColor *= vec4(outputColor, 1);
