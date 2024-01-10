@@ -6,12 +6,14 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE GAME_COMPONENTS_DLL GAME_COMP
 
 target_sources(${PROJECT_NAME} PRIVATE
 #CPP
+src/FollowTarget.cpp
 src/MovementController.cpp
 src/Spawner.cpp
 src/Wonder.cpp
 
 #HPP
 include/game/components/Config.hpp
+include/game/components/FollowTarget.hpp
 include/game/components/MovementController.hpp
 include/game/components/Spawner.hpp
 include/game/components/Wonder.hpp

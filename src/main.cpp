@@ -13,6 +13,7 @@
 #include <engine/gui/Slider.hpp>
 #include <engine/gui/Text.hpp>
 
+#include <game/components/FollowTarget.hpp>
 #include <game/components/MovementController.hpp>
 #include <game/components/Spawner.hpp>
 #include <game/components/Wonder.hpp>
@@ -33,7 +34,7 @@ static void addGroundPlane(engine::core::Engine& engine,
 	engine::graphic::Shader* checkeredShader = engine.getResourceManager().getShader("resources/Shaders/Default.vert", "resources/Shaders/Checkermap.frag");
 
 	auto* cube = engine.getScene().addTransform(position, glm::vec3(), glm::vec3(5.0f, 0.0f, 5.0f));
-	cube->addComponent<game::components::Spawner>(player, 8000, 5.0f);
+	cube->addComponent<game::components::Spawner>(player, 10, 5.0f);
 	auto* renderer = cube->addComponent<engine::components::Renderer>(cubeModel, *checkeredShader);
 	renderer->getMaterial().setColor(mainColor);
 	renderer->getMaterial().setSecondColor(secondColor);
@@ -65,7 +66,7 @@ int main()
 
 	auto* cameraTransform = scene.addTransform(glm::vec3(0.0f, 20.0f, 20.0f), glm::vec3(glm::radians(-45.0f), glm::radians(-90.0f), 0));
 	auto* camera = cameraTransform->addComponent<engine::components::Camera>();
-	//cameraTransform->addComponent<gam703::game::components::MovementController>();
+	cameraTransform->addBehavior<game::components::FollowTarget>(playerTransform, cameraTransform->getPosition());
 
 	scene.setActiveCamera(camera);
 
