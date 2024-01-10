@@ -15,9 +15,10 @@ namespace gam703::game::components
 			auto direction = glm::vec3(glm::cos(angle), 2.0f, glm::sin(angle));
 			float distance = engine::utility::generateRandomNumber(0.5f, radius);
 
-			auto* backpack = getScene().addTransform(direction * distance + m_transform.getPosition());
-			backpack->addBehavior<Wonder>(player, m_transform.getPosition() + glm::vec3(0.0f, 2.0f, 0.0f), distance);
-			backpack->addComponent<engine::components::Renderer>(getEngine().getResourceManager().getModel("resources/Models/backpack/backpack.obj"));
+			auto* cylinder = getScene().addTransform(direction * distance + m_transform.getPosition());
+			cylinder->addBehavior<Wonder>(player, m_transform.getPosition(), distance);
+			auto* renderer = cylinder->addComponent<engine::components::Renderer>(getEngine().getResourceManager().getModel("resources/Models/cylinder/cylinder.obj"));
+			renderer->getMaterial().setColor(glm::vec3(1.0f, 1.0f, 0.0f));
 		}
 	}
 
