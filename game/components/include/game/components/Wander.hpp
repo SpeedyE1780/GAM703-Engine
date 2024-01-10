@@ -3,7 +3,9 @@
 
 #include <engine/components/AudioPlayer.hpp>
 
+#include <game/components/Flee.hpp>
 #include <game/components/MovementStrategy.hpp>
+#include <game/components/Seek.hpp>
 
 #include <game/components/Config.hpp>
 
@@ -12,8 +14,6 @@
 
 namespace gam703::game::components
 {
-	class Seek;
-
 	class GAME_COMPONENTS_API Wander : public MovementStrategy
 	{
 	public:
@@ -31,6 +31,7 @@ namespace gam703::game::components
 		glm::vec3 m_currentTarget;
 		engine::components::Transform* m_player = nullptr;
 		Seek* m_seek = nullptr;
+		Flee* m_flee = nullptr;
 	};
 }
 

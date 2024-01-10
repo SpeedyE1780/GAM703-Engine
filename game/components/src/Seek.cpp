@@ -11,20 +11,21 @@ namespace gam703::game::components
 {
 	constexpr float SeekDistance = 3.0f;
 
-	Seek::Seek(engine::components::Transform& transform, engine::components::Transform* player, Wander* wander) : MovementStrategy(transform), m_player(player), m_wander(wander)
+	Seek::Seek(engine::components::Transform& transform, engine::components::Transform* player, Wander* wander, engine::components::AudioPlayer* battleStart) : MovementStrategy(transform),
+		m_player(player),
+		m_wander(wander),
+		m_battleStart(battleStart)
 	{
 		m_alert = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Alert.wav");
 		m_deactivate = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Deactivate.wav");
-		m_battleStart = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Battle Start.wav");
 		auto* sfxMixer = getEngine().getAudioEngine().getAudioMixer("SFX");
 		m_alert->setAudioMixer(sfxMixer);
 		m_deactivate->setAudioMixer(sfxMixer);
-		m_battleStart->setAudioMixer(sfxMixer);
 	}
 
 	Seek* Seek::clone(engine::components::Transform& transform) const
 	{
-		return new Seek(transform, m_player, m_wander);
+		return new Seek(transform, m_player, m_wander, m_battleStart);
 	}
 
 	void Seek::enter()

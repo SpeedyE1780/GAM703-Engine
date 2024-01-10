@@ -4,7 +4,6 @@
 
 #include <engine/utility/Math.hpp>
 
-#include <game/components/Seek.hpp>
 #include <game/components/Wander.hpp>
 
 namespace gam703::game::components
@@ -26,7 +25,10 @@ namespace gam703::game::components
 		m_bounds(bounds),
 		m_currentTarget(getPointInSquare(bounds, m_origin))
 	{
-		m_seek = m_transform.addComponent<Seek>(m_player, this);
+		auto* battleStart = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Battle Start.wav");
+		battleStart->setAudioMixer(getEngine().getAudioEngine().getAudioMixer("SFX"));
+		m_seek = m_transform.addComponent<Seek>(m_player, this, battleStart);
+		m_flee = m_transform.addComponent<Flee>(m_player, this, battleStart);
 	}
 
 	Wander* Wander::clone(engine::components::Transform& transform) const
@@ -51,8 +53,17 @@ namespace gam703::game::components
 		if (glm::length(m_transform.getPosition() - m_player->getPosition()) <= SeekDistance)
 		{
 			exit();
-			m_seek->enter();
-			return m_seek;
+
+			if (engine::utility::generateRandomNumber(0.0f, 1.0f) < 0.5f)
+			{
+				m_seek->enter();
+				return m_seek;
+			}
+			else
+			{
+				m_flee->enter();
+				return m_flee;
+			}
 		}
 
 		return this;

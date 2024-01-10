@@ -7,6 +7,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE GAME_COMPONENTS_DLL GAME_COMP
 target_sources(${PROJECT_NAME} PRIVATE
 #CPP
 src/AIMovement.cpp
+src/Flee.cpp
 src/FollowTarget.cpp
 src/MovementController.cpp
 src/MovementStrategy.cpp
@@ -17,6 +18,7 @@ src/Wander.cpp
 #HPP
 include/game/components/AIMovement.hpp
 include/game/components/Config.hpp
+include/game/components/Flee.hpp
 include/game/components/FollowTarget.hpp
 include/game/components/MovementController.hpp
 include/game/components/MovementStrategy.hpp
