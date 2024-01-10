@@ -9,20 +9,15 @@
 
 namespace gam703::game::components
 {
-	constexpr float SeekDistance = 3.0f;
-
-	Flee::Flee(engine::components::Transform& transform, engine::components::Transform* player, Wander* wander, engine::components::AudioPlayer* battleStart) : MovementStrategy(transform),
+	Flee::Flee(engine::components::Transform& transform, engine::components::Transform* player, Wander* wander) : MovementStrategy(transform),
 		m_player(player),
-		m_wander(wander),
-		m_battleStart(battleStart)
+		m_wander(wander)
 	{
 		m_fleeStart = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/FleeStart.wav");
 		m_fleeEnd = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/FleeEnd.wav");
-	}
-
-	Flee* Flee::clone(engine::components::Transform& transform) const
-	{
-		return new Flee(transform, m_player, m_wander, m_battleStart);
+		auto* sfxMixer = m_transform.getEngine().getAudioEngine().getAudioMixer("SFX");
+		m_fleeStart->setAudioMixer(sfxMixer);
+		m_fleeEnd->setAudioMixer(sfxMixer);
 	}
 
 	void Flee::enter()
@@ -34,15 +29,16 @@ namespace gam703::game::components
 	{
 		auto offset = m_transform.getPosition() - m_player->getPosition();
 		m_transform.translate(glm::normalize(offset) * deltaTime);
+		float distanceToPlayer = glm::length(offset);
 
-		if (glm::length(offset) > SeekDistance)
+		if (distanceToPlayer > SeekDistance)
 		{
 			exit();
 			m_wander->enter();
 			return m_wander;
 		}
 
-		if (m_transform.getPosition() == m_player->getPosition())
+		if (distanceToPlayer <= BattleDistance)
 		{
 			m_battleStart->play();
 			float playerNumber = engine::utility::generateRandomNumber(0.0f, 100.0f);
@@ -50,12 +46,12 @@ namespace gam703::game::components
 
 			if (playerNumber > backpackNumber)
 			{
-				getScene().removeTransform(m_transform);
+				m_transform.getScene().removeTransform(m_transform);
 			}
 			else
 			{
-				getScene().removeTransform(*m_player);
-				getEngine().getTime().setTimeScale(0.0f);
+				m_transform.getScene().removeTransform(*m_player);
+				m_transform.getEngine().getTime().setTimeScale(0.0f);
 			}
 		}
 

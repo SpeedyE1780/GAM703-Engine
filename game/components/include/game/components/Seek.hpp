@@ -13,9 +13,9 @@ namespace gam703::game::components
 	class GAME_COMPONENTS_API Seek : public MovementStrategy
 	{
 	public:
-		Seek(engine::components::Transform& transform, engine::components::Transform* player, Wander* wander, engine::components::AudioPlayer* battleStart);
+		Seek(engine::components::Transform& transform, engine::components::Transform* player, Wander* wander);
 
-		virtual Seek* clone(engine::components::Transform& transform) const;
+		void setBattleStart(engine::components::AudioPlayer* battleStart) { m_battleStart = battleStart; }
 
 		virtual void enter() override;
 		virtual MovementStrategy* processMovement(float deltaTime) override;

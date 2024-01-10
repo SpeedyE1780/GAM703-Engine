@@ -9,23 +9,15 @@
 
 namespace gam703::game::components
 {
-	constexpr float SeekDistance = 3.0f;
-
-	Seek::Seek(engine::components::Transform& transform, engine::components::Transform* player, Wander* wander, engine::components::AudioPlayer* battleStart) : MovementStrategy(transform),
+	Seek::Seek(engine::components::Transform& transform, engine::components::Transform* player, Wander* wander) : MovementStrategy(transform),
 		m_player(player),
-		m_wander(wander),
-		m_battleStart(battleStart)
+		m_wander(wander)
 	{
 		m_alert = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Alert.wav");
 		m_deactivate = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Deactivate.wav");
-		auto* sfxMixer = getEngine().getAudioEngine().getAudioMixer("SFX");
+		auto* sfxMixer = m_transform.getEngine().getAudioEngine().getAudioMixer("SFX");
 		m_alert->setAudioMixer(sfxMixer);
 		m_deactivate->setAudioMixer(sfxMixer);
-	}
-
-	Seek* Seek::clone(engine::components::Transform& transform) const
-	{
-		return new Seek(transform, m_player, m_wander, m_battleStart);
 	}
 
 	void Seek::enter()
@@ -37,7 +29,9 @@ namespace gam703::game::components
 	{
 		m_transform.setPosition(engine::utility::moveTowards(m_transform.getPosition(), m_player->getPosition(), deltaTime));
 
-		if (m_transform.getPosition() == m_player->getPosition())
+		float distanceToPlayer = glm::length(m_transform.getPosition() - m_player->getPosition());
+
+		if (distanceToPlayer <= BattleDistance)
 		{
 			m_battleStart->play();
 			float playerNumber = engine::utility::generateRandomNumber(0.0f, 100.0f);
@@ -45,16 +39,16 @@ namespace gam703::game::components
 
 			if (playerNumber > backpackNumber)
 			{
-				getScene().removeTransform(m_transform);
+				m_transform.getScene().removeTransform(m_transform);
 			}
 			else
 			{
-				getScene().removeTransform(*m_player);
-				getEngine().getTime().setTimeScale(0.0f);
+				m_transform.getScene().removeTransform(*m_player);
+				m_transform.getEngine().getTime().setTimeScale(0.0f);
 			}
 		}
 
-		if (glm::length(m_transform.getPosition() - m_player->getPosition()) > SeekDistance)
+		if (distanceToPlayer > SeekDistance)
 		{
 			exit();
 			m_wander->enter();

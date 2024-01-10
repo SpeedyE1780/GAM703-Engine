@@ -8,8 +8,6 @@
 
 namespace gam703::game::components
 {
-	constexpr float SeekDistance = 3.0f;
-
 	namespace
 	{
 		glm::vec3 getPointInSquare(const glm::vec2& bounds, const glm::vec3& center)
@@ -25,15 +23,6 @@ namespace gam703::game::components
 		m_bounds(bounds),
 		m_currentTarget(getPointInSquare(bounds, m_origin))
 	{
-		auto* battleStart = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Battle Start.wav");
-		battleStart->setAudioMixer(getEngine().getAudioEngine().getAudioMixer("SFX"));
-		m_seek = m_transform.addComponent<Seek>(m_player, this, battleStart);
-		m_flee = m_transform.addComponent<Flee>(m_player, this, battleStart);
-	}
-
-	Wander* Wander::clone(engine::components::Transform& transform) const
-	{
-		return new Wander(transform, m_player, m_origin, m_bounds);
 	}
 
 	void Wander::enter()

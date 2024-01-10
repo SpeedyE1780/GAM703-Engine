@@ -2,7 +2,7 @@
 
 namespace gam703::game::components
 {
-	MovementStrategy::MovementStrategy(engine::components::Transform& transform) : engine::components::Component(transform)
+	MovementStrategy::MovementStrategy(engine::components::Transform& transform) : m_transform(transform)
 	{
 	}
 }

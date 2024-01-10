@@ -13,9 +13,9 @@ namespace gam703::game::components
 	class GAME_COMPONENTS_API Flee : public MovementStrategy
 	{
 	public:
-		Flee(engine::components::Transform& transform, engine::components::Transform* player, Wander* wander, engine::components::AudioPlayer* battleStart);
+		Flee(engine::components::Transform& transform, engine::components::Transform* player, Wander* wander);
 
-		virtual Flee* clone(engine::components::Transform& transform) const override;
+		void setBattleStart(engine::components::AudioPlayer* battleStart) { m_battleStart = battleStart; }
 
 		virtual void enter() override;
 		virtual MovementStrategy* processMovement(float deltaTime) override;

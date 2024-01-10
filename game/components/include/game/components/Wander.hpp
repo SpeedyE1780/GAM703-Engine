@@ -19,7 +19,8 @@ namespace gam703::game::components
 	public:
 		Wander(engine::components::Transform& transform, engine::components::Transform* playerTransform, const glm::vec3& origin, const glm::vec2& bounds);
 
-		virtual Wander* clone(engine::components::Transform& transform) const override;
+		void setSeek(Seek* seek) { m_seek = seek; }
+		void setFlee(Flee* flee) { m_flee = flee; }
 
 		virtual void enter() override;
 		virtual MovementStrategy* processMovement(float deltaTime) override;
