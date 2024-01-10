@@ -35,8 +35,8 @@ namespace gam703::engine::graphic
 	{
 	public:
 		/// @brief Create Shader from vertex and fragment shader
-		/// @param vertexShaderPath Vertex Shader source code path
-		/// @param fragmentShaderPath Fragment Shader source code path
+		/// @param vertexShader Vertex Shader source code path
+		/// @param fragmentShader Fragment Shader source code path
 		Shader(ShaderSource* vertexShader, ShaderSource* fragmentShader);
 
 		/// @brief Create shader using other shader vertex and fragment shader

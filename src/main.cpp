@@ -13,10 +13,10 @@
 #include <engine/gui/Slider.hpp>
 #include <engine/gui/Text.hpp>
 
+#include <game/components/AIMovement.hpp>
 #include <game/components/FollowTarget.hpp>
 #include <game/components/MovementController.hpp>
 #include <game/components/Spawner.hpp>
-#include <game/components/Wonder.hpp>
 
 #include <iostream>
 #include <format>
