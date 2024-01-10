@@ -4,10 +4,13 @@
 
 #include <engine/utility/Math.hpp>
 
+#include <game/components/Seek.hpp>
 #include <game/components/Wander.hpp>
 
 namespace gam703::game::components
 {
+	constexpr float SeekDistance = 3.0f;
+
 	namespace
 	{
 		glm::vec3 getPointInSquare(const glm::vec2& bounds, const glm::vec3& center)
@@ -23,13 +26,7 @@ namespace gam703::game::components
 		m_bounds(bounds),
 		m_currentTarget(getPointInSquare(bounds, m_origin))
 	{
-		//m_alert = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Alert.wav");
-		//m_deactivate = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Deactivate.wav");
-		//m_battleStart = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Battle Start.wav");
-		//auto* sfxMixer = getEngine().getAudioEngine().getAudioMixer("SFX");
-		//m_alert->setAudioMixer(sfxMixer);
-		//m_deactivate->setAudioMixer(sfxMixer);
-		//m_battleStart->setAudioMixer(sfxMixer);
+		m_seek = m_transform.addComponent<Seek>(m_player, this);
 	}
 
 	Wander* Wander::clone(engine::components::Transform& transform) const
@@ -39,10 +36,10 @@ namespace gam703::game::components
 
 	void Wander::enter()
 	{
-
+		m_currentTarget = getPointInSquare(m_bounds, m_origin);
 	}
 
-	void Wander::processMovement(float deltaTime)
+	MovementStrategy* Wander::processMovement(float deltaTime)
 	{
 		m_transform.setPosition(engine::utility::moveTowards(m_transform.getPosition(), m_currentTarget, deltaTime));
 
@@ -51,6 +48,14 @@ namespace gam703::game::components
 			m_currentTarget = getPointInSquare(m_bounds, m_origin);
 		}
 
+		if (glm::length(m_transform.getPosition() - m_player->getPosition()) <= SeekDistance)
+		{
+			exit();
+			m_seek->enter();
+			return m_seek;
+		}
+
+		return this;
 		//float distanceToPlayer = glm::distance(m_transform.getPosition(), m_player->getPosition());
 
 		//if (distanceToPlayer > m_radius)

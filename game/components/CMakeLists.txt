@@ -10,6 +10,7 @@ src/AIMovement.cpp
 src/FollowTarget.cpp
 src/MovementController.cpp
 src/MovementStrategy.cpp
+src/Seek.cpp
 src/Spawner.cpp
 src/Wander.cpp
 
@@ -19,6 +20,7 @@ include/game/components/Config.hpp
 include/game/components/FollowTarget.hpp
 include/game/components/MovementController.hpp
 include/game/components/MovementStrategy.hpp
+include/game/components/Seek.hpp
 include/game/components/Spawner.hpp
 include/game/components/Wander.hpp
 )

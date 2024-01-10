@@ -53,7 +53,7 @@ int main()
 	engine.getAudioEngine().addAudioMixer("SFX")->setParentMixer(masterMixer);
 
 	auto* cubeModel = engine.getResourceManager().getModel("resources/Models/cube/cube.obj");
-	auto* playerTransform = scene.addTransform(glm::vec3(0.0f, 0.0f, 0.0f));
+	auto* playerTransform = scene.addTransform(glm::vec3(-5.0f, 0.0f, -5.0f));
 	auto* renderer = playerTransform->addComponent<engine::components::Renderer>(cubeModel);
 	renderer->getMaterial().setColor(glm::vec3(0.0f, 0.0f, 1.0f));
 	playerTransform->addBehavior<game::components::MovementController>();

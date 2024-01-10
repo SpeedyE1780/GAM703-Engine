@@ -13,7 +13,7 @@ namespace gam703::game::components
 		MovementStrategy(engine::components::Transform& transform);
 
 		virtual void enter() = 0;
-		virtual void processMovement(float deltaTime) = 0;
+		virtual MovementStrategy* processMovement(float deltaTime) = 0;
 		virtual void exit() = 0;
 	};
 }

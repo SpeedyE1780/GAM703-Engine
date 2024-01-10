@@ -21,6 +21,6 @@ namespace gam703::game::components
 
 	void AIMovement::tick(float deltaTime)
 	{
-		m_currentMovementStrategy->processMovement(deltaTime);
+		m_currentMovementStrategy = m_currentMovementStrategy->processMovement(deltaTime);
 	}
 }
