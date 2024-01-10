@@ -39,6 +39,18 @@ namespace gam703::game::components
 		if (m_transform.getPosition() == m_player->getPosition())
 		{
 			m_battleStart->play();
+			float playerNumber = engine::utility::generateRandomNumber(0.0f, 100.0f);
+			float backpackNumber = engine::utility::generateRandomNumber(0.0f, 100.0f);
+
+			if (playerNumber > backpackNumber)
+			{
+				getScene().removeTransform(m_transform);
+			}
+			else
+			{
+				getScene().removeTransform(*m_player);
+				getEngine().getTime().setTimeScale(0.0f);
+			}
 		}
 
 		if (glm::length(m_transform.getPosition() - m_player->getPosition()) > SeekDistance)
