@@ -10,6 +10,7 @@
 namespace gam703::engine::components
 {
 	Transform::Transform(core::Engine& engine, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) :
+		utility::ReferencedObject<Transform>(this),
 		m_engine(engine),
 		m_position(position),
 		m_rotation(rotation),
@@ -19,6 +20,7 @@ namespace gam703::engine::components
 	}
 
 	Transform::Transform(const Transform& transform) :
+		utility::ReferencedObject<Transform>(this),
 		m_engine(transform.m_engine),
 		m_position(transform.m_position),
 		m_rotation(transform.m_rotation),

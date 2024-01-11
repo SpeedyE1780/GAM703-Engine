@@ -51,7 +51,6 @@ namespace gam703::game::components
 			else
 			{
 				m_transform.getScene().removeTransform(*m_player);
-				m_transform.getEngine().getTime().setTimeScale(0.0f);
 			}
 		}
 
