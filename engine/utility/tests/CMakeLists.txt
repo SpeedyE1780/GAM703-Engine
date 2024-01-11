@@ -4,7 +4,7 @@ enable_testing()
 
 add_executable(${PROJECT_NAME})
 
-target_sources(${PROJECT_NAME} PRIVATE src/FileTests.cpp src/main.cpp src/MathTests.cpp)
+target_sources(${PROJECT_NAME} PRIVATE src/FileTests.cpp src/main.cpp src/MathTests.cpp src/ObjectReferenceTest.cpp)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE engine-utility)
 target_link_libraries(${PROJECT_NAME} PRIVATE gtest)

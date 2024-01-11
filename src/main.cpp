@@ -66,7 +66,7 @@ int main()
 
 	auto* cameraTransform = scene.addTransform(glm::vec3(0.0f, 20.0f, 20.0f), glm::vec3(glm::radians(-45.0f), glm::radians(-90.0f), 0));
 	auto* camera = cameraTransform->addComponent<engine::components::Camera>();
-	cameraTransform->addBehavior<game::components::FollowTarget>(playerTransform, cameraTransform->getPosition());
+	cameraTransform->addBehavior<game::components::FollowTarget>(playerTransform->getReference(), cameraTransform->getPosition());
 
 	scene.setActiveCamera(camera);
 

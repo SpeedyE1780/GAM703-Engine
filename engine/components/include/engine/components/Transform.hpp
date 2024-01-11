@@ -8,6 +8,9 @@
 #include <engine/core/Engine.fwd.hpp>
 #include <engine/core/Scene.hpp>
 
+#include <engine/utility/ObjectReference.hpp>
+#include <engine/utility/ReferencedObject.hpp>
+
 #include <glm/glm.hpp>
 
 #include <memory>
@@ -16,8 +19,10 @@
 
 namespace gam703::engine::components
 {
+	using TransformReference = utility::ObjectReference<Transform>;
+
 	/// @brief Transform contains all the information and components of scene objects
-	class ENGINE_COMPONENTS_API Transform
+	class ENGINE_COMPONENTS_API Transform : public utility::ReferencedObject<Transform>
 	{
 	public:
 		/// @brief Create a new Transform
