@@ -9,7 +9,7 @@
 
 namespace gam703::game::components
 {
-	Flee::Flee(engine::components::Transform& transform, engine::components::Transform* player, Wander* wander) : MovementStrategy(transform),
+	Flee::Flee(engine::components::Transform& transform, engine::components::TransformReference* player, Wander* wander) : MovementStrategy(transform),
 		m_player(player),
 		m_wander(wander)
 	{
@@ -27,7 +27,12 @@ namespace gam703::game::components
 
 	MovementStrategy* Flee::processMovement(float deltaTime)
 	{
-		auto offset = m_transform.getPosition() - m_player->getPosition();
+		if (!m_player->getObject())
+		{
+			return m_wander;
+		}
+
+		auto offset = m_transform.getPosition() - (*m_player)->getPosition();
 		m_transform.translate(glm::normalize(offset) * deltaTime);
 		float distanceToPlayer = glm::length(offset);
 
@@ -50,7 +55,7 @@ namespace gam703::game::components
 			}
 			else
 			{
-				m_transform.getScene().removeTransform(*m_player);
+				m_transform.getScene().removeTransform(*m_player->getObject());
 			}
 		}
 

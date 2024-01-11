@@ -9,7 +9,7 @@
 
 namespace gam703::game::components
 {
-	Seek::Seek(engine::components::Transform& transform, engine::components::Transform* player, Wander* wander) : MovementStrategy(transform),
+	Seek::Seek(engine::components::Transform& transform, engine::components::TransformReference* player, Wander* wander) : MovementStrategy(transform),
 		m_player(player),
 		m_wander(wander)
 	{
@@ -27,9 +27,14 @@ namespace gam703::game::components
 
 	MovementStrategy* Seek::processMovement(float deltaTime)
 	{
-		m_transform.setPosition(engine::utility::moveTowards(m_transform.getPosition(), m_player->getPosition(), deltaTime));
+		if (!m_player->getObject())
+		{
+			return m_wander;
+		}
 
-		float distanceToPlayer = glm::length(m_transform.getPosition() - m_player->getPosition());
+		m_transform.setPosition(engine::utility::moveTowards(m_transform.getPosition(), (*m_player)->getPosition(), deltaTime));
+
+		float distanceToPlayer = glm::length(m_transform.getPosition() - (*m_player)->getPosition());
 
 		if (distanceToPlayer <= BattleDistance)
 		{
@@ -43,14 +48,12 @@ namespace gam703::game::components
 			}
 			else
 			{
-				m_transform.getScene().removeTransform(*m_player);
+				m_transform.getScene().removeTransform(*m_player->getObject());
 			}
 		}
 
 		if (distanceToPlayer > SeekDistance)
 		{
-			exit();
-			m_wander->enter();
 			return m_wander;
 		}
 

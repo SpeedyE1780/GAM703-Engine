@@ -16,7 +16,7 @@ namespace gam703::game::components
 		}
 	}
 
-	Wander::Wander(engine::components::Transform& transform, engine::components::Transform* playerTransform, const glm::vec3& origin, const glm::vec2& bounds) :
+	Wander::Wander(engine::components::Transform& transform, engine::components::TransformReference* playerTransform, const glm::vec3& origin, const glm::vec2& bounds) :
 		MovementStrategy(transform),
 		m_origin(origin),
 		m_player(playerTransform),
@@ -39,7 +39,7 @@ namespace gam703::game::components
 			m_currentTarget = getPointInSquare(m_bounds, m_origin);
 		}
 
-		if (glm::length(m_transform.getPosition() - m_player->getPosition()) <= SeekDistance)
+		if (m_player->getObject() && glm::length(m_transform.getPosition() - (*m_player)->getPosition()) <= SeekDistance)
 		{
 			exit();
 
