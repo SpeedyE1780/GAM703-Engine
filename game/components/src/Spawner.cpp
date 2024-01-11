@@ -16,7 +16,7 @@ namespace gam703::game::components
 			float distance = engine::utility::generateRandomNumber(0.5f, radius);
 
 			auto* cylinder = getScene().addTransform(direction * distance + m_transform.getPosition());
-			cylinder->addBehavior<AIMovement>(player, m_transform.getPosition(), glm::vec2(m_transform.getScale().x * 0.5f, m_transform.getScale().z * 0.5f));
+			cylinder->addBehavior<AIMovement>(player->getReference(), m_transform.getPosition(), glm::vec2(m_transform.getScale().x * 0.5f, m_transform.getScale().z * 0.5f));
 			auto* renderer = cylinder->addComponent<engine::components::Renderer>(getEngine().getResourceManager().getModel("resources/Models/cylinder/cylinder.obj"));
 			renderer->getMaterial().setColor(glm::vec3(1.0f, 1.0f, 0.0f));
 		}

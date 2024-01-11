@@ -11,7 +11,7 @@ namespace gam703::engine::utility
 	public:
 		/// @brief Create a reference to the object and add this reference to the list of observers
 		/// @param pointer The object that is being referenced
-		ObjectReference(Object* pointer) : m_pointer(pointer)
+		explicit ObjectReference(Object* pointer) : m_pointer(pointer)
 		{
 			m_pointer->addObjectReference(this);
 		}
