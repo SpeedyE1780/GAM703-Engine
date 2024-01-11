@@ -13,14 +13,20 @@ namespace gam703::engine::utility
 		/// @param pointer The object that is being referenced
 		explicit ObjectReference(Object* pointer) : m_pointer(pointer)
 		{
-			m_pointer->addObjectReference(this);
+			if (m_pointer)
+			{
+				m_pointer->addObjectReference(this);
+			}
 		}
 
 		/// @brief Create a reference to the object's pointer and add this reference to the list of observers 
 		/// @param object The object who's pointer will be referenced
 		ObjectReference(const ObjectReference& object) : m_pointer(object.m_pointer)
 		{
-			m_pointer->addObjectReference(this);
+			if (m_pointer)
+			{
+				m_pointer->addObjectReference(this);
+			}
 		}
 
 		/// @brief Clear the old pointer and then reference object's pointer
