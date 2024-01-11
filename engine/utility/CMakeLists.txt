@@ -15,6 +15,8 @@ src/Math.cpp
 include/engine/utility/Config.hpp
 include/engine/utility/File.hpp
 include/engine/utility/Math.hpp
+include/engine/utility/ObjectReference.hpp
+include/engine/utility/ReferencedObject.hpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
