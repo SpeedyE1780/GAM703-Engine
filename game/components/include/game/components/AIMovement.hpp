@@ -17,13 +17,13 @@ namespace gam703::game::components
 	class GAME_COMPONENTS_API AIMovement : public engine::components::Behavior
 	{
 	public:
-		AIMovement(engine::components::Transform& transform, engine::components::Transform* player, const glm::vec3& origin, const glm::vec2& bounds);
+		AIMovement(engine::components::Transform& transform, const engine::components::TransformReference& player, const glm::vec3& origin, const glm::vec2& bounds);
 
 		virtual AIMovement* clone(engine::components::Transform& transform) const override;
 		virtual void tick(float deltaTime) override;
 
 	private:
-		std::unique_ptr<engine::components::TransformReference> m_player;
+		engine::components::TransformReference m_player;
 		glm::vec3 m_origin;
 		glm::vec2 m_bounds;
 		Wander m_wander;

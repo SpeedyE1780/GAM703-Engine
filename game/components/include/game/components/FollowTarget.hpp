@@ -17,14 +17,14 @@ namespace gam703::game::components
 	class FollowTarget : public engine::components::Behavior
 	{
 	public:
-		FollowTarget(engine::components::Transform& transform, engine::components::Transform* target, const glm::vec3& offset);
+		FollowTarget(engine::components::Transform& transform, const engine::components::TransformReference& target, const glm::vec3& offset);
 
 		virtual FollowTarget* clone(engine::components::Transform& transform) const override;
 
 		virtual void tick(float deltaTime) override;
 
 	private:
-		std::unique_ptr<engine::components::TransformReference> m_target = nullptr;
+		engine::components::TransformReference m_target;
 		glm::vec3 m_offset{};
 	};
 }

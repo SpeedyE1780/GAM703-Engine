@@ -13,7 +13,7 @@ namespace gam703::game::components
 	class GAME_COMPONENTS_API Flee : public MovementStrategy
 	{
 	public:
-		Flee(engine::components::Transform& transform, engine::components::TransformReference* player, Wander* wander);
+		Flee(engine::components::Transform& transform, const engine::components::TransformReference& player, Wander* wander);
 
 		void setBattleStart(engine::components::AudioPlayer* battleStart) { m_battleStart = battleStart; }
 
@@ -22,7 +22,7 @@ namespace gam703::game::components
 		virtual void exit() override;
 
 	private:
-		engine::components::TransformReference* m_player;
+		engine::components::TransformReference m_player;
 		Wander* m_wander;
 		engine::components::AudioPlayer* m_fleeStart = nullptr;
 		engine::components::AudioPlayer* m_fleeEnd = nullptr;

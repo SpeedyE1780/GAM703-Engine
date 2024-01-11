@@ -17,7 +17,7 @@ namespace gam703::game::components
 	class GAME_COMPONENTS_API Wander : public MovementStrategy
 	{
 	public:
-		Wander(engine::components::Transform& transform, engine::components::TransformReference* playerTransform, const glm::vec3& origin, const glm::vec2& bounds);
+		Wander(engine::components::Transform& transform, const engine::components::TransformReference& playerTransform, const glm::vec3& origin, const glm::vec2& bounds);
 
 		void setSeek(Seek* seek) { m_seek = seek; }
 		void setFlee(Flee* flee) { m_flee = flee; }
@@ -30,7 +30,7 @@ namespace gam703::game::components
 		glm::vec3 m_origin;
 		glm::vec2 m_bounds;
 		glm::vec3 m_currentTarget;
-		engine::components::TransformReference* m_player = nullptr;
+		engine::components::TransformReference m_player;
 		Seek* m_seek = nullptr;
 		Flee* m_flee = nullptr;
 	};

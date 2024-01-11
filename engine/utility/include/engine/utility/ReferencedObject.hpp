@@ -29,13 +29,18 @@ namespace gam703::engine::utility
 			}
 		}
 
-		/// @brief Get a reference to object and add it to the list of references
-		/// @return A dynamically allocated ObjectReference that will be managed by the calling code
-		ObjectReference<ObjectType>* getReference()
+		/// @brief Get a reference to object and add it to the list of references using ObjectReference's constructor
+		/// @return A reference to object
+		ObjectReference<ObjectType> getReference()
 		{
-			auto reference = new ObjectReference<ObjectType>(m_object);
-			m_references.push_back(reference);
-			return reference;
+			return ObjectReference<ObjectType>(m_object);
+		}
+
+		/// @brief Add a reference to the list of references
+		/// @param ref The ObjectReference that will be added
+		void addObjectReference(ObjectReference<ObjectType>* ref)
+		{
+			m_references.push_back(ref);
 		}
 
 		/// @brief Remove the object reference from the list of references once it's deleted

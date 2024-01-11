@@ -9,10 +9,34 @@ namespace gam703::engine::utility
 	class ObjectReference
 	{
 	public:
-		/// @brief Assign the object that is being referenced
+		/// @brief Create a reference to the object and add this reference to the list of observers
 		/// @param pointer The object that is being referenced
 		ObjectReference(Object* pointer) : m_pointer(pointer)
 		{
+			m_pointer->addObjectReference(this);
+		}
+
+		/// @brief Create a reference to the object's pointer and add this reference to the list of observers 
+		/// @param object The object who's pointer will be referenced
+		ObjectReference(const ObjectReference& object) : m_pointer(object.m_pointer)
+		{
+			m_pointer->addObjectReference(this);
+		}
+
+		/// @brief Clear the old pointer and then reference object's pointer
+		/// @param object The object who's pointer will be referenced
+		/// @return ObjectReference referencing object's pointer
+		ObjectReference& operator=(const ObjectReference& object)
+		{
+			if (m_pointer)
+			{
+				m_pointer->removeObjectReference(this);
+			}
+
+			m_pointer = object.m_pointer;
+			m_pointer->addObjectReference(this);
+
+			return *this;
 		}
 
 		/// @brief Remove the object reference from the list of observers
@@ -23,10 +47,6 @@ namespace gam703::engine::utility
 				m_pointer->removeObjectReference(this);
 			}
 		}
-
-		/// @brief Get a pointer to the referenced object
-		/// @return A pointer to the referenced object
-		Object* getObject() { return m_pointer; }
 
 		/// @brief Get a pointer to the referenced object
 		/// @return A pointer to the referenced object
@@ -50,6 +70,20 @@ namespace gam703::engine::utility
 		const Object* operator->() const
 		{
 			return m_pointer;
+		}
+
+		/// @brief Dereference ObjectReference's Object&
+		/// @return The referenced Object
+		Object& operator*()
+		{
+			return *m_pointer;
+		}
+
+		/// @brief Dereference ObjectReference's Object&
+		/// @return The referenced Object
+		const Object& operator*() const
+		{
+			return *m_pointer;
 		}
 
 		/// @brief Check if m_pointer still points to a valid address

@@ -20,25 +20,25 @@ namespace gam703::engine::utility::tests
 	TEST(ObjectReferenceTest, AccessValue)
 	{
 		ObjectTest obj;
-		auto ref = std::unique_ptr<ObjectReference<ObjectTest>>(obj.getReference());
+		auto ref = obj.getReference();
 
-		EXPECT_TRUE(*ref);
-		EXPECT_EQ(obj.value, (*ref)->value);
+		EXPECT_TRUE(ref);
+		EXPECT_EQ(obj.value, ref->value);
 	}
 
 	TEST(ObjectReferenceTest, ModifyValue)
 	{
 		ObjectTest obj;
-		auto ref = std::unique_ptr<ObjectReference<ObjectTest>>(obj.getReference());
+		auto ref = obj.getReference();
 
-		ASSERT_TRUE(*ref);
-		ASSERT_EQ(obj.value, (*ref)->value);
+		ASSERT_TRUE(ref);
+		ASSERT_EQ(obj.value, ref->value);
 
 		obj.value = 2;
-		EXPECT_EQ(obj.value, (*ref)->value);
+		EXPECT_EQ(obj.value, ref->value);
 
-		(*ref)->value = 3;
-		EXPECT_EQ(obj.value, (*ref)->value);
+		ref->value = 3;
+		EXPECT_EQ(obj.value, ref->value);
 	}
 
 	TEST(ObjectReferenceTest, NullifyReference)
@@ -47,18 +47,18 @@ namespace gam703::engine::utility::tests
 
 		{
 			ObjectTest obj;
-			ref = std::unique_ptr<ObjectReference<ObjectTest>>(obj.getReference());
+			auto ref = obj.getReference();
 
-			ASSERT_TRUE(*ref);
-			ASSERT_EQ(obj.value, (*ref)->value);
+			ASSERT_TRUE(ref);
+			ASSERT_EQ(obj.value, ref->value);
 
 			obj.value = 2;
-			ASSERT_EQ(obj.value, (*ref)->value);
+			ASSERT_EQ(obj.value, ref->value);
 
-			(*ref)->value = 3;
-			ASSERT_EQ(obj.value, (*ref)->value);
+			ref->value = 3;
+			ASSERT_EQ(obj.value, ref->value);
 		}
 
-		EXPECT_FALSE(*ref);
+		EXPECT_FALSE(ref);
 	}
 }
