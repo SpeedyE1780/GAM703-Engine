@@ -16,6 +16,7 @@
 #include <game/components/AIMovement.hpp>
 #include <game/components/FollowTarget.hpp>
 #include <game/components/MovementController.hpp>
+#include <game/components/PowerLevel.hpp>
 #include <game/components/Spawner.hpp>
 
 #include <iostream>
@@ -28,9 +29,20 @@ constexpr int AreaBounds = 10;
 
 struct SpawnerInfo
 {
-	int powerLevel;
+	game::components::PowerLevel lowLevel;
+	game::components::PowerLevel highLevel;
 	int enemyCount;
 };
+
+static void addGroundPlane(engine::core::Engine& engine, engine::components::Transform* player)
+{
+	const engine::graphic::Model* planeModel = engine.getResourceManager().getModel("resources/Models/plane/plane.obj");
+	engine::graphic::Shader* checkeredShader = engine.getResourceManager().getShader("resources/Shaders/Default.vert", "resources/Shaders/Checkermap.frag");
+
+	auto* plane = engine.getScene().addTransform(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(), glm::vec3(AreaBounds, 1.0f, AreaBounds));
+	auto* renderer = plane->addComponent<engine::components::Renderer>(planeModel, *checkeredShader);
+	renderer->getMaterial().setSecondColor(glm::vec3(0.0f, 0.0f, 0.0f));
+}
 
 static void addGroundPlane(engine::core::Engine& engine,
 	engine::components::Transform* player,
@@ -41,7 +53,7 @@ static void addGroundPlane(engine::core::Engine& engine,
 	engine::graphic::Shader* checkeredShader = engine.getResourceManager().getShader("resources/Shaders/Default.vert", "resources/Shaders/Checkermap.frag");
 
 	auto* plane = engine.getScene().addTransform(position, glm::vec3(), glm::vec3(AreaBounds, 1.0f, AreaBounds));
-	plane->addComponent<game::components::Spawner>(player, spawnInfo.enemyCount, AreaBounds * 0.5f, spawnInfo.powerLevel);
+	plane->addComponent<game::components::Spawner>(player, spawnInfo.enemyCount, AreaBounds * 0.5f, spawnInfo.lowLevel, spawnInfo.highLevel);
 	auto* renderer = plane->addComponent<engine::components::Renderer>(planeModel, *checkeredShader);
 	renderer->getMaterial().setSecondColor(glm::vec3(0.0f, 0.0f, 0.0f));
 }
@@ -64,15 +76,15 @@ int main()
 	renderer->getMaterial().setColor(glm::vec3(0.0f, 0.0f, 1.0f));
 	playerTransform->addBehavior<game::components::MovementController>();
 
-	addGroundPlane(engine, playerTransform, { 0, 0 });
-	addGroundPlane(engine, playerTransform, { 8, 10 }, glm::vec3(AreaBounds, 0.0f, 0.0f));
-	addGroundPlane(engine, playerTransform, { 7, 10 }, glm::vec3(-AreaBounds, 0.0f, 0.0f));
-	addGroundPlane(engine, playerTransform, { 6, 10 }, glm::vec3(0.0f, 0.0f, AreaBounds));
-	addGroundPlane(engine, playerTransform, { 5, 10 }, glm::vec3(0.0f, 0.0f, -AreaBounds));
-	addGroundPlane(engine, playerTransform, { 3, 10 }, glm::vec3(-AreaBounds, 0.0f, -AreaBounds));
-	addGroundPlane(engine, playerTransform, { 2, 10 }, glm::vec3(AreaBounds, 0.0f, -AreaBounds));
-	addGroundPlane(engine, playerTransform, { 0, 10 }, glm::vec3(AreaBounds, 0.0f, AreaBounds));
-	addGroundPlane(engine, playerTransform, { 0, 10 }, glm::vec3(-AreaBounds, 0.0f, AreaBounds));
+	addGroundPlane(engine, playerTransform);
+	addGroundPlane(engine, playerTransform, { game::components::PowerLevel::Stronger, game::components::PowerLevel::Strongest, 18 }, glm::vec3(AreaBounds, 0.0f, 0.0f));
+	addGroundPlane(engine, playerTransform, { game::components::PowerLevel::Stronger, game::components::PowerLevel::Strongest, 18 }, glm::vec3(-AreaBounds, 0.0f, 0.0f));
+	addGroundPlane(engine, playerTransform, { game::components::PowerLevel::Strong, game::components::PowerLevel::Stronger, 12 }, glm::vec3(0.0f, 0.0f, AreaBounds));
+	addGroundPlane(engine, playerTransform, { game::components::PowerLevel::Strong, game::components::PowerLevel::Stronger, 12 }, glm::vec3(0.0f, 0.0f, -AreaBounds));
+	addGroundPlane(engine, playerTransform, { game::components::PowerLevel::Normal, game::components::PowerLevel::Strong, 10 }, glm::vec3(-AreaBounds, 0.0f, -AreaBounds));
+	addGroundPlane(engine, playerTransform, { game::components::PowerLevel::Weak, game::components::PowerLevel::Normal, 8 }, glm::vec3(AreaBounds, 0.0f, -AreaBounds));
+	addGroundPlane(engine, playerTransform, { game::components::PowerLevel::Weaker, game::components::PowerLevel::Weak, 6 }, glm::vec3(AreaBounds, 0.0f, AreaBounds));
+	addGroundPlane(engine, playerTransform, { game::components::PowerLevel::Weakest, game::components::PowerLevel::Weaker, 6 }, glm::vec3(-AreaBounds, 0.0f, AreaBounds));
 
 	auto* cameraTransform = scene.addTransform(glm::vec3(0.0f, 20.0f, 20.0f), glm::vec3(glm::radians(-45.0f), glm::radians(-90.0f), 0));
 	auto* camera = cameraTransform->addComponent<engine::components::Camera>();
