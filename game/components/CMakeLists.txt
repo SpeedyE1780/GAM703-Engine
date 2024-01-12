@@ -11,6 +11,7 @@ src/Flee.cpp
 src/FollowTarget.cpp
 src/MovementController.cpp
 src/MovementStrategy.cpp
+src/PowerLevel.cpp
 src/Seek.cpp
 src/Spawner.cpp
 src/Wander.cpp
@@ -22,6 +23,7 @@ include/game/components/Flee.hpp
 include/game/components/FollowTarget.hpp
 include/game/components/MovementController.hpp
 include/game/components/MovementStrategy.hpp
+include/game/components/PowerLevel.hpp
 include/game/components/Seek.hpp
 include/game/components/Spawner.hpp
 include/game/components/Wander.hpp

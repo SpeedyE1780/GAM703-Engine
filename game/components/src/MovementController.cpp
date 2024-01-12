@@ -11,6 +11,9 @@ namespace gam703::game::components
 	{
 		m_bell = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/bell.wav");
 		m_bell->setAudioMixer(getEngine().getAudioEngine().getAudioMixer("SFX"));
+
+		m_renderer = m_transform.getComponent<engine::components::Renderer>();
+		m_renderer->getMaterial().setColor(getPowerColor(m_power));
 	}
 
 	MovementController* MovementController::clone(engine::components::Transform& transform) const
@@ -47,5 +50,11 @@ namespace gam703::game::components
 		{
 			m_bell->play();
 		}
+	}
+
+	void MovementController::increasePower(int power)
+	{
+		m_power += power;
+		m_renderer->getMaterial().setColor(getPowerColor(m_power));
 	}
 }

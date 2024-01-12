@@ -10,9 +10,9 @@ namespace gam703::game::components
 		m_origin(origin),
 		m_bounds(bounds),
 		m_power(power),
-		m_wander(m_transform, m_player, origin, bounds, m_power),
-		m_seek(m_transform, m_player, &m_wander, m_power),
-		m_flee(m_transform, m_player, &m_wander, m_power)
+		m_wander(m_transform, m_player, m_origin, m_bounds, m_power),
+		m_seek(m_transform, m_player, &m_wander, m_origin, m_bounds, m_power),
+		m_flee(m_transform, m_player, &m_wander, m_origin, m_bounds, m_power)
 	{
 		auto* battleStart = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Battle Start.wav");
 		battleStart->setAudioMixer(getEngine().getAudioEngine().getAudioMixer("SFX"));

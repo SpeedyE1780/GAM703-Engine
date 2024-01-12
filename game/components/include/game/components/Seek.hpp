@@ -13,7 +13,7 @@ namespace gam703::game::components
 	class GAME_COMPONENTS_API Seek : public MovementStrategy
 	{
 	public:
-		Seek(engine::components::Transform& transform, const engine::components::TransformReference& player, Wander* wander, int& aiPower);
+		Seek(engine::components::Transform& transform, const engine::components::TransformReference& player, Wander* wander, const glm::vec3& origin, const glm::vec2& bounds, int& aiPower);
 
 		void setBattleStart(engine::components::AudioPlayer* battleStart) { m_battleStart = battleStart; }
 
@@ -24,7 +24,9 @@ namespace gam703::game::components
 	private:
 		engine::components::TransformReference m_player;
 		Wander* m_wander = nullptr;
-		int& m_aiPower;
+		const glm::vec3& m_origin;
+		const glm::vec2& m_bounds;
+		const int& m_aiPower;
 		engine::components::AudioPlayer* m_alert = nullptr;
 		engine::components::AudioPlayer* m_deactivate = nullptr;
 		engine::components::AudioPlayer* m_battleStart = nullptr;

@@ -27,4 +27,28 @@ namespace gam703::engine::utility
 		static std::uniform_real_distribution<> dis(0, 1);
 		return dis(engine) * (maximum - minimum) + minimum;
 	}
+
+	glm::vec3 getPointInRectangle(const glm::vec3& center, const glm::vec2& bounds)
+	{
+		return center + glm::vec3(generateRandomNumber(-bounds.x, bounds.x), 0.0f, generateRandomNumber(-bounds.y, bounds.y));
+	}
+
+	bool isWithinBounds(const glm::vec3& point, const glm::vec3& origin, const glm::vec2& bounds)
+	{
+		bool withinLeft = point.x > origin.x - bounds.x;
+		bool withinRight = point.x < origin.x + bounds.x;
+		bool withinTop = point.z < origin.z + bounds.y;
+		bool withinBottom = point.z > origin.z - bounds.y;
+
+		return withinLeft && withinRight && withinTop && withinBottom;
+	}
+
+	glm::vec3 getPointInCircle(float radius, const glm::vec3& center, float offset)
+	{
+		float angle = generateRandomNumber(0.0f, 2 * PI);
+		auto pointOnCircleEdge = glm::vec3(glm::cos(angle), 0.0f, glm::sin(angle));
+		float circleRadius = engine::utility::generateRandomNumber(offset, radius);
+
+		return center + pointOnCircleEdge * circleRadius;
+	}
 }

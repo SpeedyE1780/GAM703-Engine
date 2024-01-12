@@ -10,9 +10,11 @@
 
 namespace gam703::game::components
 {
-	Flee::Flee(engine::components::Transform& transform, const engine::components::TransformReference& player, Wander* wander, int& aiPower) : MovementStrategy(transform),
+	Flee::Flee(engine::components::Transform& transform, const engine::components::TransformReference& player, Wander* wander, const glm::vec3& origin, const glm::vec2& bounds, int& aiPower) : MovementStrategy(transform),
 		m_player(player),
 		m_wander(wander),
+		m_origin(origin),
+		m_bounds(bounds),
 		m_aiPower(aiPower)
 	{
 		m_fleeStart = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/FleeStart.wav");
@@ -35,12 +37,16 @@ namespace gam703::game::components
 		}
 
 		auto offset = m_transform.getPosition() - m_player->getPosition();
-		m_transform.translate(glm::normalize(offset) * deltaTime);
 		float distanceToPlayer = glm::length(offset);
 
 		if (distanceToPlayer > SeekDistance)
 		{
 			return m_wander;
+		}
+
+		if (auto newPosition = m_transform.getPosition() + glm::normalize(offset) * deltaTime; engine::utility::isWithinBounds(newPosition, m_origin, m_bounds))
+		{
+			m_transform.setPosition(newPosition);
 		}
 
 		if (distanceToPlayer <= BattleDistance)

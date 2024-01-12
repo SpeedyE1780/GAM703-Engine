@@ -3,8 +3,10 @@
 
 #include <engine/components/AudioPlayer.hpp>
 #include <engine/components/Behavior.hpp>
+#include <engine/components/Renderer.hpp>
 
 #include <game/components/Config.hpp>
+#include <game/components/PowerLevel.hpp>
 
 namespace gam703::game::components
 {
@@ -17,13 +19,14 @@ namespace gam703::game::components
 
 		virtual void tick(float deltaTime) override;
 
-		void increasePower(int power) { m_power += power; }
+		void increasePower(int power);
 		int getPower() const {return m_power;}
 
 	private:
 		engine::components::AudioPlayer* m_bell;
+		engine::components::Renderer* m_renderer;
 		float m_movementSpeed = 2.5f;
-		int m_power = 1;
+		int m_power = static_cast<int>(PowerLevel::Weaker);
 	};
 }
 

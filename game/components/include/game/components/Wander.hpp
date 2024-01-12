@@ -11,7 +11,6 @@
 
 #include <glm/glm.hpp>
 
-
 namespace gam703::game::components
 {
 	class GAME_COMPONENTS_API Wander : public MovementStrategy
@@ -27,11 +26,11 @@ namespace gam703::game::components
 		virtual void exit() override;
 
 	private:
-		glm::vec3 m_origin;
-		glm::vec2 m_bounds;
-		glm::vec3 m_currentTarget;
 		engine::components::TransformReference m_player;
-		int& m_aiPower;
+		const glm::vec3& m_origin;
+		const glm::vec2& m_bounds;
+		const int& m_aiPower;
+		glm::vec3 m_currentTarget;
 		Seek* m_seek = nullptr;
 		Flee* m_flee = nullptr;
 	};

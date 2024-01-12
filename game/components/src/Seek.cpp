@@ -10,9 +10,11 @@
 
 namespace gam703::game::components
 {
-	Seek::Seek(engine::components::Transform& transform, const engine::components::TransformReference& player, Wander* wander, int& aiPower) : MovementStrategy(transform),
+	Seek::Seek(engine::components::Transform& transform, const engine::components::TransformReference& player, Wander* wander, const glm::vec3& origin, const glm::vec2& bounds, int& aiPower) : MovementStrategy(transform),
 		m_player(player),
 		m_wander(wander),
+		m_origin(origin),
+		m_bounds(bounds),
 		m_aiPower(aiPower)
 	{
 		m_alert = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Alert.wav");
@@ -34,10 +36,13 @@ namespace gam703::game::components
 			return m_wander;
 		}
 
-		m_transform.setPosition(engine::utility::moveTowards(m_transform.getPosition(), m_player->getPosition(), deltaTime));
-
 		float distanceToPlayer = glm::length(m_transform.getPosition() - m_player->getPosition());
 		auto* playerMovement = m_player->getBehavior<MovementController>();
+
+		if (auto newPosition = engine::utility::moveTowards(m_transform.getPosition(), m_player->getPosition(), deltaTime); engine::utility::isWithinBounds(newPosition, m_origin, m_bounds))
+		{
+			m_transform.setPosition(newPosition);
+		}
 
 		if (distanceToPlayer <= BattleDistance)
 		{
