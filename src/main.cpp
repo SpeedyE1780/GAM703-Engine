@@ -41,7 +41,7 @@ static void addGroundPlane(engine::core::Engine& engine,
 	engine::graphic::Shader* checkeredShader = engine.getResourceManager().getShader("resources/Shaders/Default.vert", "resources/Shaders/Checkermap.frag");
 
 	auto* plane = engine.getScene().addTransform(position, glm::vec3(), glm::vec3(AreaBounds, 1.0f, AreaBounds));
-	plane->addComponent<game::components::Spawner>(player, spawnInfo.enemyCount, AreaBounds, spawnInfo.powerLevel);
+	plane->addComponent<game::components::Spawner>(player, spawnInfo.enemyCount, AreaBounds * 0.5f, spawnInfo.powerLevel);
 	auto* renderer = plane->addComponent<engine::components::Renderer>(planeModel, *checkeredShader);
 	renderer->getMaterial().setSecondColor(glm::vec3(0.0f, 0.0f, 0.0f));
 }
