@@ -26,16 +26,22 @@ namespace game = gam703::game;
 
 constexpr int AreaBounds = 10;
 
+struct SpawnerInfo
+{
+	int powerLevel;
+	int enemyCount;
+};
+
 static void addGroundPlane(engine::core::Engine& engine,
 	engine::components::Transform* player,
-	int powerLevel = 0,
+	SpawnerInfo spawnInfo,
 	const glm::vec3& position = glm::vec3(0.0f, 0.0f, 0.0f))
 {
 	const engine::graphic::Model* planeModel = engine.getResourceManager().getModel("resources/Models/plane/plane.obj");
 	engine::graphic::Shader* checkeredShader = engine.getResourceManager().getShader("resources/Shaders/Default.vert", "resources/Shaders/Checkermap.frag");
 
 	auto* plane = engine.getScene().addTransform(position, glm::vec3(), glm::vec3(AreaBounds, 1.0f, AreaBounds));
-	plane->addComponent<game::components::Spawner>(player, 10.0f, AreaBounds, powerLevel);
+	plane->addComponent<game::components::Spawner>(player, spawnInfo.enemyCount, AreaBounds, spawnInfo.powerLevel);
 	auto* renderer = plane->addComponent<engine::components::Renderer>(planeModel, *checkeredShader);
 	renderer->getMaterial().setSecondColor(glm::vec3(0.0f, 0.0f, 0.0f));
 }
@@ -53,16 +59,20 @@ int main()
 	engine.getAudioEngine().addAudioMixer("SFX")->setParentMixer(masterMixer);
 
 	auto* cubeModel = engine.getResourceManager().getModel("resources/Models/cube/cube.obj");
-	auto* playerTransform = scene.addTransform(glm::vec3(-AreaBounds, 0.0f, -AreaBounds));
+	auto* playerTransform = scene.addTransform();
 	auto* renderer = playerTransform->addComponent<engine::components::Renderer>(cubeModel);
 	renderer->getMaterial().setColor(glm::vec3(0.0f, 0.0f, 1.0f));
 	playerTransform->addBehavior<game::components::MovementController>();
 
-	addGroundPlane(engine, playerTransform);
-	addGroundPlane(engine, playerTransform, 1, glm::vec3(AreaBounds, 0.0f, 0.0f));
-	addGroundPlane(engine, playerTransform, 2, glm::vec3(-AreaBounds, 0.0f, 0.0f));
-	addGroundPlane(engine, playerTransform, 3, glm::vec3(0.0f, 0.0f, AreaBounds));
-	addGroundPlane(engine, playerTransform, 4, glm::vec3(0.0f, 0.0f, -AreaBounds));
+	addGroundPlane(engine, playerTransform, { 0, 0 });
+	addGroundPlane(engine, playerTransform, { 8, 10 }, glm::vec3(AreaBounds, 0.0f, 0.0f));
+	addGroundPlane(engine, playerTransform, { 7, 10 }, glm::vec3(-AreaBounds, 0.0f, 0.0f));
+	addGroundPlane(engine, playerTransform, { 6, 10 }, glm::vec3(0.0f, 0.0f, AreaBounds));
+	addGroundPlane(engine, playerTransform, { 5, 10 }, glm::vec3(0.0f, 0.0f, -AreaBounds));
+	addGroundPlane(engine, playerTransform, { 3, 10 }, glm::vec3(-AreaBounds, 0.0f, -AreaBounds));
+	addGroundPlane(engine, playerTransform, { 2, 10 }, glm::vec3(AreaBounds, 0.0f, -AreaBounds));
+	addGroundPlane(engine, playerTransform, { 0, 10 }, glm::vec3(AreaBounds, 0.0f, AreaBounds));
+	addGroundPlane(engine, playerTransform, { 0, 10 }, glm::vec3(-AreaBounds, 0.0f, AreaBounds));
 
 	auto* cameraTransform = scene.addTransform(glm::vec3(0.0f, 20.0f, 20.0f), glm::vec3(glm::radians(-45.0f), glm::radians(-90.0f), 0));
 	auto* camera = cameraTransform->addComponent<engine::components::Camera>();
