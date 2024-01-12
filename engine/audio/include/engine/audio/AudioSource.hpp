@@ -10,7 +10,7 @@
 namespace gam703::engine::audio
 {
 	/// @brief AudioSource wraps ISoundSource and allows playing/manipulating ISound
-	class ENGINE_AUDIO_API AudioSource
+	class ENGINE_AUDIO_API AudioSource : private irrklang::ISoundStopEventReceiver
 	{
 	public:
 		/// @brief Create an AudioSource wrapping the ISoundSource
@@ -47,6 +47,12 @@ namespace gam703::engine::audio
 		/// @brief Set the audio mixer that will influence this audio source
 		/// @param mixer The audio mixer that will influence this audio source
 		void setAudioMixer(AudioMixer* mixer);
+
+		/// @brief Callback for when the playing sound is stopped
+		/// @param sound The sound that was being played
+		/// @param reason Reason it was stopped
+		/// @param userData User defined data attached to the sound
+		virtual void OnSoundStopped(irrklang::ISound* sound, irrklang::E_STOP_EVENT_CAUSE reason, void* userData) override;
 
 	private:
 		/// @brief The game's audio engine
