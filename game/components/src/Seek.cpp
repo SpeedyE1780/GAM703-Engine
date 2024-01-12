@@ -37,11 +37,11 @@ namespace gam703::game::components
 		m_transform.setPosition(engine::utility::moveTowards(m_transform.getPosition(), m_player->getPosition(), deltaTime));
 
 		float distanceToPlayer = glm::length(m_transform.getPosition() - m_player->getPosition());
+		auto* playerMovement = m_player->getBehavior<MovementController>();
 
 		if (distanceToPlayer <= BattleDistance)
 		{
 			m_battleStart->play();
-			auto* playerMovement = m_player->getBehavior<MovementController>();
 
 			if (playerMovement->getPower() > m_aiPower)
 			{
@@ -54,7 +54,7 @@ namespace gam703::game::components
 			}
 		}
 
-		if (distanceToPlayer > SeekDistance)
+		if (distanceToPlayer > SeekDistance || playerMovement->getPower() > m_aiPower)
 		{
 			return m_wander;
 		}
