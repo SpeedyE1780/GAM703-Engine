@@ -42,4 +42,13 @@ namespace gam703::engine::utility
 
 		return withinLeft && withinRight && withinTop && withinBottom;
 	}
+
+	glm::vec3 getPointInCircle(float radius, const glm::vec3& center, float offset)
+	{
+		float angle = generateRandomNumber(0.0f, 2 * PI);
+		auto pointOnCircleEdge = glm::vec3(glm::cos(angle), 0.0f, glm::sin(angle));
+		float circleRadius = engine::utility::generateRandomNumber(offset, radius);
+
+		return center + pointOnCircleEdge * circleRadius;
+	}
 }

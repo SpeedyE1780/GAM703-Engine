@@ -7,6 +7,9 @@
 
 namespace gam703::engine::utility
 {
+	/// @brief Represent PI
+	constexpr float PI = 3.14f;
+
 	/// @brief Get a vector move towards the target by a maximum distance
 	/// @param current The current vector that's being moved
 	/// @param target The target vector we want to reach
@@ -39,6 +42,13 @@ namespace gam703::engine::utility
 	/// @param bounds The extent of the xz bounding box
 	/// @return True if point is inside bounding box
 	ENGINE_UTILITY_API bool isWithinBounds(const glm::vec3& point, const glm::vec3& origin, const glm::vec2& bounds);
+
+	/// @brief Return a point in a circle
+	/// @param radius The circle radius
+	/// @param center The center of the circle
+	/// @param offset The minimum distance from the center
+	/// @return Point in a circle
+	ENGINE_UTILITY_API glm::vec3 getPointInCircle(float radius, const glm::vec3& center = glm::vec3(0.0f, 0.0f, 0.0f), float offset = 0.0f);
 }
 
 #endif // GAM703_ENGINE_UTILITY_MATH_HPP
