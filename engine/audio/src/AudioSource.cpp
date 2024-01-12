@@ -18,6 +18,11 @@ namespace gam703::engine::audio
 		{
 			if (m_activeSound)
 			{
+				if (auto* activeSoundSource = m_activeSound->getSoundSource())
+				{
+					std::cout << "DROPPING SOUND SOURCE: " << activeSoundSource->getName() << std::endl;
+				}
+
 				m_activeSound->drop();
 			}
 		}
