@@ -48,7 +48,7 @@ namespace gam703::game::components
 			}
 			else
 			{
-				m_transform.getScene().removeTransform(*m_player.getObject());
+				m_transform.getScene().removeTransform(*m_player);
 			}
 		}
 

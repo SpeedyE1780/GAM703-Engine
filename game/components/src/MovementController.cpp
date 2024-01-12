@@ -7,9 +7,7 @@
 
 namespace gam703::game::components
 {
-	MovementController::MovementController(engine::components::Transform& transform) : engine::components::Behavior(transform),
-		m_pitch(glm::degrees(transform.getRotation().x)),
-		m_yaw(glm::degrees(transform.getRotation().y))
+	MovementController::MovementController(engine::components::Transform& transform) : engine::components::Behavior(transform)
 	{
 		m_bell = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/bell.wav");
 		m_bell->setAudioMixer(getEngine().getAudioEngine().getAudioMixer("SFX"));
@@ -49,15 +47,5 @@ namespace gam703::game::components
 		{
 			m_bell->play();
 		}
-
-		float xoffset = inputHandler.getMouseOffsetX() * m_mouseSensitivity;
-		float yoffset = inputHandler.getMouseOffsetY() * m_mouseSensitivity;
-
-		//m_yaw += xoffset;
-		//m_pitch += yoffset;
-
-		//m_pitch = glm::clamp(m_pitch, -89.0f, 89.0f);
-
-		m_transform.setRotation(glm::vec3(glm::radians(m_pitch), glm::radians(m_yaw), 0.0f));
 	}
 }

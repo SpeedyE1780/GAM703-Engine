@@ -38,8 +38,6 @@ namespace gam703::game::components
 
 		if (distanceToPlayer > SeekDistance)
 		{
-			exit();
-			m_wander->enter();
 			return m_wander;
 		}
 
@@ -55,7 +53,7 @@ namespace gam703::game::components
 			}
 			else
 			{
-				m_transform.getScene().removeTransform(*m_player.getObject());
+				m_transform.getScene().removeTransform(*m_player);
 			}
 		}
 

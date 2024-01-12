@@ -54,10 +54,6 @@ namespace gam703::engine::utility
 			}
 		}
 
-		/// @brief Get a pointer to the referenced object
-		/// @return A pointer to the referenced object
-		const Object* getObject() const { return m_pointer; }
-
 		/// @brief Nullify the pointer since it has been destroyed
 		void nullify()
 		{
