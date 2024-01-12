@@ -68,6 +68,7 @@ namespace gam703::engine::audio
 		}
 
 		m_activeSound = m_engine.play(*this, loop);
+		m_activeSound->setSoundStopEventReceiver(const_cast<AudioSource*>(this), nullptr);
 	}
 
 	void AudioSource::setAudioMixer(AudioMixer* mixer)
@@ -85,6 +86,15 @@ namespace gam703::engine::audio
 			}
 
 			updateVolume();
+		}
+	}
+
+	void AudioSource::OnSoundStopped(irrklang::ISound* sound, irrklang::E_STOP_EVENT_CAUSE reason, void* userData)
+	{
+		if (m_activeSound)
+		{
+			m_activeSound->drop();
+			m_activeSound = nullptr;
 		}
 	}
 }
