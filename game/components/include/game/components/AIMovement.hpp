@@ -17,7 +17,7 @@ namespace gam703::game::components
 	class GAME_COMPONENTS_API AIMovement : public engine::components::Behavior
 	{
 	public:
-		AIMovement(engine::components::Transform& transform, const engine::components::TransformReference& player, const glm::vec3& origin, const glm::vec2& bounds);
+		AIMovement(engine::components::Transform& transform, const engine::components::TransformReference& player, const glm::vec3& origin, const glm::vec2& bounds, int power);
 
 		virtual AIMovement* clone(engine::components::Transform& transform) const override;
 		virtual void tick(float deltaTime) override;
@@ -26,6 +26,7 @@ namespace gam703::game::components
 		engine::components::TransformReference m_player;
 		glm::vec3 m_origin;
 		glm::vec2 m_bounds;
+		int m_power;
 		Wander m_wander;
 		Flee m_flee;
 		Seek m_seek;

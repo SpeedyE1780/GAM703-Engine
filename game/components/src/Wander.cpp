@@ -4,6 +4,7 @@
 
 #include <engine/utility/Math.hpp>
 
+#include <game/components/MovementController.hpp>
 #include <game/components/Wander.hpp>
 
 namespace gam703::game::components
@@ -16,10 +17,11 @@ namespace gam703::game::components
 		}
 	}
 
-	Wander::Wander(engine::components::Transform& transform, const engine::components::TransformReference& playerTransform, const glm::vec3& origin, const glm::vec2& bounds) :
+	Wander::Wander(engine::components::Transform& transform, const engine::components::TransformReference& playerTransform, const glm::vec3& origin, const glm::vec2& bounds, int& aiPower) :
 		MovementStrategy(transform),
 		m_origin(origin),
 		m_player(playerTransform),
+		m_aiPower(aiPower),
 		m_bounds(bounds),
 		m_currentTarget(getPointInSquare(bounds, m_origin))
 	{
@@ -41,7 +43,9 @@ namespace gam703::game::components
 
 		if (m_player && glm::length(m_transform.getPosition() - m_player->getPosition()) <= SeekDistance)
 		{
-			if (engine::utility::generateRandomNumber(0.0f, 1.0f) < 0.5f)
+			auto* playerMovement = m_player->getBehavior<MovementController>();
+
+			if (playerMovement->getPower() <= m_aiPower)
 			{
 				return m_seek;
 			}

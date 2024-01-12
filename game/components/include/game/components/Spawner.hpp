@@ -10,7 +10,7 @@ namespace gam703::game::components
 	class GAME_COMPONENTS_API Spawner : public engine::components::Component
 	{
 	public:
-		Spawner(engine::components::Transform& transform, engine::components::Transform* player, int count, float radius);
+		Spawner(engine::components::Transform& transform, engine::components::Transform* player, int count, float radius, int powerLevel);
 
 		virtual Spawner* clone(engine::components::Transform& transform) const override;
 
@@ -18,6 +18,7 @@ namespace gam703::game::components
 		engine::components::Transform* m_player;
 		const int m_count;
 		const float m_radius;
+		const int m_powerLevel;
 	};
 }
 

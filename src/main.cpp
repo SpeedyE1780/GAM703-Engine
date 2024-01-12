@@ -26,6 +26,7 @@ namespace game = gam703::game;
 
 static void addGroundPlane(engine::core::Engine& engine,
 	engine::components::Transform* player,
+	int powerLevel = 0,
 	const glm::vec3& position = glm::vec3(0.0f, 0.0f, 0.0f),
 	const glm::vec3& mainColor = glm::vec3(1.0f, 1.0f, 1.0f),
 	const glm::vec3& secondColor = glm::vec3(0.0f, 0.0f, 0.0f))
@@ -34,7 +35,7 @@ static void addGroundPlane(engine::core::Engine& engine,
 	engine::graphic::Shader* checkeredShader = engine.getResourceManager().getShader("resources/Shaders/Default.vert", "resources/Shaders/Checkermap.frag");
 
 	auto* plane = engine.getScene().addTransform(position, glm::vec3(), glm::vec3(5.0f, 1.0f, 5.0f));
-	plane->addComponent<game::components::Spawner>(player, 10.0f, 5.0f);
+	plane->addComponent<game::components::Spawner>(player, 10.0f, 5.0f, powerLevel);
 	auto* renderer = plane->addComponent<engine::components::Renderer>(planeModel, *checkeredShader);
 	renderer->getMaterial().setColor(mainColor);
 	renderer->getMaterial().setSecondColor(secondColor);
@@ -59,10 +60,10 @@ int main()
 	playerTransform->addBehavior<game::components::MovementController>();
 
 	addGroundPlane(engine, playerTransform);
-	addGroundPlane(engine, playerTransform, glm::vec3(5.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	addGroundPlane(engine, playerTransform, glm::vec3(-5.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	addGroundPlane(engine, playerTransform, glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	addGroundPlane(engine, playerTransform, glm::vec3(0.0f, 0.0f, -5.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	addGroundPlane(engine, playerTransform, 1, glm::vec3(5.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	addGroundPlane(engine, playerTransform, 2, glm::vec3(-5.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	addGroundPlane(engine, playerTransform, 3, glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	addGroundPlane(engine, playerTransform, 4, glm::vec3(0.0f, 0.0f, -5.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	auto* cameraTransform = scene.addTransform(glm::vec3(0.0f, 20.0f, 20.0f), glm::vec3(glm::radians(-45.0f), glm::radians(-90.0f), 0));
 	auto* camera = cameraTransform->addComponent<engine::components::Camera>();

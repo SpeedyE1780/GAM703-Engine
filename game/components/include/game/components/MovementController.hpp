@@ -17,9 +17,13 @@ namespace gam703::game::components
 
 		virtual void tick(float deltaTime) override;
 
+		void increasePower(int power) { m_power += power; }
+		int getPower() const {return m_power;}
+
 	private:
 		engine::components::AudioPlayer* m_bell;
 		float m_movementSpeed = 2.5f;
+		int m_power = 1;
 	};
 }
 

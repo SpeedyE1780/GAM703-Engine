@@ -5,13 +5,15 @@
 #include <engine/utility/Math.hpp>
 
 #include <game/components/Flee.hpp>
+#include <game/components/MovementController.hpp>
 #include <game/components/Wander.hpp>
 
 namespace gam703::game::components
 {
-	Flee::Flee(engine::components::Transform& transform, const engine::components::TransformReference& player, Wander* wander) : MovementStrategy(transform),
+	Flee::Flee(engine::components::Transform& transform, const engine::components::TransformReference& player, Wander* wander, int& aiPower) : MovementStrategy(transform),
 		m_player(player),
-		m_wander(wander)
+		m_wander(wander),
+		m_aiPower(aiPower)
 	{
 		m_fleeStart = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/FleeStart.wav");
 		m_fleeEnd = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/FleeEnd.wav");
@@ -44,12 +46,13 @@ namespace gam703::game::components
 		if (distanceToPlayer <= BattleDistance)
 		{
 			m_battleStart->play();
-			float playerNumber = engine::utility::generateRandomNumber(0.0f, 100.0f);
-			float backpackNumber = engine::utility::generateRandomNumber(0.0f, 100.0f);
 
-			if (playerNumber > backpackNumber)
+			auto* playerMovement = m_player->getBehavior<MovementController>();
+
+			if (playerMovement->getPower() > m_aiPower)
 			{
 				m_transform.getScene().removeTransform(m_transform);
+				playerMovement->increasePower(1);
 			}
 			else
 			{

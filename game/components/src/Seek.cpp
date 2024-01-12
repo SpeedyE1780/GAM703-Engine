@@ -5,13 +5,15 @@
 #include <engine/utility/Math.hpp>
 
 #include <game/components/Seek.hpp>
+#include <game/components/MovementController.hpp>
 #include <game/components/Wander.hpp>
 
 namespace gam703::game::components
 {
-	Seek::Seek(engine::components::Transform& transform, const engine::components::TransformReference& player, Wander* wander) : MovementStrategy(transform),
+	Seek::Seek(engine::components::Transform& transform, const engine::components::TransformReference& player, Wander* wander, int& aiPower) : MovementStrategy(transform),
 		m_player(player),
-		m_wander(wander)
+		m_wander(wander),
+		m_aiPower(aiPower)
 	{
 		m_alert = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Alert.wav");
 		m_deactivate = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/Deactivate.wav");
@@ -39,12 +41,12 @@ namespace gam703::game::components
 		if (distanceToPlayer <= BattleDistance)
 		{
 			m_battleStart->play();
-			float playerNumber = engine::utility::generateRandomNumber(0.0f, 100.0f);
-			float backpackNumber = engine::utility::generateRandomNumber(0.0f, 100.0f);
+			auto* playerMovement = m_player->getBehavior<MovementController>();
 
-			if (playerNumber > backpackNumber)
+			if (playerMovement->getPower() > m_aiPower)
 			{
 				m_transform.getScene().removeTransform(m_transform);
+				playerMovement->increasePower(m_aiPower);
 			}
 			else
 			{
