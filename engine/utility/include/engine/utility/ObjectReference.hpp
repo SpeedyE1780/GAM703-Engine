@@ -40,7 +40,11 @@ namespace gam703::engine::utility
 			}
 
 			m_pointer = object.m_pointer;
-			m_pointer->addObjectReference(this);
+
+			if (m_pointer)
+			{
+				m_pointer->addObjectReference(this);
+			}
 
 			return *this;
 		}

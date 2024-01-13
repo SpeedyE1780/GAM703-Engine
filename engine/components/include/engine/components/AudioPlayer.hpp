@@ -56,6 +56,7 @@ namespace gam703::engine::components
 		/// @param audioSource The audio source that this audio player will wrap
 		AudioPlayer(Transform& transform, audio::AudioSource& audioSource);
 
+		/// @brief The audio source played
 		audio::AudioSource& m_audioSource;
 	};
 }

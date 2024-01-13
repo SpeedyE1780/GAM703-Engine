@@ -23,6 +23,7 @@ namespace gam703::engine::gui
 		virtual void renderElement() const override;
 
 	private:
+		/// @brief Callback called once button is pressed
 		std::function<void()> m_callback;
 	};
 }

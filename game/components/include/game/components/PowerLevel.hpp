@@ -7,6 +7,7 @@
 
 namespace gam703::game::components
 {
+	/// @brief Different Power Levels
 	enum class PowerLevel : int
 	{
 		Weakest = 0,
@@ -18,8 +19,15 @@ namespace gam703::game::components
 		Strongest = 40
 	};
 
+	/// @brief Get a power value between low and high
+	/// @param low Lower Power
+	/// @param high Higher Power
+	/// @return A power value between low and high
 	GAME_COMPONENTS_API int getPowerBetweenLevels(PowerLevel low, PowerLevel high);
 
+	/// @brief Get a color between the lower and higher power level
+	/// @param power The power level of the player/npc
+	/// @return A color between the lower and higher power level
 	GAME_COMPONENTS_API glm::vec3 getPowerColor(int power);
 }
 

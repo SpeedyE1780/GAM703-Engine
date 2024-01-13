@@ -10,12 +10,9 @@
 
 namespace gam703::game::components
 {
-	Flee::Flee(engine::components::Transform& transform, const engine::components::TransformReference& player, Wander* wander, const glm::vec3& origin, const glm::vec2& bounds, int& aiPower) : MovementStrategy(transform),
-		m_player(player),
-		m_wander(wander),
-		m_origin(origin),
-		m_bounds(bounds),
-		m_aiPower(aiPower)
+	Flee::Flee(engine::components::Transform& transform, const engine::components::TransformReference& player, Wander* wander, const glm::vec3& origin, const glm::vec2& bounds, int& aiPower) :
+		MovementStrategy(transform, player, origin, bounds, aiPower),
+		m_wander(wander)
 	{
 		m_fleeStart = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/FleeStart.wav");
 		m_fleeEnd = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/FleeEnd.wav");

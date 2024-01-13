@@ -10,11 +10,7 @@
 namespace gam703::game::components
 {
 	Wander::Wander(engine::components::Transform& transform, const engine::components::TransformReference& playerTransform, const glm::vec3& origin, const glm::vec2& bounds, int& aiPower) :
-		MovementStrategy(transform),
-		m_player(playerTransform),
-		m_origin(origin),
-		m_bounds(bounds),
-		m_aiPower(aiPower),
+		MovementStrategy(transform, playerTransform, origin, bounds, aiPower),
 		m_currentTarget(engine::utility::getPointInRectangle(m_origin, m_bounds))
 	{
 	}

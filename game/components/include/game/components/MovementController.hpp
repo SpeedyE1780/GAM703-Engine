@@ -10,22 +10,39 @@
 
 namespace gam703::game::components
 {
+	/// @brief MovementController allows moving a transform with a keyboard
 	class GAME_COMPONENTS_API MovementController : public engine::components::Behavior
 	{
 	public:
+		/// @brief Create a behavior to move the transform with the keyboard
+		/// @param transform The transform owning this behavior
 		MovementController(engine::components::Transform& transform);
 
+		/// @brief Create a copy attached to the new transform
+		/// @param transform The new transform that will own the clone
+		/// @return The cloned MovementController belonging to the transform
 		virtual MovementController* clone(engine::components::Transform& transform) const override;
 
+		/// @brief Check for keyboard input and move transform
+		/// @param deltaTime Elapsed time between this frame and the last frame
 		virtual void tick(float deltaTime) override;
 
+		/// @brief Increase player power level
+		/// @param power the added power to give
 		void increasePower(int power);
+
+		/// @brief Get the player power level
+		/// @return The player power level
 		int getPower() const {return m_power;}
 
 	private:
+		/// @brief Bell to play when pressing space
 		engine::components::AudioPlayer* m_bell;
+		/// @brief The renderer component
 		engine::components::Renderer* m_renderer;
+		/// @brief The player movement speed
 		float m_movementSpeed = 2.5f;
+		/// @brief The player power level
 		int m_power = static_cast<int>(PowerLevel::Weaker);
 	};
 }

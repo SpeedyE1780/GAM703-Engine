@@ -10,26 +10,37 @@ namespace gam703::game::components
 {
 	class Wander;
 
+	/// @brief Seek npc will move towards from player
 	class GAME_COMPONENTS_API Seek : public MovementStrategy
 	{
 	public:
+		/// @brief Create a Seek strategy to move towards player
+		/// @param transform The transform owning this component
+		/// @param player The player the npc needs to follow
+		/// @param wander The wander strategy the npc exits too
+		/// @param origin The origin of the npc area
+		/// @param bounds The bounds of the npc area
+		/// @param aiPower The power level of the npc
 		Seek(engine::components::Transform& transform, const engine::components::TransformReference& player, Wander* wander, const glm::vec3& origin, const glm::vec2& bounds, int& aiPower);
 
-		void setBattleStart(engine::components::AudioPlayer* battleStart) { m_battleStart = battleStart; }
-
+		/// @brief Setup strategy
 		virtual void enter() override;
+
+		/// @brief Move npc using current strategy
+		/// @param deltaTime Elapsed time between this frame and the last frame
+		/// @return The next strategy to npc needs to use
 		virtual MovementStrategy* processMovement(float deltaTime) override;
+
+		/// @brief Clean up strategy
 		virtual void exit() override;
 
 	private:
-		engine::components::TransformReference m_player;
+		/// @brief The behavior Seek escapes too
 		Wander* m_wander = nullptr;
-		const glm::vec3& m_origin;
-		const glm::vec2& m_bounds;
-		const int& m_aiPower;
+		/// @brief The audio to play once the npc starts seeking
 		engine::components::AudioPlayer* m_alert = nullptr;
+		/// @brief The audio to play once the npc stops seeking
 		engine::components::AudioPlayer* m_deactivate = nullptr;
-		engine::components::AudioPlayer* m_battleStart = nullptr;
 	};
 }
 
