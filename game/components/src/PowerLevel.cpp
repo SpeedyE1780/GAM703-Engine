@@ -18,13 +18,18 @@ namespace gam703::game::components
 			return static_cast<int>(high) - static_cast<int>(low);
 		}
 
-		static const glm::vec3 weakest = glm::vec3(0.6f, 0.443f, 0.321f);
-		static const glm::vec3 weaker = glm::vec3(0.203f, 0.662f, 0.349f);
-		static const glm::vec3 weak = glm::vec3(0.968f, 0.674f, 0.364f);
-		static const glm::vec3 normal = glm::vec3(1.0f, 0.905f, 0.580f);
-		static const glm::vec3 strong = glm::vec3(0.172f, 0.725f, 0.776f);
-		static const glm::vec3 stronger = glm::vec3(0.113f, 0.411f, 0.878f);
-		static const glm::vec3 strongest = glm::vec3(0.968f, 0.372f, 0.364f);
+		constexpr float getProgess(int power, PowerLevel low, PowerLevel high)
+		{
+			return 1 - getGap(high, power) / getGap(high, low);
+		}
+
+		static const glm::vec3 weakest = glm::vec3(0.168f, 0.00f, 0.00f);
+		static const glm::vec3 weaker = glm::vec3(0.537f, 0.00f, 0.00f);
+		static const glm::vec3 weak = glm::vec3(1.00f, 0.00f, 0.00f);
+		static const glm::vec3 normal = glm::vec3(1.0f, 0.305f, 0.00f);
+		static const glm::vec3 strong = glm::vec3(0.788f, 0.545, 0.00f);
+		static const glm::vec3 stronger = glm::vec3(1.00f, 0.760f, 0.00f);
+		static const glm::vec3 strongest = glm::vec3(1.00f, 0.988f, 0.572f);
 	}
 
 	int getPowerBetweenLevels(PowerLevel low, PowerLevel high)
@@ -40,27 +45,27 @@ namespace gam703::game::components
 		}
 		else if (power < static_cast<int>(PowerLevel::Weaker))
 		{
-			return glm::lerp(weakest, weaker, getGap(PowerLevel::Weaker, power) / getGap(PowerLevel::Weaker, PowerLevel::Weakest));
+			return glm::lerp(weakest, weaker, getProgess(power, PowerLevel::Weakest, PowerLevel::Weaker));
 		}
 		else if (power < static_cast<int>(PowerLevel::Weak))
 		{
-			return glm::lerp(weaker, weak, getGap(PowerLevel::Weak, power) / getGap(PowerLevel::Weak, PowerLevel::Weaker));
+			return glm::lerp(weaker, weak, getProgess(power, PowerLevel::Weaker, PowerLevel::Weak));
 		}
 		else if (power < static_cast<int>(PowerLevel::Normal))
 		{
-			return glm::lerp(weak, normal, getGap(PowerLevel::Normal, power) / getGap(PowerLevel::Normal, PowerLevel::Weak));
+			return glm::lerp(weak, normal, getProgess(power, PowerLevel::Weak, PowerLevel::Normal));
 		}
 		else if (power < static_cast<int>(PowerLevel::Strong))
 		{
-			return glm::lerp(normal, strong, getGap(PowerLevel::Strong, power) / getGap(PowerLevel::Strong, PowerLevel::Normal));
+			return glm::lerp(normal, strong, getProgess(power, PowerLevel::Normal, PowerLevel::Strong));
 		}
 		else if (power < static_cast<int>(PowerLevel::Stronger))
 		{
-			return glm::lerp(strong, stronger, getGap(PowerLevel::Stronger, power) / getGap(PowerLevel::Stronger, PowerLevel::Strong));
+			return glm::lerp(strong, stronger, getProgess(power, PowerLevel::Strong, PowerLevel::Stronger));
 		}
 		else if (power < static_cast<int>(PowerLevel::Strongest))
 		{
-			return glm::lerp(stronger, strongest, getGap(PowerLevel::Strongest, power) / getGap(PowerLevel::Strongest, PowerLevel::Stronger));
+			return glm::lerp(stronger, strongest, getProgess(power, PowerLevel::Stronger, PowerLevel::Strongest));
 		}
 		else
 		{
