@@ -22,6 +22,7 @@ namespace gam703::game::components
 		/// @param transform The transform owning this component
 		/// @param target The target the transform follows
 		/// @param offset The offset to keep between the transform and target
+		/// @param velocity The velocity traveled every second
 		FollowTarget(engine::components::Transform& transform, const engine::components::TransformReference& target, const glm::vec3& offset, float velocity = 2.0f);
 
 		/// @brief Create a copy attached to the new transform

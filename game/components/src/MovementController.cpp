@@ -1,6 +1,7 @@
 #include <engine/core/Engine.hpp>
 #include <engine/components/Transform.hpp>
 
+#include <game/components/FollowTarget.hpp>
 #include <game/components/MovementController.hpp>
 
 #include <GLFW/glfw3.h>
@@ -9,6 +10,7 @@ namespace gam703::game::components
 {
 	constexpr float SlowDownPowerDuration = 2.0f;
 	constexpr float SlowDownPowerCoolDown = 30.0f;
+	constexpr float PowerIndicatorScale = 0.2f;
 
 	MovementController::MovementController(engine::components::Transform& transform) : engine::components::Behavior(transform)
 	{
@@ -17,6 +19,12 @@ namespace gam703::game::components
 
 		m_renderer = m_transform.getComponent<engine::components::Renderer>();
 		m_renderer->getMaterial().setColor(getPowerColor(m_power));
+
+		m_powerIndicator = getScene().addTransform()->getReference();
+		m_powerIndicator->addBehavior<FollowTarget>(m_transform.getReference(), glm::vec3(0.0f, 1.5f, 0.0f), m_movementSpeed);
+		m_powerIndicator->setScale(glm::vec3(PowerIndicatorScale, PowerIndicatorScale, PowerIndicatorScale));
+		auto* renderer = m_powerIndicator->addComponent<engine::components::Renderer>(getEngine().getResourceManager().getModel("resources/Models/cube/cube.obj"));
+		renderer->getMaterial().setColor(glm::vec3(0.0f, 0.0f, 1.0f));
 	}
 
 	MovementController* MovementController::clone(engine::components::Transform& transform) const
@@ -24,8 +32,43 @@ namespace gam703::game::components
 		return new MovementController(transform);
 	}
 
+	void MovementController::updatePosition()
+	{
+		float unscaledDeltaTime = getEngine().getTime().getUnscaledDeltaTime();
+		auto& inputHandler = getEngine().getInput();
+		float velocity = m_movementSpeed * unscaledDeltaTime;
+		glm::vec3 movement{ 0.0f, 0.0f, 0.0f };
+
+		if (inputHandler.isKeyPressed(GLFW_KEY_W))
+		{
+			movement.z = -1.0f;
+		}
+
+		if (inputHandler.isKeyPressed(GLFW_KEY_S))
+		{
+			movement.z = 1.0f;
+		}
+
+		if (inputHandler.isKeyPressed(GLFW_KEY_A))
+		{
+			movement.x = -1.0f;
+		}
+
+		if (inputHandler.isKeyPressed(GLFW_KEY_D))
+		{
+			movement.x = 1.0f;
+		}
+
+		if (movement .x != 0 || movement.z != 0)
+		{
+			m_transform.translate(glm::normalize(movement) * velocity);
+		}
+	}
+
 	void MovementController::tick(float deltaTime)
 	{
+		updatePosition();
+
 		float unscaledDeltaTime = getEngine().getTime().getUnscaledDeltaTime();
 		auto& inputHandler = getEngine().getInput();
 		float velocity = m_movementSpeed * unscaledDeltaTime;
@@ -41,24 +84,9 @@ namespace gam703::game::components
 			m_slowDownCooldown = SlowDownPowerCoolDown;
 		}
 
-		if (inputHandler.isKeyPressed(GLFW_KEY_W))
+		if (m_slowDownCooldown < 0.0f && !m_slowDownActive)
 		{
-			m_transform.translate(glm::vec3(0.0f, 0.0f, -1.0f) * velocity);
-		}
-
-		if (inputHandler.isKeyPressed(GLFW_KEY_S))
-		{
-			m_transform.translate(glm::vec3(0.0f, 0.0f, 1.0f) * velocity);
-		}
-
-		if (inputHandler.isKeyPressed(GLFW_KEY_A))
-		{
-			m_transform.translate(glm::vec3(-1.0f, 0.0f, 0.0f) * velocity);
-		}
-
-		if (inputHandler.isKeyPressed(GLFW_KEY_D))
-		{
-			m_transform.translate(glm::vec3(1.0f, 0.0f, 0.0f) * velocity);
+			m_powerIndicator->setScale(PowerIndicatorScale, PowerIndicatorScale, PowerIndicatorScale);
 		}
 
 		if (inputHandler.isKeyPressed(GLFW_KEY_SPACE) && m_slowDownCooldown <= 0)
@@ -67,6 +95,7 @@ namespace gam703::game::components
 			m_slowDownDuration = SlowDownPowerDuration;
 			m_slowDownActive = true;
 			getEngine().getTime().setTimeScale(0.2f);
+			m_powerIndicator->setScale(0.0f, 0.0f, 0.0f);
 		}
 	}
 
