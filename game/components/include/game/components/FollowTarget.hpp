@@ -22,7 +22,8 @@ namespace gam703::game::components
 		/// @param transform The transform owning this component
 		/// @param target The target the transform follows
 		/// @param offset The offset to keep between the transform and target
-		FollowTarget(engine::components::Transform& transform, const engine::components::TransformReference& target, const glm::vec3& offset);
+		/// @param velocity The velocity traveled every second
+		FollowTarget(engine::components::Transform& transform, const engine::components::TransformReference& target, const glm::vec3& offset, float velocity = 2.0f);
 
 		/// @brief Create a copy attached to the new transform
 		/// @param transform The new transform that will own the clone
@@ -38,6 +39,8 @@ namespace gam703::game::components
 		engine::components::TransformReference m_target;
 		/// @brief Offset between transform position and target position to keep
 		glm::vec3 m_offset{};
+		/// @brief The velocity traveled every second
+		float m_velocity = 2.0f;
 	};
 }
 
