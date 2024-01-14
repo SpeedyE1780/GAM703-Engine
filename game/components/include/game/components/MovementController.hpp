@@ -47,7 +47,9 @@ namespace gam703::game::components
 		/// @brief Checks if time is currently slowed down
 		bool m_slowDownActive = false;
 		/// @brief The duration of the slow down power up
-		float m_slowDownDuration = 2.0f;
+		float m_slowDownDuration = 0.0f;
+		/// @brief The cooldown until the slow down power up can be activated again
+		float m_slowDownCooldown = 0.0f;
 	};
 }
 

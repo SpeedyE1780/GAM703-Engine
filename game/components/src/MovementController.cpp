@@ -8,6 +8,7 @@
 namespace gam703::game::components
 {
 	constexpr float SlowDownPowerDuration = 2.0f;
+	constexpr float SlowDownPowerCoolDown = 30.0f;
 
 	MovementController::MovementController(engine::components::Transform& transform) : engine::components::Behavior(transform)
 	{
@@ -30,12 +31,14 @@ namespace gam703::game::components
 		float velocity = m_movementSpeed * unscaledDeltaTime;
 
 		m_slowDownDuration -= unscaledDeltaTime;
+		m_slowDownCooldown -= unscaledDeltaTime;
 
 		if (m_slowDownDuration < 0 && m_slowDownActive)
 		{
 			getEngine().getTime().setTimeScale(1.0f);
 			m_bell->play();
 			m_slowDownActive = false;
+			m_slowDownCooldown = SlowDownPowerCoolDown;
 		}
 
 		if (inputHandler.isKeyPressed(GLFW_KEY_W))
@@ -58,7 +61,7 @@ namespace gam703::game::components
 			m_transform.translate(glm::vec3(1.0f, 0.0f, 0.0f) * velocity);
 		}
 
-		if (inputHandler.isKeyPressed(GLFW_KEY_SPACE))
+		if (inputHandler.isKeyPressed(GLFW_KEY_SPACE) && m_slowDownCooldown <= 0)
 		{
 			m_bell->play();
 			m_slowDownDuration = SlowDownPowerDuration;
