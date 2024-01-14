@@ -43,7 +43,6 @@ add_subdirectory(engine/utility)
 add_subdirectory(game/components)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE game-components)
-target_link_libraries(${PROJECT_NAME} PRIVATE irrKlang)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>)
 
