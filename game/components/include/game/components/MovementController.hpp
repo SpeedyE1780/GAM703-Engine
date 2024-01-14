@@ -44,6 +44,10 @@ namespace gam703::game::components
 		float m_movementSpeed = 2.5f;
 		/// @brief The player power level
 		int m_power = static_cast<int>(PowerLevel::Weaker);
+		/// @brief Checks if time is currently slowed down
+		bool m_slowDownActive = false;
+		/// @brief The duration of the slow down power up
+		float m_slowDownDuration = 2.0f;
 	};
 }
 

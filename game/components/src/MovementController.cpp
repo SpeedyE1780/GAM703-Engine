@@ -7,6 +7,8 @@
 
 namespace gam703::game::components
 {
+	constexpr float SlowDownPowerDuration = 2.0f;
+
 	MovementController::MovementController(engine::components::Transform& transform) : engine::components::Behavior(transform)
 	{
 		m_bell = m_transform.addComponent<engine::components::AudioPlayer>("resources/Audio/bell.wav");
@@ -26,6 +28,15 @@ namespace gam703::game::components
 		float unscaledDeltaTime = getEngine().getTime().getUnscaledDeltaTime();
 		auto& inputHandler = getEngine().getInput();
 		float velocity = m_movementSpeed * unscaledDeltaTime;
+
+		m_slowDownDuration -= unscaledDeltaTime;
+
+		if (m_slowDownDuration < 0 && m_slowDownActive)
+		{
+			getEngine().getTime().setTimeScale(1.0f);
+			m_bell->play();
+			m_slowDownActive = false;
+		}
 
 		if (inputHandler.isKeyPressed(GLFW_KEY_W))
 		{
@@ -50,6 +61,8 @@ namespace gam703::game::components
 		if (inputHandler.isKeyPressed(GLFW_KEY_SPACE))
 		{
 			m_bell->play();
+			m_slowDownDuration = SlowDownPowerDuration;
+			m_slowDownActive = true;
 			getEngine().getTime().setTimeScale(0.2f);
 		}
 	}
