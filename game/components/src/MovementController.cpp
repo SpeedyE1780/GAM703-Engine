@@ -23,8 +23,9 @@ namespace gam703::game::components
 
 	void MovementController::tick(float deltaTime)
 	{
+		float unscaledDeltaTime = getEngine().getTime().getUnscaledDeltaTime();
 		auto& inputHandler = getEngine().getInput();
-		float velocity = m_movementSpeed * deltaTime;
+		float velocity = m_movementSpeed * unscaledDeltaTime;
 
 		if (inputHandler.isKeyPressed(GLFW_KEY_W))
 		{
@@ -49,6 +50,7 @@ namespace gam703::game::components
 		if (inputHandler.isKeyPressed(GLFW_KEY_SPACE))
 		{
 			m_bell->play();
+			getEngine().getTime().setTimeScale(0.2f);
 		}
 	}
 

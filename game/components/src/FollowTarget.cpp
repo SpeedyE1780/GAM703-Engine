@@ -1,13 +1,16 @@
+#include <engine/core/Engine.hpp>
+
 #include <engine/utility/Math.hpp>
 
 #include <game/components/FollowTarget.hpp>
 
 namespace gam703::game::components
 {
-	FollowTarget::FollowTarget(engine::components::Transform& transform, const engine::components::TransformReference& target, const glm::vec3& offset) :
+	FollowTarget::FollowTarget(engine::components::Transform& transform, const engine::components::TransformReference& target, const glm::vec3& offset, float velocity) :
 		engine::components::Behavior(transform),
 		m_target(target),
-		m_offset(offset)
+		m_offset(offset),
+		m_velocity(velocity)
 	{
 	}
 
@@ -21,7 +24,7 @@ namespace gam703::game::components
 		if (m_target)
 		{
 			glm::vec3 targetPosition = m_target->getPosition() + m_offset;
-			glm::vec3 newPosition = engine::utility::moveTowards(m_transform.getPosition(), targetPosition, deltaTime * 2.0f);
+			glm::vec3 newPosition = engine::utility::moveTowards(m_transform.getPosition(), targetPosition, getEngine().getTime().getUnscaledDeltaTime() * m_velocity);
 
 			m_transform.setPosition(newPosition);
 		}
