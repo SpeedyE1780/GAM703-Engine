@@ -51,5 +51,6 @@ namespace gam703::engine::audio
 	void AudioMixer::updateAudioSources() const
 	{
 		std::for_each(begin(m_sources), end(m_sources), [](AudioSource* source) { source->updateVolume(); });
+		std::for_each(begin(m_children), end(m_children), [](AudioMixer* mixer) { mixer->updateAudioSources(); });
 	}
 }
