@@ -48,7 +48,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY $
 
 add_custom_target(copy-files ALL
 COMMAND ${CMAKE_COMMAND} -E copy_directory
-${CMAKE_SOURCE_DIR}/resources/
+${PROJECT_SOURCE_DIR}/resources/
 ${COPY_DIRECTORY_PATH}/resources/
 )
 
